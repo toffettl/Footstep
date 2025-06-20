@@ -6,4 +6,17 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="FluentValidation" Version="12.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Footstep.Communication\Footstep.Communication.csproj" />
+    <ProjectReference Include="..\Footstep.Domain\Footstep.Domain.csproj" />
+    <ProjectReference Include="..\Footstep.Exception\Footstep.Exception.csproj" />
+    <ProjectReference Include="..\Footstep.Infrastructure\Footstep.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
