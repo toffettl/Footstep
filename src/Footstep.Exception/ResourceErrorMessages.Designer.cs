@@ -97,6 +97,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Trace not found.
+        /// </summary>
+        public static string TRACE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("TRACE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Unknow error.
         /// </summary>
         public static string UNKNOW_ERROR {

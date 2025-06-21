@@ -129,6 +129,9 @@
   <data name="THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST" xml:space="preserve">
     <value>The expiration date cannot be in the past</value>
   </data>
+  <data name="TRACE_NOT_FOUND" xml:space="preserve">
+    <value>Trace not found</value>
+  </data>
   <data name="UNKNOW_ERROR" xml:space="preserve">
     <value>Unknow error</value>
   </data>

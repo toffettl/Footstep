@@ -1,4 +1,5 @@
 ﻿using Footstep.Application.UseCases.Traces.Create;
+using Footstep.Application.UseCases.Traces.Delete;
 using Footstep.Communication.Requests;
 using Footstep.Communication.Responses;
 using Microsoft.AspNetCore.Http;
@@ -19,6 +20,19 @@ namespace Footstep.Api.Controllers
             var response = await usecase.Execute(request);
 
             return Created(string.Empty, response);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete(
+            [FromServices] IDeleteTraceUseCase useCase,
+            [FromRoute] Guid id)
+        {
+            await useCase.Execute(id);
+
+            return NoContent();
         }
     }
 }
