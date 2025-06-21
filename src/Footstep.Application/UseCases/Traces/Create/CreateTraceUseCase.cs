@@ -43,7 +43,7 @@ namespace Footstep.Application.UseCases.Traces.Create
 
         private void Validade(RequestTraceJson request)
         {
-            var validator = new CreateTraceValidator();
+            var validator = new TraceValidator();
 
             var result = validator.Validate(request);
 

@@ -1,5 +1,6 @@
 ﻿using Footstep.Application.UseCases.Traces.Create;
 using Footstep.Application.UseCases.Traces.Delete;
+using Footstep.Application.UseCases.Traces.Update;
 using Footstep.Communication.Requests;
 using Footstep.Communication.Responses;
 using Microsoft.AspNetCore.Http;
@@ -31,6 +32,21 @@ namespace Footstep.Api.Controllers
             [FromRoute] Guid id)
         {
             await useCase.Execute(id);
+
+            return NoContent();
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Update(
+            [FromServices] IUpdateTraceUseCase useCase,
+            [FromRoute] Guid id,
+            [FromBody] RequestTraceJson request)
+        {
+            await useCase.Execute(id, request);
 
             return NoContent();
         }

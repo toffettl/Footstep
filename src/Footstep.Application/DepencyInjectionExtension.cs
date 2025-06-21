@@ -1,6 +1,7 @@
 ﻿using Footstep.Application.AutoMapper;
 using Footstep.Application.UseCases.Traces.Create;
 using Footstep.Application.UseCases.Traces.Delete;
+using Footstep.Application.UseCases.Traces.Update;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace Footstep.Application
         {
             services.AddScoped<ICreateTraceUseCase, CreateTraceUseCase>();
             services.AddScoped<IDeleteTraceUseCase, DeleteTraceUseCase>();
+            services.AddScoped<IUpdateTraceUseCase, UpdateTraceUseCase>();
         }
     }
 }

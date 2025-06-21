@@ -25,6 +25,7 @@ namespace Footstep.Infrastructure
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ITracesWriteOnlyRepository, TracesRepostory>();
+            services.AddScoped<ITracesUpdateOnlyRepository, TracesRepostory>();
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

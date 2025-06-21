@@ -4,7 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Footstep.Infrastructure.DataAccess.Repositories
 {
-    public class TracesRepostory : ITracesWriteOnlyRepository
+    public class TracesRepostory : ITracesWriteOnlyRepository,
+        ITracesUpdateOnlyRepository
     {
         private readonly FootstepDbContext _dbContext;
         public TracesRepostory(FootstepDbContext dbContext)
@@ -27,6 +28,16 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             _dbContext.Traces.Remove(result);
 
             return true;
+        }
+
+        async Task<Trace?> ITracesUpdateOnlyRepository.GetById(Guid id)
+        {
+            return await _dbContext.Traces.AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
+        }
+
+        public void Update(Trace trace)
+        {
+            _dbContext.Traces.Update(trace);
         }
     }
 }
