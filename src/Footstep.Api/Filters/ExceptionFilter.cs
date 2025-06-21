@@ -10,7 +10,7 @@ namespace Footstep.Api.Filters
     {
         public void OnException(ExceptionContext context)
         {
-            if(context.Exception is FootstepException)
+            if (context.Exception is FootstepException)
             {
                 HandleProjectException(context);
             }
