@@ -21,6 +21,7 @@ namespace Footstep.Application.AutoMapper
         private void EntityToResponse()
         {
             CreateMap<Trace, ResponseCreateTraceJson>();
+            CreateMap<Trace, ResponseTraceJson>();
         }
     }
 }

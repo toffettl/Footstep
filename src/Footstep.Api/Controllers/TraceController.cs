@@ -1,5 +1,7 @@
 ﻿using Footstep.Application.UseCases.Traces.Create;
 using Footstep.Application.UseCases.Traces.Delete;
+using Footstep.Application.UseCases.Traces.GetAll;
+using Footstep.Application.UseCases.Traces.GetById;
 using Footstep.Application.UseCases.Traces.Update;
 using Footstep.Communication.Requests;
 using Footstep.Communication.Responses;
@@ -48,6 +50,34 @@ namespace Footstep.Api.Controllers
         {
             await useCase.Execute(id, request);
 
+            return NoContent();
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        [ProducesResponseType(typeof(ResponseTraceJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetById(
+            [FromServices] IGetByIdTraceUseCase useCase,
+            [FromRoute] Guid id)
+        {
+            var response = await useCase.Execute(id);
+
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [ProducesResponseType(typeof(ResponseTraceJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> GetAll(
+            [FromServices] IGetAllTraceUseCase useCase)
+        {
+            var response = await useCase.Execute();
+
+            if (response.Traces.Count != 0)
+            {
+                return Ok(response);
+            }
             return NoContent();
         }
     }
