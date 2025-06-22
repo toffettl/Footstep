@@ -79,6 +79,42 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Latitude must be between -90 and 90.
+        /// </summary>
+        public static string INVALID_LATITUDE {
+            get {
+                return ResourceManager.GetString("INVALID_LATITUDE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Longitude must be between -180 and 180.
+        /// </summary>
+        public static string INVALID_LONGITUDE {
+            get {
+                return ResourceManager.GetString("INVALID_LONGITUDE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Latitude is required.
+        /// </summary>
+        public static string LATITUDE_REQUIRED {
+            get {
+                return ResourceManager.GetString("LATITUDE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Longitude is required.
+        /// </summary>
+        public static string LONGITUDE_REQUIRED {
+            get {
+                return ResourceManager.GetString("LONGITUDE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The name is required.
         /// </summary>
         public static string NAME_REQUIRED {
