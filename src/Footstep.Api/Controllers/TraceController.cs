@@ -5,7 +5,6 @@ using Footstep.Application.UseCases.Traces.GetById;
 using Footstep.Application.UseCases.Traces.Update;
 using Footstep.Communication.Requests;
 using Footstep.Communication.Responses;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Footstep.Api.Controllers

@@ -2,11 +2,6 @@
 using Footstep.Domain.Repositories.Traces;
 using Footstep.Exception;
 using Footstep.Exception.ExceptionsBase;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Footstep.Application.UseCases.Traces.Delete
 {

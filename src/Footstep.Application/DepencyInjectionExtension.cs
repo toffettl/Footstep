@@ -5,11 +5,6 @@ using Footstep.Application.UseCases.Traces.GetAll;
 using Footstep.Application.UseCases.Traces.GetById;
 using Footstep.Application.UseCases.Traces.Update;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Footstep.Application
 {
