@@ -27,9 +27,9 @@ namespace Footstep.Application
             services.AddScoped<ICreateTraceUseCase, CreateTraceUseCase>();
             services.AddScoped<IDeleteTraceUseCase, DeleteTraceUseCase>();
             services.AddScoped<IUpdateTraceUseCase, UpdateTraceUseCase>();
-            services.AddScoped<IGetByIdTraceUseCase, GetByIdTraceUseCase>();
+            services.AddScoped<IGetByIdTraceUseCase, GetByIdTracesUseCase>();
             services.AddScoped<IGetAllTraceUseCase, GetAllTraceUseCase>();
-            services.AddScoped<IGetTracesByRayUseCase, GetTracesByRayUseCase>();
+            services.AddScoped<IGetNearbyTracesUseCase, GetNearbyTracesUseCase>();
         }
     }
 }

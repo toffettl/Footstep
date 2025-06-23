@@ -6,12 +6,12 @@ using Footstep.Exception.ExceptionsBase;
 
 namespace Footstep.Application.UseCases.Traces.GetById
 {
-    public class GetByIdTraceUseCase : IGetByIdTraceUseCase
+    public class GetByIdTracesUseCase : IGetByIdTraceUseCase
     {
         private readonly ITracesReadOnlyRepository _repository;
         private readonly IMapper _mapper;
 
-        public GetByIdTraceUseCase(ITracesReadOnlyRepository repository,
+        public GetByIdTracesUseCase(ITracesReadOnlyRepository repository,
             IMapper mapper)
         {
             _repository = repository;

@@ -81,15 +81,15 @@ namespace Footstep.Api.Controllers
             return NoContent();
         }
 
-        [HttpGet("{id}/nearby")]
+        [HttpGet("nearby")]
         [ProducesResponseType(typeof(List<ResponseTraceJson>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetTracesByRay(
-            [FromServices] IGetTracesByRayUseCase useCase,
-            [FromRoute] Guid id,
+        public async Task<IActionResult> GetNearbyTraces(
+            [FromServices] IGetNearbyTracesUseCase useCase,
+            [FromQuery] double latitude,
+            [FromQuery] double longitude,
             [FromQuery] double radiusInMeters)
         {
-            var response = await useCase.Execute(id, radiusInMeters);
+            var response = await useCase.Execute(latitude, longitude, radiusInMeters);
 
             return Ok(response);
         }

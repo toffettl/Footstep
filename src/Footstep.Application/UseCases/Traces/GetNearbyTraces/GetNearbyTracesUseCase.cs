@@ -5,41 +5,31 @@ using Footstep.Exception;
 using Footstep.Exception.ExceptionsBase;
 
 namespace Footstep.Application.UseCases.Traces.GetByRay;
-public class GetTracesByRayUseCase : IGetTracesByRayUseCase
+public class GetNearbyTracesUseCase : IGetNearbyTracesUseCase
 {
     private readonly ITracesReadOnlyRepository _repository;
     private readonly IMapper _mapper;
 
-    public GetTracesByRayUseCase(ITracesReadOnlyRepository repository, IMapper mapper)
+    public GetNearbyTracesUseCase(ITracesReadOnlyRepository repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;
     }
 
-    public async Task<List<ResponseTraceJson>> Execute(Guid id, double radiusInMeters)
+    public async Task<List<ResponseTraceJson>> Execute(double latitude, double longitude, double radiusInMeters)
     {
-        var originTrace = await _repository.GetById(id);
-
-        if (originTrace == null)
-        {
-            throw new NotFoundException(ResourceErrorMessages.TRACE_NOT_FOUND);
-        }
-
         var allTraces = await _repository.GetAll();
 
         var nearbyTraces = allTraces
-            .Where(t => t.Id != id)
-                .Where(t => 
-                    CalculateDistanceInMeters
-                        (originTrace.Latitude, originTrace.Longitude, t.Latitude, t.Longitude) <= radiusInMeters)
-                .ToList();
+            .Where(t => CalculateDistanceInMeters(latitude, longitude, t.Latitude, t.Longitude) <= radiusInMeters)
+            .ToList();
 
         return _mapper.Map<List<ResponseTraceJson>>(nearbyTraces);
     }
 
     private double CalculateDistanceInMeters(double lat1, double lon1, double lat2, double lon2)
     {
-        var R = 6371000;
+        const double R = 6371000;
         var latRad1 = DegreesToRadians(lat1);
         var latRad2 = DegreesToRadians(lat2);
         var deltaLat = DegreesToRadians(lat2 - lat1);
