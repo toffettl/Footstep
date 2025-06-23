@@ -3,6 +3,7 @@ using Footstep.Application.UseCases.Traces.Create;
 using Footstep.Application.UseCases.Traces.Delete;
 using Footstep.Application.UseCases.Traces.GetAll;
 using Footstep.Application.UseCases.Traces.GetById;
+using Footstep.Application.UseCases.Traces.GetByRay;
 using Footstep.Application.UseCases.Traces.Update;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,6 +29,7 @@ namespace Footstep.Application
             services.AddScoped<IUpdateTraceUseCase, UpdateTraceUseCase>();
             services.AddScoped<IGetByIdTraceUseCase, GetByIdTraceUseCase>();
             services.AddScoped<IGetAllTraceUseCase, GetAllTraceUseCase>();
+            services.AddScoped<IGetTracesByRayUseCase, GetTracesByRayUseCase>();
         }
     }
 }
