@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using Footstep.Communication.Responses;
 using Footstep.Domain.Repositories.Traces;
-using Footstep.Exception;
-using Footstep.Exception.ExceptionsBase;
-
 namespace Footstep.Application.UseCases.Traces.GetByRay;
 public class GetNearbyTracesUseCase : IGetNearbyTracesUseCase
 {
