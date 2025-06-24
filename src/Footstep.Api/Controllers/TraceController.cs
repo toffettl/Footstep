@@ -2,6 +2,7 @@
 using Footstep.Application.UseCases.Traces.Delete;
 using Footstep.Application.UseCases.Traces.GetAll;
 using Footstep.Application.UseCases.Traces.GetById;
+using Footstep.Application.UseCases.Traces.GetByRay;
 using Footstep.Application.UseCases.Traces.Update;
 using Footstep.Communication.Requests;
 using Footstep.Communication.Responses;
@@ -78,6 +79,19 @@ namespace Footstep.Api.Controllers
                 return Ok(response);
             }
             return NoContent();
+        }
+
+        [HttpGet("nearby")]
+        [ProducesResponseType(typeof(List<ResponseTraceJson>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetNearbyTraces(
+            [FromServices] IGetNearbyTracesUseCase useCase,
+            [FromQuery] double latitude,
+            [FromQuery] double longitude,
+            [FromQuery] double radiusInMeters)
+        {
+            var response = await useCase.Execute(latitude, longitude, radiusInMeters);
+
+            return Ok(response);
         }
     }
 }
