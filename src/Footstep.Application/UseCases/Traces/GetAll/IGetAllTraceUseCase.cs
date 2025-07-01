@@ -1,4 +1,4 @@
-﻿using Footstep.Communication.Responses;
+﻿using Footstep.Communication.Responses.Traces;
 
 namespace Footstep.Application.UseCases.Traces.GetAll
 {

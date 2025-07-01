@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Footstep.Communication.Requests;
-using Footstep.Communication.Responses;
+using Footstep.Communication.Responses.Traces;
 using Footstep.Domain.Entities;
 using Footstep.Domain.Repositories;
 using Footstep.Domain.Repositories.Traces;

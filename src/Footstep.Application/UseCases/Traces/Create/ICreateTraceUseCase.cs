@@ -1,5 +1,5 @@
 ﻿using Footstep.Communication.Requests;
-using Footstep.Communication.Responses;
+using Footstep.Communication.Responses.Traces;
 
 namespace Footstep.Application.UseCases.Traces.Create
 {

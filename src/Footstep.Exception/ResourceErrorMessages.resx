@@ -123,17 +123,35 @@
   <data name="DESCRIPTION_REQUIRED" xml:space="preserve">
     <value>The description is required</value>
   </data>
+  <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
+    <value>This email is already registered</value>
+  </data>
+  <data name="EMAIL_EMPTY" xml:space="preserve">
+    <value>Email cannot be empty</value>
+  </data>
+  <data name="EMAIL_INVALID" xml:space="preserve">
+    <value>Invalid email</value>
+  </data>
+  <data name="EMAIL_OR_PASSWORD_INVALID" xml:space="preserve">
+    <value>Email or password invalid</value>
+  </data>
   <data name="INVALID_LATITUDE" xml:space="preserve">
     <value>Latitude must be between -90 and 90</value>
   </data>
   <data name="INVALID_LONGITUDE" xml:space="preserve">
     <value>Longitude must be between -180 and 180</value>
   </data>
+  <data name="INVALID_PASSWORD" xml:space="preserve">
+    <value>Password must contain at least 8 characters and include at least one capital letter</value>
+  </data>
   <data name="LATITUDE_REQUIRED" xml:space="preserve">
     <value>Latitude is required</value>
   </data>
   <data name="LONGITUDE_REQUIRED" xml:space="preserve">
     <value>Longitude is required</value>
+  </data>
+  <data name="NAME_EMPTY" xml:space="preserve">
+    <value>Name cannot be empty</value>
   </data>
   <data name="NAME_REQUIRED" xml:space="preserve">
     <value>The name is required</value>
