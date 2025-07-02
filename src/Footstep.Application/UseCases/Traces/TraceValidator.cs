@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Footstep.Communication.Requests;
+using Footstep.Communication.Requests.Traces;
 using Footstep.Exception;
 
 namespace Footstep.Application.UseCases.Traces

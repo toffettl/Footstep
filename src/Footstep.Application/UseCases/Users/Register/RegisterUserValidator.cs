@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Footstep.Communication.Requests;
+using Footstep.Communication.Requests.Users;
 using Footstep.Exception;
 
 namespace Footstep.Application.UseCases.Users.Register;

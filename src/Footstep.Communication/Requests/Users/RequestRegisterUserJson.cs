@@ -1,4 +1,4 @@
-﻿namespace Footstep.Communication.Requests;
+﻿namespace Footstep.Communication.Requests.Users;
 public class RequestRegisterUserJson
 {
     public string? Name { get; set; }

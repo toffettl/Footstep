@@ -4,7 +4,7 @@ using Footstep.Application.UseCases.Traces.GetAll;
 using Footstep.Application.UseCases.Traces.GetById;
 using Footstep.Application.UseCases.Traces.GetByRay;
 using Footstep.Application.UseCases.Traces.Update;
-using Footstep.Communication.Requests;
+using Footstep.Communication.Requests.Traces;
 using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Traces;
 using Microsoft.AspNetCore.Mvc;

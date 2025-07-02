@@ -1,5 +1,5 @@
 ﻿using Footstep.Application.UseCases.Users.Register;
-using Footstep.Communication.Requests;
+using Footstep.Communication.Requests.Users;
 using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Users;
 using Microsoft.AspNetCore.Mvc;

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Footstep.Communication.Requests;
+using Footstep.Communication.Requests.Traces;
 using Footstep.Domain.Repositories;
 using Footstep.Domain.Repositories.Traces;
 using Footstep.Exception;

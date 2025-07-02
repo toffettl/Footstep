@@ -4,11 +4,11 @@ using Footstep.Domain.Repositories;
 using Footstep.Domain.Security.Cryptography;
 using Footstep.Domain.Security.Tokens;
 using Footstep.Communication.Responses.Users;
-using Footstep.Communication.Requests;
 using Footstep.Exception;
 using FluentValidation.Results;
 using Footstep.Exception.ExceptionsBase;
 using Footstep.Domain.Entities;
+using Footstep.Communication.Requests.Users;
 
 namespace Footstep.Application.UseCases.Users.Register;
 public class RegisterUserUseCase : IRegisterUserUseCase
