@@ -1,4 +1,4 @@
-﻿namespace Footstep.Communication.Requests
+﻿namespace Footstep.Communication.Requests.Traces
 {
     public class RequestTraceJson
     {

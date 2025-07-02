@@ -1,4 +1,4 @@
-﻿using Footstep.Communication.Requests;
+﻿using Footstep.Communication.Requests.Traces;
 
 namespace Footstep.Application.UseCases.Traces.Update
 {

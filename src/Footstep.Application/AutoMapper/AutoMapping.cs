@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
-using Footstep.Communication.Requests;
-using Footstep.Communication.Responses;
+using Footstep.Communication.Requests.Traces;
+using Footstep.Communication.Requests.Users;
+using Footstep.Communication.Responses.Traces;
 using Footstep.Domain.Entities;
 
 namespace Footstep.Application.AutoMapper
@@ -16,6 +17,8 @@ namespace Footstep.Application.AutoMapper
         private void RequestToEntity()
         {
             CreateMap<RequestTraceJson, Trace>();
+            CreateMap<RequestRegisterUserJson, User>()
+                .ForMember(dest => dest.Password, config => config.Ignore());
         }
 
         private void EntityToResponse()

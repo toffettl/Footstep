@@ -1,4 +1,4 @@
-﻿namespace Footstep.Communication.Responses
+﻿namespace Footstep.Communication.Responses.Traces
 {
     public class ResponseCreateTraceJson
     {
