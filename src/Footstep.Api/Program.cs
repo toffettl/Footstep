@@ -2,7 +2,9 @@ using Footstep.Api.Filters;
 using Footstep.Api.Middleware;
 using Footstep.Application;
 using Footstep.Infrastructure;
+using Footstep.Infrastructure.DataAccess;
 using Footstep.Infrastructure.Migrations;
+using Microsoft.EntityFrameworkCore;
 //V1.0.1
 
 var builder = WebApplication.CreateBuilder(args);
@@ -42,6 +44,18 @@ app.Run();
 async Task MigrateDatabase()
 {
     await using var scope = app.Services.CreateAsyncScope();
+    var dbContext = scope.ServiceProvider.GetRequiredService<FootstepDbContext>();
 
-    await DataBaseMigration.MigrateDatabase(scope.ServiceProvider);
+    var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync();
+
+    if (pendingMigrations.Any())
+    {
+        Console.WriteLine("Applying pending migrations");
+        await dbContext.Database.MigrateAsync();
+        Console.WriteLine("Migrations successfully implemented");
+    }
+    else
+    {
+        Console.WriteLine("No pending migrations");
+    }
 }
