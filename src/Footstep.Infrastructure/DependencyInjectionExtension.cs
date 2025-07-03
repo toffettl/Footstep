@@ -9,6 +9,7 @@ using Footstep.Infrastructure.Security.Tokens;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Pomelo.EntityFrameworkCore.MySql.Internal;
 
 namespace Footstep.Infrastructure
 {
@@ -42,11 +43,13 @@ namespace Footstep.Infrastructure
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
         {
-            var conectionString = configuration.GetConnectionString("Connection");
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            var serverVersion = new MySqlServerVersion(new Version(8, 0, 21));
-
-            services.AddDbContext<FootstepDbContext>(config => config.UseMySql(conectionString, serverVersion));
+            services.AddDbContext<FootstepDbContext>(options =>
+            {
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString),
+                    mySqlOptions => mySqlOptions.EnableRetryOnFailure());
+            });
         }
     }
 }
