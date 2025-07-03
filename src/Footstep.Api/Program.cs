@@ -2,11 +2,7 @@ using Footstep.Api.Filters;
 using Footstep.Api.Middleware;
 using Footstep.Application;
 using Footstep.Infrastructure;
-using Footstep.Infrastructure.DataAccess;
-using Footstep.Infrastructure.Migrations;
-using Microsoft.EntityFrameworkCore;
-//V1.0.1
-
+//V1.0.5
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration["ConnectionStrings:DefaultConnection"] = Environment.GetEnvironmentVariable("DEFAULT_CONNECTION");
@@ -36,26 +32,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-await MigrateDatabase();
-
 app.Run();
-
-
-async Task MigrateDatabase()
-{
-    await using var scope = app.Services.CreateAsyncScope();
-    var dbContext = scope.ServiceProvider.GetRequiredService<FootstepDbContext>();
-
-    var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync();
-
-    if (pendingMigrations.Any())
-    {
-        Console.WriteLine("Applying pending migrations");
-        await dbContext.Database.MigrateAsync();
-        Console.WriteLine("Migrations successfully implemented");
-    }
-    else
-    {
-        Console.WriteLine("No pending migrations");
-    }
-}
