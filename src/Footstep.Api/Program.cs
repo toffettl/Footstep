@@ -3,6 +3,7 @@ using Footstep.Api.Middleware;
 using Footstep.Application;
 using Footstep.Infrastructure;
 using Footstep.Infrastructure.Migrations;
+//V1.0.1
 
 var builder = WebApplication.CreateBuilder(args);
 

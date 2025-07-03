@@ -9,7 +9,6 @@ COPY . .
 
 RUN dotnet publish -c Release -o /app/publish
 
-# Etapa final: junta tudo
 FROM base AS final
 WORKDIR /app
 COPY --from=build /app/publish .
