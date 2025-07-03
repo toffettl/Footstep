@@ -7,7 +7,9 @@ WORKDIR /src
 
 COPY . .
 
-RUN dotnet publish -c Release -o /app/publish
+RUN dotnet restore src/Foodstep.Api/Foodstep.Api.csproj
+
+RUN dotnet publish src/Footstep.Api/Footstep.Api.csproj -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
