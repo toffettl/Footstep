@@ -9,7 +9,6 @@ using Footstep.Infrastructure.Security.Tokens;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Pomelo.EntityFrameworkCore.MySql.Internal;
 
 namespace Footstep.Infrastructure
 {
