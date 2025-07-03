@@ -1,4 +1,4 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 80
 
@@ -9,8 +9,9 @@ COPY . .
 
 RUN dotnet publish -c Release -o /app/publish
 
+# Etapa final: junta tudo
 FROM base AS final
 WORKDIR /app
 COPY --from=build /app/publish .
 
-ENTRYPOINT ["dotnet", "Footstep.API.dll"]
+ENTRYPOINT ["dotnet", "Footstep.Api.dll"]
