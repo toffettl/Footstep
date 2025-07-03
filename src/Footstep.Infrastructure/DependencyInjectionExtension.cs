@@ -42,11 +42,10 @@ namespace Footstep.Infrastructure
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
         {
-            var conectionString = configuration.GetConnectionString("Connection");
+            var conectionString = "Host=yamabiko.proxy.rlwy.net;Port=5432;Database=footstep;Username=postgres;Password=Host=yamabiko.proxy.rlwy.net;Port=23952;Database=footstep;Username=postgres;Password=cxESXilghkzQBLYjuNtNRSuDyAjcnrVz;";
 
-            var serverVersion = new MySqlServerVersion(new Version(8, 0, 21));
-
-            services.AddDbContext<FootstepDbContext>(config => config.UseMySql(conectionString, serverVersion));
+            services.AddDbContext<FootstepDbContext>(config =>
+                config.UseNpgsql(conectionString));
         }
     }
 }

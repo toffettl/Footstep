@@ -2,9 +2,10 @@ using Footstep.Api.Filters;
 using Footstep.Api.Middleware;
 using Footstep.Application;
 using Footstep.Infrastructure;
-using Footstep.Infrastructure.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration["ConnectionStrings:DefaultConnection"] = Environment.GetEnvironmentVariable("DEFAULT_CONNECTION");
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -31,14 +32,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-await MigrateDatabase();
-
 app.Run();
-
-
-async Task MigrateDatabase()
-{
-    await using var scope = app.Services.CreateAsyncScope();
-
-    await DataBaseMigration.MigrateDatabase(scope.ServiceProvider);
-}
