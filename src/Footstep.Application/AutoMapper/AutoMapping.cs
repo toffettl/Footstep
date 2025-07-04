@@ -2,6 +2,7 @@
 using Footstep.Communication.Requests.Traces;
 using Footstep.Communication.Requests.Users;
 using Footstep.Communication.Responses.Traces;
+using Footstep.Communication.Responses.Users;
 using Footstep.Domain.Entities;
 
 namespace Footstep.Application.AutoMapper
