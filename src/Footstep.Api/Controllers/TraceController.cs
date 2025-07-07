@@ -23,7 +23,7 @@ namespace Footstep.Api.Controllers
         {
             var response = await usecase.Execute(request);
 
-            return Created(string.Empty, response);
+            return Ok(response);
         }
 
         [HttpDelete]
