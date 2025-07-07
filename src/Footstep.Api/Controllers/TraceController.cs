@@ -15,7 +15,7 @@ namespace Footstep.Api.Controllers
     [ApiController]
     public class TraceController : ControllerBase
     {
-        [HttpPost("postTrace")]
+        [HttpPost]
         [ProducesResponseType(typeof(ResponseCreateTraceJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create([FromServices] ICreateTraceUseCase usecase,
