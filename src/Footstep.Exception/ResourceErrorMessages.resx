@@ -156,6 +156,9 @@
   <data name="NAME_REQUIRED" xml:space="preserve">
     <value>The name is required</value>
   </data>
+  <data name="SASUAIIUAS_AJH" xml:space="preserve">
+    <value />
+  </data>
   <data name="THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST" xml:space="preserve">
     <value>The expiration date cannot be in the past</value>
   </data>

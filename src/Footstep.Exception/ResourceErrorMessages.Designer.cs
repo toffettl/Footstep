@@ -178,6 +178,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a .
+        /// </summary>
+        public static string SASUAIIUAS_AJH {
+            get {
+                return ResourceManager.GetString("SASUAIIUAS_AJH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The expiration date cannot be in the past.
         /// </summary>
         public static string THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST {
