@@ -2,7 +2,7 @@ using Footstep.Api.Filters;
 using Footstep.Api.Middleware;
 using Footstep.Application;
 using Footstep.Infrastructure;
-//V1.0.16
+//V1.0.17
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration["ConnectionStrings:DefaultConnection"] = Environment.GetEnvironmentVariable("DEFAULT_CONNECTION");
