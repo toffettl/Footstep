@@ -9,7 +9,7 @@ namespace Footstep.Api.Controllers;
 [ApiController]
 public class UserController : ControllerBase
 {
-    [HttpPost]
+    [HttpPost("register")]
     [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Register(

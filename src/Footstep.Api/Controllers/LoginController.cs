@@ -9,7 +9,7 @@ namespace Footstep.Api.Controllers;
 [ApiController]
 public class LoginController : ControllerBase
 {
-    [HttpPost]
+    [HttpPost("login")]
     [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> Login(
