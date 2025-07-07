@@ -5,21 +5,7 @@ using Footstep.Infrastructure;
 //V1.0.12
 var builder = WebApplication.CreateBuilder(args);
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-builder.WebHost.UseUrls($"http://*:{port}");
-
-builder.Configuration["ConnectionStrings:DefaultConnection"] =
-    Environment.GetEnvironmentVariable("DEFAULT_CONNECTION");
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll", policy =>
-    {
-        policy.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader();
-    });
-});
+builder.Configuration["ConnectionStrings:DefaultConnection"] = Environment.GetEnvironmentVariable("DEFAULT_CONNECTION");
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -27,33 +13,23 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
-builder.Services.AddHttpsRedirection(options =>
-{
-    options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
-    options.HttpsPort = 443;
-});
-
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 
 var app = builder.Build();
 
-app.UseSwagger();
-app.UseSwaggerUI();
-
-app.UseHttpsRedirection();
-app.UseCors("AllowAll");
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseMiddleware<CultureMiddleware>();
+
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.Use(async (context, next) =>
-{
-    Console.WriteLine($"[DEBUG] Recebido: {context.Request.Method} {context.Request.Path}");
-    await next();
-});
 
 app.Run();
