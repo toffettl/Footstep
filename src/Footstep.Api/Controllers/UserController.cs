@@ -18,6 +18,6 @@ public class UserController : ControllerBase
     {
         var response = await useCase.Execute(request);
 
-        return CreatedAtAction(nameof(Register), new {}, response);
+        return Ok(response);
     }
 }
