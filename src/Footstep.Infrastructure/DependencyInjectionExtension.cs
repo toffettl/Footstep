@@ -24,8 +24,8 @@ namespace Footstep.Infrastructure
         }
         private static void AddToken(IServiceCollection services, IConfiguration configuration)
         {
-            var expirationTimeMinutes = configuration.GetValue<uint>("Settings:Jwt:ExpiresMinutes");
-            var signingKey = configuration.GetValue<string>("Settings:Jwt:SigningKey");
+            var expirationTimeMinutes = Convert.ToUInt32(1000);
+            var signingKey = "-T%QuRqutu)]LoDn7Let59URPHGsTLWp3b1aQKE";
 
             services.AddScoped<IAccessTokenGenerator>(config => new JwtTokenGenerator(expirationTimeMinutes, signingKey!));
         }
