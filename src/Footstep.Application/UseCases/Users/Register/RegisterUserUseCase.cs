@@ -40,7 +40,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         await Validade(request);
 
         var user = _mapper.Map<User>(request);
-        user.Password = _passwordEncripter.Encrypt(request.Password!);
+        user.Password = request.Password;
         user.Id = Guid.NewGuid();
 
         await _userWriteOnlyRepostory.Add(user);
@@ -50,6 +50,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         return new ResponseRegisteredUserJson
         {
             Name = user.Name,
+            Token = _tokenGenerator.Generate(user)
         };
     }
 
