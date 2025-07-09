@@ -160,6 +160,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Mark not found.
+        /// </summary>
+        public static string MARK_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("MARK_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Name cannot be empty.
         /// </summary>
         public static string NAME_EMPTY {
@@ -178,11 +187,11 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a .
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Trace name must have at least 3 characters.
         /// </summary>
-        public static string SASUAIIUAS_AJH {
+        public static string NAME_TRACE_SIZE {
             get {
-                return ResourceManager.GetString("SASUAIIUAS_AJH", resourceCulture);
+                return ResourceManager.GetString("NAME_TRACE_SIZE", resourceCulture);
             }
         }
         

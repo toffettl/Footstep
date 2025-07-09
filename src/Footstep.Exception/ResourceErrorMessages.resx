@@ -150,14 +150,17 @@
   <data name="LONGITUDE_REQUIRED" xml:space="preserve">
     <value>Longitude is required</value>
   </data>
+  <data name="MARK_NOT_FOUND" xml:space="preserve">
+    <value>Mark not found</value>
+  </data>
   <data name="NAME_EMPTY" xml:space="preserve">
     <value>Name cannot be empty</value>
   </data>
   <data name="NAME_REQUIRED" xml:space="preserve">
     <value>The name is required</value>
   </data>
-  <data name="SASUAIIUAS_AJH" xml:space="preserve">
-    <value />
+  <data name="NAME_TRACE_SIZE" xml:space="preserve">
+    <value>Trace name must have at least 3 characters</value>
   </data>
   <data name="THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST" xml:space="preserve">
     <value>The expiration date cannot be in the past</value>

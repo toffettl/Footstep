@@ -9,5 +9,6 @@ namespace Footstep.Infrastructure.DataAccess
 
         public DbSet<Trace> Traces { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Mark> Marks { get; set; }
     }
 }
