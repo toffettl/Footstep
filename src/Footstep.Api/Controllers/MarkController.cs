@@ -1,5 +1,6 @@
 ﻿using Footstep.Application.UseCases.Marks.Create;
-using Footstep.Application.UseCases.Marks.Get;
+using Footstep.Application.UseCases.Marks.GetAll;
+using Footstep.Application.UseCases.Marks.GetById;
 using Footstep.Application.UseCases.Marks.Update;
 using Footstep.Communication.Requests.Marks;
 using Footstep.Communication.Responses;
@@ -19,6 +20,18 @@ namespace Footstep.Api.Controllers
             [FromBody] RequestMarkJson request)
         {
             var response = await usecase.Execute(request);
+
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        [ProducesResponseType(typeof(ResponseMarkJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetById([FromServices] IGetByIdMarkUseCase usecase,
+            [FromRoute] Guid id)
+        {
+            var response = await usecase.Execute(id);
 
             return Ok(response);
         }
