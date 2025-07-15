@@ -1,7 +1,6 @@
 ﻿using Footstep.Communication.Responses.Marks;
-using Footstep.Domain.Entities;
 
-namespace Footstep.Application.UseCases.Marks.Get
+namespace Footstep.Application.UseCases.Marks.GetAll
 {
     public interface IGetAllMarkUseCase
     {

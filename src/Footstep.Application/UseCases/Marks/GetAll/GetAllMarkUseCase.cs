@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Footstep.Application.UseCases.Marks.Get;
 using Footstep.Communication.Responses.Marks;
 using Footstep.Domain.Repositories.Marks;
 
