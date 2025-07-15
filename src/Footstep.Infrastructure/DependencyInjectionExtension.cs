@@ -37,10 +37,11 @@ namespace Footstep.Infrastructure
             services.AddScoped<ITracesWriteOnlyRepository, TracesRepostory>();
             services.AddScoped<ITracesUpdateOnlyRepository, TracesRepostory>();
             services.AddScoped<ITracesReadOnlyRepository, TracesRepostory>();
+            services.AddScoped<IMarkWriteOnlyRepository, MarkRepository>();
+            services.AddScoped<IMarkReadOnlyRepository, MarkRepository>();
+            services.AddScoped<IMarkUpdateOnlyRepository, MarkRepository>();
             services.AddScoped<IUserReadOnlyRepository, UserRepository>();
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
-            services.AddScoped<IMarkWriteOnlyRepository, MarkRepository>();
-            services.AddScoped<IMarkUpdateOnlyRepository, MarkRepository>();
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
