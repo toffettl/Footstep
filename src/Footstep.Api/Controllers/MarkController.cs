@@ -1,4 +1,5 @@
 ﻿using Footstep.Application.UseCases.Marks.Create;
+using Footstep.Application.UseCases.Marks.Delete;
 using Footstep.Application.UseCases.Marks.GetAll;
 using Footstep.Application.UseCases.Marks.GetById;
 using Footstep.Application.UseCases.Marks.Update;
@@ -24,10 +25,22 @@ namespace Footstep.Api.Controllers
             return Ok(response);
         }
 
+        [HttpDelete]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete([FromServices] IDeleteMarkUseCase usecase,
+            [FromRoute] Guid id)
+        {
+            await usecase.Execute(id);
+
+            return NoContent();
+        } 
+
         [HttpGet]
         [Route("{id}")]
         [ProducesResponseType(typeof(ResponseMarkJson), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById([FromServices] IGetByIdMarkUseCase usecase,
             [FromRoute] Guid id)
         {
@@ -42,6 +55,11 @@ namespace Footstep.Api.Controllers
         public async Task<IActionResult> GetAll([FromServices] IGetAllMarkUseCase usecase)
         {
             var response = await usecase.Execute();
+
+            if(response.Marks.Count == 0)
+            {
+                return NoContent();
+            }
 
             return Ok(response);
         }
