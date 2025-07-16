@@ -2,6 +2,7 @@
 using Footstep.Application.UseCases.Marks.Delete;
 using Footstep.Application.UseCases.Marks.GetAll;
 using Footstep.Application.UseCases.Marks.GetById;
+using Footstep.Application.UseCases.Marks.GetNearby;
 using Footstep.Application.UseCases.Marks.Update;
 using Footstep.Communication.Requests.Marks;
 using Footstep.Communication.Responses;
@@ -63,6 +64,25 @@ namespace Footstep.Api.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet("nearby")]
+        [ProducesResponseType(typeof(ResponseMarksJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> GetNearby([FromServices] IGetNearbyMarkUseCase useCase,
+            [FromQuery] double latitude,
+            [FromQuery] double longitude,
+            [FromQuery] double radiusInMeters)
+        {
+            var response = await useCase.Execute(latitude, longitude, radiusInMeters);
+
+            if(response.Marks.Count == 0)
+            {
+                return NoContent();
+            }
+
+            return Ok(response);
+        }
+
 
         [HttpPut]
         [Route("{id}")]
