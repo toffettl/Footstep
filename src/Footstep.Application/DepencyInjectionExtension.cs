@@ -3,6 +3,7 @@ using Footstep.Application.UseCases.Marks.Create;
 using Footstep.Application.UseCases.Marks.Delete;
 using Footstep.Application.UseCases.Marks.GetAll;
 using Footstep.Application.UseCases.Marks.GetById;
+using Footstep.Application.UseCases.Marks.GetNearby;
 using Footstep.Application.UseCases.Marks.Update;
 using Footstep.Application.UseCases.Traces.Create;
 using Footstep.Application.UseCases.Traces.Delete;
@@ -41,6 +42,7 @@ namespace Footstep.Application
             services.AddScoped<IDeleteMarkUseCase, DeleteMarkUsecase>();
             services.AddScoped<IGetByIdMarkUseCase, GetByIdMarkUseCase>();
             services.AddScoped<IGetAllMarkUseCase, GetAllMarkUseCase>();
+            services.AddScoped<IGetNearbyMarkUseCase, GetNearbyMarkUseCase>();
             services.AddScoped<IUpdateMarkUseCase, UpdateMarkUseCase>();
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
