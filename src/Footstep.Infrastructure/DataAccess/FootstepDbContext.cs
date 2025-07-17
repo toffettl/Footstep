@@ -9,6 +9,7 @@ namespace Footstep.Infrastructure.DataAccess
 
         public DbSet<Trace> Traces { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<UserRelation> UserRelations { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserRelation>()
@@ -22,24 +23,6 @@ namespace Footstep.Infrastructure.DataAccess
                 .WithMany(u => u.Followers)
                 .HasForeignKey(ur => ur.FollowingId)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Comment>()
-                .HasOne(c => c.Author)
-                .WithMany(u => u.CommentsWritten)
-                .HasForeignKey(c => c.AuthorId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Comment>()
-                .HasOne(c => c.TargetUser)
-                .WithMany(u => u.CommentsReceived)
-                .HasForeignKey(c => c.TargetUserId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Achievement>()
-                .HasOne(a => a.User)
-                .WithMany(u => u.Achievements)
-                .HasForeignKey(a => a.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

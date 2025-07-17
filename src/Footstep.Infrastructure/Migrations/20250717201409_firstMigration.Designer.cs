@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Footstep.Infrastructure.Migrations
 {
     [DbContext(typeof(FootstepDbContext))]
-    [Migration("20250715194031_AddSocialRelations")]
-    partial class AddSocialRelations
+    [Migration("20250717201409_firstMigration")]
+    partial class firstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,92 +24,6 @@ namespace Footstep.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("Footstep.Domain.Entities.Achievement", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("EarnedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Achievement");
-                });
-
-            modelBuilder.Entity("Footstep.Domain.Entities.Comment", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("AuthorId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid>("TargetUserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
-
-                    b.HasIndex("TargetUserId");
-
-                    b.ToTable("Comment");
-                });
-
-            modelBuilder.Entity("Footstep.Domain.Entities.Social", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string[]>("Achievements")
-                        .IsRequired()
-                        .HasColumnType("text[]");
-
-                    b.Property<string[]>("Comments")
-                        .IsRequired()
-                        .HasColumnType("text[]");
-
-                    b.Property<string[]>("Followers")
-                        .IsRequired()
-                        .HasColumnType("text[]");
-
-                    b.Property<string[]>("Following")
-                        .IsRequired()
-                        .HasColumnType("text[]");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Social");
-                });
 
             modelBuilder.Entity("Footstep.Domain.Entities.Trace", b =>
                 {
@@ -189,48 +103,7 @@ namespace Footstep.Infrastructure.Migrations
 
                     b.HasIndex("FollowingId");
 
-                    b.ToTable("UserRelation");
-                });
-
-            modelBuilder.Entity("Footstep.Domain.Entities.Achievement", b =>
-                {
-                    b.HasOne("Footstep.Domain.Entities.User", "User")
-                        .WithMany("Achievements")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Footstep.Domain.Entities.Comment", b =>
-                {
-                    b.HasOne("Footstep.Domain.Entities.User", "Author")
-                        .WithMany("CommentsWritten")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Footstep.Domain.Entities.User", "TargetUser")
-                        .WithMany("CommentsReceived")
-                        .HasForeignKey("TargetUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-
-                    b.Navigation("TargetUser");
-                });
-
-            modelBuilder.Entity("Footstep.Domain.Entities.Social", b =>
-                {
-                    b.HasOne("Footstep.Domain.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
+                    b.ToTable("UserRelations");
                 });
 
             modelBuilder.Entity("Footstep.Domain.Entities.Trace", b =>
@@ -263,12 +136,6 @@ namespace Footstep.Infrastructure.Migrations
 
             modelBuilder.Entity("Footstep.Domain.Entities.User", b =>
                 {
-                    b.Navigation("Achievements");
-
-                    b.Navigation("CommentsReceived");
-
-                    b.Navigation("CommentsWritten");
-
                     b.Navigation("Followers");
 
                     b.Navigation("Following");

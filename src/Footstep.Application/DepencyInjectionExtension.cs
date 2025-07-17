@@ -1,4 +1,5 @@
 ﻿using Footstep.Application.AutoMapper;
+using Footstep.Application.UseCases.RelationUser.Follow;
 using Footstep.Application.UseCases.Traces.Create;
 using Footstep.Application.UseCases.Traces.Delete;
 using Footstep.Application.UseCases.Traces.GetAll;
@@ -34,6 +35,7 @@ namespace Footstep.Application
             services.AddScoped<IGetNearbyTracesUseCase, GetNearbyTracesUseCase>();
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
+            services.AddScoped<IFollowUserRelationUseCase, FollowUserRelationUseCase>();
         }
     }
 }
