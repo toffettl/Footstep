@@ -1,4 +1,6 @@
 ﻿using Footstep.Application.UseCases.RelationUser.Follow;
+using Footstep.Application.UseCases.Traces.Delete;
+using Footstep.Application.UseCases.UserRelation.Unfollow;
 using Footstep.Communication.Requests.UserRelation;
 using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Traces;
@@ -18,5 +20,18 @@ public class UserRelationController : ControllerBase
         var response = await followcase.Execute(request);
 
         return Ok(response);
+    }
+
+    [HttpDelete]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> DeleteRelation(
+    [FromServices] IUnfollowUserRelationUseCase useCase,
+    [FromQuery] Guid followerId,
+    [FromQuery] Guid followingId)
+    {
+        await useCase.Execute(followerId, followingId);
+
+        return NoContent();
     }
 }

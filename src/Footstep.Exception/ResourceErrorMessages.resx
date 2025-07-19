@@ -177,4 +177,7 @@
   <data name="UPDATE_DATE_IN_THE_PAST" xml:space="preserve">
     <value>Update date cannot be in the past</value>
   </data>
+  <data name="USER_RELATION_NOT_FOUND" xml:space="preserve">
+    <value>Relationship between users not found</value>
+  </data>
 </root>

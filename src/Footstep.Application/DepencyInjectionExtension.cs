@@ -6,6 +6,7 @@ using Footstep.Application.UseCases.Traces.GetAll;
 using Footstep.Application.UseCases.Traces.GetById;
 using Footstep.Application.UseCases.Traces.GetByRay;
 using Footstep.Application.UseCases.Traces.Update;
+using Footstep.Application.UseCases.UserRelation.Unfollow;
 using Footstep.Application.UseCases.Users.Login;
 using Footstep.Application.UseCases.Users.Register;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,6 +37,7 @@ namespace Footstep.Application
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
             services.AddScoped<IFollowUserRelationUseCase, FollowUserRelationUseCase>();
+            services.AddScoped<IUnfollowUserRelationUseCase, UnfollowUserRelationUseCase>();
         }
     }
 }

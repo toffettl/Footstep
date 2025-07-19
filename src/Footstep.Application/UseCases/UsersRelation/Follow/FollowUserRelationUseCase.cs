@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation.Results;
 using Footstep.Communication.Requests.UserRelation;
-using Footstep.Communication.Responses.Traces;
 using Footstep.Communication.Responses.UserRelation;
 using Footstep.Domain.Entities;
 using Footstep.Domain.Repositories;
@@ -32,7 +31,7 @@ public class FollowUserRelationUseCase : IFollowUserRelationUseCase
     {
         await Validate(request);
 
-        var relation = _mapper.Map<UserRelation>(request);
+        var relation = _mapper.Map<Domain.Entities.UserRelation>(request);
 
         await _writeOnlyRepository.AddRelation(relation);
 

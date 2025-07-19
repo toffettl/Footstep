@@ -15,6 +15,20 @@ public class UserRelationRepository : IUserRelationWriteOnlyRepository, IUserRel
         await _dbContext.UserRelations.AddAsync(userRelation);
     }
 
+    public async Task<bool?> DeleteRelation(Guid followerId, Guid followingId)
+    {
+        var result = await _dbContext.UserRelations.FirstOrDefaultAsync(
+            relation => relation.FollowerId == followerId && relation.FollowingId == followingId);
+        if (result == null)
+        {
+            return false;
+        }
+
+        _dbContext.UserRelations.Remove(result);
+
+        return true;
+    }
+
     public async Task<bool> IsFollowingAsync(Guid followerId, Guid followingId)
     {
         return await _dbContext.UserRelations.AnyAsync(user => user.FollowerId == followerId && user.FollowingId == followingId);

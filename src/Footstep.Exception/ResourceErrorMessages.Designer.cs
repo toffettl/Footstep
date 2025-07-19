@@ -239,5 +239,14 @@ namespace Footstep.Exception {
                 return ResourceManager.GetString("UPDATE_DATE_IN_THE_PAST", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Relationship between users not found.
+        /// </summary>
+        public static string USER_RELATION_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("USER_RELATION_NOT_FOUND", resourceCulture);
+            }
+        }
     }
 }
