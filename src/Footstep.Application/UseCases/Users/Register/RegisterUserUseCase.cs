@@ -42,6 +42,23 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         var user = _mapper.Map<User>(request);
         user.Password = _passwordEncripter.Encrypt(request.Password!);
         user.Id = Guid.NewGuid();
+        user.MapStyle = "initial";
+        user.PointOfInterestStyle = "initial";
+        user.AvatarOverProfile = true;
+        user.HeadStyle = "initial";
+        user.TorsoStyle = "initial";
+        user.LegStyle = "initial";
+        user.BagStyle = "initial";
+        user.AcessoryStyle = "initial";
+        user.UnlockedMapStyles = "initial";
+        user.UnlockedPointOfInterestStyles = "initial";
+        user.UnlockedHeadStyles = "initial";
+        user.UnlockedTorsoStyles = "initial";
+        user.UnlockedLegStyles = "initial";
+        user.UnlockedBagStyles = "initial";
+        user.UnlockedAcessoryStyles = "initial";
+        user.CreatedAt = DateTime.UtcNow;
+        user.UpdatedAt = DateTime.UtcNow;
 
         await _userWriteOnlyRepostory.Add(user);
 
