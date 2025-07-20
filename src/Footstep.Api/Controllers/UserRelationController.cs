@@ -1,9 +1,11 @@
 ﻿using Footstep.Application.UseCases.RelationUser.Follow;
 using Footstep.Application.UseCases.Traces.Delete;
 using Footstep.Application.UseCases.UserRelation.Unfollow;
+using Footstep.Application.UseCases.UsersRelation.GetFollowers;
 using Footstep.Communication.Requests.UserRelation;
 using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Traces;
+using Footstep.Communication.Responses.UserRelation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Footstep.Api.Controllers;
@@ -33,5 +35,17 @@ public class UserRelationController : ControllerBase
         await useCase.Execute(followerId, followingId);
 
         return NoContent();
+    }
+
+    [HttpGet("followers/{followingId}")]
+    [ProducesResponseType(typeof(List<ResponseFollowersJson>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetFollowers(
+        [FromServices] IGetFollowersUserRelationUseCase useCase,
+        [FromRoute] Guid followingId)
+    {
+        var response = await useCase.Execute(followingId);
+
+        return Ok(response);
     }
 }

@@ -214,6 +214,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a This user has no followers.
+        /// </summary>
+        public static string THIS_USER_HAS_NO_FOLLOWERS {
+            get {
+                return ResourceManager.GetString("THIS_USER_HAS_NO_FOLLOWERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Trace not found.
         /// </summary>
         public static string TRACE_NOT_FOUND {

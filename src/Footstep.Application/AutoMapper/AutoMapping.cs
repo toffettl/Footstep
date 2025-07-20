@@ -30,6 +30,10 @@ namespace Footstep.Application.AutoMapper
             CreateMap<Trace, ResponseCreateTraceJson>();
             CreateMap<Trace, ResponseTraceJson>();
             CreateMap<UserRelation, ResponseUserRelationJson>();
+            CreateMap<UserRelation, ResponseFollowersJson>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Follower!.Id))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Follower!.Name))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Follower!.Email));
         }
     }
 }

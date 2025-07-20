@@ -3,7 +3,8 @@ using Footstep.Domain.Repositories.RelationUser;
 using Microsoft.EntityFrameworkCore;
 
 namespace Footstep.Infrastructure.DataAccess.Repositories;
-public class UserRelationRepository : IUserRelationWriteOnlyRepository, IUserRelationReadOnlyRepository
+public class UserRelationRepository : IUserRelationWriteOnlyRepository, 
+    IUserRelationReadOnlyRepository
 {
     private readonly FootstepDbContext _dbContext;
     public UserRelationRepository(FootstepDbContext dbContext)
@@ -27,6 +28,14 @@ public class UserRelationRepository : IUserRelationWriteOnlyRepository, IUserRel
         _dbContext.UserRelations.Remove(result);
 
         return true;
+    }
+
+    public async Task<List<UserRelation>> GetFollowers(Guid followingId)
+    {
+        return await _dbContext.UserRelations
+            .Where(user => user.FollowingId == followingId)
+            .Include(user => user.Follower)
+            .ToListAsync();
     }
 
     public async Task<bool> IsFollowingAsync(Guid followerId, Guid followingId)

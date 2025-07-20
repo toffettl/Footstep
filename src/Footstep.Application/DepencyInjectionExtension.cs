@@ -9,6 +9,7 @@ using Footstep.Application.UseCases.Traces.Update;
 using Footstep.Application.UseCases.UserRelation.Unfollow;
 using Footstep.Application.UseCases.Users.Login;
 using Footstep.Application.UseCases.Users.Register;
+using Footstep.Application.UseCases.UsersRelation.GetFollowers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Footstep.Application
@@ -38,6 +39,7 @@ namespace Footstep.Application
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
             services.AddScoped<IFollowUserRelationUseCase, FollowUserRelationUseCase>();
             services.AddScoped<IUnfollowUserRelationUseCase, UnfollowUserRelationUseCase>();
+            services.AddScoped<IGetFollowersUserRelationUseCase, GetFollowersUserRelationUseCase>();
         }
     }
 }
