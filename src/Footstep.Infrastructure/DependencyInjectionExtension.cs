@@ -24,8 +24,8 @@ namespace Footstep.Infrastructure
         }
         private static void AddToken(IServiceCollection services, IConfiguration configuration)
         {
-            var expirationTimeMinutes = Convert.ToUInt32(1000);
-            var signingKey = "-T%QuRqutu)]LoDn7Let59URPHGsTLWp3b1aQKE";
+            var expirationTimeMinutes = Convert.ToUInt32(configuration["JWT_EXPIRATION_MINUTES"]);
+            var signingKey = configuration["JWT_SECRET"];
 
             services.AddScoped<IAccessTokenGenerator>(config => new JwtTokenGenerator(expirationTimeMinutes, signingKey!));
         }
@@ -42,7 +42,7 @@ namespace Footstep.Infrastructure
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
         {
-            var conectionString = "Host=yamabiko.proxy.rlwy.net;Port=23952;Database=footstep;Username=postgres;Password=cxESXilghkzQBLYjuNtNRSuDyAjcnrVz;";
+            var conectionString = configuration["ConnectionStrings:DefaultConnection"];
 
             services.AddDbContext<FootstepDbContext>(config =>
                 config.UseNpgsql(conectionString));
