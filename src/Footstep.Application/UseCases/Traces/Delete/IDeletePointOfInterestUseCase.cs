@@ -1,6 +1,6 @@
 ﻿namespace Footstep.Application.UseCases.Traces.Delete
 {
-    public interface IDeleteTraceUseCase
+    public interface IDeletePointOfInterestUseCase
     {
         Task Execute(Guid id);
     }

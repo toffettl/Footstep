@@ -1,6 +1,6 @@
 ﻿namespace Footstep.Communication.Responses.Traces
 {
-    public class ResponseTraceJson
+    public class ResponsePointOfIntereseJson
     {
         public Guid Id { get; set; }
         public string? Name { get; set; }

@@ -34,9 +34,9 @@ namespace Footstep.Infrastructure
         private static void AddRepositories(IServiceCollection services)
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<ITracesWriteOnlyRepository, TracesRepostory>();
-            services.AddScoped<ITracesUpdateOnlyRepository, TracesRepostory>();
-            services.AddScoped<ITracesReadOnlyRepository, TracesRepostory>();
+            services.AddScoped<IPointsOfInterestWriteOnlyRepository, PointOfInterestRepository>();
+            services.AddScoped<IPointsOfInterestUpdateOnlyRepository, PointOfInterestRepository>();
+            services.AddScoped<IPointsOfInterestReadOnlyRepository, PointOfInterestRepository>();
             services.AddScoped<IUserReadOnlyRepository, UserRepository>();
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
             services.AddScoped<IUserRelationReadOnlyRepository, UserRelationRepository>();

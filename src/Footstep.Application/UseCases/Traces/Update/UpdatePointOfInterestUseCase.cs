@@ -7,13 +7,13 @@ using Footstep.Exception.ExceptionsBase;
 
 namespace Footstep.Application.UseCases.Traces.Update
 {
-    public class UpdateTraceUseCase : IUpdateTraceUseCase
+    public class UpdatePointOfInterestUseCase : IUpdatePointOfInterestUseCase
     {
-        private readonly ITracesUpdateOnlyRepository _repostiory;
+        private readonly IPointsOfInterestUpdateOnlyRepository _repostiory;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UpdateTraceUseCase(ITracesUpdateOnlyRepository repository,
+        public UpdatePointOfInterestUseCase(IPointsOfInterestUpdateOnlyRepository repository,
         IUnitOfWork unitOfWork,
         IMapper mapper)
         {
@@ -21,7 +21,7 @@ namespace Footstep.Application.UseCases.Traces.Update
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task Execute(Guid id, RequestTraceJson request)
+        public async Task Execute(Guid id, RequestPointOfInterestJson request)
         {
             Validate(request);
 
@@ -39,7 +39,7 @@ namespace Footstep.Application.UseCases.Traces.Update
             await _unitOfWork.Commit();
         }
 
-        private void Validate(RequestTraceJson request)
+        private void Validate(RequestPointOfInterestJson request)
         {
             var validator = new TraceValidator();
 

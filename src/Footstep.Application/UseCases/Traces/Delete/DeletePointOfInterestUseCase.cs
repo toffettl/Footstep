@@ -5,11 +5,11 @@ using Footstep.Exception.ExceptionsBase;
 
 namespace Footstep.Application.UseCases.Traces.Delete
 {
-    public class DeleteTraceUseCase : IDeleteTraceUseCase
+    public class DeletePointOfInterestUseCase : IDeletePointOfInterestUseCase
     {
-        private readonly ITracesWriteOnlyRepository _repository;
+        private readonly IPointsOfInterestWriteOnlyRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
-        public DeleteTraceUseCase(ITracesWriteOnlyRepository repository,
+        public DeletePointOfInterestUseCase(IPointsOfInterestWriteOnlyRepository repository,
             IUnitOfWork unitOfWork)
         {
             _repository = repository;
