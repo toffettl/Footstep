@@ -34,6 +34,11 @@ namespace Footstep.Application.AutoMapper
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Follower!.Id))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Follower!.Name))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Follower!.Email));
+
+            CreateMap<UserRelation, ResponseFollowingJson>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Following!.Id))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Following!.Name))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Following!.Email));
         }
     }
 }

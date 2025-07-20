@@ -38,6 +38,14 @@ public class UserRelationRepository : IUserRelationWriteOnlyRepository,
             .ToListAsync();
     }
 
+    public async Task<List<UserRelation>> GetFollowing(Guid followerId)
+    {
+        return await _dbContext.UserRelations
+            .Where(user => user.FollowerId == followerId)
+            .Include(user => user.Following)
+            .ToListAsync();
+    }
+
     public async Task<bool> IsFollowingAsync(Guid followerId, Guid followingId)
     {
         return await _dbContext.UserRelations.AnyAsync(user => user.FollowerId == followerId && user.FollowingId == followingId);

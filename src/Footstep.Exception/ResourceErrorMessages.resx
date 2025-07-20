@@ -168,6 +168,9 @@
   <data name="THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST" xml:space="preserve">
     <value>The expiration date cannot be in the past</value>
   </data>
+  <data name="THIS_USER_DOES_NOT_FOLLOW_ANYONE" xml:space="preserve">
+    <value>This user does not follow anyone</value>
+  </data>
   <data name="THIS_USER_HAS_NO_FOLLOWERS" xml:space="preserve">
     <value>This user has no followers</value>
   </data>
