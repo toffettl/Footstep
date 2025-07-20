@@ -5,6 +5,7 @@ using Footstep.Application.UseCases.Traces.GetAll;
 using Footstep.Application.UseCases.Traces.GetById;
 using Footstep.Application.UseCases.Traces.GetByRay;
 using Footstep.Application.UseCases.Traces.Update;
+using Footstep.Application.UseCases.Users.GetByEmail;
 using Footstep.Application.UseCases.Users.Login;
 using Footstep.Application.UseCases.Users.Register;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,6 +35,7 @@ namespace Footstep.Application
             services.AddScoped<IGetNearbyTracesUseCase, GetNearbyTracesUseCase>();
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
+            services.AddScoped<IGetByEmailUserUseCase, GetByEmailUserUseCase>();
         }
     }
 }
