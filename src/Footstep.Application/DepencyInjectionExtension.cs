@@ -26,12 +26,12 @@ namespace Footstep.Application
 
         private static void AddUseCases(this IServiceCollection services)
         {
-            services.AddScoped<ICreateTraceUseCase, CreateTraceUseCase>();
-            services.AddScoped<IDeleteTraceUseCase, DeleteTraceUseCase>();
-            services.AddScoped<IUpdateTraceUseCase, UpdateTraceUseCase>();
-            services.AddScoped<IGetByIdTraceUseCase, GetByIdTracesUseCase>();
-            services.AddScoped<IGetAllTraceUseCase, GetAllTraceUseCase>();
-            services.AddScoped<IGetNearbyTracesUseCase, GetNearbyTracesUseCase>();
+            services.AddScoped<ICreatePointOfInterestUseCase, CreatePointOfInterestUseCase>();
+            services.AddScoped<IDeletePointOfInterestUseCase, DeletePointOfInterestUseCase>();
+            services.AddScoped<IUpdatePointOfInterestUseCase, UpdatePointOfInterestUseCase>();
+            services.AddScoped<IGetByIdPointOfInterestUseCase, GetByIdPointsOfInterestUseCase>();
+            services.AddScoped<IGetAllPoitntOfInterestUseCase, GetAllPointOfInterestUseCase>();
+            services.AddScoped<IGetNearbyPointsOfInterestUseCase, GetNearbyPointsOfInterestUseCase>();
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
         }

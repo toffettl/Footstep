@@ -3,8 +3,8 @@ using Footstep.Communication.Responses.Traces;
 
 namespace Footstep.Application.UseCases.Traces.Create
 {
-    public interface ICreateTraceUseCase
+    public interface ICreatePointOfInterestUseCase
     {
-        Task<ResponseCreateTraceJson> Execute(RequestTraceJson request);
+        Task<ResponseCreatePointOfInterestJson> Execute(RequestPointOfInterestJson request);
     }
 }

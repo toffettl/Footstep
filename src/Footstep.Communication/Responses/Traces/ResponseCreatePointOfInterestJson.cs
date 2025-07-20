@@ -1,6 +1,6 @@
 ﻿namespace Footstep.Communication.Responses.Traces
 {
-    public class ResponseCreateTraceJson
+    public class ResponseCreatePointOfInterestJson
     {
         public string? Title { get; set; }
     }

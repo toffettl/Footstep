@@ -8,13 +8,13 @@ using Footstep.Exception.ExceptionsBase;
 
 namespace Footstep.Application.UseCases.Traces.Create
 {
-    public class CreateTraceUseCase : ICreateTraceUseCase
+    public class CreatePointOfInterestUseCase : ICreatePointOfInterestUseCase
     {
-        private readonly ITracesWriteOnlyRepository _repository;
+        private readonly IPointsOfInterestWriteOnlyRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public CreateTraceUseCase(
-            ITracesWriteOnlyRepository repository,
+        public CreatePointOfInterestUseCase(
+            IPointsOfInterestWriteOnlyRepository repository,
             IUnitOfWork unitOfWork,
             IMapper mapper)
         {
@@ -23,20 +23,22 @@ namespace Footstep.Application.UseCases.Traces.Create
             _mapper = mapper;
         }
 
-        public async Task<ResponseCreateTraceJson> Execute(RequestTraceJson request)
+        public async Task<ResponseCreatePointOfInterestJson> Execute(RequestPointOfInterestJson request)
         {
             Validade(request);
 
-            var entity = _mapper.Map<Trace>(request);
+            var entity = _mapper.Map<PointOfInterest>(request);
+
+            entity.CreatedAt = DateTime.UtcNow;
 
             await _repository.Add(entity);
 
             await _unitOfWork.Commit();
 
-            return _mapper.Map<ResponseCreateTraceJson>(entity);
+            return _mapper.Map<ResponseCreatePointOfInterestJson>(entity);
         }
 
-        private void Validade(RequestTraceJson request)
+        private void Validade(RequestPointOfInterestJson request)
         {
             var validator = new TraceValidator();
 

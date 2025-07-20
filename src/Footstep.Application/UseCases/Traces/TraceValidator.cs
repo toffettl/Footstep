@@ -4,7 +4,7 @@ using Footstep.Exception;
 
 namespace Footstep.Application.UseCases.Traces
 {
-    public class TraceValidator : AbstractValidator<RequestTraceJson>
+    public class TraceValidator : AbstractValidator<RequestPointOfInterestJson>
     {
         public TraceValidator()
         {

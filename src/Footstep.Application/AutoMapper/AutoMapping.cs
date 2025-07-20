@@ -17,15 +17,15 @@ namespace Footstep.Application.AutoMapper
 
         private void RequestToEntity()
         {
-            CreateMap<RequestTraceJson, Trace>();
+            CreateMap<RequestPointOfInterestJson, PointOfInterest>();
             CreateMap<RequestRegisterUserJson, User>()
                 .ForMember(dest => dest.Password, config => config.Ignore());
         }
 
         private void EntityToResponse()
         {
-            CreateMap<Trace, ResponseCreateTraceJson>();
-            CreateMap<Trace, ResponseTraceJson>();
+            CreateMap<PointOfInterest, ResponseCreatePointOfInterestJson>();
+            CreateMap<PointOfInterest, ResponsePointOfIntereseJson>();
         }
     }
 }

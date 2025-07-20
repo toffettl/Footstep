@@ -7,7 +7,7 @@ namespace Footstep.Infrastructure.DataAccess
     {
         public FootstepDbContext(DbContextOptions options) : base(options) { }
 
-        public DbSet<Trace> Traces { get; set; }
+        public DbSet<PointOfInterest> PointOfInterests { get; set; }
         public DbSet<User> Users { get; set; }
     }
 }

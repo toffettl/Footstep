@@ -6,19 +6,19 @@ using Footstep.Exception.ExceptionsBase;
 
 namespace Footstep.Application.UseCases.Traces.GetById
 {
-    public class GetByIdTracesUseCase : IGetByIdTraceUseCase
+    public class GetByIdPointsOfInterestUseCase : IGetByIdPointOfInterestUseCase
     {
-        private readonly ITracesReadOnlyRepository _repository;
+        private readonly IPointsOfInterestReadOnlyRepository _repository;
         private readonly IMapper _mapper;
 
-        public GetByIdTracesUseCase(ITracesReadOnlyRepository repository,
+        public GetByIdPointsOfInterestUseCase(IPointsOfInterestReadOnlyRepository repository,
             IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
-        public async Task<ResponseTraceJson> Execute(Guid id)
+        public async Task<ResponsePointOfIntereseJson> Execute(Guid id)
         {
             var result = await _repository.GetById(id);
 
@@ -27,7 +27,7 @@ namespace Footstep.Application.UseCases.Traces.GetById
                 throw new NotFoundException(ResourceErrorMessages.TRACE_NOT_FOUND);
             }
 
-            return _mapper.Map<ResponseTraceJson>(result);
+            return _mapper.Map<ResponsePointOfIntereseJson>(result);
         }
     }
 }

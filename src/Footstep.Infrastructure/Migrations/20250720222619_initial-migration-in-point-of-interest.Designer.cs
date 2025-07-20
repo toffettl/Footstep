@@ -3,6 +3,7 @@ using System;
 using Footstep.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Footstep.Infrastructure.Migrations
 {
     [DbContext(typeof(FootstepDbContext))]
-    partial class FootstepDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250720222619_initial-migration-in-point-of-interest")]
+    partial class initialmigrationinpointofinterest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,13 +31,13 @@ namespace Footstep.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime?>("CreatedAt")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("ExpireAt")
+                    b.Property<DateTime>("ExpireAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<double>("Latitude")
@@ -52,7 +55,7 @@ namespace Footstep.Infrastructure.Migrations
                     b.Property<int>("PointOfInterestType")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime?>("UpdateAt")
+                    b.Property<DateTime>("UpdateAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid?>("UserId")

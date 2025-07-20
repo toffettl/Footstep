@@ -4,25 +4,25 @@ using Footstep.Domain.Repositories.Traces;
 
 namespace Footstep.Application.UseCases.Traces.GetAll
 {
-    public class GetAllTraceUseCase : IGetAllTraceUseCase
+    public class GetAllPointOfInterestUseCase : IGetAllPoitntOfInterestUseCase
     {
-        private readonly ITracesReadOnlyRepository _repository;
+        private readonly IPointsOfInterestReadOnlyRepository _repository;
         private readonly IMapper _mapper;
 
-        public GetAllTraceUseCase(ITracesReadOnlyRepository repository,
+        public GetAllPointOfInterestUseCase(IPointsOfInterestReadOnlyRepository repository,
             IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
-        public async Task<ResponseTracesJson> Execute()
+        public async Task<ResponsePointOfInterestJson> Execute()
         {
             var result = await _repository.GetAll();
 
-            return new ResponseTracesJson
+            return new ResponsePointOfInterestJson
             {
-                Traces = _mapper.Map<List<ResponseTraceJson>>(result)
+                Traces = _mapper.Map<List<ResponsePointOfIntereseJson>>(result)
             };
         }
     }

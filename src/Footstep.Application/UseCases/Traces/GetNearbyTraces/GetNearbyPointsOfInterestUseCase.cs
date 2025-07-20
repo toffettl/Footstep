@@ -2,18 +2,18 @@
 using Footstep.Communication.Responses.Traces;
 using Footstep.Domain.Repositories.Traces;
 namespace Footstep.Application.UseCases.Traces.GetByRay;
-public class GetNearbyTracesUseCase : IGetNearbyTracesUseCase
+public class GetNearbyPointsOfInterestUseCase : IGetNearbyPointsOfInterestUseCase
 {
-    private readonly ITracesReadOnlyRepository _repository;
+    private readonly IPointsOfInterestReadOnlyRepository _repository;
     private readonly IMapper _mapper;
 
-    public GetNearbyTracesUseCase(ITracesReadOnlyRepository repository, IMapper mapper)
+    public GetNearbyPointsOfInterestUseCase(IPointsOfInterestReadOnlyRepository repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;
     }
 
-    public async Task<List<ResponseTraceJson>> Execute(double latitude, double longitude, double radiusInMeters)
+    public async Task<List<ResponsePointOfIntereseJson>> Execute(double latitude, double longitude, double radiusInMeters)
     {
         var allTraces = await _repository.GetAll();
 
@@ -21,7 +21,7 @@ public class GetNearbyTracesUseCase : IGetNearbyTracesUseCase
             .Where(t => CalculateDistanceInMeters(latitude, longitude, t.Latitude, t.Longitude) <= radiusInMeters)
             .ToList();
 
-        return _mapper.Map<List<ResponseTraceJson>>(nearbyTraces);
+        return _mapper.Map<List<ResponsePointOfIntereseJson>>(nearbyTraces);
     }
 
     private double CalculateDistanceInMeters(double lat1, double lon1, double lat2, double lon2)

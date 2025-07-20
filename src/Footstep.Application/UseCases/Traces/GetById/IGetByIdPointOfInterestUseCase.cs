@@ -2,8 +2,8 @@
 
 namespace Footstep.Application.UseCases.Traces.GetById
 {
-    public interface IGetByIdTraceUseCase
+    public interface IGetByIdPointOfInterestUseCase
     {
-        Task<ResponseTraceJson> Execute(Guid id);
+        Task<ResponsePointOfIntereseJson> Execute(Guid id);
     }
 }
