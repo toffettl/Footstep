@@ -13,9 +13,9 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task Add(Domain.Entities.PointOfInterest trace)
+        public async Task Add(Domain.Entities.PointOfInterest pointOfInterest)
         {
-            await _dbContext.PointOfInterests.AddAsync(trace);
+            await _dbContext.PointOfInterests.AddAsync(pointOfInterest);
         }
 
        public async Task<bool?> Delete(Guid id)
@@ -36,9 +36,9 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             return await _dbContext.PointOfInterests.AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
         }
 
-        public void Update(Domain.Entities.PointOfInterest trace)
+        public void Update(Domain.Entities.PointOfInterest pointOfInterest)
         {
-            _dbContext.PointOfInterests.Update(trace);
+            _dbContext.PointOfInterests.Update(pointOfInterest);
         }
 
         public async Task<List<Domain.Entities.PointOfInterest>> GetAll()

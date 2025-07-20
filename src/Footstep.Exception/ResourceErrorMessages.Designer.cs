@@ -178,6 +178,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Point Of Interest not found.
+        /// </summary>
+        public static string POINT_OF_INTEREST_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("POINT_OF_INTEREST_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a .
         /// </summary>
         public static string SASUAIIUAS_AJH {
@@ -192,15 +201,6 @@ namespace Footstep.Exception {
         public static string THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST {
             get {
                 return ResourceManager.GetString("THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Trace not found.
-        /// </summary>
-        public static string TRACE_NOT_FOUND {
-            get {
-                return ResourceManager.GetString("TRACE_NOT_FOUND", resourceCulture);
             }
         }
         
