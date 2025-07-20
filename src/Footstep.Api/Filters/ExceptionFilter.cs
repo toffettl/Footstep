@@ -31,7 +31,7 @@ namespace Footstep.Api.Filters
 
         private void ThrowUnknowError(ExceptionContext context)
         {
-            var errorResponse = new ResponseErrorJson(ResourceErrorMessages.UNKNOW_ERROR);
+            var errorResponse = new ResponseErrorJson(ResourceErrorMessages.UNKNOWM_ERROR);
 
             context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
             context.Result = new ObjectResult(errorResponse);

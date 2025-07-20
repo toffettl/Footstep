@@ -115,6 +115,24 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Followed user Id cannot be null.
+        /// </summary>
+        public static string FOLLOWED_USER_ID_CANNOT_BE_NULL {
+            get {
+                return ResourceManager.GetString("FOLLOWED_USER_ID_CANNOT_BE_NULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Follower Id cannot be null.
+        /// </summary>
+        public static string FOLLOWER_ID_CANNOT_BE_NULL {
+            get {
+                return ResourceManager.GetString("FOLLOWER_ID_CANNOT_BE_NULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Latitude must be between -90 and 90.
         /// </summary>
         public static string INVALID_LATITUDE {
@@ -138,6 +156,15 @@ namespace Footstep.Exception {
         public static string INVALID_PASSWORD {
             get {
                 return ResourceManager.GetString("INVALID_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The user is already following.
+        /// </summary>
+        public static string IS_FOLLOWING {
+            get {
+                return ResourceManager.GetString("IS_FOLLOWING", resourceCulture);
             }
         }
         
@@ -178,20 +205,29 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a .
-        /// </summary>
-        public static string SASUAIIUAS_AJH {
-            get {
-                return ResourceManager.GetString("SASUAIIUAS_AJH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The expiration date cannot be in the past.
         /// </summary>
         public static string THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST {
             get {
                 return ResourceManager.GetString("THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a This user does not follow anyone.
+        /// </summary>
+        public static string THIS_USER_DOES_NOT_FOLLOW_ANYONE {
+            get {
+                return ResourceManager.GetString("THIS_USER_DOES_NOT_FOLLOW_ANYONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a This user has no followers.
+        /// </summary>
+        public static string THIS_USER_HAS_NO_FOLLOWERS {
+            get {
+                return ResourceManager.GetString("THIS_USER_HAS_NO_FOLLOWERS", resourceCulture);
             }
         }
         
@@ -205,11 +241,11 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Unknow error.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Unknowm error.
         /// </summary>
-        public static string UNKNOW_ERROR {
+        public static string UNKNOWM_ERROR {
             get {
-                return ResourceManager.GetString("UNKNOW_ERROR", resourceCulture);
+                return ResourceManager.GetString("UNKNOWM_ERROR", resourceCulture);
             }
         }
         
@@ -219,6 +255,15 @@ namespace Footstep.Exception {
         public static string UPDATE_DATE_IN_THE_PAST {
             get {
                 return ResourceManager.GetString("UPDATE_DATE_IN_THE_PAST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Relationship between users not found.
+        /// </summary>
+        public static string USER_RELATION_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("USER_RELATION_NOT_FOUND", resourceCulture);
             }
         }
     }

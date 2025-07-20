@@ -135,6 +135,12 @@
   <data name="EMAIL_OR_PASSWORD_INVALID" xml:space="preserve">
     <value>Email or password invalid</value>
   </data>
+  <data name="FOLLOWED_USER_ID_CANNOT_BE_NULL" xml:space="preserve">
+    <value>Followed user Id cannot be null</value>
+  </data>
+  <data name="FOLLOWER_ID_CANNOT_BE_NULL" xml:space="preserve">
+    <value>Follower Id cannot be null</value>
+  </data>
   <data name="INVALID_LATITUDE" xml:space="preserve">
     <value>Latitude must be between -90 and 90</value>
   </data>
@@ -143,6 +149,9 @@
   </data>
   <data name="INVALID_PASSWORD" xml:space="preserve">
     <value>Password must contain at least 8 characters and include at least one capital letter</value>
+  </data>
+  <data name="IS_FOLLOWING" xml:space="preserve">
+    <value>The user is already following</value>
   </data>
   <data name="LATITUDE_REQUIRED" xml:space="preserve">
     <value>Latitude is required</value>
@@ -156,19 +165,25 @@
   <data name="NAME_REQUIRED" xml:space="preserve">
     <value>The name is required</value>
   </data>
-  <data name="SASUAIIUAS_AJH" xml:space="preserve">
-    <value />
-  </data>
   <data name="THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST" xml:space="preserve">
     <value>The expiration date cannot be in the past</value>
+  </data>
+  <data name="THIS_USER_DOES_NOT_FOLLOW_ANYONE" xml:space="preserve">
+    <value>This user does not follow anyone</value>
+  </data>
+  <data name="THIS_USER_HAS_NO_FOLLOWERS" xml:space="preserve">
+    <value>This user has no followers</value>
   </data>
   <data name="TRACE_NOT_FOUND" xml:space="preserve">
     <value>Trace not found</value>
   </data>
-  <data name="UNKNOW_ERROR" xml:space="preserve">
-    <value>Unknow error</value>
+  <data name="UNKNOWM_ERROR" xml:space="preserve">
+    <value>Unknowm error</value>
   </data>
   <data name="UPDATE_DATE_IN_THE_PAST" xml:space="preserve">
     <value>Update date cannot be in the past</value>
+  </data>
+  <data name="USER_RELATION_NOT_FOUND" xml:space="preserve">
+    <value>Relationship between users not found</value>
   </data>
 </root>

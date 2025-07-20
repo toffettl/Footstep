@@ -22,7 +22,7 @@ namespace Footstep.Application.UseCases.Traces.GetById
         {
             var result = await _repository.GetById(id);
 
-            if(result == null)
+            if (result == null)
             {
                 throw new NotFoundException(ResourceErrorMessages.TRACE_NOT_FOUND);
             }

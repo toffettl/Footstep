@@ -1,4 +1,5 @@
 ﻿using Footstep.Domain.Repositories;
+using Footstep.Domain.Repositories.RelationUser;
 using Footstep.Domain.Repositories.Traces;
 using Footstep.Domain.Repositories.Users;
 using Footstep.Domain.Security.Cryptography;
@@ -38,6 +39,8 @@ namespace Footstep.Infrastructure
             services.AddScoped<ITracesReadOnlyRepository, TracesRepostory>();
             services.AddScoped<IUserReadOnlyRepository, UserRepository>();
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
+            services.AddScoped<IUserRelationReadOnlyRepository, UserRelationRepository>();
+            services.AddScoped<IUserRelationWriteOnlyRepository, UserRelationRepository>();
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
