@@ -1,4 +1,5 @@
 ﻿using Footstep.Application.AutoMapper;
+using Footstep.Application.UseCases.Comments.Create;
 using Footstep.Application.UseCases.RelationUser.Follow;
 using Footstep.Application.UseCases.Traces.Create;
 using Footstep.Application.UseCases.Traces.Delete;
@@ -42,6 +43,7 @@ namespace Footstep.Application
             services.AddScoped<IUnfollowUserRelationUseCase, UnfollowUserRelationUseCase>();
             services.AddScoped<IGetFollowersUserRelationUseCase, GetFollowersUserRelationUseCase>();
             services.AddScoped<IGetFollowingUserRelationUseCase, GetFollowingUserRelationUseCase>();
+            services.AddScoped<ICreateCommentUseCase, CreateCommentUseCase>();
         }
     }
 }

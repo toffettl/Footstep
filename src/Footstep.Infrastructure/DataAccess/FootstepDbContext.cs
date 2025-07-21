@@ -10,6 +10,7 @@ namespace Footstep.Infrastructure.DataAccess
         public DbSet<PointOfInterest> PointOfInterests { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserRelation> UserRelations { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserRelation>()

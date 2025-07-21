@@ -1,4 +1,5 @@
 ﻿using Footstep.Domain.Repositories;
+using Footstep.Domain.Repositories.Comments;
 using Footstep.Domain.Repositories.RelationUser;
 using Footstep.Domain.Repositories.Traces;
 using Footstep.Domain.Repositories.Users;
@@ -41,6 +42,7 @@ namespace Footstep.Infrastructure
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
             services.AddScoped<IUserRelationReadOnlyRepository, UserRelationRepository>();
             services.AddScoped<IUserRelationWriteOnlyRepository, UserRelationRepository>();
+            services.AddScoped<ICommentsWriteOnlyRepository, CommentRepository>();
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

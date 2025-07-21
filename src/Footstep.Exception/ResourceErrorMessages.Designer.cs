@@ -61,6 +61,24 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Author id cannot be empty.
+        /// </summary>
+        public static string AUTHOR_ID_CANNOT_BE_EMPTY {
+            get {
+                return ResourceManager.GetString("AUTHOR_ID_CANNOT_BE_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Comment cannot be empty.
+        /// </summary>
+        public static string COMMENT_CANNOT_BE_EMPTY {
+            get {
+                return ResourceManager.GetString("COMMENT_CANNOT_BE_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Creation date cannot be past.
         /// </summary>
         public static string DATE_OF_CREATION_IN_THE_PAST {
@@ -201,6 +219,15 @@ namespace Footstep.Exception {
         public static string NAME_REQUIRED {
             get {
                 return ResourceManager.GetString("NAME_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Parent id cannot be empty.
+        /// </summary>
+        public static string PARENT_ID_CANNOT_BE_EMPTY {
+            get {
+                return ResourceManager.GetString("PARENT_ID_CANNOT_BE_EMPTY", resourceCulture);
             }
         }
         

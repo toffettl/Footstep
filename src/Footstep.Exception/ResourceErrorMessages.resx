@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AUTHOR_ID_CANNOT_BE_EMPTY" xml:space="preserve">
+    <value>Author id cannot be empty</value>
+  </data>
+  <data name="COMMENT_CANNOT_BE_EMPTY" xml:space="preserve">
+    <value>Comment cannot be empty</value>
+  </data>
   <data name="DATE_OF_CREATION_IN_THE_PAST" xml:space="preserve">
     <value>Creation date cannot be past</value>
   </data>
@@ -164,6 +170,9 @@
   </data>
   <data name="NAME_REQUIRED" xml:space="preserve">
     <value>The name is required</value>
+  </data>
+  <data name="PARENT_ID_CANNOT_BE_EMPTY" xml:space="preserve">
+    <value>Parent id cannot be empty</value>
   </data>
   <data name="THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST" xml:space="preserve">
     <value>The expiration date cannot be in the past</value>
