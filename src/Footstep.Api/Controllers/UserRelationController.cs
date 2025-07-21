@@ -15,7 +15,7 @@ namespace Footstep.Api.Controllers;
 public class UserRelationController : ControllerBase
 {
     [HttpPost]
-    [ProducesResponseType(typeof(ResponseCreateTraceJson), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ResponseCreatePointOfInterestJson), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromServices] IFollowUserRelationUseCase followcase,
     [FromBody] RequestUserRelationJson request)
