@@ -123,6 +123,9 @@
   <data name="COMMENT_CANNOT_BE_EMPTY" xml:space="preserve">
     <value>Comment cannot be empty</value>
   </data>
+  <data name="COMMENT_NOT_FOUND" xml:space="preserve">
+    <value>Comment not found</value>
+  </data>
   <data name="DATE_OF_CREATION_IN_THE_PAST" xml:space="preserve">
     <value>Creation date cannot be past</value>
   </data>

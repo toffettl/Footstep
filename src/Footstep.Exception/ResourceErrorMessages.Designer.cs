@@ -79,6 +79,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Comment not found.
+        /// </summary>
+        public static string COMMENT_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("COMMENT_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Creation date cannot be past.
         /// </summary>
         public static string DATE_OF_CREATION_IN_THE_PAST {

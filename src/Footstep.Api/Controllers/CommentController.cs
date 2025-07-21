@@ -1,4 +1,6 @@
 ﻿using Footstep.Application.UseCases.Comments.Create;
+using Footstep.Application.UseCases.Comments.Delete;
+using Footstep.Application.UseCases.Traces.Delete;
 using Footstep.Communication.Requests.Comments;
 using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Comments;
@@ -19,6 +21,19 @@ namespace Footstep.Api.Controllers
             var response = await usecase.Execute(request);
 
             return Ok(response);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete(
+            [FromServices] IDeleteCommentUseCase useCase,
+            [FromRoute] Guid id)
+        {
+            await useCase.Execute(id);
+
+            return NoContent();
         }
     }
 }

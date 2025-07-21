@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using Footstep.Application.UseCases.Traces;
 using Footstep.Communication.Requests.Comments;
-using Footstep.Communication.Requests.Traces;
 using Footstep.Communication.Responses.Comments;
 using Footstep.Domain.Entities;
 using Footstep.Domain.Repositories;
@@ -25,13 +23,12 @@ namespace Footstep.Application.UseCases.Comments.Create
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-
         public async Task<ResponseCreateComments> Execute(RequestCommentJson request)
         {
             Validade(request);
 
             var entity = _mapper.Map<Comment>(request);
-            
+
             entity.CreatedAt = DateTime.UtcNow;
 
             await _repository.Add(entity);
