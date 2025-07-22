@@ -1,4 +1,4 @@
-﻿feanamespace Footstep.Domain.Entities;
+﻿namespace Footstep.Domain.Entities;
 public class User
 {
     public Guid Id { get; set; }
