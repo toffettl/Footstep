@@ -3,7 +3,7 @@ using Footstep.Domain.Repositories.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace Footstep.Infrastructure.DataAccess.Repositories;
-public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository
+public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository, IUserUpdateOnlyRepository
 {
     private readonly FootstepDbContext _dbContext;
 
@@ -22,8 +22,18 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository
         return await _dbContext.Users.AnyAsync(user => user.Email!.Equals(email));
     }
 
-    public async Task<User?> GetUserByEmail(string email)
+    public async Task<User?> GetById(Guid id)
+    {
+        return await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(user => user.Id == id);
+    }
+
+    public async Task<User?> GetByEmail(string email)
     {
         return await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(user => user.Email!.Equals(email));
+    }
+
+    public void Update(User user)
+    {
+        _dbContext.Users.Update(user);
     }
 }
