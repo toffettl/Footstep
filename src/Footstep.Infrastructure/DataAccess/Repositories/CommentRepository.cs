@@ -1,11 +1,13 @@
 ﻿using Footstep.Domain.Entities;
 using Footstep.Domain.Repositories.Comments;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace Footstep.Infrastructure.DataAccess.Repositories
 {
     public class CommentRepository : ICommentsWriteOnlyRepository,
-        ICommentsReadOnlyRepository
+        ICommentsReadOnlyRepository,
+        ICommentsUpdateOnlyRepository
     {
         private readonly FootstepDbContext _dbContext;
         public CommentRepository(FootstepDbContext dbContext)
@@ -37,6 +39,11 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             return await _dbContext.Comments.AsNoTracking().Where(comment => comment.AuthorId == id).ToListAsync();
         }
 
+        public async Task<Comment> GetById(Guid id)
+        {
+            return await _dbContext.Comments.AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
+        }
+
         public async Task<List<Comment>> GetByParentIdAndAuthorId(Guid parentId, Guid authorId)
         {
             return await _dbContext.Comments.AsNoTracking()
@@ -47,6 +54,11 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
         public async Task<List<Comment>> GetByParentsId(Guid id)
         {
             return await _dbContext.Comments.AsNoTracking().Where(comment => comment.ParentId == id).ToListAsync();
+        }
+
+        public void Update(Comment comment)
+        {
+            _dbContext.Comments.Update(comment);
         }
     }
 }

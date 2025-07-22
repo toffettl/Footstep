@@ -4,6 +4,7 @@ using Footstep.Application.UseCases.Comments.Delete;
 using Footstep.Application.UseCases.Comments.GetByAuthorId;
 using Footstep.Application.UseCases.Comments.GetByParentIdAndAuthorId;
 using Footstep.Application.UseCases.Comments.GetByParentsId;
+using Footstep.Application.UseCases.Comments.Update;
 using Footstep.Application.UseCases.RelationUser.Follow;
 using Footstep.Application.UseCases.Traces.Create;
 using Footstep.Application.UseCases.Traces.Delete;
@@ -52,6 +53,7 @@ namespace Footstep.Application
             services.AddScoped<IGetCommentsByParentsIdUseCase, GetCommentsByParentsIdUseCase>();
             services.AddScoped<IGetCommentsByAuthorIdUseCase, GetCommentsByAuthorIdUseCase>();
             services.AddScoped<IGetCommentsByParentsIdAndAuthorIdUseCase, GetCommentsByParentsIdAndAuthorIdUseCase>();
+            services.AddScoped<IUpdateStatusCommentsUseCase, UpdateStatusCommentsUseCase>();
         }
     }
 }

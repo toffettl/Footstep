@@ -3,9 +3,13 @@ using Footstep.Application.UseCases.Comments.Delete;
 using Footstep.Application.UseCases.Comments.GetByAuthorId;
 using Footstep.Application.UseCases.Comments.GetByParentIdAndAuthorId;
 using Footstep.Application.UseCases.Comments.GetByParentsId;
+using Footstep.Application.UseCases.Comments.Update;
+using Footstep.Application.UseCases.Traces.Update;
 using Footstep.Communication.Requests.Comments;
+using Footstep.Communication.Requests.Traces;
 using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Comments;
+using Footstep.Domain.Repositories.Comments;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Footstep.Api.Controllers
@@ -73,6 +77,21 @@ namespace Footstep.Api.Controllers
             var response = await useCase.Execute(parentId, authorId);
 
             return Ok(response);
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Update(
+            [FromServices] IUpdateStatusCommentsUseCase useCase,
+            [FromRoute] Guid id,
+            [FromBody] RequestUpdateStatusCommentsJson request)
+        {
+            await useCase.Execute(id, request);
+
+            return NoContent();
         }
 
     }
