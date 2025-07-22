@@ -42,7 +42,7 @@ namespace Footstep.Infrastructure
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
         {
-            var conectionString = "Host=yamabiko.proxy.rlwy.net;Port=23952;Database=footstep;Username=postgres;Password=cxESXilghkzQBLYjuNtNRSuDyAjcnrVz;";
+            var conectionString = "Host=interchange.proxy.rlwy.net;Port=37540;Database=footstep;Username=postgres;Password=MSYYgFCfUyXFFLJLNDpKWTuPGmRGGKJK;";
 
             services.AddDbContext<FootstepDbContext>(config =>
                 config.UseNpgsql(conectionString));
