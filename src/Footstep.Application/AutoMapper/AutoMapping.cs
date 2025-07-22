@@ -20,6 +20,12 @@ namespace Footstep.Application.AutoMapper
             CreateMap<RequestTraceJson, Trace>();
             CreateMap<RequestRegisterUserJson, User>()
                 .ForMember(dest => dest.Password, config => config.Ignore());
+            CreateMap<RequestUpdatePreferencesUserJson, User>()
+                .ForMember(dest => dest.HeadStyle, config => config.MapFrom(src => src.AvatarStyle!.Head))
+                .ForMember(dest => dest.TorsoStyle, config => config.MapFrom(src => src.AvatarStyle!.Torso))
+                .ForMember(dest => dest.LegStyle, config => config.MapFrom(src => src.AvatarStyle!.Leg))
+                .ForMember(dest => dest.BagStyle, config => config.MapFrom(src => src.AvatarStyle!.Bag))
+                .ForMember(dest => dest.AcessoryStyle, config => config.MapFrom(src => src.AvatarStyle!.Acessory));
         }
 
         private void EntityToResponse()
@@ -27,12 +33,12 @@ namespace Footstep.Application.AutoMapper
             CreateMap<Trace, ResponseCreateTraceJson>();
             CreateMap<Trace, ResponseTraceJson>();
             CreateMap<User, ResponseGetUserJson>()
-                .ForMember(dest => dest.Preferences, config => config.MapFrom(src => new Preferences
+                .ForMember(dest => dest.Preferences, config => config.MapFrom(src => new ResponsePreferencesJson
                 {
                     MapStyle = src.MapStyle,
                     PointOfInterestStyle = src.PointOfInterestStyle,
                     AvatarOverProfile = src.AvatarOverProfile,
-                    AvatarStyle = new AvatarStyle
+                    AvatarStyle = new ResponseAvatarStyleJson
                     {
                         Head = src.HeadStyle,
                         Torso = src.TorsoStyle,
@@ -41,7 +47,7 @@ namespace Footstep.Application.AutoMapper
                         Acessory = src.AcessoryStyle,
                     }
                 }))
-                .ForMember(dest => dest.UnlockedStyles, config => config.MapFrom(src => new UnlockedStyles
+                .ForMember(dest => dest.UnlockedStyles, config => config.MapFrom(src => new ResponseUnlockedStylesJson
                 {
                     UnlockedMapStyles = src.UnlockedMapStyles,
                     UnlockedPointOfInterestStyles = src.UnlockedPointOfInterestStyles,
