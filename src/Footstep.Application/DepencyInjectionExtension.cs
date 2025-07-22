@@ -9,6 +9,7 @@ using Footstep.Application.UseCases.Users.GetByEmail;
 using Footstep.Application.UseCases.Users.Login;
 using Footstep.Application.UseCases.Users.Register;
 using Footstep.Application.UseCases.Users.UpdatePreferences;
+using Footstep.Application.UseCases.Users.UpdateUnlockedStyles;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Footstep.Application
@@ -38,6 +39,7 @@ namespace Footstep.Application
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
             services.AddScoped<IGetByEmailUserUseCase, GetByEmailUserUseCase>();
             services.AddScoped<IUpdatePreferencesUserUseCase, UpdatePreferencesUserUseCase>();
+            services.AddScoped<IUpdateUnlockedStylesUserUseCase, UpdateUnlockedStylesUserUseCase>();
         }
     }
 }
