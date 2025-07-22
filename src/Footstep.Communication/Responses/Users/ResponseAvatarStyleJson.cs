@@ -1,6 +1,6 @@
 ﻿namespace Footstep.Communication.Responses.Users
 {
-    public class AvatarStyle
+    public class ResponseAvatarStyleJson
     {
         public string? Head { get; set; }
         public string? Torso { get; set; }
