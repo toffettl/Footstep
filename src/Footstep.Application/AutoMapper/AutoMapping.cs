@@ -26,6 +26,7 @@ namespace Footstep.Application.AutoMapper
                 .ForMember(dest => dest.LegStyle, config => config.MapFrom(src => src.AvatarStyle!.Leg))
                 .ForMember(dest => dest.BagStyle, config => config.MapFrom(src => src.AvatarStyle!.Bag))
                 .ForMember(dest => dest.AcessoryStyle, config => config.MapFrom(src => src.AvatarStyle!.Acessory));
+            CreateMap<RequestUpdateUnlockedStylesUserJson, User>();
         }
 
         private void EntityToResponse()
