@@ -24,7 +24,7 @@ namespace Footstep.Application.UseCases.Users.GetByEmail
 
         public async Task<ResponseGetUserJson> Execute(string email)
         {
-            var result = await _repository.GetUserByEmail(email);
+            var result = await _repository.GetByEmail(email);
 
             if (result == null)
             {
