@@ -6,5 +6,6 @@ namespace Footstep.Domain.Repositories.Comments
     {
         Task<List<Comment>> GetByParentsId(Guid id);
         Task<List<Comment>> GetByAuthorId(Guid id);
+        Task<List<Comment>> GetByParentIdAndAuthorId(Guid parentId, Guid authorId);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Footstep.Application.UseCases.Comments.Create;
 using Footstep.Application.UseCases.Comments.Delete;
 using Footstep.Application.UseCases.Comments.GetByAuthorId;
+using Footstep.Application.UseCases.Comments.GetByParentIdAndAuthorId;
 using Footstep.Application.UseCases.Comments.GetByParentsId;
 using Footstep.Communication.Requests.Comments;
 using Footstep.Communication.Responses;
@@ -57,6 +58,19 @@ namespace Footstep.Api.Controllers
             [FromRoute] Guid id)
         {
             var response = await useCase.Execute(id);
+
+            return Ok(response);
+        }
+
+        [HttpGet("by-parent-and-author")]
+        [ProducesResponseType(typeof(List<ResponseCommentJson>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetByAuthorId(
+            [FromServices] IGetCommentsByParentsIdAndAuthorIdUseCase useCase,
+            [FromQuery] Guid parentId,
+            [FromQuery] Guid authorId)
+        {
+            var response = await useCase.Execute(parentId, authorId);
 
             return Ok(response);
         }
