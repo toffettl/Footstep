@@ -6,8 +6,8 @@
         public string? Name { get; set; }
         public string? Email { get; set; }
         public string? Biography { get; set; }
-        public Preferences Preferences { get; set; }
-        public UnlockedStyles UnlockedStyles { get; set; }
+        public ResponsePreferencesJson Preferences { get; set; }
+        public ResponseUnlockedStylesJson UnlockedStyles { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }

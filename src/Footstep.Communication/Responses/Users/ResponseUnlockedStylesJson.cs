@@ -1,6 +1,6 @@
 ﻿namespace Footstep.Communication.Responses.Users
 {
-    public class UnlockedStyles
+    public class ResponseUnlockedStylesJson
     {
         public string? UnlockedMapStyles { get; set; }
         public string? UnlockedPointOfInterestStyles { get; set; }
