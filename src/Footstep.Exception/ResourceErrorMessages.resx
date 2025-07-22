@@ -177,6 +177,9 @@
   <data name="PARENT_ID_CANNOT_BE_EMPTY" xml:space="preserve">
     <value>Parent id cannot be empty</value>
   </data>
+  <data name="PARENT_NOT_FOUND" xml:space="preserve">
+    <value>Parent not found</value>
+  </data>
   <data name="THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST" xml:space="preserve">
     <value>The expiration date cannot be in the past</value>
   </data>

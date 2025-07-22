@@ -9,7 +9,7 @@ namespace Footstep.Domain.Entities
         public Guid Id { get; set; }
         public Guid AuthorId { get; set; }
 
-        public Guid ParentId;
+        public Guid ParentId { get; set; }
         public ParentType ParentType { get; set; }
 
         public string? Content { get; set; }

@@ -23,7 +23,7 @@ namespace Footstep.Application.UseCases.Comments.Create
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<ResponseCreateComments> Execute(RequestCommentJson request)
+        public async Task<ResponseCommentJson> Execute(RequestCommentJson request)
         {
             Validade(request);
 
@@ -35,7 +35,7 @@ namespace Footstep.Application.UseCases.Comments.Create
 
             await _unitOfWork.Commit();
 
-            return _mapper.Map<ResponseCreateComments>(entity);
+            return _mapper.Map<ResponseCommentJson>(entity);
         }
 
         private void Validade(RequestCommentJson request)

@@ -1,6 +1,7 @@
 ﻿using Footstep.Application.UseCases.Comments.Create;
 using Footstep.Application.UseCases.Comments.Delete;
-using Footstep.Application.UseCases.Traces.Delete;
+using Footstep.Application.UseCases.Comments.GetByAuthorId;
+using Footstep.Application.UseCases.Comments.GetByParentsId;
 using Footstep.Communication.Requests.Comments;
 using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Comments;
@@ -13,7 +14,7 @@ namespace Footstep.Api.Controllers
     public class CommentController : ControllerBase
     {
         [HttpPost]
-        [ProducesResponseType(typeof(ResponseCreateComments), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseCommentJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create([FromServices] ICreateCommentUseCase usecase,
         [FromBody] RequestCommentJson request)
@@ -35,5 +36,30 @@ namespace Footstep.Api.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("by-parent/{id}")]
+        [ProducesResponseType(typeof(List<ResponseCommentJson>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetByParentId(
+            [FromServices] IGetCommentsByParentsIdUseCase useCase,
+            [FromRoute] Guid id)
+        {
+            var response = await useCase.Execute(id);
+
+            return Ok(response);
+        }
+
+        [HttpGet("by-author/{id}")]
+        [ProducesResponseType(typeof(List<ResponseCommentJson>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetByAuthorId(
+            [FromServices] IGetCommentsByAuthorIdUseCase useCase,
+            [FromRoute] Guid id)
+        {
+            var response = await useCase.Execute(id);
+
+            return Ok(response);
+        }
+
     }
 }

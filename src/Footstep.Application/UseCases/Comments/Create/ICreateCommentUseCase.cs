@@ -6,6 +6,6 @@ namespace Footstep.Application.UseCases.Comments.Create
 {
     public interface ICreateCommentUseCase
     {
-        Task<ResponseCreateComments> Execute(RequestCommentJson request);
+        Task<ResponseCommentJson> Execute(RequestCommentJson request);
     }
 }

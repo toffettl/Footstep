@@ -241,6 +241,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Parent not found.
+        /// </summary>
+        public static string PARENT_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("PARENT_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The expiration date cannot be in the past.
         /// </summary>
         public static string THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST {

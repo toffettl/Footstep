@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Footstep.Communication.Responses.Comments
 {
-    public class ResponseCreateComments
+    public class ResponseCommentJson
     {
         public Guid Id { get; set; }
         public Guid AuthorId { get; set; }

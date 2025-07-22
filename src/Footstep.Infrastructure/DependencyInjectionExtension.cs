@@ -43,6 +43,7 @@ namespace Footstep.Infrastructure
             services.AddScoped<IUserRelationReadOnlyRepository, UserRelationRepository>();
             services.AddScoped<IUserRelationWriteOnlyRepository, UserRelationRepository>();
             services.AddScoped<ICommentsWriteOnlyRepository, CommentRepository>();
+            services.AddScoped<ICommentsReadOnlyRepository, CommentRepository>();
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

@@ -29,7 +29,7 @@ namespace Footstep.Application.AutoMapper
         {
             CreateMap<PointOfInterest, ResponseCreatePointOfInterestJson>();
             CreateMap<PointOfInterest, ResponsePointOfIntereseJson>();
-            CreateMap<Comment, ResponseCreateComments>()
+            CreateMap<Comment, ResponseCommentJson>()
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new StatusResponse
                     {
                         Likes = src.Likes,

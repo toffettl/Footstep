@@ -4,7 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Footstep.Infrastructure.DataAccess.Repositories
 {
-    public class CommentRepository : ICommentsWriteOnlyRepository
+    public class CommentRepository : ICommentsWriteOnlyRepository,
+        ICommentsReadOnlyRepository
     {
         private readonly FootstepDbContext _dbContext;
         public CommentRepository(FootstepDbContext dbContext)
@@ -29,6 +30,16 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             _dbContext.Comments.Remove(result);
 
             return true;
+        }
+
+        public async Task<List<Comment>> GetByAuthorId(Guid id)
+        {
+            return await _dbContext.Comments.AsNoTracking().Where(comment => comment.AuthorId == id).ToListAsync();
+        }
+
+        public async Task<List<Comment>> GetByParentsId(Guid id)
+        {
+            return await _dbContext.Comments.AsNoTracking().Where(comment => comment.ParentId == id).ToListAsync();
         }
     }
 }
