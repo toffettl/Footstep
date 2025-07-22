@@ -156,8 +156,29 @@
   <data name="NAME_REQUIRED" xml:space="preserve">
     <value>The name is required</value>
   </data>
-  <data name="SASUAIIUAS_AJH" xml:space="preserve">
-    <value />
+  <data name="MAPSTYLE_REQUIRED" xml:space="preserve">
+    <value>The mapstyle is required</value>
+  </data>
+  <data name="ACESSORY_REQUIRED" xml:space="preserve">
+    <value>The acessory is required</value>
+  </data>
+  <data name="BAG_REQUIRED" xml:space="preserve">
+    <value>The bag is required</value>
+  </data>
+  <data name="LEG_REQUIRED" xml:space="preserve">
+    <value>The leg is required</value>
+  </data>
+  <data name="TORSO_REQUIRED" xml:space="preserve">
+    <value>The torso is required</value>
+  </data>
+  <data name="HEAD_REQUIRED" xml:space="preserve">
+    <value>The heads is required</value>
+  </data>
+  <data name="AVATAROVERPROFILE_REQUIRED" xml:space="preserve">
+    <value>The avataroverprofile is required</value>
+  </data>
+  <data name="POINTOFINTERESTSTYLE_REQUIRED" xml:space="preserve">
+    <value>The pointofintereststyle is required</value>
   </data>
   <data name="THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST" xml:space="preserve">
     <value>The expiration date cannot be in the past</value>
@@ -165,8 +186,8 @@
   <data name="TRACE_NOT_FOUND" xml:space="preserve">
     <value>Trace not found</value>
   </data>
-  <data name="UNKNOW_ERROR" xml:space="preserve">
-    <value>Unknow error</value>
+  <data name="UNKNOWN_ERROR" xml:space="preserve">
+    <value>Unknown error</value>
   </data>
   <data name="UPDATE_DATE_IN_THE_PAST" xml:space="preserve">
     <value>Update date cannot be in the past</value>

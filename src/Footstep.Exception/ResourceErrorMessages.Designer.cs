@@ -61,6 +61,33 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The acessory is required.
+        /// </summary>
+        public static string ACESSORY_REQUIRED {
+            get {
+                return ResourceManager.GetString("ACESSORY_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The avataroverprofile is required.
+        /// </summary>
+        public static string AVATAROVERPROFILE_REQUIRED {
+            get {
+                return ResourceManager.GetString("AVATAROVERPROFILE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The bag is required.
+        /// </summary>
+        public static string BAG_REQUIRED {
+            get {
+                return ResourceManager.GetString("BAG_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Creation date cannot be past.
         /// </summary>
         public static string DATE_OF_CREATION_IN_THE_PAST {
@@ -115,6 +142,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The heads is required.
+        /// </summary>
+        public static string HEAD_REQUIRED {
+            get {
+                return ResourceManager.GetString("HEAD_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Latitude must be between -90 and 90.
         /// </summary>
         public static string INVALID_LATITUDE {
@@ -151,11 +187,29 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The leg is required.
+        /// </summary>
+        public static string LEG_REQUIRED {
+            get {
+                return ResourceManager.GetString("LEG_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Longitude is required.
         /// </summary>
         public static string LONGITUDE_REQUIRED {
             get {
                 return ResourceManager.GetString("LONGITUDE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The mapstyle is required.
+        /// </summary>
+        public static string MAPSTYLE_REQUIRED {
+            get {
+                return ResourceManager.GetString("MAPSTYLE_REQUIRED", resourceCulture);
             }
         }
         
@@ -178,11 +232,11 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a .
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The pointofintereststyle is required.
         /// </summary>
-        public static string SASUAIIUAS_AJH {
+        public static string POINTOFINTERESTSTYLE_REQUIRED {
             get {
-                return ResourceManager.GetString("SASUAIIUAS_AJH", resourceCulture);
+                return ResourceManager.GetString("POINTOFINTERESTSTYLE_REQUIRED", resourceCulture);
             }
         }
         
@@ -196,6 +250,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The torso is required.
+        /// </summary>
+        public static string TORSO_REQUIRED {
+            get {
+                return ResourceManager.GetString("TORSO_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Trace not found.
         /// </summary>
         public static string TRACE_NOT_FOUND {
@@ -205,11 +268,11 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Unknow error.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Unknown error.
         /// </summary>
-        public static string UNKNOW_ERROR {
+        public static string UNKNOWN_ERROR {
             get {
-                return ResourceManager.GetString("UNKNOW_ERROR", resourceCulture);
+                return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
             }
         }
         
