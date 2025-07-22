@@ -277,6 +277,69 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The unlockedacessorystyles is required.
+        /// </summary>
+        public static string UNLOCKEDACESSORYSTYLES_REQUIRED {
+            get {
+                return ResourceManager.GetString("UNLOCKEDACESSORYSTYLES_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The unlockedbagstyles is required.
+        /// </summary>
+        public static string UNLOCKEDBAGSTYLES_REQUIRED {
+            get {
+                return ResourceManager.GetString("UNLOCKEDBAGSTYLES_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The unlockedheadstyles is required.
+        /// </summary>
+        public static string UNLOCKEDHEADSTYLES_REQUIRED {
+            get {
+                return ResourceManager.GetString("UNLOCKEDHEADSTYLES_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The unlockedlegstyles is required.
+        /// </summary>
+        public static string UNLOCKEDLEGSTYLES_REQUIRED {
+            get {
+                return ResourceManager.GetString("UNLOCKEDLEGSTYLES_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The unlockedmapstyles is required.
+        /// </summary>
+        public static string UNLOCKEDMAPSTYLES_REQUIRED {
+            get {
+                return ResourceManager.GetString("UNLOCKEDMAPSTYLES_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The unlockedpointofintereststyles is required.
+        /// </summary>
+        public static string UNLOCKEDPOINTOFINTERESTSTYLES_REQUIRED {
+            get {
+                return ResourceManager.GetString("UNLOCKEDPOINTOFINTERESTSTYLES_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The unlockedtorsostyles is required.
+        /// </summary>
+        public static string UNLOCKEDTORSOSTYLES_REQUIRED {
+            get {
+                return ResourceManager.GetString("UNLOCKEDTORSOSTYLES_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Update date cannot be in the past.
         /// </summary>
         public static string UPDATE_DATE_IN_THE_PAST {

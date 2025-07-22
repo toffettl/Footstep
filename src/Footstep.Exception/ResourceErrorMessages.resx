@@ -162,6 +162,27 @@
   <data name="ACESSORY_REQUIRED" xml:space="preserve">
     <value>The acessory is required</value>
   </data>
+  <data name="UNLOCKEDMAPSTYLES_REQUIRED" xml:space="preserve">
+    <value>The unlockedmapstyles is required</value>
+  </data>
+  <data name="UNLOCKEDACESSORYSTYLES_REQUIRED" xml:space="preserve">
+    <value>The unlockedacessorystyles is required</value>
+  </data>
+  <data name="UNLOCKEDBAGSTYLES_REQUIRED" xml:space="preserve">
+    <value>The unlockedbagstyles is required</value>
+  </data>
+  <data name="UNLOCKEDLEGSTYLES_REQUIRED" xml:space="preserve">
+    <value>The unlockedlegstyles is required</value>
+  </data>
+  <data name="UNLOCKEDTORSOSTYLES_REQUIRED" xml:space="preserve">
+    <value>The unlockedtorsostyles is required</value>
+  </data>
+  <data name="UNLOCKEDHEADSTYLES_REQUIRED" xml:space="preserve">
+    <value>The unlockedheadstyles is required</value>
+  </data>
+  <data name="UNLOCKEDPOINTOFINTERESTSTYLES_REQUIRED" xml:space="preserve">
+    <value>The unlockedpointofintereststyles is required</value>
+  </data>
   <data name="BAG_REQUIRED" xml:space="preserve">
     <value>The bag is required</value>
   </data>
