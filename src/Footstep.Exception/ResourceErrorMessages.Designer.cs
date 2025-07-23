@@ -61,6 +61,33 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The acessory is required.
+        /// </summary>
+        public static string ACESSORY_REQUIRED {
+            get {
+                return ResourceManager.GetString("ACESSORY_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The avataroverprofile is required.
+        /// </summary>
+        public static string AVATAROVERPROFILE_REQUIRED {
+            get {
+                return ResourceManager.GetString("AVATAROVERPROFILE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The bag is required.
+        /// </summary>
+        public static string BAG_REQUIRED {
+            get {
+                return ResourceManager.GetString("BAG_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Creation date cannot be past.
         /// </summary>
         public static string DATE_OF_CREATION_IN_THE_PAST {
@@ -115,20 +142,11 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Followed user Id cannot be null.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The heads is required.
         /// </summary>
-        public static string FOLLOWED_USER_ID_CANNOT_BE_NULL {
+        public static string HEAD_REQUIRED {
             get {
-                return ResourceManager.GetString("FOLLOWED_USER_ID_CANNOT_BE_NULL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Follower Id cannot be null.
-        /// </summary>
-        public static string FOLLOWER_ID_CANNOT_BE_NULL {
-            get {
-                return ResourceManager.GetString("FOLLOWER_ID_CANNOT_BE_NULL", resourceCulture);
+                return ResourceManager.GetString("HEAD_REQUIRED", resourceCulture);
             }
         }
         
@@ -178,11 +196,29 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The leg is required.
+        /// </summary>
+        public static string LEG_REQUIRED {
+            get {
+                return ResourceManager.GetString("LEG_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Longitude is required.
         /// </summary>
         public static string LONGITUDE_REQUIRED {
             get {
                 return ResourceManager.GetString("LONGITUDE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The mapstyle is required.
+        /// </summary>
+        public static string MAPSTYLE_REQUIRED {
+            get {
+                return ResourceManager.GetString("MAPSTYLE_REQUIRED", resourceCulture);
             }
         }
         
@@ -205,20 +241,11 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a The expiration date cannot be in the past.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The pointofintereststyle is required.
         /// </summary>
-        public static string THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST {
+        public static string POINTOFINTERESTSTYLE_REQUIRED {
             get {
-                return ResourceManager.GetString("THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a This user does not follow anyone.
-        /// </summary>
-        public static string THIS_USER_DOES_NOT_FOLLOW_ANYONE {
-            get {
-                return ResourceManager.GetString("THIS_USER_DOES_NOT_FOLLOW_ANYONE", resourceCulture);
+                return ResourceManager.GetString("POINTOFINTERESTSTYLE_REQUIRED", resourceCulture);
             }
         }
         
@@ -232,6 +259,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The torso is required.
+        /// </summary>
+        public static string TORSO_REQUIRED {
+            get {
+                return ResourceManager.GetString("TORSO_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Trace not found.
         /// </summary>
         public static string TRACE_NOT_FOUND {
@@ -241,11 +277,74 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Unknowm error.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Unknown error.
         /// </summary>
-        public static string UNKNOWM_ERROR {
+        public static string UNKNOWN_ERROR {
             get {
-                return ResourceManager.GetString("UNKNOWM_ERROR", resourceCulture);
+                return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The unlockedacessorystyles is required.
+        /// </summary>
+        public static string UNLOCKEDACESSORYSTYLES_REQUIRED {
+            get {
+                return ResourceManager.GetString("UNLOCKEDACESSORYSTYLES_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The unlockedbagstyles is required.
+        /// </summary>
+        public static string UNLOCKEDBAGSTYLES_REQUIRED {
+            get {
+                return ResourceManager.GetString("UNLOCKEDBAGSTYLES_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The unlockedheadstyles is required.
+        /// </summary>
+        public static string UNLOCKEDHEADSTYLES_REQUIRED {
+            get {
+                return ResourceManager.GetString("UNLOCKEDHEADSTYLES_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The unlockedlegstyles is required.
+        /// </summary>
+        public static string UNLOCKEDLEGSTYLES_REQUIRED {
+            get {
+                return ResourceManager.GetString("UNLOCKEDLEGSTYLES_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The unlockedmapstyles is required.
+        /// </summary>
+        public static string UNLOCKEDMAPSTYLES_REQUIRED {
+            get {
+                return ResourceManager.GetString("UNLOCKEDMAPSTYLES_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The unlockedpointofintereststyles is required.
+        /// </summary>
+        public static string UNLOCKEDPOINTOFINTERESTSTYLES_REQUIRED {
+            get {
+                return ResourceManager.GetString("UNLOCKEDPOINTOFINTERESTSTYLES_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The unlockedtorsostyles is required.
+        /// </summary>
+        public static string UNLOCKEDTORSOSTYLES_REQUIRED {
+            get {
+                return ResourceManager.GetString("UNLOCKEDTORSOSTYLES_REQUIRED", resourceCulture);
             }
         }
         
@@ -259,11 +358,11 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Relationship between users not found.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a User not found.
         /// </summary>
-        public static string USER_RELATION_NOT_FOUND {
+        public static string USER_NOT_FOUND {
             get {
-                return ResourceManager.GetString("USER_RELATION_NOT_FOUND", resourceCulture);
+                return ResourceManager.GetString("USER_NOT_FOUND", resourceCulture);
             }
         }
     }
