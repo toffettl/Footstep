@@ -35,8 +35,6 @@ namespace Footstep.Application.AutoMapper
 
         private void EntityToResponse()
         {
-            CreateMap<Trace, ResponseCreateTraceJson>();
-            CreateMap<Trace, ResponseTraceJson>();
             CreateMap<User, ResponseGetUserJson>()
                 .ForMember(dest => dest.Preferences, config => config.MapFrom(src => new ResponsePreferencesJson
                 {

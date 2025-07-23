@@ -70,6 +70,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Author id cannot be empty.
+        /// </summary>
+        public static string AUTHOR_ID_CANNOT_BE_EMPTY {
+            get {
+                return ResourceManager.GetString("AUTHOR_ID_CANNOT_BE_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The avataroverprofile is required.
         /// </summary>
         public static string AVATAROVERPROFILE_REQUIRED {
@@ -84,15 +93,6 @@ namespace Footstep.Exception {
         public static string BAG_REQUIRED {
             get {
                 return ResourceManager.GetString("BAG_REQUIRED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Author id cannot be empty.
-        /// </summary>
-        public static string AUTHOR_ID_CANNOT_BE_EMPTY {
-            get {
-                return ResourceManager.GetString("AUTHOR_ID_CANNOT_BE_EMPTY", resourceCulture);
             }
         }
         
@@ -165,6 +165,24 @@ namespace Footstep.Exception {
         public static string EMAIL_OR_PASSWORD_INVALID {
             get {
                 return ResourceManager.GetString("EMAIL_OR_PASSWORD_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Followed user Id cannot be null.
+        /// </summary>
+        public static string FOLLOWED_USER_ID_CANNOT_BE_NULL {
+            get {
+                return ResourceManager.GetString("FOLLOWED_USER_ID_CANNOT_BE_NULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Follower Id cannot be null.
+        /// </summary>
+        public static string FOLLOWER_ID_CANNOT_BE_NULL {
+            get {
+                return ResourceManager.GetString("FOLLOWER_ID_CANNOT_BE_NULL", resourceCulture);
             }
         }
         
@@ -268,7 +286,6 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a The pointofintereststyle is required.
         ///   Consulta uma cadeia de caracteres localizada semelhante a Parent id cannot be empty.
         /// </summary>
         public static string PARENT_ID_CANNOT_BE_EMPTY {
@@ -287,11 +304,29 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a The expiration date cannot be in the past.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The pointofintereststyle is required.
         /// </summary>
         public static string POINTOFINTERESTSTYLE_REQUIRED {
             get {
                 return ResourceManager.GetString("POINTOFINTERESTSTYLE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The expiration date cannot be in the past.
+        /// </summary>
+        public static string THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST {
+            get {
+                return ResourceManager.GetString("THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a This user does not follow anyone.
+        /// </summary>
+        public static string THIS_USER_DOES_NOT_FOLLOW_ANYONE {
+            get {
+                return ResourceManager.GetString("THIS_USER_DOES_NOT_FOLLOW_ANYONE", resourceCulture);
             }
         }
         
@@ -319,6 +354,15 @@ namespace Footstep.Exception {
         public static string TRACE_NOT_FOUND {
             get {
                 return ResourceManager.GetString("TRACE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Unknowm error.
+        /// </summary>
+        public static string UNKNOWM_ERROR {
+            get {
+                return ResourceManager.GetString("UNKNOWM_ERROR", resourceCulture);
             }
         }
         
@@ -409,6 +453,15 @@ namespace Footstep.Exception {
         public static string USER_NOT_FOUND {
             get {
                 return ResourceManager.GetString("USER_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Relationship between users not found.
+        /// </summary>
+        public static string USER_RELATION_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("USER_RELATION_NOT_FOUND", resourceCulture);
             }
         }
     }
