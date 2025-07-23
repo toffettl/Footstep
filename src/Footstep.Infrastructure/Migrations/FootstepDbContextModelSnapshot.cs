@@ -22,6 +22,41 @@ namespace Footstep.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Footstep.Domain.Entities.Comment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Likes")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("ParentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("ParentType")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Replies")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("Footstep.Domain.Entities.PointOfInterest", b =>
                 {
                     b.Property<Guid>("Id")
@@ -139,6 +174,27 @@ namespace Footstep.Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Footstep.Domain.Entities.UserRelation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("FollowerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("FollowingId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FollowerId");
+
+                    b.HasIndex("FollowingId");
+
+                    b.ToTable("UserRelations");
+                });
+
             modelBuilder.Entity("Footstep.Domain.Entities.PointOfInterest", b =>
                 {
                     b.HasOne("Footstep.Domain.Entities.User", "User")
@@ -146,6 +202,32 @@ namespace Footstep.Infrastructure.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.UserRelation", b =>
+                {
+                    b.HasOne("Footstep.Domain.Entities.User", "Follower")
+                        .WithMany("Following")
+                        .HasForeignKey("FollowerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Footstep.Domain.Entities.User", "Following")
+                        .WithMany("Followers")
+                        .HasForeignKey("FollowingId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Follower");
+
+                    b.Navigation("Following");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.User", b =>
+                {
+                    b.Navigation("Followers");
+
+                    b.Navigation("Following");
                 });
 #pragma warning restore 612, 618
         }

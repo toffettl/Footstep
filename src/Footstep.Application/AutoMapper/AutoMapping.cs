@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Footstep.Communication.Requests.Comments;
 using Footstep.Communication.Requests.Traces;
 using Footstep.Communication.Requests.Users;
+using Footstep.Communication.Responses.Comments;
 using Footstep.Communication.Responses.Traces;
 using Footstep.Communication.Responses.Users;
 using Footstep.Domain.Entities;
@@ -27,6 +29,8 @@ namespace Footstep.Application.AutoMapper
                 .ForMember(dest => dest.BagStyle, config => config.MapFrom(src => src.AvatarStyle!.Bag))
                 .ForMember(dest => dest.AcessoryStyle, config => config.MapFrom(src => src.AvatarStyle!.Acessory));
             CreateMap<RequestUpdateUnlockedStylesUserJson, User>();
+            CreateMap<RequestCommentJson, Comment>();
+            CreateMap<RequestUpdateStatusCommentsJson, Comment>();
         }
 
         private void EntityToResponse()
@@ -58,6 +62,14 @@ namespace Footstep.Application.AutoMapper
                     UnlockedBagStyles = src.UnlockedBagStyles,
                     UnlockedAcessoryStyles = src.UnlockedAcessoryStyles
                 }));
+            CreateMap<PointOfInterest, ResponseCreatePointOfInterestJson>();
+            CreateMap<PointOfInterest, ResponsePointOfIntereseJson>();
+            CreateMap<Comment, ResponseCommentJson>()
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new StatusResponse
+                    {
+                        Likes = src.Likes,
+                        Replies = src.Replies,
+                    }));
         }
     }
 }
