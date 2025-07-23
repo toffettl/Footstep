@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Footstep.Application.UseCases.Comments.UpdateStatus;
 using Footstep.Communication.Requests.Comments;
 using Footstep.Domain.Repositories;
 using Footstep.Domain.Repositories.Comments;
@@ -25,8 +24,6 @@ namespace Footstep.Application.UseCases.Comments.Update
 
         public async Task Execute(Guid id, RequestUpdateStatusCommentsJson request)
         {
-            Validate(request);
-
             var comment = await _repository.GetById(id);
 
             if (comment == null)
@@ -40,19 +37,6 @@ namespace Footstep.Application.UseCases.Comments.Update
             _repository.Update(comment);
 
             await _unitOfWork.Commit();
-        }
-
-        private void Validate(RequestUpdateStatusCommentsJson request)
-        {
-            var validator = new UpdateStatusValidator();
-
-            var result = validator.Validate(request);
-            if (!result.IsValid)
-            {
-                var errorsMessages = result.Errors.Select(e => e.ErrorMessage).ToList();
-
-                throw new ErrorOnValidationException(errorsMessages);
-            }
         }
     }
 }
