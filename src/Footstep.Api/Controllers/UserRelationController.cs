@@ -9,6 +9,7 @@ using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Traces;
 using Footstep.Communication.Responses.UserRelation;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.MicrosoftExtensions;
 
 namespace Footstep.Api.Controllers;
 [Route("api/[controller]")]
@@ -41,12 +42,18 @@ public class UserRelationController : ControllerBase
 
     [HttpGet("relations")]
     [ProducesResponseType(typeof(List<ResponseAllRelationsJson>), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GetAllUserRelations(
         [FromServices] IGetAllUserRelationsUseCase useCase
-        )
+     )
+
     {
         var response = await useCase.Execute();
+
+        if (response == null)
+        {
+            return NoContent();
+        }
         return Ok(response);
     }
 
