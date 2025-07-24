@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Footstep.Infrastructure.Migrations
 {
     [DbContext(typeof(FootstepDbContext))]
-    [Migration("20250722001659_AddAcessoryStyleInUser")]
-    partial class AddAcessoryStyleInUser
+    [Migration("20250724001019_newBase")]
+    partial class newBase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,44 +25,109 @@ namespace Footstep.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Footstep.Domain.Entities.Trace", b =>
+            modelBuilder.Entity("Footstep.Domain.Entities.Comment", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Likes")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("ParentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("ParentType")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Replies")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.PointOfInterest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Cep")
+                        .HasColumnType("text");
+
+                    b.Property<string>("City")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Coutry")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("ExpireAt")
+                    b.Property<string>("District")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("ExpireAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<double>("Latitude")
                         .HasColumnType("double precision");
 
-                    b.Property<int>("Like")
+                    b.Property<int>("Likes")
                         .HasColumnType("integer");
 
                     b.Property<double>("Longitude")
                         .HasColumnType("double precision");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Number")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("UpdateAt")
+                    b.Property<int>("PointOfInterestType")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("State")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid?>("UserId")
                         .HasColumnType("uuid");
 
+                    b.Property<int>("Views")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Traces");
+                    b.ToTable("PointOfInterests");
                 });
 
             modelBuilder.Entity("Footstep.Domain.Entities.User", b =>
@@ -139,13 +204,60 @@ namespace Footstep.Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Footstep.Domain.Entities.Trace", b =>
+            modelBuilder.Entity("Footstep.Domain.Entities.UserRelation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("FollowerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("FollowingId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FollowerId");
+
+                    b.HasIndex("FollowingId");
+
+                    b.ToTable("UserRelations");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.PointOfInterest", b =>
                 {
                     b.HasOne("Footstep.Domain.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.UserRelation", b =>
+                {
+                    b.HasOne("Footstep.Domain.Entities.User", "Follower")
+                        .WithMany("Following")
+                        .HasForeignKey("FollowerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Footstep.Domain.Entities.User", "Following")
+                        .WithMany("Followers")
+                        .HasForeignKey("FollowingId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Follower");
+
+                    b.Navigation("Following");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.User", b =>
+                {
+                    b.Navigation("Followers");
+
+                    b.Navigation("Following");
                 });
 #pragma warning restore 612, 618
         }

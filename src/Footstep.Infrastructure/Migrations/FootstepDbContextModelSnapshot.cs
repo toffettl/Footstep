@@ -63,10 +63,25 @@ namespace Footstep.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Cep")
+                        .HasColumnType("text");
+
+                    b.Property<string>("City")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Coutry")
+                        .HasColumnType("text");
+
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("District")
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("ExpireAt")
@@ -75,23 +90,35 @@ namespace Footstep.Infrastructure.Migrations
                     b.Property<double>("Latitude")
                         .HasColumnType("double precision");
 
-                    b.Property<int>("Like")
+                    b.Property<int>("Likes")
                         .HasColumnType("integer");
 
                     b.Property<double>("Longitude")
                         .HasColumnType("double precision");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Number")
                         .HasColumnType("text");
 
                     b.Property<int>("PointOfInterestType")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime?>("UpdateAt")
+                    b.Property<string>("State")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid?>("UserId")
                         .HasColumnType("uuid");
+
+                    b.Property<int>("Views")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Footstep.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class DbReset : Migration
+    public partial class newBase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,6 +17,7 @@ namespace Footstep.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     AuthorId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ParentId = table.Column<Guid>(type: "uuid", nullable: false),
                     ParentType = table.Column<int>(type: "integer", nullable: false),
                     Content = table.Column<string>(type: "text", nullable: true),
                     Likes = table.Column<int>(type: "integer", nullable: false),
@@ -36,7 +37,25 @@ namespace Footstep.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: true),
                     Email = table.Column<string>(type: "text", nullable: true),
-                    Password = table.Column<string>(type: "text", nullable: true)
+                    Biography = table.Column<string>(type: "text", nullable: true),
+                    Password = table.Column<string>(type: "text", nullable: true),
+                    MapStyle = table.Column<string>(type: "text", nullable: true),
+                    PointOfInterestStyle = table.Column<string>(type: "text", nullable: true),
+                    AvatarOverProfile = table.Column<bool>(type: "boolean", nullable: true),
+                    HeadStyle = table.Column<string>(type: "text", nullable: true),
+                    TorsoStyle = table.Column<string>(type: "text", nullable: true),
+                    LegStyle = table.Column<string>(type: "text", nullable: true),
+                    BagStyle = table.Column<string>(type: "text", nullable: true),
+                    AcessoryStyle = table.Column<string>(type: "text", nullable: true),
+                    UnlockedMapStyles = table.Column<string>(type: "text", nullable: true),
+                    UnlockedPointOfInterestStyles = table.Column<string>(type: "text", nullable: true),
+                    UnlockedHeadStyles = table.Column<string>(type: "text", nullable: true),
+                    UnlockedTorsoStyles = table.Column<string>(type: "text", nullable: true),
+                    UnlockedLegStyles = table.Column<string>(type: "text", nullable: true),
+                    UnlockedBagStyles = table.Column<string>(type: "text", nullable: true),
+                    UnlockedAcessoryStyles = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,16 +67,25 @@ namespace Footstep.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    ExpireAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    Like = table.Column<int>(type: "integer", nullable: false),
+                    AuthorId = table.Column<Guid>(type: "uuid", nullable: false),
+                    PointOfInterestType = table.Column<int>(type: "integer", nullable: false),
                     Latitude = table.Column<double>(type: "double precision", nullable: false),
                     Longitude = table.Column<double>(type: "double precision", nullable: false),
+                    Coutry = table.Column<string>(type: "text", nullable: true),
+                    State = table.Column<string>(type: "text", nullable: true),
+                    City = table.Column<string>(type: "text", nullable: true),
+                    District = table.Column<string>(type: "text", nullable: true),
+                    Street = table.Column<string>(type: "text", nullable: true),
+                    Number = table.Column<string>(type: "text", nullable: true),
+                    Cep = table.Column<string>(type: "text", nullable: true),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Views = table.Column<int>(type: "integer", nullable: false),
+                    Likes = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UpdateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: true),
-                    PointOfInterestType = table.Column<int>(type: "integer", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    ExpireAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {

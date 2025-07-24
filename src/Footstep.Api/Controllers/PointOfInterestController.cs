@@ -16,7 +16,7 @@ namespace Footstep.Api.Controllers
     public class PointOfInterestController : ControllerBase
     {
         [HttpPost]
-        [ProducesResponseType(typeof(ResponseCreatePointOfInterestJson), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponsePointOfIntereseJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create([FromServices] ICreatePointOfInterestUseCase usecase,
             [FromBody] RequestPointOfInterestJson request)
