@@ -1,4 +1,5 @@
-﻿using Footstep.Application.UseCases.Users.GetByEmail;
+﻿using Footstep.Application.UseCases.Users.GetAll;
+using Footstep.Application.UseCases.Users.GetByEmail;
 using Footstep.Application.UseCases.Users.Register;
 using Footstep.Application.UseCases.Users.UpdatePreferences;
 using Footstep.Application.UseCases.Users.UpdateUnlockedStyles;
@@ -34,6 +35,22 @@ public class UserController : ControllerBase
         var response = await useCase.Execute(email);
 
         return Ok(response);
+    }
+
+
+    [HttpGet]
+    [ProducesResponseType(typeof(ResponseUserJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status204NoContent)]
+
+    public async Task<IActionResult> GetAll([FromServices] IGetAllUserUseCase useCase)
+    {
+        var response = await useCase.Execute();
+
+        if (response.Users.Count != 0)
+        {
+            return Ok(response);
+        }
+        return NoContent();
     }
 
     [HttpPut]
