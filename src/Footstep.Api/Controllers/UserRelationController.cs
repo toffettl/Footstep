@@ -1,6 +1,7 @@
 ﻿using Footstep.Application.UseCases.RelationUser.Follow;
 using Footstep.Application.UseCases.Traces.Delete;
 using Footstep.Application.UseCases.UserRelation.Unfollow;
+using Footstep.Application.UseCases.UsersRelation.GetAll;
 using Footstep.Application.UseCases.UsersRelation.GetFollowers;
 using Footstep.Application.UseCases.UsersRelation.GetFollowing;
 using Footstep.Communication.Requests.UserRelation;
@@ -36,6 +37,17 @@ public class UserRelationController : ControllerBase
         await useCase.Execute(followerId, followingId);
 
         return NoContent();
+    }
+
+    [HttpGet("relations")]
+    [ProducesResponseType(typeof(List<ResponseAllRelationsJson>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> GetAllUserRelations(
+        [FromServices] IGetAllUserRelationsUseCase useCase
+        )
+    {
+        var response = await useCase.Execute();
+        return Ok(response);
     }
 
     [HttpGet("followers/{followingId}")]
