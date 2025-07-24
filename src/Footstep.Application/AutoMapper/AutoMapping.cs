@@ -31,6 +31,7 @@ namespace Footstep.Application.AutoMapper
             CreateMap<RequestUpdateUnlockedStylesUserJson, User>();
             CreateMap<RequestCommentJson, Comment>();
             CreateMap<RequestUpdateStatusCommentsJson, Comment>();
+            CreateMap<RequestUpdateStatusPointOfInterestJson, PointOfInterest>();
         }
 
         private void EntityToResponse()
@@ -67,28 +68,27 @@ namespace Footstep.Application.AutoMapper
                         Likes = src.Likes,
                         Replies = src.Replies,
                     }));
-
             CreateMap<PointOfInterest, ResponsePointOfIntereseJson>()
-                .ForMember(dest => dest.Coordinates, opt => opt.MapFrom(src => new ResponseCoordinates
-                {
-                    Latitude = src.Latitude,
-                    Longitude = src.Longitude
-                }))
-                .ForMember(dest => dest.Adress, opt => opt.MapFrom(src => new ResponseAdress
-                {
-                    Coutry = src.Coutry,
-                    State = src.State,
-                    City = src.City,
-                    District = src.District,
-                    Street = src.Street,
-                    Number = src.Number,
-                    Cep = src.Cep
-                }))
-                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new ResponseStatus
-                {
-                    Views = src.Views,
-                    Likes = src.Likes
-                }));
+            .ForMember(dest => dest.Coordinates, opt => opt.MapFrom(src => new ResponseCoordinates
+            {
+                Latitude = src.Latitude,
+                Longitude = src.Longitude
+            }))
+            .ForMember(dest => dest.Adress, opt => opt.MapFrom(src => new ResponseAdress
+            {
+                Coutry = src.Coutry,
+                State = src.State,
+                City = src.City,
+                District = src.District,
+                Street = src.Street,
+                Number = src.Number,
+                Cep = src.Cep
+            }))
+            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new ResponseStatus
+            {
+                Views = src.Views,
+                Likes = src.Likes
+            }));
         }
     }
 }

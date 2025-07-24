@@ -304,6 +304,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Point of interest not found.
+        /// </summary>
+        public static string POINT_OF_INTEREST_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("POINT_OF_INTEREST_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The pointofintereststyle is required.
         /// </summary>
         public static string POINTOFINTERESTSTYLE_REQUIRED {

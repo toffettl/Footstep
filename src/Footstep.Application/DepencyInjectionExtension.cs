@@ -12,6 +12,7 @@ using Footstep.Application.UseCases.Traces.GetAll;
 using Footstep.Application.UseCases.Traces.GetById;
 using Footstep.Application.UseCases.Traces.GetByRay;
 using Footstep.Application.UseCases.Traces.Update;
+using Footstep.Application.UseCases.Traces.UpdateStatus;
 using Footstep.Application.UseCases.UserRelation.Unfollow;
 using Footstep.Application.UseCases.Users.GetByEmail;
 using Footstep.Application.UseCases.Users.Login;
@@ -60,6 +61,7 @@ namespace Footstep.Application
             services.AddScoped<IGetCommentsByAuthorIdUseCase, GetCommentsByAuthorIdUseCase>();
             services.AddScoped<IGetCommentsByParentsIdAndAuthorIdUseCase, GetCommentsByParentsIdAndAuthorIdUseCase>();
             services.AddScoped<IUpdateStatusCommentsUseCase, UpdateStatusCommentsUseCase>();
+            services.AddScoped<IUpdateStatusPointOfInterestUseCase, UpdateStatusPointOfInterestUseCase>();
         }
     }
 }

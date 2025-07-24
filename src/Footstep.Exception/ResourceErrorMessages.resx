@@ -237,9 +237,9 @@
   <data name="TRACE_NOT_FOUND" xml:space="preserve">
     <value>Trace not found</value>
   </data>
-	<data name="UNKNOWN_ERROR" xml:space="preserve">
+  <data name="UNKNOWN_ERROR" xml:space="preserve">
     <value>Unknown error</value>
-    </data> 
+  </data>
   <data name="UNKNOWM_ERROR" xml:space="preserve">
     <value>Unknowm error</value>
   </data>
@@ -251,5 +251,8 @@
   </data>
   <data name="USER_RELATION_NOT_FOUND" xml:space="preserve">
     <value>Relationship between users not found</value>
+  </data>
+  <data name="POINT_OF_INTEREST_NOT_FOUND" xml:space="preserve">
+    <value>Point of interest not found</value>
   </data>
 </root>

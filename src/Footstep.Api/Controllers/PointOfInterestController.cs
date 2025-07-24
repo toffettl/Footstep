@@ -4,6 +4,7 @@ using Footstep.Application.UseCases.Traces.GetAll;
 using Footstep.Application.UseCases.Traces.GetById;
 using Footstep.Application.UseCases.Traces.GetByRay;
 using Footstep.Application.UseCases.Traces.Update;
+using Footstep.Application.UseCases.Traces.UpdateStatus;
 using Footstep.Communication.Requests.Traces;
 using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Traces;
@@ -45,9 +46,9 @@ namespace Footstep.Api.Controllers
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update(
-            [FromServices] IUpdatePointOfInterestUseCase useCase,
+            [FromServices] IUpdateStatusPointOfInterestUseCase useCase,
             [FromRoute] Guid id,
-            [FromBody] RequestPointOfInterestJson request)
+            [FromBody] RequestUpdateStatusPointOfInterestJson request)
         {
             await useCase.Execute(id, request);
 
