@@ -41,20 +41,17 @@ public class UserRelationController : ControllerBase
     }
 
     [HttpGet("relations")]
-    [ProducesResponseType(typeof(List<ResponseAllRelationsJson>), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> GetAllUserRelations(
-        [FromServices] IGetAllUserRelationsUseCase useCase
-     )
-
+    [ProducesResponseType(typeof(List<ResponseUserRelationJson>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> GetAll([FromServices] IGetAllUserRelationsUseCase useCase)
     {
         var response = await useCase.Execute();
 
-        if (response == null)
+        if (response.Relations.Count != 0)
         {
-            return NoContent();
+            return Ok(response);
         }
-        return Ok(response);
+        return NoContent();
     }
 
     [HttpGet("followers/{followingId}")]

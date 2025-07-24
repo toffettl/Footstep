@@ -30,6 +30,11 @@ public class UserRelationRepository : IUserRelationWriteOnlyRepository,
         return true;
     }
 
+    public Task<List<UserRelation>> GetAll()
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<List<UserRelation>> GetFollowers(Guid followingId)
     {
         return await _dbContext.UserRelations

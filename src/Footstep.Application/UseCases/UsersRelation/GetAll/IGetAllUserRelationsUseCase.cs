@@ -9,6 +9,6 @@ namespace Footstep.Application.UseCases.UsersRelation.GetAll
 {
     public interface IGetAllUserRelationsUseCase
     {
-        Task<List<ResponseAllRelationsJson>> Execute();
+        Task<ResponseUsersRelationsJson> Execute();
     }
 }
