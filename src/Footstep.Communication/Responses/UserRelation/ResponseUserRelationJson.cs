@@ -2,4 +2,6 @@
 public class ResponseUserRelationJson
 {
     public string? Title { get; set; }
+
+    public List<>
 }

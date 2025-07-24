@@ -9,6 +9,6 @@ namespace Footstep.Application.UseCases.Users.GetAll
 {
     public interface IGetAllUserUseCase
     {
-        Task<ResponseUserJson> Execute();
+        Task<ResponseUsersJson> Execute();
     }
 }

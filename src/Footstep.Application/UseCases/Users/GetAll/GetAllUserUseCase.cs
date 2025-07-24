@@ -23,11 +23,11 @@ namespace Footstep.Application.UseCases.Users.GetAll
             _repository = repository;
             _mapper = mapper;
         }
-        public async Task<ResponseUserJson> Execute()
+        public async Task<ResponseUsersJson> Execute()
         {
             var result = await _repository.GetAll();
 
-            return new ResponseUserJson
+            return new ResponseUsersJson
             {
                 Users = _mapper.Map<List<ResponseUserJson>>(result),
             };
