@@ -1,4 +1,5 @@
 ﻿using Footstep.Application.UseCases.Users.GetByEmail;
+using Footstep.Application.UseCases.Users.GetById;
 using Footstep.Application.UseCases.Users.Register;
 using Footstep.Application.UseCases.Users.UpdatePreferences;
 using Footstep.Application.UseCases.Users.UpdateUnlockedStyles;
@@ -24,7 +25,7 @@ public class UserController : ControllerBase
         return Ok(response);
     }
     [HttpGet]
-    [Route("{email}")]
+    [Route("get-by-email{email}")]
     [ProducesResponseType(typeof(ResponseGetUserJson), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetByEmail(
@@ -32,6 +33,17 @@ public class UserController : ControllerBase
         [FromRoute] string email)
     {
         var response = await useCase.Execute(email);
+
+        return Ok(response);
+    }
+
+    [HttpGet]
+    [Route("get-by-id/{id}")]
+    [ProducesResponseType(typeof(ResponseGetUserJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetByUserId([FromServices] IGetByIdUserUseCase useCase, [FromRoute] Guid id)
+    {
+        var response = await useCase.Execute(id);
 
         return Ok(response);
     }
