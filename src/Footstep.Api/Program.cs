@@ -1,8 +1,10 @@
+using DotNetEnv;
 using Footstep.Api.Filters;
 using Footstep.Api.Middleware;
 using Footstep.Application;
 using Footstep.Infrastructure;
-//V1.0.18
+
+Env.Load();
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration["ConnectionStrings:DefaultConnection"] = Environment.GetEnvironmentVariable("DEFAULT_CONNECTION");
