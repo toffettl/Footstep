@@ -66,7 +66,6 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 
         return new ResponseUserJson
         {
-            Name = user.Name,
             Token = _tokenGenerator.Generate(user)
         };
     }
