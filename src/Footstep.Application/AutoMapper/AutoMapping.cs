@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Footstep.Communication.Requests.Comments;
 using Footstep.Communication.Requests.Traces;
+using Footstep.Communication.Requests.UserRelation;
 using Footstep.Communication.Requests.Users;
 using Footstep.Communication.Responses.Comments;
 using Footstep.Communication.Responses.Traces;
+using Footstep.Communication.Responses.UserRelation;
 using Footstep.Communication.Responses.Users;
 using Footstep.Domain.Entities;
 
@@ -32,6 +34,7 @@ namespace Footstep.Application.AutoMapper
             CreateMap<RequestCommentJson, Comment>();
             CreateMap<RequestUpdateStatusCommentsJson, Comment>();
             CreateMap<RequestUpdateStatusPointOfInterestJson, PointOfInterest>();
+            CreateMap<RequestUserRelationJson, UserRelation>();
         }
 
         private void EntityToResponse()
@@ -90,6 +93,16 @@ namespace Footstep.Application.AutoMapper
                 Views = src.Views,
                 Likes = src.Likes
             }));
+
+            CreateMap<UserRelation, ResponseFollowersJson>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Follower!.Id))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Follower!.Name))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Follower!.Email));
+
+            CreateMap<UserRelation, ResponseFollowingJson>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Following!.Id))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Following!.Name))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Following!.Email));
         }
     }
 }
