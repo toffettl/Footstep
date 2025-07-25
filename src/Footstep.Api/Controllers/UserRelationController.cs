@@ -7,11 +7,13 @@ using Footstep.Communication.Requests.UserRelation;
 using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Traces;
 using Footstep.Communication.Responses.UserRelation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Footstep.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class UserRelationController : ControllerBase
 {
     [HttpPost]

@@ -10,12 +10,14 @@ using Footstep.Communication.Requests.Traces;
 using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Comments;
 using Footstep.Domain.Repositories.Comments;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Footstep.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CommentController : ControllerBase
     {
         [HttpPost]

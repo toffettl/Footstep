@@ -8,11 +8,13 @@ using Footstep.Communication.Requests.Users;
 using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Traces;
 using Footstep.Communication.Responses.Users;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Footstep.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class UserController : ControllerBase
 {
     [HttpGet]

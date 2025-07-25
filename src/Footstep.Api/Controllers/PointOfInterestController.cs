@@ -8,12 +8,14 @@ using Footstep.Application.UseCases.Traces.UpdateStatus;
 using Footstep.Communication.Requests.Traces;
 using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Traces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Footstep.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PointOfInterestController : ControllerBase
     {
         [HttpPost]
