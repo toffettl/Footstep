@@ -9,6 +9,6 @@ namespace Footstep.Application.UseCases.Users.GetById
 {
     public interface IGetByIdUserUseCase
     {
-        Task<ResponseUserJson> Execute(Guid id);
+        Task<ResponseGetUserJson> Execute(Guid id);
     }
 }

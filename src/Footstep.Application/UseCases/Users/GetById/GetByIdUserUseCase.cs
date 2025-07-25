@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Footstep.Communication.Responses.Users;
 using Footstep.Domain.Repositories.Users;
 using Footstep.Exception;
@@ -21,10 +16,7 @@ namespace Footstep.Application.UseCases.Users.GetById
             _mapper = mapper;
         }
             
-            
-            
-            
-        public async Task<ResponseUserJson> Execute(Guid id)
+        public async Task<ResponseGetUserJson> Execute(Guid id)
         {
             var result = await _repository.GetById(id);
 
@@ -33,7 +25,7 @@ namespace Footstep.Application.UseCases.Users.GetById
                 throw new DirectoryNotFoundException(ResourceErrorMessages.USER_NOT_FOUND);
             }
 
-            return _mapper.Map<ResponseUserJson>(result);
+            return _mapper.Map<ResponseGetUserJson>(result);
         }
     }
 }
