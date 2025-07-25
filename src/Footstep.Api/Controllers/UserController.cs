@@ -1,6 +1,5 @@
 ﻿using Footstep.Application.UseCases.Users.GetByEmail;
 using Footstep.Application.UseCases.Users.GetById;
-using Footstep.Application.UseCases.Users.Register;
 using Footstep.Application.UseCases.Users.UpdatePreferences;
 using Footstep.Application.UseCases.Users.UpdateUnlockedStyles;
 using Footstep.Communication.Requests.Users;
@@ -13,17 +12,6 @@ namespace Footstep.Api.Controllers;
 [ApiController]
 public class UserController : ControllerBase
 {
-    [HttpPost("register")]
-    [ProducesResponseType(typeof(ResponseUserJson), StatusCodes.Status201Created)]
-    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Register(
-        [FromServices] IRegisterUserUseCase useCase,
-        [FromBody] RequestRegisterUserJson request)
-    {
-        var response = await useCase.Execute(request);
-
-        return Ok(response);
-    }
     [HttpGet]
     [Route("get-by-email{email}")]
     [ProducesResponseType(typeof(ResponseGetUserJson), StatusCodes.Status200OK)]
