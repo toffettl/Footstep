@@ -36,4 +36,9 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository,
     {
         _dbContext.Users.Update(user);
     }
+
+    public async Task<List<User>> GetAll()
+    {
+        return await _dbContext.Users.AsNoTracking().ToListAsync();
+    }
 }

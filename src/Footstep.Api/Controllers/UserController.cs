@@ -1,9 +1,12 @@
-﻿using Footstep.Application.UseCases.Users.GetByEmail;
+﻿using Footstep.Application.UseCases.Traces.GetAll;
+using Footstep.Application.UseCases.Users.GetAll;
+using Footstep.Application.UseCases.Users.GetByEmail;
 using Footstep.Application.UseCases.Users.GetById;
 using Footstep.Application.UseCases.Users.UpdatePreferences;
 using Footstep.Application.UseCases.Users.UpdateUnlockedStyles;
 using Footstep.Communication.Requests.Users;
 using Footstep.Communication.Responses;
+using Footstep.Communication.Responses.Traces;
 using Footstep.Communication.Responses.Users;
 using Microsoft.AspNetCore.Mvc;
 
@@ -60,6 +63,22 @@ public class UserController : ControllerBase
         [FromBody] RequestUpdateUnlockedStylesUserJson request)
     {
         await useCase.Execute(id, request);
+        return NoContent();
+    }
+
+
+    [HttpGet]
+    [ProducesResponseType(typeof(ResponseUsersJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> GetAll(
+        [FromServices] IGetAllUserUseCase useCase)
+    {
+        var response = await useCase.Execute();
+
+        if (response.Users.Count != 0)
+        {
+            return Ok(response);
+        }
         return NoContent();
     }
 }

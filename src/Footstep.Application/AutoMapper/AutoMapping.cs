@@ -62,6 +62,7 @@ namespace Footstep.Application.AutoMapper
                     UnlockedAcessoryStyles = src.UnlockedAcessoryStyles
                 }));
             CreateMap<PointOfInterest, ResponsePointOfIntereseJson>();
+            CreateMap<User, ResponseUsersJson>();
             CreateMap<Comment, ResponseCommentJson>()
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new StatusResponse
                     {
