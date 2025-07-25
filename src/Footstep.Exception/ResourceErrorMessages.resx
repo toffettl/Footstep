@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AUTHOR_ID_CANNOT_BE_EMPTY" xml:space="preserve">
+    <value>Author id cannot be empty</value>
+  </data>
+  <data name="COMMENT_CANNOT_BE_EMPTY" xml:space="preserve">
+    <value>Comment cannot be empty</value>
+  </data>
+  <data name="COMMENT_NOT_FOUND" xml:space="preserve">
+    <value>Comment not found</value>
+  </data>
   <data name="DATE_OF_CREATION_IN_THE_PAST" xml:space="preserve">
     <value>Creation date cannot be past</value>
   </data>
@@ -135,6 +144,12 @@
   <data name="EMAIL_OR_PASSWORD_INVALID" xml:space="preserve">
     <value>Email or password invalid</value>
   </data>
+  <data name="FOLLOWED_USER_ID_CANNOT_BE_NULL" xml:space="preserve">
+    <value>Followed user Id cannot be null</value>
+  </data>
+  <data name="FOLLOWER_ID_CANNOT_BE_NULL" xml:space="preserve">
+    <value>Follower Id cannot be null</value>
+  </data>
   <data name="INVALID_LATITUDE" xml:space="preserve">
     <value>Latitude must be between -90 and 90</value>
   </data>
@@ -143,6 +158,9 @@
   </data>
   <data name="INVALID_PASSWORD" xml:space="preserve">
     <value>Password must contain at least 8 characters and include at least one capital letter</value>
+  </data>
+  <data name="IS_FOLLOWING" xml:space="preserve">
+    <value>The user is already following</value>
   </data>
   <data name="LATITUDE_REQUIRED" xml:space="preserve">
     <value>Latitude is required</value>
@@ -156,19 +174,85 @@
   <data name="NAME_REQUIRED" xml:space="preserve">
     <value>The name is required</value>
   </data>
-  <data name="SASUAIIUAS_AJH" xml:space="preserve">
-    <value />
+  <data name="PARENT_ID_CANNOT_BE_EMPTY" xml:space="preserve">
+    <value>Parent id cannot be empty</value>
+  </data>
+  <data name="PARENT_NOT_FOUND" xml:space="preserve">
+    <value>Parent not found</value>
+  </data>
+  <data name="MAPSTYLE_REQUIRED" xml:space="preserve">
+    <value>The mapstyle is required</value>
+  </data>
+  <data name="ACESSORY_REQUIRED" xml:space="preserve">
+    <value>The acessory is required</value>
+  </data>
+  <data name="UNLOCKEDMAPSTYLES_REQUIRED" xml:space="preserve">
+    <value>The unlockedmapstyles is required</value>
+  </data>
+  <data name="UNLOCKEDACESSORYSTYLES_REQUIRED" xml:space="preserve">
+    <value>The unlockedacessorystyles is required</value>
+  </data>
+  <data name="UNLOCKEDBAGSTYLES_REQUIRED" xml:space="preserve">
+    <value>The unlockedbagstyles is required</value>
+  </data>
+  <data name="UNLOCKEDLEGSTYLES_REQUIRED" xml:space="preserve">
+    <value>The unlockedlegstyles is required</value>
+  </data>
+  <data name="UNLOCKEDTORSOSTYLES_REQUIRED" xml:space="preserve">
+    <value>The unlockedtorsostyles is required</value>
+  </data>
+  <data name="UNLOCKEDHEADSTYLES_REQUIRED" xml:space="preserve">
+    <value>The unlockedheadstyles is required</value>
+  </data>
+  <data name="UNLOCKEDPOINTOFINTERESTSTYLES_REQUIRED" xml:space="preserve">
+    <value>The unlockedpointofintereststyles is required</value>
+  </data>
+  <data name="BAG_REQUIRED" xml:space="preserve">
+    <value>The bag is required</value>
+  </data>
+  <data name="LEG_REQUIRED" xml:space="preserve">
+    <value>The leg is required</value>
+  </data>
+  <data name="TORSO_REQUIRED" xml:space="preserve">
+    <value>The torso is required</value>
+  </data>
+  <data name="HEAD_REQUIRED" xml:space="preserve">
+    <value>The heads is required</value>
+  </data>
+  <data name="AVATAROVERPROFILE_REQUIRED" xml:space="preserve">
+    <value>The avataroverprofile is required</value>
+  </data>
+  <data name="POINTOFINTERESTSTYLE_REQUIRED" xml:space="preserve">
+    <value>The pointofintereststyle is required</value>
   </data>
   <data name="THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST" xml:space="preserve">
     <value>The expiration date cannot be in the past</value>
   </data>
+  <data name="THIS_USER_DOES_NOT_FOLLOW_ANYONE" xml:space="preserve">
+    <value>This user does not follow anyone</value>
+  </data>
+  <data name="THIS_USER_HAS_NO_FOLLOWERS" xml:space="preserve">
+    <value>This user has no followers</value>
+  </data>
   <data name="TRACE_NOT_FOUND" xml:space="preserve">
     <value>Trace not found</value>
   </data>
-  <data name="UNKNOW_ERROR" xml:space="preserve">
-    <value>Unknow error</value>
+  <data name="UNKNOWN_ERROR" xml:space="preserve">
+    <value>Unknown error</value>
+  </data>
+  <data name="UNKNOWM_ERROR" xml:space="preserve">
+    <value>Unknowm error</value>
   </data>
   <data name="UPDATE_DATE_IN_THE_PAST" xml:space="preserve">
     <value>Update date cannot be in the past</value>
+  </data>
+  <data name="USER_NOT_FOUND" xml:space="preserve">
+    <value>User not found</value>
+  </data>
+  <data name="USER_RELATION_NOT_FOUND" xml:space="preserve">
+    <value>Relationship between users not found</value>
+  </data>
+  <data name="POINT_OF_INTEREST_NOT_FOUND" xml:space="preserve">
+    <value>Point of interest not found</value>
   </data>
 </root>
