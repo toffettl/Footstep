@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Footstep.Infrastructure.Migrations
 {
     [DbContext(typeof(FootstepDbContext))]
-    [Migration("20250725183710_newBase")]
-    partial class newBase
+    [Migration("20250725192511_new")]
+    partial class @new
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

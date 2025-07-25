@@ -1,5 +1,6 @@
 ﻿namespace Footstep.Communication.Responses.UserRelation;
 public class ResponseUserRelationJson
 {
-    public string? Title { get; set; }
+    public Guid FollowerId { get; set; }
+    public Guid FollowingId { get; set; }
 }

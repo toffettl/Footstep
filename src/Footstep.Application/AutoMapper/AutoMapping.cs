@@ -35,6 +35,17 @@ namespace Footstep.Application.AutoMapper
             CreateMap<RequestUpdateStatusCommentsJson, Comment>();
             CreateMap<RequestUpdateStatusPointOfInterestJson, PointOfInterest>();
             CreateMap<RequestUserRelationJson, UserRelation>();
+            CreateMap<RequestPointOfInterestJson, PointOfInterest>()
+                .ForMember(dest => dest.Latitude, opt => opt.MapFrom(src => src.Coordinates != null ? src.Coordinates.Latitude : 0))
+                .ForMember(dest => dest.Longitude, opt => opt.MapFrom(src => src.Coordinates != null ? src.Coordinates.Longitude : 0))
+                .ForMember(dest => dest.Coutry, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Coutry : null))
+                .ForMember(dest => dest.State, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.State : null))
+                .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.City : null))
+                .ForMember(dest => dest.District, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.District : null))
+                .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Street : null))
+                .ForMember(dest => dest.Number, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Number : null))
+                .ForMember(dest => dest.Cep, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Cep : null));
+
         }
 
         private void EntityToResponse()
@@ -103,6 +114,8 @@ namespace Footstep.Application.AutoMapper
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Following!.Id))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Following!.Name))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Following!.Email));
+
+            CreateMap<UserRelation, ResponseUserRelationJson>();
         }
     }
 }
