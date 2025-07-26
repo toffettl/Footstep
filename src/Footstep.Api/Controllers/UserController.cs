@@ -18,7 +18,7 @@ namespace Footstep.Api.Controllers;
 public class UserController : ControllerBase
 {
     [HttpGet]
-    [Route("get-by-email{email}")]
+    [Route("get-by-email/{email}")]
     [ProducesResponseType(typeof(ResponseGetUserJson), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetByEmail(
