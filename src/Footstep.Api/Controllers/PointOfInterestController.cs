@@ -55,6 +55,40 @@ namespace Footstep.Api.Controllers
             return NoContent();
         }
 
+
+
+        [HttpPut]
+        [Route("{id}/views")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest | StatusCodes.Status404NotFound)]
+
+        public async Task<IActionResult> Update(
+            [FromServices] IUpdateStatusPointOfInterestUseCase useCase,
+            [FromRoute] Guid id,
+            [FromBody] RequestUpdateStatusPointOfInterestJson.RequestUpdateViewsPointOfInterestJson requestView)
+        {
+            await useCase.Execute(id, requestView);
+
+            return NoContent();
+        }
+
+
+        [HttpPut]
+        [Route("{id}/likes")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest | StatusCodes.Status404NotFound)]
+
+        public async Task<IActionResult> Update(
+            [FromServices] IUpdateStatusPointOfInterestUseCase useCase,
+            [FromRoute] Guid id,
+            [FromBody] RequestUpdateStatusPointOfInterestJson.RequestUpdateLikesPointOfInterestJson requestLike)
+        {
+            await useCase.Execute(id, requestLike);
+
+            return NoContent();
+        }
+        
+
         [HttpGet]
         [Route("{id}")]
         [ProducesResponseType(typeof(ResponsePointOfIntereseJson), StatusCodes.Status200OK)]

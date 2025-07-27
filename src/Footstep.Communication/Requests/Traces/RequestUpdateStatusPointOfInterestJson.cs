@@ -1,8 +1,18 @@
 ﻿namespace Footstep.Communication.Requests.Traces
 {
-    public class RequestUpdateStatusPointOfInterestJson
-    {
-        public int Views { get; set; }
-        public int Likes { get; set; }
+
+    public class RequestUpdateStatusPointOfInterestJson {
+        public class RequestUpdateViewsPointOfInterestJson
+        {
+            public int Views { get; set; }
+        }
+
+
+        public class RequestUpdateLikesPointOfInterestJson
+        {
+            public int Likes { get; set; }
+
+        }
     }
+    
 }

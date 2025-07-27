@@ -45,6 +45,7 @@ namespace Footstep.Application.AutoMapper
                 .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Street : null))
                 .ForMember(dest => dest.Number, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Number : null))
                 .ForMember(dest => dest.Cep, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Cep : null));
+            CreateMap<RequestUpdateStatusPointOfInterestJson.RequestUpdateViewsPointOfInterestJson, PointOfInterest>();
 
         }
 

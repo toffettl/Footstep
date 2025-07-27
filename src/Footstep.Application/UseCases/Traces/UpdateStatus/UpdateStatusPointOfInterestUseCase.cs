@@ -39,5 +39,40 @@ namespace Footstep.Application.UseCases.Traces.UpdateStatus
 
             await _unitOfWork.Commit();
         }
+
+        public async Task Execute(Guid id, RequestUpdateStatusPointOfInterestJson.RequestUpdateLikesPointOfInterestJson requestView)
+        {
+           var pointOfInterest = await _repository.GetById(id);
+
+            if (pointOfInterest == null)
+            {
+                throw new NotFoundException(ResourceErrorMessages.POINT_OF_INTEREST_NOT_FOUND);
+            }
+
+            _mapper.Map(pointOfInterest, requestView);
+
+            pointOfInterest.UpdatedAt = DateTime.UtcNow;
+            _repository.Update(pointOfInterest);
+
+            await _unitOfWork.Commit();
+        }
+
+        public async Task Execute(Guid id, RequestUpdateStatusPointOfInterestJson.RequestUpdateViewsPointOfInterestJson requestLike)
+        {
+            var pointOfInterest = await _repository.GetById(id);
+
+            if (pointOfInterest == null)
+            {
+                throw new NotFoundException(ResourceErrorMessages.POINT_OF_INTEREST_NOT_FOUND);
+            }
+
+            _mapper.Map(pointOfInterest, requestLike);
+
+            pointOfInterest.UpdatedAt= DateTime.UtcNow;
+            _repository.Update(pointOfInterest);
+
+            await _unitOfWork.Commit();
+                
+        }
     }
 }
