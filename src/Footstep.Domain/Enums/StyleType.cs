@@ -2,8 +2,8 @@
 {
     public enum StyleType
     {
-        Map = 0,
-        Profile = 1,
+        Profile = 0,
+        Map = 1,
         PointOfInterest = 2,
         Head = 3,
         Torso = 4,
