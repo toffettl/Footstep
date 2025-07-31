@@ -6,6 +6,7 @@ public class User
     public string? Email { get; set; }
     public string? Biography { get; set; }
     public string? Password { get; set; }
+    public string? ProfileStyle { get; set; }
     public string? MapStyle { get; set; }
     public string? PointOfInterestStyle { get; set; }
     public bool? AvatarOverProfile { get; set; }
@@ -14,6 +15,7 @@ public class User
     public string? LegStyle { get; set; }
     public string? BagStyle { get; set; }
     public string? AccessoryStyle {  get; set; }
+    public string? UnlockedProfileStyles { get; set; }
     public string? UnlockedMapStyles { get; set; }
     public string? UnlockedPointOfInterestStyles { get; set; }
     public string? UnlockedHeadStyles { get; set; }

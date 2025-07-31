@@ -2,6 +2,7 @@
 {
     public class ResponseUnlockedStylesJson
     {
+        public string? UnlockedProfileStyles { get; set; }
         public string? UnlockedMapStyles { get; set; }
         public string? UnlockedPointOfInterestStyles { get; set; }
         public string? UnlockedHeadStyles { get; set; }

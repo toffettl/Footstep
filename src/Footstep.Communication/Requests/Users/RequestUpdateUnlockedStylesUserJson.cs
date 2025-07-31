@@ -8,6 +8,7 @@ namespace Footstep.Communication.Requests.Users
 {
     public class RequestUpdateUnlockedStylesUserJson
     {
+        public string? UnlockedProfileStyles { get; set; }
         public string? UnlockedMapStyles { get; set; }
         public string? UnlockedPointOfInterestStyles { get; set; }
         public string? UnlockedHeadStyles { get; set; }

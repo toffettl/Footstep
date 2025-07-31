@@ -3,11 +3,12 @@
     public enum StyleType
     {
         Map = 0,
-        PointOfInterest = 1,
-        Head = 2,
-        Torso = 3,
-        Leg = 4,
-        Bag = 5,
-        Accessory = 6
+        Profile = 1,
+        PointOfInterest = 2,
+        Head = 3,
+        Torso = 4,
+        Leg = 5,
+        Bag = 6,
+        Accessory = 7
     }
 }
