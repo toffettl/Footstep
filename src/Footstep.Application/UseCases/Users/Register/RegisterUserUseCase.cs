@@ -49,14 +49,14 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         user.TorsoStyle = "initial";
         user.LegStyle = "initial";
         user.BagStyle = "initial";
-        user.AcessoryStyle = "initial";
+        user.AccessoryStyle = "initial";
         user.UnlockedMapStyles = "initial";
         user.UnlockedPointOfInterestStyles = "initial";
         user.UnlockedHeadStyles = "initial";
         user.UnlockedTorsoStyles = "initial";
         user.UnlockedLegStyles = "initial";
         user.UnlockedBagStyles = "initial";
-        user.UnlockedAcessoryStyles = "initial";
+        user.UnlockedAccessoryStyles = "initial";
         user.CreatedAt = DateTime.UtcNow;
         user.UpdatedAt = DateTime.UtcNow;
 

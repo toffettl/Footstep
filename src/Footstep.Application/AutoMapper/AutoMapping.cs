@@ -29,7 +29,7 @@ namespace Footstep.Application.AutoMapper
                 .ForMember(dest => dest.TorsoStyle, config => config.MapFrom(src => src.AvatarStyle!.Torso))
                 .ForMember(dest => dest.LegStyle, config => config.MapFrom(src => src.AvatarStyle!.Leg))
                 .ForMember(dest => dest.BagStyle, config => config.MapFrom(src => src.AvatarStyle!.Bag))
-                .ForMember(dest => dest.AcessoryStyle, config => config.MapFrom(src => src.AvatarStyle!.Acessory));
+                .ForMember(dest => dest.AccessoryStyle, config => config.MapFrom(src => src.AvatarStyle!.Acessory));
             CreateMap<RequestUpdateUnlockedStylesUserJson, User>();
             CreateMap<RequestCommentJson, Comment>();
             CreateMap<RequestUpdateStatusCommentsJson, Comment>();
@@ -62,7 +62,7 @@ namespace Footstep.Application.AutoMapper
                         Torso = src.TorsoStyle,
                         Leg = src.LegStyle,
                         Bag = src.BagStyle,
-                        Acessory = src.AcessoryStyle,
+                        Acessory = src.AccessoryStyle,
                     }
                 }))
                 .ForMember(dest => dest.UnlockedStyles, config => config.MapFrom(src => new ResponseUnlockedStylesJson
@@ -73,7 +73,7 @@ namespace Footstep.Application.AutoMapper
                     UnlockedTorsoStyles = src.UnlockedTorsoStyles,
                     UnlockedLegStyles = src.UnlockedLegStyles,
                     UnlockedBagStyles = src.UnlockedBagStyles,
-                    UnlockedAcessoryStyles = src.UnlockedAcessoryStyles
+                    UnlockedAcessoryStyles = src.UnlockedAccessoryStyles
                 }));
             CreateMap<PointOfInterest, ResponsePointOfIntereseJson>();
             CreateMap<User, ResponseUsersJson>();
