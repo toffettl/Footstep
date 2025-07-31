@@ -13,17 +13,18 @@ public class User
     public string? TorsoStyle { get; set; }
     public string? LegStyle { get; set; }
     public string? BagStyle { get; set; }
-    public string? AcessoryStyle {  get; set; }
+    public string? AccessoryStyle {  get; set; }
     public string? UnlockedMapStyles { get; set; }
     public string? UnlockedPointOfInterestStyles { get; set; }
     public string? UnlockedHeadStyles { get; set; }
     public string? UnlockedTorsoStyles { get; set; }
     public string? UnlockedLegStyles { get; set; }
     public string? UnlockedBagStyles { get; set; }
-    public string? UnlockedAcessoryStyles { get; set; }
+    public string? UnlockedAccessoryStyles { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 
     public ICollection<UserRelation> Followers { get; set; } = new List<UserRelation>();
     public ICollection<UserRelation> Following { get; set; } = new List<UserRelation>();
+    public ICollection<Style> Styles { get; set; } = new List<Style>();
 }
