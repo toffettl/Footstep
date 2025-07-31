@@ -1,4 +1,6 @@
-﻿namespace Footstep.Domain.Entities;
+﻿using System.Runtime.CompilerServices;
+
+namespace Footstep.Domain.Entities;
 public class User
 {
     public Guid Id { get; set; }
@@ -26,4 +28,7 @@ public class User
 
     public ICollection<UserRelation> Followers { get; set; } = new List<UserRelation>();
     public ICollection<UserRelation> Following { get; set; } = new List<UserRelation>();
+    public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+    public ICollection<PointOfInterest> PointsOfInterest { get; set; } = new List<PointOfInterest>();
+
 }
