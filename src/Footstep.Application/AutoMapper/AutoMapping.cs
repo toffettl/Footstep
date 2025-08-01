@@ -5,6 +5,7 @@ using Footstep.Communication.Requests.Traces;
 using Footstep.Communication.Requests.UserRelation;
 using Footstep.Communication.Requests.Users;
 using Footstep.Communication.Responses.Comments;
+using Footstep.Communication.Responses.Styles;
 using Footstep.Communication.Responses.Traces;
 using Footstep.Communication.Responses.UserRelation;
 using Footstep.Communication.Responses.Users;
@@ -117,6 +118,7 @@ namespace Footstep.Application.AutoMapper
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Following!.Email));
 
             CreateMap<UserRelation, ResponseUserRelationJson>();
+            CreateMap<Style, ResponseStyleJson>();
         }
     }
 }
