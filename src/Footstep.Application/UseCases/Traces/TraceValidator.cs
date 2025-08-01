@@ -12,7 +12,7 @@ namespace Footstep.Application.UseCases.Traces
                 .GreaterThan(DateTime.UtcNow)
                 .WithMessage(ResourceErrorMessages.THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST);
             
-            RuleFor(trace => trace.Coordinates.Latitude)
+            RuleFor(trace => trace.Coordinates!.Latitude)
                 .InclusiveBetween(-90, 90)
                 .WithMessage(ResourceErrorMessages.INVALID_LATITUDE);
 

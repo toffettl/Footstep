@@ -40,7 +40,7 @@ namespace Footstep.Application.UseCases.Traces.UpdateStatus
             await _unitOfWork.Commit();
         }
 
-        public async Task Execute(Guid id, RequestUpdateStatusPointOfInterestJson.RequestUpdateLikesPointOfInterestJson requestView)
+        public async Task Execute(Guid id, RequestUpdateStatusPointOfInterestJson.RequestUpdateLikesPointOfInterestJson requestLike)
         {
            var pointOfInterest = await _repository.GetById(id);
 
@@ -49,7 +49,7 @@ namespace Footstep.Application.UseCases.Traces.UpdateStatus
                 throw new NotFoundException(ResourceErrorMessages.POINT_OF_INTEREST_NOT_FOUND);
             }
 
-            _mapper.Map(pointOfInterest, requestView);
+            _mapper.Map(requestLike, pointOfInterest);
 
             pointOfInterest.UpdatedAt = DateTime.UtcNow;
             _repository.Update(pointOfInterest);
@@ -57,7 +57,7 @@ namespace Footstep.Application.UseCases.Traces.UpdateStatus
             await _unitOfWork.Commit();
         }
 
-        public async Task Execute(Guid id, RequestUpdateStatusPointOfInterestJson.RequestUpdateViewsPointOfInterestJson requestLike)
+        public async Task Execute(Guid id, RequestUpdateStatusPointOfInterestJson.RequestUpdateViewsPointOfInterestJson requestView)
         {
             var pointOfInterest = await _repository.GetById(id);
 
@@ -66,7 +66,7 @@ namespace Footstep.Application.UseCases.Traces.UpdateStatus
                 throw new NotFoundException(ResourceErrorMessages.POINT_OF_INTEREST_NOT_FOUND);
             }
 
-            _mapper.Map(pointOfInterest, requestLike);
+            _mapper.Map(requestView, pointOfInterest);
 
             pointOfInterest.UpdatedAt= DateTime.UtcNow;
             _repository.Update(pointOfInterest);

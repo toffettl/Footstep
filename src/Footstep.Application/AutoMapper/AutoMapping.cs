@@ -34,6 +34,8 @@ namespace Footstep.Application.AutoMapper
             CreateMap<RequestCommentJson, Comment>();
             CreateMap<RequestUpdateStatusCommentsJson, Comment>();
             CreateMap<RequestUpdateStatusPointOfInterestJson, PointOfInterest>();
+            CreateMap<RequestUpdateStatusPointOfInterestJson.RequestUpdateViewsPointOfInterestJson, PointOfInterest>();
+            CreateMap<RequestUpdateStatusPointOfInterestJson.RequestUpdateLikesPointOfInterestJson, PointOfInterest>();
             CreateMap<RequestUserRelationJson, UserRelation>();
             CreateMap<RequestPointOfInterestJson, PointOfInterest>()
                 .ForMember(dest => dest.Latitude, opt => opt.MapFrom(src => src.Coordinates != null ? src.Coordinates.Latitude : 0))
@@ -45,7 +47,7 @@ namespace Footstep.Application.AutoMapper
                 .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Street : null))
                 .ForMember(dest => dest.Number, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Number : null))
                 .ForMember(dest => dest.Cep, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Cep : null));
-            CreateMap<RequestUpdateStatusPointOfInterestJson.RequestUpdateViewsPointOfInterestJson, PointOfInterest>();
+           
 
         }
 
