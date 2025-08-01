@@ -28,5 +28,4 @@ public class User
 
     public ICollection<UserRelation> Followers { get; set; } = new List<UserRelation>();
     public ICollection<UserRelation> Following { get; set; } = new List<UserRelation>();
-    public ICollection<Style> Styles { get; set; } = new List<Style>();
 }
