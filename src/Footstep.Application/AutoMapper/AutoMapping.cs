@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Footstep.Communication.Requests.Comments;
+using Footstep.Communication.Requests.Styles;
 using Footstep.Communication.Requests.Traces;
 using Footstep.Communication.Requests.UserRelation;
 using Footstep.Communication.Requests.Users;
@@ -45,7 +46,7 @@ namespace Footstep.Application.AutoMapper
                 .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Street : null))
                 .ForMember(dest => dest.Number, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Number : null))
                 .ForMember(dest => dest.Cep, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Cep : null));
-
+            CreateMap<RequestStyleJson, Style>();
         }
 
         private void EntityToResponse()
