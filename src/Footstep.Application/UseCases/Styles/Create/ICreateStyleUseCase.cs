@@ -1,7 +1,7 @@
 ﻿using Footstep.Communication.Requests.Styles;
 using Footstep.Communication.Responses.Styles;
 
-namespace Footstep.Application.UseCases.Style.Create
+namespace Footstep.Application.UseCases.Styles.Create
 {
     public interface ICreateStyleUseCase
     {

@@ -2,7 +2,7 @@
 using Footstep.Communication.Requests.Styles;
 using Footstep.Exception;
 
-namespace Footstep.Application.UseCases.Style
+namespace Footstep.Application.UseCases.Styles
 {
     public class StyleValidator : AbstractValidator<RequestStyleJson>
     {
