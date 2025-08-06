@@ -11,6 +11,7 @@ namespace Footstep.Domain.Entities
         public decimal Price { get; set; }
         public StyleType StyleType { get; set; }
 
-        public ICollection<User> Users { get; set; } = new List<User>();
+        public ICollection<User> UnlockedUsers { get; set; } = new List<User>();
+        public ICollection<User> ActiveUsers { get; set; } = new List<User>();
     }
 }
