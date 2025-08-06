@@ -196,6 +196,24 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The imageurl is invalid.
+        /// </summary>
+        public static string IMAGEURL_INVALID {
+            get {
+                return ResourceManager.GetString("IMAGEURL_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Imageurl is required.
+        /// </summary>
+        public static string IMAGEURL_REQUIRED {
+            get {
+                return ResourceManager.GetString("IMAGEURL_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Latitude must be between -90 and 90.
         /// </summary>
         public static string INVALID_LATITUDE {
@@ -322,6 +340,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The price must be greater than 0.
+        /// </summary>
+        public static string PRICE_INVALID {
+            get {
+                return ResourceManager.GetString("PRICE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The expiration date cannot be in the past.
         /// </summary>
         public static string THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST {
@@ -363,15 +390,6 @@ namespace Footstep.Exception {
         public static string TRACE_NOT_FOUND {
             get {
                 return ResourceManager.GetString("TRACE_NOT_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Unknowm error.
-        /// </summary>
-        public static string UNKNOWM_ERROR {
-            get {
-                return ResourceManager.GetString("UNKNOWM_ERROR", resourceCulture);
             }
         }
         

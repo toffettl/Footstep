@@ -240,9 +240,6 @@
   <data name="UNKNOWN_ERROR" xml:space="preserve">
     <value>Unknown error</value>
   </data>
-  <data name="UNKNOWM_ERROR" xml:space="preserve">
-    <value>Unknowm error</value>
-  </data>
   <data name="UPDATE_DATE_IN_THE_PAST" xml:space="preserve">
     <value>Update date cannot be in the past</value>
   </data>
@@ -254,5 +251,14 @@
   </data>
   <data name="POINT_OF_INTEREST_NOT_FOUND" xml:space="preserve">
     <value>Point of interest not found</value>
+  </data>
+  <data name="IMAGEURL_REQUIRED" xml:space="preserve">
+    <value>Imageurl is required</value>
+  </data>
+  <data name="IMAGEURL_INVALID" xml:space="preserve">
+    <value>The imageurl is invalid</value>
+  </data>
+  <data name="PRICE_INVALID" xml:space="preserve">
+    <value>The price must be greater than 0</value>
   </data>
 </root>
