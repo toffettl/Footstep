@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Comments;
 using Footstep.Domain.Repositories.Comments;
 using Footstep.Exception;
@@ -17,15 +18,21 @@ namespace Footstep.Application.UseCases.Comments.GetByParentsId
             _mapper = mapper;
         }
 
-        public async Task<List<ResponseCommentJson>> Execute(Guid id)
+        public async Task<PagedResult<ResponseCommentJson>> Execute(Guid id, int page, int pageSize)
         {
-            var result = await _repository.GetByParentsId(id);
+            var (comments, totalCount) = await _repository.GetByParentsId(id, page, pageSize);
 
-            if (result.Count == 0)
-            {
+            if (comments.Count == 0)
                 throw new NotFoundException(ResourceErrorMessages.COMMENT_NOT_FOUND);
-            }
-            return _mapper.Map<List<ResponseCommentJson>>(result);
+
+            return new PagedResult<ResponseCommentJson>
+            {
+                Items = _mapper.Map<List<ResponseCommentJson>>(comments),
+                Page = page,
+                PageSize = pageSize,
+                TotalCount = totalCount,
+                TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize)
+            };
         }
     }
 }

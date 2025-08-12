@@ -43,14 +43,15 @@ namespace Footstep.Api.Controllers
         }
 
         [HttpGet("by-parent/{id}")]
-        [ProducesResponseType(typeof(List<ResponseCommentJson>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PagedResult<ResponseCommentJson>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetByParentId(
             [FromServices] IGetCommentsByParentsIdUseCase useCase,
-            [FromRoute] Guid id)
+            [FromRoute] Guid id,
+            [FromQuery] int page,
+            [FromQuery] int pageSize)
         {
-            var response = await useCase.Execute(id);
-
+            var response = await useCase.Execute(id, page, pageSize);
             return Ok(response);
         }
 

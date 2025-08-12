@@ -51,9 +51,21 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
                 .ToListAsync();
         }
 
-        public async Task<List<Comment>> GetByParentsId(Guid id)
+        public async Task<(List<Comment> Comments, int TotalCount)> GetByParentsId(Guid id, int page, int pageSize)
         {
-            return await _dbContext.Comments.AsNoTracking().Where(comment => comment.ParentId == id).ToListAsync();
+            var query = _dbContext.Comments
+                .AsNoTracking()
+                .Where(comment => comment.ParentId == id);
+
+            var totalCount = await query.CountAsync();
+
+            var comments = await query
+                .OrderByDescending(c => c.Likes)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return (comments, totalCount);
         }
 
         public void Update(Comment comment)
