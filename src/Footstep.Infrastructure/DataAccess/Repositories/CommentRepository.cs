@@ -6,7 +6,7 @@ using System.Diagnostics;
 namespace Footstep.Infrastructure.DataAccess.Repositories
 {
     public class CommentRepository : ICommentsWriteOnlyRepository,
-        ICommentsReadOnlyRepository,
+        //ICommentsReadOnlyRepository,
         ICommentsUpdateOnlyRepository
     {
         private readonly FootstepDbContext _dbContext;
@@ -44,17 +44,17 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             return await _dbContext.Comments.AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
         }
 
-        public async Task<List<Comment>> GetByParentIdAndAuthorId(Guid parentId, Guid authorId)
-        {
-            return await _dbContext.Comments.AsNoTracking()
-                .Where(comment => comment.ParentId == parentId && comment.AuthorId == authorId)
-                .ToListAsync();
-        }
+        //public async Task<List<Comment>> GetByParentIdAndAuthorId(Guid parentId, Guid authorId)
+        //{
+        //    return await _dbContext.Comments.AsNoTracking()
+        //        .Where(comment => comment.ParentId == parentId && comment.AuthorId == authorId)
+        //        .ToListAsync();
+        //}
 
-        public async Task<List<Comment>> GetByParentsId(Guid id)
-        {
-            return await _dbContext.Comments.AsNoTracking().Where(comment => comment.ParentId == id).ToListAsync();
-        }
+        //public async Task<List<Comment>> GetByParentsId(Guid id)
+        //{
+        ////    return await _dbContext.Comments.AsNoTracking().Where(comment => comment.ParentId == id).ToListAsync();
+        ////}
 
         public void Update(Comment comment)
         {
