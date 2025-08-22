@@ -16,5 +16,8 @@ namespace Footstep.Domain.Entities
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public DateTime? ExpireAt { get; set; }
+
+        public Address? Address { get; set; }
+        public Guid AddressId { get; set; }
     }
 }
