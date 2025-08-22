@@ -47,7 +47,7 @@ namespace Footstep.Application
             services.AddScoped<IUpdatePointOfInterestUseCase, UpdatePointOfInterestUseCase>();
             services.AddScoped<IGetByIdPointOfInterestUseCase, GetByIdPointsOfInterestUseCase>();
             services.AddScoped<IGetAllPoitntOfInterestUseCase, GetAllPointOfInterestUseCase>();
-            services.AddScoped<IGetNearbyPointsOfInterestUseCase, GetNearbyPointsOfInterestUseCase>();
+            //services.AddScoped<IGetNearbyPointsOfInterestUseCase, GetNearbyPointsOfInterestUseCase>();
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
             services.AddScoped<IGetByEmailUserUseCase, GetByEmailUserUseCase>();

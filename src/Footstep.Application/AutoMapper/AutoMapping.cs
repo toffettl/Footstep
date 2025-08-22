@@ -35,16 +35,16 @@ namespace Footstep.Application.AutoMapper
             CreateMap<RequestUpdateStatusCommentsJson, Comment>();
             CreateMap<RequestUpdateStatusPointOfInterestJson, PointOfInterest>();
             CreateMap<RequestUserRelationJson, UserRelation>();
-            CreateMap<RequestPointOfInterestJson, PointOfInterest>()
-                .ForMember(dest => dest.Latitude, opt => opt.MapFrom(src => src.Coordinates != null ? src.Coordinates.Latitude : 0))
-                .ForMember(dest => dest.Longitude, opt => opt.MapFrom(src => src.Coordinates != null ? src.Coordinates.Longitude : 0))
-                .ForMember(dest => dest.Coutry, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Coutry : null))
-                .ForMember(dest => dest.State, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.State : null))
-                .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.City : null))
-                .ForMember(dest => dest.District, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.District : null))
-                .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Street : null))
-                .ForMember(dest => dest.Number, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Number : null))
-                .ForMember(dest => dest.Cep, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Cep : null));
+            //CreateMap<RequestPointOfInterestJson, PointOfInterest>()
+            //    .ForMember(dest => dest.Latitude, opt => opt.MapFrom(src => src.Coordinates != null ? src.Coordinates.Latitude : 0))
+            //    .ForMember(dest => dest.Longitude, opt => opt.MapFrom(src => src.Coordinates != null ? src.Coordinates.Longitude : 0))
+            //    .ForMember(dest => dest.Coutry, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Coutry : null))
+            //    .ForMember(dest => dest.State, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.State : null))
+            //    .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.City : null))
+            //    .ForMember(dest => dest.District, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.District : null))
+            //    .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Street : null))
+            //    .ForMember(dest => dest.Number, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Number : null))
+            //    .ForMember(dest => dest.Cep, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Cep : null));
 
         }
 
@@ -86,23 +86,23 @@ namespace Footstep.Application.AutoMapper
             CreateMap<PointOfInterest, ResponsePointOfIntereseJson>()
             .ForMember(dest => dest.Coordinates, opt => opt.MapFrom(src => new ResponseCoordinates
             {
-                Latitude = src.Latitude,
-                Longitude = src.Longitude
+                //Latitude = src.Latitude,
+                //Longitude = src.Longitude
             }))
             .ForMember(dest => dest.Adress, opt => opt.MapFrom(src => new ResponseAdress
             {
-                Coutry = src.Coutry,
-                State = src.State,
-                City = src.City,
-                District = src.District,
-                Street = src.Street,
-                Number = src.Number,
-                Cep = src.Cep
+                //Coutry = src.Coutry,
+                //State = src.State,
+                //City = src.City,
+                //District = src.District,
+                //Street = src.Street,
+                //Number = src.Number,
+                //Cep = src.Cep
             }))
             .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new ResponseStatus
             {
-                Views = src.Views,
-                Likes = src.Likes
+                //Views = src.Views,
+                //Likes = src.Likes
             }));
 
             CreateMap<UserRelation, ResponseFollowersJson>()
