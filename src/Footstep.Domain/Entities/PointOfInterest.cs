@@ -19,5 +19,7 @@ namespace Footstep.Domain.Entities
 
         public Address? Address { get; set; }
         public Guid AddressId { get; set; }
+
+        public ICollection<UserPointOfInterestRelation> UserPointOfInterestRelations { get; set; } = new List<UserPointOfInterestRelation>();
     }
 }
