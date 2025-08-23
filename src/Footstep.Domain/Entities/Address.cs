@@ -13,12 +13,12 @@
         public string? Country { get; set; }
         public string? Cep { get; set; }
 
-        public int number { get; set; }
+        public int Number { get; set; }
 
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
-        public PointOfInterest? PointOfInterest { get; set; }
         public Guid PointOfInterestId { get; set; }
+        public PointOfInterest? PointOfInterest { get; set; }
     }
 }

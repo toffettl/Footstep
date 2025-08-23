@@ -10,10 +10,10 @@ namespace Footstep.Domain.Entities
 
         public UserPointOfInterestRelationType Type { get; set; }
 
-        public User? User { get; set; }
         public Guid UserId { get; set; }
+        public User? User { get; set; }
 
-        public PointOfInterest? PointOfInterest { get; set; }
         public Guid PointOfInterestId { get; set; }
+        public PointOfInterest? PointOfInterest { get; set; }
     }
 }

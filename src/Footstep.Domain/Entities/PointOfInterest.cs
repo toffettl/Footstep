@@ -17,8 +17,8 @@ namespace Footstep.Domain.Entities
         public DateTime? UpdatedAt { get; set; }
         public DateTime? ExpireAt { get; set; }
 
-        public Address? Address { get; set; }
         public Guid AddressId { get; set; }
+        public Address? Address { get; set; }
 
         public ICollection<UserPointOfInterestRelation> UserPointOfInterestRelations { get; set; } = new List<UserPointOfInterestRelation>();
     }
