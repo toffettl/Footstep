@@ -17,15 +17,37 @@ namespace Footstep.Application.UseCases.Comments.GetByParentIdAndAuthorId
             _mapper = mapper;
         }
 
-        public async Task<List<ResponseCommentJson>> Execute(Guid parentId, Guid authorId)
+        public async Task<List<ResponseCommentJson>> Execute(Guid parentId, Guid authorId, int type)
         {
-            var result = await _repository.GetByParentIdAndAuthorId(parentId, authorId);
+            Validate(type);
 
-            if (result.Count == 0)
+            var response = await _repository.GetByPointOfInterestIdAndAuthorId(parentId, authorId);
+
+            if (type ==1)
+            {
+                response = await _repository.GetByCommentIdAndAuthorId(parentId, authorId);
+            }
+
+            if (response.Count == 0)
             {
                 throw new NotFoundException(ResourceErrorMessages.COMMENT_NOT_FOUND);
             }
-            return _mapper.Map<List<ResponseCommentJson>>(result);
+
+            return _mapper.Map<List<ResponseCommentJson>>(response);
+        }
+
+        private void Validate(int type)
+        {
+            var validator = new TypeValidator();
+
+            var result = validator.Validate(type);
+
+            if (result.IsValid == false)
+            {
+                var errorMessages = result.Errors.Select(f => f.ErrorMessage).ToList();
+
+                throw new ErrorOnValidationException(errorMessages);
+            }
         }
     }
 }
