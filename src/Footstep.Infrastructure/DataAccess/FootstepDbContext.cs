@@ -13,6 +13,16 @@ namespace Footstep.Infrastructure.DataAccess
         public DbSet<Comment> Comments { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Coin)
+                .WithOne(c => c.User)
+                .HasForeignKey<Coin>(c => c.UserId);
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Preference)
+                .WithOne(p => p.User)
+                .HasForeignKey<Preference>(p => p.UserId);
+
             modelBuilder.Entity<UserRelation>()
                 .HasOne(ur => ur.Follower)
                 .WithMany(u => u.Following)
