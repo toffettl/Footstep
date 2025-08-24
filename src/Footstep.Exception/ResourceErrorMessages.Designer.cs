@@ -367,6 +367,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Invalid type.
+        /// </summary>
+        public static string TYPE_INVALID {
+            get {
+                return ResourceManager.GetString("TYPE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Unknowm error.
         /// </summary>
         public static string UNKNOWM_ERROR {

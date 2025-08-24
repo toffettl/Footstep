@@ -44,7 +44,7 @@ namespace Footstep.Infrastructure
             services.AddScoped<IUserRelationReadOnlyRepository, UserRelationRepository>();
             services.AddScoped<IUserRelationWriteOnlyRepository, UserRelationRepository>();
             services.AddScoped<ICommentsWriteOnlyRepository, CommentRepository>();
-            //services.AddScoped<ICommentsReadOnlyRepository, CommentRepository>();
+            services.AddScoped<ICommentsReadOnlyRepository, CommentRepository>();
             services.AddScoped<ICommentsUpdateOnlyRepository, CommentRepository>();
         }
 

@@ -255,4 +255,7 @@
   <data name="POINT_OF_INTEREST_NOT_FOUND" xml:space="preserve">
     <value>Point of interest not found</value>
   </data>
+  <data name="TYPE_INVALID" xml:space="preserve">
+    <value>Invalid type</value>
+  </data>
 </root>
