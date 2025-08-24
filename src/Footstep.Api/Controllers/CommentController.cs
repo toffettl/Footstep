@@ -47,9 +47,10 @@ namespace Footstep.Api.Controllers
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetByParentId(
             [FromServices] IGetCommentsByParentsIdUseCase useCase,
-            [FromRoute] Guid id)
+            [FromRoute] Guid id,
+            [FromBody] int type)
         {
-            var response = await useCase.Execute(id);
+            var response = await useCase.Execute(id, type);
 
             return Ok(response);
         }
@@ -69,12 +70,13 @@ namespace Footstep.Api.Controllers
         [HttpGet("by-parent-and-author")]
         [ProducesResponseType(typeof(List<ResponseCommentJson>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetByAuthorId(
+        public async Task<IActionResult> GetByParentsIdAndAuthorId(
             [FromServices] IGetCommentsByParentsIdAndAuthorIdUseCase useCase,
             [FromQuery] Guid parentId,
-            [FromQuery] Guid authorId)
+            [FromQuery] Guid authorId,
+            [FromBody] int type)
         {
-            var response = await useCase.Execute(parentId, authorId);
+            var response = await useCase.Execute(parentId, authorId, type);
 
             return Ok(response);
         }
