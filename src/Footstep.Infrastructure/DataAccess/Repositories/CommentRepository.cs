@@ -6,7 +6,7 @@ using System.Diagnostics;
 namespace Footstep.Infrastructure.DataAccess.Repositories
 {
     public class CommentRepository : ICommentsWriteOnlyRepository,
-        //ICommentsReadOnlyRepository,
+        ICommentsReadOnlyRepository,
         ICommentsUpdateOnlyRepository
     {
         private readonly FootstepDbContext _dbContext;
@@ -39,26 +39,38 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             return await _dbContext.Comments.AsNoTracking().Where(comment => comment.AuthorId == id).ToListAsync();
         }
 
-        public async Task<Comment> GetById(Guid id)
+        public async Task<Comment?> GetById(Guid id)
         {
             return await _dbContext.Comments.AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
         }
 
-        //public async Task<List<Comment>> GetByParentIdAndAuthorId(Guid parentId, Guid authorId)
-        //{
-        //    return await _dbContext.Comments.AsNoTracking()
-        //        .Where(comment => comment.ParentId == parentId && comment.AuthorId == authorId)
-        //        .ToListAsync();
-        //}
+        public async Task<List<Comment>> GetByPointOfInterestIdAndAuthorId(Guid pointOfInterestId, Guid authorId)
+        {
+            return await _dbContext.Comments.AsNoTracking()
+                .Where(comment => comment.PointOfInterestId == pointOfInterestId && comment.AuthorId == authorId)
+                .ToListAsync();
+        }
 
-        //public async Task<List<Comment>> GetByParentsId(Guid id)
-        //{
-        ////    return await _dbContext.Comments.AsNoTracking().Where(comment => comment.ParentId == id).ToListAsync();
-        ////}
+        public async Task<List<Comment>> GetByPointOfInterestId(Guid id)
+        {
+            return await _dbContext.Comments.AsNoTracking().Where(comment => comment.PointOfInterestId == id).ToListAsync();
+        }
 
         public void Update(Comment comment)
         {
             _dbContext.Comments.Update(comment);
+        }
+
+        public async Task<List<Comment>> GetByCommentId(Guid id)
+        {
+            return await _dbContext.Comments.AsNoTracking().Where(comment => comment.CommentId == id).ToListAsync();
+        }
+
+        public async Task<List<Comment>> GetByCommentIdAndAuthorId(Guid commentId, Guid authorId)
+        {
+            return await _dbContext.Comments.AsNoTracking()
+                .Where(comment => comment.CommentId == commentId && comment.AuthorId == authorId)
+                .ToListAsync();
         }
     }
 }

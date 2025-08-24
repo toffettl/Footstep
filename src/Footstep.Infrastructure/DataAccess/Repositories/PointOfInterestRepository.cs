@@ -31,22 +31,22 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             return true;
         }
 
-        async Task<Domain.Entities.PointOfInterest?> IPointsOfInterestUpdateOnlyRepository.GetById(Guid id)
+        async Task<PointOfInterest?> IPointsOfInterestUpdateOnlyRepository.GetById(Guid id)
         {
             return await _dbContext.PointOfInterests.AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
         }
 
-        public void Update(Domain.Entities.PointOfInterest trace)
+        public void Update(PointOfInterest trace)
         {
             _dbContext.PointOfInterests.Update(trace);
         }
 
-        public async Task<List<Domain.Entities.PointOfInterest>> GetAll()
+        public async Task<List<PointOfInterest>> GetAll()
         {
             return await _dbContext.PointOfInterests.AsNoTracking().ToListAsync();
         }
 
-        async Task<Domain.Entities.PointOfInterest?> IPointsOfInterestReadOnlyRepository.GetById(Guid id)
+        async Task<PointOfInterest?> IPointsOfInterestReadOnlyRepository.GetById(Guid id)
         {
             return await _dbContext.PointOfInterests.AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
         }
