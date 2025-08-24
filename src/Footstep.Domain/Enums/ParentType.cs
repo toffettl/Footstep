@@ -2,7 +2,7 @@
 {
     public enum ParentType
     {
-        Mark = 0, 
+        PointOfInterest = 0, 
         Comment = 1
     }
 }

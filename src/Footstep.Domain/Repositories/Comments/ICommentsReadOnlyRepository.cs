@@ -4,8 +4,10 @@ namespace Footstep.Domain.Repositories.Comments
 {
     public interface ICommentsReadOnlyRepository
     {
-        Task<List<Comment>> GetByParentsId(Guid id);
+        Task<List<Comment>> GetByPointOfInterestId(Guid id);
+        Task<List<Comment>> GetByCommentId(Guid id);
         Task<List<Comment>> GetByAuthorId(Guid id);
-        Task<List<Comment>> GetByParentIdAndAuthorId(Guid parentId, Guid authorId);
+        Task<List<Comment>> GetByPointOfInterestIdAndAuthorId(Guid pointOfInterestId, Guid authorId);
+        Task<List<Comment>> GetByCommentIdAndAuthorId(Guid commentId, Guid authorId);
     }
 }
