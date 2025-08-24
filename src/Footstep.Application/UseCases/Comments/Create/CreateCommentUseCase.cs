@@ -25,7 +25,7 @@ namespace Footstep.Application.UseCases.Comments.Create
         }
         public async Task<ResponseCommentJson> Execute(RequestCommentJson request)
         {
-            Validade(request);
+            Validate(request);
 
             var entity = _mapper.Map<Comment>(request);
 
@@ -38,7 +38,7 @@ namespace Footstep.Application.UseCases.Comments.Create
             return _mapper.Map<ResponseCommentJson>(entity);
         }
 
-        private void Validade(RequestCommentJson request)
+        private void Validate(RequestCommentJson request)
         {
             var validator = new CommentValidator();
 

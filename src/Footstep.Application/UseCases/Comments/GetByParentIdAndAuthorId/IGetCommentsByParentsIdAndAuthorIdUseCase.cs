@@ -4,6 +4,6 @@ namespace Footstep.Application.UseCases.Comments.GetByParentIdAndAuthorId
 {
     public interface IGetCommentsByParentsIdAndAuthorIdUseCase
     {
-        Task<List<ResponseCommentJson>> Execute(Guid parenId, Guid authorId);
+        Task<List<ResponseCommentJson>> Execute(Guid parenId, Guid authorId, int type);
     }
 }
