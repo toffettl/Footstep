@@ -25,7 +25,8 @@ namespace Footstep.Application.AutoMapper
         {
             CreateMap<RequestPointOfInterestJson, PointOfInterest>();
             CreateMap<RequestRegisterUserJson, User>()
-                .ForMember(dest => dest.Password, config => config.Ignore());
+                .ForMember(dest => dest.Password, config => config.Ignore())
+                .ForMember(dest => dest.Preference!.MapStyle, config => config.MapFrom(src => src.MapStyle!));
             //CreateMap<RequestUpdatePreferencesUserJson, User>()
             //    .ForMember(dest => dest.HeadStyle, config => config.MapFrom(src => src.AvatarStyle!.Head))
             //    .ForMember(dest => dest.TorsoStyle, config => config.MapFrom(src => src.AvatarStyle!.Torso))
