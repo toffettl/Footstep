@@ -196,6 +196,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Image is empty.
+        /// </summary>
+        public static string IMAGE_EMPTY {
+            get {
+                return ResourceManager.GetString("IMAGE_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Latitude must be between -90 and 90.
         /// </summary>
         public static string INVALID_LATITUDE {
@@ -268,6 +277,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a This name is already registered.
+        /// </summary>
+        public static string NAME_ALREADY_REGISTERED {
+            get {
+                return ResourceManager.GetString("NAME_ALREADY_REGISTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Name cannot be empty.
         /// </summary>
         public static string NAME_EMPTY {
@@ -318,6 +336,51 @@ namespace Footstep.Exception {
         public static string POINTOFINTERESTSTYLE_REQUIRED {
             get {
                 return ResourceManager.GetString("POINTOFINTERESTSTYLE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Price must be greater than 0.
+        /// </summary>
+        public static string PRICE_INVALID {
+            get {
+                return ResourceManager.GetString("PRICE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Price is required.
+        /// </summary>
+        public static string PRICE_REQUIRED {
+            get {
+                return ResourceManager.GetString("PRICE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Store is required.
+        /// </summary>
+        public static string STORE_REQUIRED {
+            get {
+                return ResourceManager.GetString("STORE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Styletype must be between 0 and 4.
+        /// </summary>
+        public static string STYLETYPE_INVALID {
+            get {
+                return ResourceManager.GetString("STYLETYPE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Styletype is required.
+        /// </summary>
+        public static string STYLETYPE_REQUIRED {
+            get {
+                return ResourceManager.GetString("STYLETYPE_REQUIRED", resourceCulture);
             }
         }
         
