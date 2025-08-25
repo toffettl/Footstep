@@ -11,6 +11,9 @@ namespace Footstep.Infrastructure.DataAccess
         public DbSet<User> Users { get; set; }
         public DbSet<UserRelation> UserRelations { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Style> Styles { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<Preference> Preferences { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
