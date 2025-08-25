@@ -18,6 +18,11 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             await _dbContext.Styles.AddAsync(style);
         }
 
+        public async Task<List<Style>> GetAll()
+        {
+            return await _dbContext.Styles.AsNoTracking().ToListAsync();
+        }
+
         public async Task<Style?> GetByName(string name)
         {
             return await _dbContext.Styles.AsNoTracking().FirstOrDefaultAsync(style => style.Name == name);
