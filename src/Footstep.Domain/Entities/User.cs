@@ -1,20 +1,21 @@
 ﻿namespace Footstep.Domain.Entities;
 public class User
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
+
     public string? Name { get; set; }
     public string? Email { get; set; }
     public string? Biography { get; set; }
     public string? Password { get; set; }
 
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
     public Guid CoinId { get; set; }
     public Guid PreferenceId { get; set; }
 
-    public Coin? Coin { get; set; }
-    public Preference? Preference { get; set; }
+    public Coin? Coin { get; set; } = new Coin();
+    public Preference? Preference { get; set; } = new Preference();
 
     public ICollection<UserRelation> Followers { get; set; } = new List<UserRelation>();
     public ICollection<UserRelation> Following { get; set; } = new List<UserRelation>();

@@ -4,9 +4,9 @@ namespace Footstep.Domain.Entities
 {
     public class UserPointOfInterestRelation
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
-        public bool Like { get; set; }
+        public bool Like { get; set; } = false;
 
         public UserPointOfInterestRelationType Type { get; set; }
 

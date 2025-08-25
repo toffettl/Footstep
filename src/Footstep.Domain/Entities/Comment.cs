@@ -5,15 +5,14 @@ namespace Footstep.Domain.Entities
 {
     public class Comment
     {
-        [Key]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         public string? Content { get; set; }
 
         public ParentType ParentType { get; set; }
 
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
         public Guid AuthorId { get; set; }
         public Guid CommentId { get; set; }

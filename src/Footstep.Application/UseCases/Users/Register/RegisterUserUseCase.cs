@@ -37,28 +37,17 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 
     public async Task<ResponseUserJson> Execute(RequestRegisterUserJson request)
     {
-        await Validade(request);
+        await Validate(request);
 
         var user = _mapper.Map<User>(request);
+
         user.Password = _passwordEncripter.Encrypt(request.Password!);
-        user.Id = Guid.NewGuid();
-        //user.MapStyle = "initial";
         //user.PointOfInterestStyle = "initial";
-        //user.AvatarOverProfile = true;
         //user.HeadStyle = "initial";
         //user.TorsoStyle = "initial";
         //user.LegStyle = "initial";
         //user.BagStyle = "initial";
         //user.AcessoryStyle = "initial";
-        //user.UnlockedMapStyles = "initial";
-        //user.UnlockedPointOfInterestStyles = "initial";
-        //user.UnlockedHeadStyles = "initial";
-        //user.UnlockedTorsoStyles = "initial";
-        //user.UnlockedLegStyles = "initial";
-        //user.UnlockedBagStyles = "initial";
-        //user.UnlockedAcessoryStyles = "initial";
-        user.CreatedAt = DateTime.UtcNow;
-        user.UpdatedAt = DateTime.UtcNow;
 
         await _userWriteOnlyRepostory.Add(user);
 
@@ -70,7 +59,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         };
     }
 
-    private async Task Validade(RequestRegisterUserJson request)
+    private async Task Validate(RequestRegisterUserJson request)
     {
         var result = new RegisterUserValidator().Validate(request);
 

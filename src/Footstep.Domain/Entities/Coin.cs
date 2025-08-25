@@ -2,11 +2,11 @@
 {
     public class Coin
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
-        public int Total { get; set; }
-        public int Earned { get; set; }
-        public int Spent { get; set; }  
+        public int Total { get; set; } = 0;
+        public int Earned { get; set; } = 0;
+        public int Spent { get; set; }  = 0;
 
         public Guid UserId { get; set; }
 

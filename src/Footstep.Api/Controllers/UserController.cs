@@ -1,12 +1,10 @@
-﻿using Footstep.Application.UseCases.Traces.GetAll;
-using Footstep.Application.UseCases.Users.GetAll;
+﻿using Footstep.Application.UseCases.Users.GetAll;
 using Footstep.Application.UseCases.Users.GetByEmail;
 using Footstep.Application.UseCases.Users.GetById;
 using Footstep.Application.UseCases.Users.UpdatePreferences;
 using Footstep.Application.UseCases.Users.UpdateUnlockedStyles;
 using Footstep.Communication.Requests.Users;
 using Footstep.Communication.Responses;
-using Footstep.Communication.Responses.Traces;
 using Footstep.Communication.Responses.Users;
 using Microsoft.AspNetCore.Mvc;
 

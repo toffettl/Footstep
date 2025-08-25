@@ -4,9 +4,10 @@ namespace Footstep.Domain.Entities
 {
     public class Style
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         public string? Name { get; set; }
+        public string? Image { get; set; }
         public int Price { get; set; }
         public bool Store { get; set; }
 

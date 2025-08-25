@@ -5,7 +5,7 @@ namespace Footstep.Domain.Entities
 {
     public class PointOfInterest
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         public string? Title { get; set; }
         public string? Description { get; set; }
@@ -14,8 +14,8 @@ namespace Footstep.Domain.Entities
         public PointOfInterestVisibility PointOfInterestVisibility { get; set; }
 
         public DateTime? ExpireAt { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? UpdatedAt { get; set; } = DateTime.UtcNow;
 
         public Guid AddressId { get; set; }
 

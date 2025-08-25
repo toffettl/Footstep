@@ -2,10 +2,10 @@
 {
     public class Preference
     { 
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         public string? MapStyle { get; set; }
-        public bool AvatarOverProfile { get; set; }
+        public bool AvatarOverProfile { get; set; } = true;
 
         public Guid UserId { get; set; }
 

@@ -2,7 +2,7 @@
 {
     public class LikeComment
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         public Guid UserId { get; set; }
         public Guid CommentId { get; set; }
