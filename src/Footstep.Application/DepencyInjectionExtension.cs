@@ -6,11 +6,11 @@ using Footstep.Application.UseCases.Comments.GetByParentIdAndAuthorId;
 using Footstep.Application.UseCases.Comments.GetByParentsId;
 using Footstep.Application.UseCases.Comments.Update;
 using Footstep.Application.UseCases.RelationUser.Follow;
+using Footstep.Application.UseCases.Styles.Create;
 using Footstep.Application.UseCases.Traces.Create;
 using Footstep.Application.UseCases.Traces.Delete;
 using Footstep.Application.UseCases.Traces.GetAll;
 using Footstep.Application.UseCases.Traces.GetById;
-using Footstep.Application.UseCases.Traces.GetByRay;
 using Footstep.Application.UseCases.Traces.Update;
 using Footstep.Application.UseCases.Traces.UpdateStatus;
 using Footstep.Application.UseCases.UserRelation.Unfollow;
@@ -66,6 +66,7 @@ namespace Footstep.Application
             services.AddScoped<IUpdateStatusPointOfInterestUseCase, UpdateStatusPointOfInterestUseCase>();
             services.AddScoped<IGetByIdUserUseCase, GetByIdUserUseCase>();
             services.AddScoped<IGetAllUserUseCase, GetAllUserUseCase>();
+            services.AddScoped<ICreateStyleUseCase, CreateStyleUseCase>();
         }
     }
 }
