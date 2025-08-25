@@ -1,6 +1,9 @@
 ﻿using Footstep.Domain.Repositories;
 using Footstep.Domain.Repositories.Comments;
+using Footstep.Domain.Repositories.Items;
+using Footstep.Domain.Repositories.Preferences;
 using Footstep.Domain.Repositories.RelationUser;
+using Footstep.Domain.Repositories.Styles;
 using Footstep.Domain.Repositories.Traces;
 using Footstep.Domain.Repositories.Users;
 using Footstep.Domain.Security.Cryptography;
@@ -46,6 +49,12 @@ namespace Footstep.Infrastructure
             services.AddScoped<ICommentsWriteOnlyRepository, CommentRepository>();
             services.AddScoped<ICommentsReadOnlyRepository, CommentRepository>();
             services.AddScoped<ICommentsUpdateOnlyRepository, CommentRepository>();
+            services.AddScoped<IStyleWriteOnlyRepository, StyleRepository>();
+            services.AddScoped<IStyleReadOnlyRepository, StyleRepository>();
+            services.AddScoped<IItemWriteOnlyRepository, ItemRepository>();
+            services.AddScoped<IItemReadOnlyRepository, ItemRepository>();
+            services.AddScoped<IPreferenceWriteOnlyRepository, PreferenceRepository>();
+            services.AddScoped<IPreferenceReadOnlyRepository, PreferenceRepository>();
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
