@@ -24,6 +24,7 @@ namespace Footstep.Application.AutoMapper
         private void RequestToEntity()
         {
             CreateMap<RequestPointOfInterestJson, PointOfInterest>();
+            CreateMap<RequestUpdatePointOfInterestJson, PointOfInterest>();
             CreateMap<RequestRegisterUserJson, User>()
                 .ForMember(dest => dest.Password, config => config.Ignore());
             CreateMap<RequestCommentJson, Comment>();
