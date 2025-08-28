@@ -47,7 +47,7 @@ namespace Footstep.Application.UseCases.Styles.Create
                 {
                     Unblocked = false,
                     Equipped = false,
-                    Preference = preference,
+                    PreferenceId = preference.Id,
                 };
 
                 style.Items.Add(item);
