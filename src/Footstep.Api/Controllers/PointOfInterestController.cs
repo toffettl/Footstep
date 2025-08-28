@@ -42,10 +42,25 @@ namespace Footstep.Api.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update(
+            [FromServices] IUpdatePointOfInterestUseCase useCase,
+            [FromRoute] Guid id,
+            [FromBody] RequestUpdatePointOfInterestJson request)
+        {
+            await useCase.Execute(id, request);
+
+            return NoContent();
+        }
+
+        [HttpPut]
+        [Route("Status/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Updatetatus(
             [FromServices] IUpdateStatusPointOfInterestUseCase useCase,
             [FromRoute] Guid id,
             [FromBody] RequestUpdateStatusPointOfInterestJson request)
@@ -85,6 +100,7 @@ namespace Footstep.Api.Controllers
 
         [HttpGet("nearby")]
         [ProducesResponseType(typeof(List<ResponsePointOfIntereseJson>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetNearbyTraces(
             [FromServices] IGetNearbyPointsOfInterestUseCase useCase,
             [FromQuery] double latitude,
