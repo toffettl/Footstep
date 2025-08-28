@@ -14,8 +14,8 @@ public class User
     public Guid CoinId { get; set; }
     public Guid PreferenceId { get; set; }
 
-    public Coin? Coin { get; set; } = new Coin();
-    public Preference? Preference { get; set; } = new Preference();
+    public Coin Coin { get; set; } = new Coin();
+    public Preference Preference { get; set; } = new Preference();
 
     public ICollection<UserRelation> Followers { get; set; } = new List<UserRelation>();
     public ICollection<UserRelation> Following { get; set; } = new List<UserRelation>();

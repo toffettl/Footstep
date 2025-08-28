@@ -9,6 +9,9 @@ using FluentValidation.Results;
 using Footstep.Exception.ExceptionsBase;
 using Footstep.Domain.Entities;
 using Footstep.Communication.Requests.Users;
+using Footstep.Domain.Repositories.Styles;
+using Footstep.Communication.Enums;
+using System.Threading.Tasks;
 
 namespace Footstep.Application.UseCases.Users.Register;
 public class RegisterUserUseCase : IRegisterUserUseCase
@@ -17,6 +20,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
     private readonly IPasswordEncripter _passwordEncripter;
     private readonly IUserReadOnlyRepository _userReadOnlyRepostory;
     private readonly IUserWriteOnlyRepository _userWriteOnlyRepostory;
+    private readonly IStyleReadOnlyRepository _styleReadOnlyRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IAccessTokenGenerator _tokenGenerator;
     public RegisterUserUseCase(
@@ -24,6 +28,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         IPasswordEncripter passwordEncripter,
         IUserReadOnlyRepository userReadOnlyRepostory,
         IUserWriteOnlyRepository userWriteOnlyRepostory,
+        IStyleReadOnlyRepository styleReadOnlyRepository,
         IUnitOfWork unitOfWork,
         IAccessTokenGenerator tokenGenerator)
     {
@@ -31,6 +36,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         _passwordEncripter = passwordEncripter;
         _userReadOnlyRepostory = userReadOnlyRepostory;
         _userWriteOnlyRepostory = userWriteOnlyRepostory;
+        _styleReadOnlyRepository = styleReadOnlyRepository;
         _unitOfWork = unitOfWork;
         _tokenGenerator = tokenGenerator;
     }
@@ -42,12 +48,21 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         var user = _mapper.Map<User>(request);
 
         user.Password = _passwordEncripter.Encrypt(request.Password!);
-        //user.PointOfInterestStyle = "initial";
-        //user.HeadStyle = "initial";
-        //user.TorsoStyle = "initial";
-        //user.LegStyle = "initial";
-        //user.BagStyle = "initial";
-        //user.AcessoryStyle = "initial";
+        user.Preference.MapStyle = request.MapStyle;
+
+        var styles = await _styleReadOnlyRepository.GetAll();
+
+        foreach(var style in styles)
+        {
+            Item item = new Item
+            {
+                Unblocked = false,
+                Equipped = false,
+                StyleId = style.Id,
+            };
+
+            user.Preference.Items.Add(item);
+        }
 
         await _userWriteOnlyRepostory.Add(user);
 
@@ -64,6 +79,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         var result = new RegisterUserValidator().Validate(request);
 
         var emailExist = await _userReadOnlyRepostory.ExistActiveUserWithEmail(request.Email!);
+
         if (emailExist)
         {
             result.Errors.Add(new ValidationFailure(string.Empty, ResourceErrorMessages.EMAIL_ALREADY_REGISTERED));

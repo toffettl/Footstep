@@ -4,8 +4,9 @@
     {
         Head = 0,
         Body = 1,
-        Legs = 2,
+        Leg = 2,
         Bag = 3,
-        Accessory = 4
+        Accessory = 4,
+        PointOfInterest = 5
     }
 }
