@@ -32,11 +32,6 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             return true;
         }
 
-        async Task<PointOfInterest?> IPointsOfInterestUpdateOnlyRepository.GetById(Guid id)
-        {
-            return await _dbContext.PointOfInterests.AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
-        }
-
         public void Update(PointOfInterest trace)
         {
             _dbContext.PointOfInterests.Update(trace);
@@ -44,12 +39,12 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
 
         public async Task<List<PointOfInterest>> GetAll()
         {
-            return await _dbContext.PointOfInterests.AsNoTracking().ToListAsync();
+            return await _dbContext.PointOfInterests.Include(p => p.Address).AsNoTracking().ToListAsync();
         }
 
-        async Task<PointOfInterest?> IPointsOfInterestReadOnlyRepository.GetById(Guid id)
+        public async Task<PointOfInterest?> GetById(Guid id)
         {
-            return await _dbContext.PointOfInterests.AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
+            return await _dbContext.PointOfInterests.Include(p => p.Address).AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
         }
     }
 }

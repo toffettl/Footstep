@@ -4,9 +4,9 @@ using Footstep.Exception;
 
 namespace Footstep.Application.UseCases.Traces
 {
-    public class TraceValidator : AbstractValidator<RequestPointOfInterestJson>
+    public class RequestPointOfInterestJsonValidator : AbstractValidator<RequestPointOfInterestJson>
     {
-        public TraceValidator()
+        public RequestPointOfInterestJsonValidator()
         {   
             RuleFor(trace => trace.ExpireAt)
                 .GreaterThan(DateTime.UtcNow)

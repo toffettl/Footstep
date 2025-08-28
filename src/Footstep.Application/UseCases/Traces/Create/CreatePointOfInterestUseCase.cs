@@ -50,7 +50,7 @@ namespace Footstep.Application.UseCases.Traces.Create
 
         private void Validade(RequestPointOfInterestJson request)
         {
-            var validator = new TraceValidator();
+            var validator = new RequestPointOfInterestJsonValidator();
 
             var result = validator.Validate(request);
 
