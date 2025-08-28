@@ -13,14 +13,15 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task Add(Domain.Entities.PointOfInterest trace)
+        public async Task Add(PointOfInterest pointOfInterest)
         {
-            await _dbContext.PointOfInterests.AddAsync(trace);
+            await _dbContext.PointOfInterests.AddAsync(pointOfInterest);
         }
 
        public async Task<bool?> Delete(Guid id)
         {
             var result = await _dbContext.PointOfInterests.FirstOrDefaultAsync(t => t.Id == id);
+
             if (result == null)
             {
                 return false;
