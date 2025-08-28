@@ -367,6 +367,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Style not found.
+        /// </summary>
+        public static string STYLE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("STYLE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Styletype must be between 0 and 4.
         /// </summary>
         public static string STYLETYPE_INVALID {

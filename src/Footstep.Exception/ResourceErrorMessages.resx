@@ -279,4 +279,7 @@
   <data name="STYLETYPE_REQUIRED" xml:space="preserve">
     <value>Styletype is required</value>
   </data>
+  <data name="STYLE_NOT_FOUND" xml:space="preserve">
+    <value>Style not found</value>
+  </data>
 </root>
