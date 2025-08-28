@@ -1,4 +1,5 @@
 ﻿using Footstep.Domain.Repositories;
+using Footstep.Domain.Repositories.Addresses;
 using Footstep.Domain.Repositories.Comments;
 using Footstep.Domain.Repositories.Items;
 using Footstep.Domain.Repositories.Preferences;
@@ -41,6 +42,8 @@ namespace Footstep.Infrastructure
             services.AddScoped<IPointsOfInterestWriteOnlyRepository, PointOfInterestRepository>();
             services.AddScoped<IPointsOfInterestUpdateOnlyRepository, PointOfInterestRepository>();
             services.AddScoped<IPointsOfInterestReadOnlyRepository, PointOfInterestRepository>();
+            services.AddScoped<IAddressWriteOnlyRepository, AddressRepository>();
+            services.AddScoped<IAddressReadOnlyRepository, AddressRepository>();
             services.AddScoped<IUserReadOnlyRepository, UserRepository>();
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
             services.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
