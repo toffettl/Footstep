@@ -7,6 +7,7 @@ using Footstep.Application.UseCases.Comments.GetByParentsId;
 using Footstep.Application.UseCases.Comments.Update;
 using Footstep.Application.UseCases.RelationUser.Follow;
 using Footstep.Application.UseCases.Styles.Create;
+using Footstep.Application.UseCases.Styles.GetByName;
 using Footstep.Application.UseCases.Traces.Create;
 using Footstep.Application.UseCases.Traces.Delete;
 using Footstep.Application.UseCases.Traces.GetAll;
@@ -67,6 +68,7 @@ namespace Footstep.Application
             services.AddScoped<IGetByIdUserUseCase, GetByIdUserUseCase>();
             services.AddScoped<IGetAllUserUseCase, GetAllUserUseCase>();
             services.AddScoped<ICreateStyleUseCase, CreateStyleUseCase>();
+            services.AddScoped<IGetByNameStyleUseCase, GetByNameStyleUseCase>();
         }
     }
 }
