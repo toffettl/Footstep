@@ -11,7 +11,6 @@ namespace Footstep.Communication.Responses.Comments
         public Guid? ParentId { get; set; }
         public ParentType ParentType { get; set; }
         public string? Content { get; set; }
-        public bool Edited { get; set; }
 
         public StatusResponse? Status { get; set; }
 

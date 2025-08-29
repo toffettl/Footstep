@@ -5,6 +5,7 @@ using Footstep.Application.UseCases.Comments.GetByParentIdAndAuthorId;
 using Footstep.Application.UseCases.Comments.GetByParentsId;
 using Footstep.Application.UseCases.Comments.Update;
 using Footstep.Application.UseCases.Traces.Update;
+using Footstep.Communication.Enums;
 using Footstep.Communication.Requests.Comments;
 using Footstep.Communication.Requests.Traces;
 using Footstep.Communication.Responses;
@@ -42,15 +43,15 @@ namespace Footstep.Api.Controllers
             return NoContent();
         }
 
-        [HttpGet("by-parent/{id}")]
+        [HttpGet("by-parent/{parentId}")]
         [ProducesResponseType(typeof(List<ResponseCommentJson>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetByParentId(
-            [FromServices] IGetCommentsByParentsIdUseCase useCase,
-            [FromRoute] Guid id,
-            [FromBody] int type)
+            [FromServices] IGetCommentsByParentIdUseCase useCase,
+            [FromRoute] Guid parentId,
+            [FromQuery] ParentType parentType)
         {
-            var response = await useCase.Execute(id, type);
+            var response = await useCase.Execute(parentId, parentType);
 
             return Ok(response);
         }

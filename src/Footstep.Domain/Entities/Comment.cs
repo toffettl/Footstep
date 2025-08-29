@@ -8,7 +8,6 @@ namespace Footstep.Domain.Entities
         public Guid Id { get; set; } = Guid.NewGuid();
 
         public string? Content { get; set; }
-        public bool Edited { get; set; } = false;
 
         public ParentType ParentType { get; set; }
 
