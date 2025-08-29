@@ -34,9 +34,9 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             return true;
         }
 
-        public async Task<List<Comment>> GetByAuthorId(Guid id)
+        public async Task<List<Comment>> GetByUserId(Guid id)
         {
-            return await _dbContext.Comments.AsNoTracking().Where(comment => comment.AuthorId == id).ToListAsync();
+            return await _dbContext.Comments.AsNoTracking().Where(comment => comment.UserId == id).ToListAsync();
         }
 
         public async Task<Comment?> GetById(Guid id)
@@ -47,13 +47,13 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
         public async Task<List<Comment>> GetByPointOfInterestIdAndAuthorId(Guid pointOfInterestId, Guid authorId)
         {
             return await _dbContext.Comments.AsNoTracking()
-                .Where(comment => comment.PointOfInterestId == pointOfInterestId && comment.AuthorId == authorId)
+                .Where(comment => comment.ParentPointOfInterestId == pointOfInterestId && comment.UserId == authorId)
                 .ToListAsync();
         }
 
         public async Task<List<Comment>> GetByPointOfInterestId(Guid id)
         {
-            return await _dbContext.Comments.AsNoTracking().Where(comment => comment.PointOfInterestId == id).ToListAsync();
+            return await _dbContext.Comments.AsNoTracking().Where(comment => comment.ParentPointOfInterestId == id).ToListAsync();
         }
 
         public void Update(Comment comment)
@@ -63,13 +63,13 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
 
         public async Task<List<Comment>> GetByCommentId(Guid id)
         {
-            return await _dbContext.Comments.AsNoTracking().Where(comment => comment.CommentId == id).ToListAsync();
+            return await _dbContext.Comments.AsNoTracking().Where(comment => comment.ParentCommentId == id).ToListAsync();
         }
 
         public async Task<List<Comment>> GetByCommentIdAndAuthorId(Guid commentId, Guid authorId)
         {
             return await _dbContext.Comments.AsNoTracking()
-                .Where(comment => comment.CommentId == commentId && comment.AuthorId == authorId)
+                .Where(comment => comment.ParentCommentId == commentId && comment.UserId == authorId)
                 .ToListAsync();
         }
     }
