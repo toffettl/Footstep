@@ -67,9 +67,9 @@ namespace Footstep.Application.AutoMapper
             CreateMap<Comment, ResponseCommentJson>()
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new StatusResponse
                     {
-                        //Likes = src.Likes,
-                        //Replies = src.Replies,
-                    }));
+                    Likes = src.CommentLikes.Count,
+                    Replies = src.Comments.Count,
+                }));
 
             CreateMap<PointOfInterest, ResponsePointOfIntereseJson>()
                 .ForMember(dest => dest.Coordinates, opt => opt.MapFrom(src => new ResponseCoordinates

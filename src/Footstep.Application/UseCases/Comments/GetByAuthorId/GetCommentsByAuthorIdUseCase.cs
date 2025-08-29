@@ -19,7 +19,7 @@ namespace Footstep.Application.UseCases.Comments.GetByAuthorId
 
         public async Task<List<ResponseCommentJson>> Execute(Guid id)
         {
-            var result = await _repository.GetByAuthorId(id);
+            var result = await _repository.GetByUserId(id);
 
             if (result.Count == 0)
             {

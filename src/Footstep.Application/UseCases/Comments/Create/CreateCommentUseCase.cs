@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Footstep.Communication.Enums;
 using Footstep.Communication.Requests.Comments;
 using Footstep.Communication.Responses.Comments;
 using Footstep.Domain.Entities;
@@ -27,15 +28,34 @@ namespace Footstep.Application.UseCases.Comments.Create
         {
             Validate(request);
 
-            var entity = _mapper.Map<Comment>(request);
+            var comment = _mapper.Map<Comment>(request);
 
-            entity.CreatedAt = DateTime.UtcNow;
+            switch ((ParentType)(int)comment.ParentType)
+            {
+                case ParentType.PointOfInterest:
+                    comment.ParentPointOfInterestId = request.ParentId;
+                    comment.ParentCommentId = null;
+                    break;
+                case ParentType.Comment:
+                    comment.ParentCommentId = request.ParentId;
+                    comment.ParentPointOfInterestId = null;
+                    break;
+            }
 
-            await _repository.Add(entity);
+            CommentLike commentLike = new CommentLike
+            {
+                CommentId = comment.Id,
+                UserId = comment.UserId
+            };
+
+            comment.CommentLikes.Add(commentLike);
 
             await _unitOfWork.Commit();
 
-            return _mapper.Map<ResponseCommentJson>(entity);
+            ResponseCommentJson response = _mapper.Map<ResponseCommentJson>(comment);
+
+            response.ParentId = request.ParentId;
+            return response;
         }
 
         private void Validate(RequestCommentJson request)
