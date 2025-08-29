@@ -8,21 +8,23 @@ namespace Footstep.Domain.Entities
         public Guid Id { get; set; } = Guid.NewGuid();
 
         public string? Content { get; set; }
+        public bool Edited { get; set; } = false;
 
         public ParentType ParentType { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
-        public Guid AuthorId { get; set; }
-        public Guid CommentId { get; set; }
-        public Guid PointOfInterestId { get; set; }
+        public Guid UserId { get; set; }
+        public Guid? ParentPointOfInterestId { get; set; }
+        public Guid? ParentCommentId { get; set; }
 
         public User? User { get; set; }
-        public PointOfInterest? PointOfInterest { get; set; }
+        public PointOfInterest? ParentPointOfInterest { get; set; }
+        public Comment? ParentComment { get; set; }
 
 
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
-        public ICollection<LikeComment> LikesComments { get; set; } = new List<LikeComment>();
+        public ICollection<CommentLike> CommentLikes { get; set; } = new List<CommentLike>();
     }
 }

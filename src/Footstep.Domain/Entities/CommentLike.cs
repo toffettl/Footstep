@@ -1,6 +1,6 @@
 ﻿namespace Footstep.Domain.Entities
 {
-    public class LikeComment
+    public class CommentLike
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
