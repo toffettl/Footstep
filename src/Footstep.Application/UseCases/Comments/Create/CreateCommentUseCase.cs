@@ -11,7 +11,7 @@ namespace Footstep.Application.UseCases.Comments.Create
 {
     public class CreateCommentUseCase : ICreateCommentUseCase
     {
-        private readonly ICommentsWriteOnlyRepository _repository;
+        private readonly ICommentsWriteOnlyRepository _CommentWriteOnlyRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
@@ -20,7 +20,7 @@ namespace Footstep.Application.UseCases.Comments.Create
             IUnitOfWork unitOfWork,
             IMapper mapper)
         {
-            _repository = repository;
+            _CommentWriteOnlyRepository = repository;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
@@ -49,6 +49,8 @@ namespace Footstep.Application.UseCases.Comments.Create
             };
 
             comment.CommentLikes.Add(commentLike);
+
+            await _CommentWriteOnlyRepository.Add(comment);
 
             await _unitOfWork.Commit();
 

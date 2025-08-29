@@ -2,7 +2,7 @@
 
 namespace Footstep.Application.UseCases.Comments.GetByAuthorId
 {
-    public interface IGetCommentsByAuthorIdUseCase
+    public interface IGetCommentsByUserIdUseCase
     {
         Task<List<ResponseCommentJson>> Execute(Guid id);
     }

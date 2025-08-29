@@ -36,7 +36,7 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
 
         public async Task<List<Comment>> GetByUserId(Guid id)
         {
-            return await _dbContext.Comments.AsNoTracking().Where(comment => comment.UserId == id).ToListAsync();
+            return await _dbContext.Comments.Include(comment => comment.CommentLikes).Include(comment => comment.Comments).AsNoTracking().Where(comment => comment.UserId == id).ToListAsync();
         }
 
         public async Task<Comment?> GetById(Guid id)
