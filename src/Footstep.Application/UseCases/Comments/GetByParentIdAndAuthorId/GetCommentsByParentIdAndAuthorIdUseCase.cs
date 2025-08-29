@@ -1,41 +1,40 @@
 ﻿using AutoMapper;
 using Footstep.Communication.Enums;
-using Footstep.Communication.Requests.Comments;
 using Footstep.Communication.Responses.Comments;
 using Footstep.Domain.Repositories.Comments;
 using Footstep.Exception;
 using Footstep.Exception.ExceptionsBase;
 
-namespace Footstep.Application.UseCases.Comments.GetByParentsId
+namespace Footstep.Application.UseCases.Comments.GetByParentIdAndAuthorId
 {
-    public class GetCommentsByParentIdUseCase : IGetCommentsByParentIdUseCase
+    public class GetCommentsByParentIdAndAuthorIdUseCase : IGetCommentsByParentIdAndAuthorIdUseCase
     {
         private readonly ICommentsReadOnlyRepository _commentReadOnlyRepository;
         private readonly IMapper _mapper;
-        public GetCommentsByParentIdUseCase(ICommentsReadOnlyRepository commrnyReadOnlyRepository,
+        public GetCommentsByParentIdAndAuthorIdUseCase(ICommentsReadOnlyRepository commentReadOnlyRepository,
             IMapper mapper)
         {
-            _commentReadOnlyRepository = commrnyReadOnlyRepository;
+            _commentReadOnlyRepository = commentReadOnlyRepository;
             _mapper = mapper;
         }
 
-        public async Task<List<ResponseCommentJson>> Execute(Guid parentId, ParentType parentType)
+        public async Task<List<ResponseCommentJson>> Execute(Guid parentId, Guid authorId, ParentType parentType)
         {
             Validate(parentType);
 
-            var comments = await _commentReadOnlyRepository.GetByPointOfInterestId(parentId);
+            var comment = await _commentReadOnlyRepository.GetByPointOfInterestIdAndAuthorId(parentId, authorId);
 
             if (parentType == ParentType.Comment)
             {
-                comments = await _commentReadOnlyRepository.GetByCommentId(parentId);
+                comment = await _commentReadOnlyRepository.GetByCommentIdAndAuthorId(parentId, authorId);
             }
 
-            if (comments.Count == 0)
+            if (comment.Count == 0)
             {
                 throw new NotFoundException(ResourceErrorMessages.COMMENT_NOT_FOUND);
             }
 
-            List<ResponseCommentJson> responses = _mapper.Map<List<ResponseCommentJson>>(comments);
+            List<ResponseCommentJson> responses = _mapper.Map<List<ResponseCommentJson>>(comment);
 
             foreach (var response in responses)
             {

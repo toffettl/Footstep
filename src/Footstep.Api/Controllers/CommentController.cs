@@ -72,12 +72,12 @@ namespace Footstep.Api.Controllers
         [ProducesResponseType(typeof(List<ResponseCommentJson>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetByParentsIdAndAuthorId(
-            [FromServices] IGetCommentsByParentsIdAndAuthorIdUseCase useCase,
+            [FromServices] IGetCommentsByParentIdAndAuthorIdUseCase useCase,
             [FromQuery] Guid parentId,
             [FromQuery] Guid authorId,
-            [FromBody] int type)
+            [FromQuery] ParentType parentType)
         {
-            var response = await useCase.Execute(parentId, authorId, type);
+            var response = await useCase.Execute(parentId, authorId, parentType);
 
             return Ok(response);
         }

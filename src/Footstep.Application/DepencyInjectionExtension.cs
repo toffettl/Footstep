@@ -63,7 +63,7 @@ namespace Footstep.Application
             services.AddScoped<IDeleteCommentUseCase, DeleteCommentUseCase>();
             services.AddScoped<IGetCommentsByParentIdUseCase, GetCommentsByParentIdUseCase>();
             services.AddScoped<IGetCommentsByUserIdUseCase, GetCommentsByUserIdUseCase>();
-            services.AddScoped<IGetCommentsByParentsIdAndAuthorIdUseCase, GetCommentsByParentsIdAndAuthorIdUseCase>();
+            services.AddScoped<IGetCommentsByParentIdAndAuthorIdUseCase, GetCommentsByParentIdAndAuthorIdUseCase>();
             services.AddScoped<IUpdateStatusCommentsUseCase, UpdateStatusCommentsUseCase>();
             //services.AddScoped<IUpdateStatusPointOfInterestUseCase, UpdateStatusPointOfInterestUseCase>();
             services.AddScoped<IGetByIdUserUseCase, GetByIdUserUseCase>();
