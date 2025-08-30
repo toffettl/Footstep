@@ -66,17 +66,13 @@ public class UserController : ControllerBase
 
 
     [HttpGet]
-    [ProducesResponseType(typeof(ResponseUsersJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseUserJson), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> GetAll(
         [FromServices] IGetAllUserUseCase useCase)
     {
         var response = await useCase.Execute();
 
-        if (response.Users.Count != 0)
-        {
-            return Ok(response);
-        }
-        return NoContent();
+        return Ok(response);
     }
 }

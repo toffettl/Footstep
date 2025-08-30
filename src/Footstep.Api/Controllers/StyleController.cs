@@ -1,5 +1,6 @@
 ﻿using Footstep.Application.UseCases.Styles.Create;
 using Footstep.Application.UseCases.Styles.GetByName;
+using Footstep.Application.UseCases.Styles.GetByStore;
 using Footstep.Communication.Requests.Styles;
 using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Styles;
@@ -31,6 +32,17 @@ namespace Footstep.Api.Controllers
             [FromRoute] string name)
         {
             var response = await useCase.Execute(name);
+
+            return Ok(response);
+        }
+
+        [HttpGet("Store")]
+        [ProducesResponseType(typeof(List<ResponseStyleJson>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> GetByStoreStyle(
+            [FromServices] IGetByStoreStyleUseCase useCase)
+        {
+            var response = await useCase.Execute();
 
             return Ok(response);
         }
