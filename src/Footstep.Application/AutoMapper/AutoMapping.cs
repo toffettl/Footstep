@@ -23,17 +23,25 @@ namespace Footstep.Application.AutoMapper
 
         private void RequestToEntity()
         {
-            CreateMap<RequestPointOfInterestJson, PointOfInterest>();
-            CreateMap<RequestUpdatePointOfInterestJson, PointOfInterest>();
             CreateMap<RequestRegisterUserJson, User>()
                 .ForMember(dest => dest.Password, config => config.Ignore());
+            
+            CreateMap<RequestUserRelationJson, UserRelation>();
+            
+            CreateMap<RequestStyleJson, Style>();
+            
+            CreateMap<RequestPointOfInterestJson, PointOfInterest>();
+            
+            CreateMap<RequestPointOfInterestJson, PointOfInterest>();
+            
+            CreateMap<RequestUpdateStatusPointOfInterestJson, PointOfInterest>();
+
+            CreateMap<RequestUpdatePointOfInterestJson, PointOfInterest>();
+
             CreateMap<RequestCommentJson, Comment>()
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.AuthorId));
-            CreateMap<RequestUpdateStatusPointOfInterestJson, PointOfInterest>();
-            CreateMap<RequestUserRelationJson, UserRelation>();
-            CreateMap<RequestPointOfInterestJson, PointOfInterest>();
-            CreateMap<RequestStyleJson, Style>();
-
+            
+            CreateMap<RequestUpdateContentComment, Comment>();
         }
 
         private void EntityToResponse()
@@ -53,7 +61,7 @@ namespace Footstep.Application.AutoMapper
                     //        Acessory = src.AcessoryStyle,
                     //    }
                 }))
-                    .ForMember(dest => dest.UnlockedStyles, config => config.MapFrom(src => new ResponseUnlockedStylesJson
+                .ForMember(dest => dest.UnlockedStyles, config => config.MapFrom(src => new ResponseUnlockedStylesJson
                     {
                     //UnlockedMapStyles = src.UnlockedMapStyles,
                     //UnlockedPointOfInterestStyles = src.UnlockedPointOfInterestStyles,
@@ -63,7 +71,9 @@ namespace Footstep.Application.AutoMapper
                     //UnlockedBagStyles = src.UnlockedBagStyles,
                     //UnlockedAcessoryStyles = src.UnlockedAcessoryStyles
                 }));
+
             CreateMap<User, ResponseUsersJson>();
+
             CreateMap<Comment, ResponseCommentJson>()
                 .ForMember(dest => dest.AuthorId, opt => opt.MapFrom(src => src.UserId))
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new StatusResponse
