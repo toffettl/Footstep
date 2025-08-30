@@ -115,6 +115,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a This user has already given like to this comment.
+        /// </summary>
+        public static string COMMENTLIKE_ALREADY_EXISTS {
+            get {
+                return ResourceManager.GetString("COMMENTLIKE_ALREADY_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Creation date cannot be past.
         /// </summary>
         public static string DATE_OF_CREATION_IN_THE_PAST {

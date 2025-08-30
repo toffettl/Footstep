@@ -282,4 +282,7 @@
   <data name="STYLE_NOT_FOUND" xml:space="preserve">
     <value>Style not found</value>
   </data>
+  <data name="COMMENTLIKE_ALREADY_EXISTS" xml:space="preserve">
+    <value>This user has already given like to this comment</value>
+  </data>
 </root>
