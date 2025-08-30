@@ -6,14 +6,14 @@ using Footstep.Exception;
 
 namespace Footstep.Application.UseCases.Comments.Update
 {
-    public class UpdateCommentLikeUseCase : IUpdateCommentLikeUseCase
+    public class UpdateCommentLikeCommentUseCase : IUpdateCommentLikeCommentUseCase
     {
         private readonly ICommentLikeWriteOnlyRepository _commentLikeWriteOnlyRepository;
         private readonly ICommentLikeReadOnlyRepository _commentLikeReadOnlyRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UpdateCommentLikeUseCase(
+        public UpdateCommentLikeCommentUseCase(
             ICommentLikeWriteOnlyRepository commentLikeWriteOnlyRepository,
             ICommentLikeReadOnlyRepository commentLikeReadOnlyRepository,
             IUnitOfWork unitOfWork,
