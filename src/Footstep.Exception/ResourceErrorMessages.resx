@@ -285,4 +285,7 @@
   <data name="COMMENTLIKE_ALREADY_EXISTS" xml:space="preserve">
     <value>This user has already given like to this comment</value>
   </data>
+  <data name="CONTENT_EMPTY" xml:space="preserve">
+    <value>Content cannot be empty</value>
+  </data>
 </root>
