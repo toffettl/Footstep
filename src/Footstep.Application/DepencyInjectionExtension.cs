@@ -5,6 +5,7 @@ using Footstep.Application.UseCases.Comments.GetByAuthorId;
 using Footstep.Application.UseCases.Comments.GetByParentIdAndAuthorId;
 using Footstep.Application.UseCases.Comments.GetByParentsId;
 using Footstep.Application.UseCases.Comments.Update;
+using Footstep.Application.UseCases.Comments.UpdateContent;
 using Footstep.Application.UseCases.RelationUser.Follow;
 using Footstep.Application.UseCases.Styles.Create;
 using Footstep.Application.UseCases.Styles.GetByName;
@@ -14,7 +15,6 @@ using Footstep.Application.UseCases.Traces.GetAll;
 using Footstep.Application.UseCases.Traces.GetById;
 using Footstep.Application.UseCases.Traces.GetByRay;
 using Footstep.Application.UseCases.Traces.Update;
-using Footstep.Application.UseCases.Traces.UpdateStatus;
 using Footstep.Application.UseCases.UserRelation.Unfollow;
 using Footstep.Application.UseCases.Users.GetAll;
 using Footstep.Application.UseCases.Users.GetByEmail;
@@ -44,32 +44,38 @@ namespace Footstep.Application
 
         private static void AddUseCases(this IServiceCollection services)
         {
+            services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
+            services.AddScoped<IGetByEmailUserUseCase, GetByEmailUserUseCase>();
+            services.AddScoped<IGetByIdUserUseCase, GetByIdUserUseCase>();
+            services.AddScoped<IGetAllUserUseCase, GetAllUserUseCase>();
+
+            services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
+
+            services.AddScoped<IUpdatePreferencesUserUseCase, UpdatePreferencesUserUseCase>();
+            services.AddScoped<IUpdateUnlockedStylesUserUseCase, UpdateUnlockedStylesUserUseCase>();
+ 
+            services.AddScoped<ICreateStyleUseCase, CreateStyleUseCase>();
+            services.AddScoped<IGetByNameStyleUseCase, GetByNameStyleUseCase>();
+           
+            services.AddScoped<IFollowUserRelationUseCase, FollowUserRelationUseCase>();
+            services.AddScoped<IUnfollowUserRelationUseCase, UnfollowUserRelationUseCase>();
+            services.AddScoped<IGetFollowersUserRelationUseCase, GetFollowersUserRelationUseCase>();
+            services.AddScoped<IGetFollowingUserRelationUseCase, GetFollowingUserRelationUseCase>();
+            
             services.AddScoped<ICreatePointOfInterestUseCase, CreatePointOfInterestUseCase>();
             services.AddScoped<IDeletePointOfInterestUseCase, DeletePointOfInterestUseCase>();
             services.AddScoped<IUpdatePointOfInterestUseCase, UpdatePointOfInterestUseCase>();
             services.AddScoped<IGetByIdPointOfInterestUseCase, GetByIdPointsOfInterestUseCase>();
             services.AddScoped<IGetAllPoitntOfInterestUseCase, GetAllPointOfInterestUseCase>();
             services.AddScoped<IGetNearbyPointsOfInterestUseCase, GetNearbyPointsOfInterestUseCase>();
-            services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
-            services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
-            services.AddScoped<IGetByEmailUserUseCase, GetByEmailUserUseCase>();
-            services.AddScoped<IUpdatePreferencesUserUseCase, UpdatePreferencesUserUseCase>();
-            services.AddScoped<IUpdateUnlockedStylesUserUseCase, UpdateUnlockedStylesUserUseCase>();
-            services.AddScoped<IFollowUserRelationUseCase, FollowUserRelationUseCase>();
-            services.AddScoped<IUnfollowUserRelationUseCase, UnfollowUserRelationUseCase>();
-            services.AddScoped<IGetFollowersUserRelationUseCase, GetFollowersUserRelationUseCase>();
-            services.AddScoped<IGetFollowingUserRelationUseCase, GetFollowingUserRelationUseCase>();
+
             services.AddScoped<ICreateCommentUseCase, CreateCommentUseCase>();
-            services.AddScoped<IDeleteCommentUseCase, DeleteCommentUseCase>();
             services.AddScoped<IGetCommentsByParentIdUseCase, GetCommentsByParentIdUseCase>();
             services.AddScoped<IGetCommentsByUserIdUseCase, GetCommentsByUserIdUseCase>();
             services.AddScoped<IGetCommentsByParentIdAndAuthorIdUseCase, GetCommentsByParentIdAndAuthorIdUseCase>();
-            services.AddScoped<IUpdateCommentLikeUseCase, UpdateCommentLikeUseCase>();
-            //services.AddScoped<IUpdateStatusPointOfInterestUseCase, UpdateStatusPointOfInterestUseCase>();
-            services.AddScoped<IGetByIdUserUseCase, GetByIdUserUseCase>();
-            services.AddScoped<IGetAllUserUseCase, GetAllUserUseCase>();
-            services.AddScoped<ICreateStyleUseCase, CreateStyleUseCase>();
-            services.AddScoped<IGetByNameStyleUseCase, GetByNameStyleUseCase>();
+            services.AddScoped<IUpdateCommentLikeCommentUseCase, UpdateCommentLikeCommentUseCase>();
+            services.AddScoped<IUpdateContentCommentUseCase, UpdateContentCommentUseCase>();
+            services.AddScoped<IDeleteCommentUseCase, DeleteCommentUseCase>();
         }
     }
 }
