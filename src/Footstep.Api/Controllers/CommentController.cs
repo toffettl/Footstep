@@ -83,16 +83,16 @@ namespace Footstep.Api.Controllers
         }
 
         [HttpPut]
-        [Route("{id}")]
+        [Route("Likes/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Update(
-            [FromServices] IUpdateStatusCommentsUseCase useCase,
+        public async Task<IActionResult> UpdateCommentLike(
+            [FromServices] IUpdateCommentLikeUseCase useCase,
             [FromRoute] Guid id,
-            [FromBody] RequestUpdateStatusCommentsJson request)
+            [FromQuery] Guid userId)
         {
-            await useCase.Execute(id, request);
+            await useCase.Execute(id, userId);
 
             return NoContent();
         }
