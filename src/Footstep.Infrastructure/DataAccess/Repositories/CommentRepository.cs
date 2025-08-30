@@ -36,24 +36,41 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
 
         public async Task<List<Comment>> GetByUserId(Guid id)
         {
-            return await _dbContext.Comments.Include(comment => comment.CommentLikes).Include(comment => comment.Comments).AsNoTracking().Where(comment => comment.UserId == id).ToListAsync();
+            return await _dbContext.Comments
+                .Include(c => c.CommentLikes)
+                .Include(c => c.Comments)
+                .AsNoTracking()
+                .Where(c => c.UserId == id)
+                .ToListAsync();
         }
 
         public async Task<Comment?> GetById(Guid id)
         {
-            return await _dbContext.Comments.AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
+            return await _dbContext.Comments
+                .Include(c => c.CommentLikes)
+                .Include(c => c.Comments)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<List<Comment>> GetByPointOfInterestIdAndAuthorId(Guid pointOfInterestId, Guid authorId)
         {
-            return await _dbContext.Comments.AsNoTracking()
-                .Where(comment => comment.ParentPointOfInterestId == pointOfInterestId && comment.UserId == authorId)
+            return await _dbContext.Comments
+                .Include(c => c.CommentLikes)
+                .Include(c => c.Comments)  
+                .AsNoTracking()
+                .Where(c => c.ParentPointOfInterestId == pointOfInterestId && c.UserId == authorId)
                 .ToListAsync();
         }
 
         public async Task<List<Comment>> GetByPointOfInterestId(Guid id)
         {
-            return await _dbContext.Comments.AsNoTracking().Where(comment => comment.ParentPointOfInterestId == id).ToListAsync();
+            return await _dbContext.Comments
+                .Include(c => c.CommentLikes)
+                .Include(c => c.Comments)
+                .AsNoTracking()
+                .Where(c => c.ParentPointOfInterestId == id)
+                .ToListAsync();
         }
 
         public void Update(Comment comment)
@@ -63,12 +80,20 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
 
         public async Task<List<Comment>> GetByCommentId(Guid id)
         {
-            return await _dbContext.Comments.AsNoTracking().Where(comment => comment.ParentCommentId == id).ToListAsync();
+            return await _dbContext.Comments
+                .Include(c => c.CommentLikes)
+                .Include(c => c.Comments)
+                .AsNoTracking()
+                .Where(c => c.ParentCommentId == id)
+                .ToListAsync();
         }
 
         public async Task<List<Comment>> GetByCommentIdAndAuthorId(Guid commentId, Guid authorId)
         {
-            return await _dbContext.Comments.AsNoTracking()
+            return await _dbContext.Comments
+                .Include(c => c.CommentLikes)
+                .Include(c => c.Comments)
+                .AsNoTracking()
                 .Where(comment => comment.ParentCommentId == commentId && comment.UserId == authorId)
                 .ToListAsync();
         }
