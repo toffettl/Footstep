@@ -6,5 +6,6 @@ namespace Footstep.Domain.Repositories.Styles
     {
         Task<Style?> GetByName(string name);
         Task<List<Style>> GetAll();
+        Task<List<Style>> GetByStore();
     }
 }
