@@ -9,6 +9,7 @@ using Footstep.Application.UseCases.Comments.UpdateContent;
 using Footstep.Application.UseCases.RelationUser.Follow;
 using Footstep.Application.UseCases.Styles.Create;
 using Footstep.Application.UseCases.Styles.GetByName;
+using Footstep.Application.UseCases.Styles.GetByStore;
 using Footstep.Application.UseCases.Traces.Create;
 using Footstep.Application.UseCases.Traces.Delete;
 using Footstep.Application.UseCases.Traces.GetAll;
@@ -56,7 +57,8 @@ namespace Footstep.Application
  
             services.AddScoped<ICreateStyleUseCase, CreateStyleUseCase>();
             services.AddScoped<IGetByNameStyleUseCase, GetByNameStyleUseCase>();
-           
+            services.AddScoped<IGetByStoreStyleUseCase, GetByStoreStyleUseCase>();
+
             services.AddScoped<IFollowUserRelationUseCase, FollowUserRelationUseCase>();
             services.AddScoped<IUnfollowUserRelationUseCase, UnfollowUserRelationUseCase>();
             services.AddScoped<IGetFollowersUserRelationUseCase, GetFollowersUserRelationUseCase>();
