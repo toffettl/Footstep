@@ -4,6 +4,7 @@ using Footstep.Application.UseCases.Comments.GetByAuthorId;
 using Footstep.Application.UseCases.Comments.GetByParentIdAndAuthorId;
 using Footstep.Application.UseCases.Comments.GetByParentsId;
 using Footstep.Application.UseCases.Comments.Update;
+using Footstep.Application.UseCases.Comments.UpdateContent;
 using Footstep.Application.UseCases.Traces.Update;
 using Footstep.Communication.Enums;
 using Footstep.Communication.Requests.Comments;
@@ -82,13 +83,12 @@ namespace Footstep.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPut]
-        [Route("Likes/{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpPut("Likes/{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateCommentLike(
-            [FromServices] IUpdateCommentLikeUseCase useCase,
+            [FromServices] IUpdateCommentLikeCommentUseCase useCase,
             [FromRoute] Guid id,
             [FromQuery] Guid userId)
         {
@@ -97,5 +97,18 @@ namespace Footstep.Api.Controllers
             return NoContent();
         }
 
+        [HttpPut("Content/{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> UpdateContent(
+            [FromServices] IUpdateContentCommentUseCase useCase,
+            [FromRoute] Guid id,
+            [FromBody] RequestUpdateContentComment request)
+        {
+            await useCase.Execute(id, request);
+
+            return NoContent();
+        }
     }
 }
