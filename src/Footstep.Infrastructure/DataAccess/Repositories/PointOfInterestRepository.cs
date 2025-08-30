@@ -39,12 +39,18 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
 
         public async Task<List<PointOfInterest>> GetAll()
         {
-            return await _dbContext.PointOfInterests.Include(p => p.Address).AsNoTracking().ToListAsync();
+            return await _dbContext.PointOfInterests
+                .Include(p => p.Address)
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<PointOfInterest?> GetById(Guid id)
         {
-            return await _dbContext.PointOfInterests.Include(p => p.Address).AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
+            return await _dbContext.PointOfInterests
+                .Include(p => p.Address)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(t => t.Id == id);
         }
     }
 }

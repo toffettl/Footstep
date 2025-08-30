@@ -27,5 +27,10 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
         {
             return await _dbContext.Styles.AsNoTracking().FirstOrDefaultAsync(style => style.Name == name);
         }
+
+        public async Task<List<Style>> GetByStore()
+        {
+            return await _dbContext.Styles.AsNoTracking().Where(style => style.Store == true).ToListAsync();
+        }
     }
 }

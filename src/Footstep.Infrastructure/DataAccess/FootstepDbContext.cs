@@ -22,7 +22,8 @@ namespace Footstep.Infrastructure.DataAccess
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Coin)
                 .WithOne(c => c.User)
-                .HasForeignKey<Coin>(c => c.UserId);
+                .HasForeignKey<Coin>(c => c.UserId)
+                .OnDelete(DeleteBehavior.Cascade); 
 
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Preference)
@@ -40,6 +41,12 @@ namespace Footstep.Infrastructure.DataAccess
                 .WithMany(u => u.Followers)
                 .HasForeignKey(ur => ur.FollowingId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<CommentLike>()
+                .HasOne(cl => cl.Comment)
+                .WithMany(c => c.CommentLikes)
+                .HasForeignKey(cl => cl.CommentId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
