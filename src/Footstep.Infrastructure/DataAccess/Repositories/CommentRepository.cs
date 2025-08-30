@@ -39,6 +39,7 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             return await _dbContext.Comments
                 .Include(c => c.CommentLikes)
                 .Include(c => c.Comments)
+                .AsSplitQuery()
                 .AsNoTracking()
                 .Where(c => c.UserId == id)
                 .ToListAsync();
@@ -49,6 +50,7 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             return await _dbContext.Comments
                 .Include(c => c.CommentLikes)
                 .Include(c => c.Comments)
+                .AsSplitQuery()
                 .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
@@ -57,7 +59,8 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
         {
             return await _dbContext.Comments
                 .Include(c => c.CommentLikes)
-                .Include(c => c.Comments)  
+                .Include(c => c.Comments)
+                .AsSplitQuery()
                 .AsNoTracking()
                 .Where(c => c.ParentPointOfInterestId == pointOfInterestId && c.UserId == authorId)
                 .ToListAsync();
@@ -68,6 +71,7 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             return await _dbContext.Comments
                 .Include(c => c.CommentLikes)
                 .Include(c => c.Comments)
+                .AsSplitQuery()
                 .AsNoTracking()
                 .Where(c => c.ParentPointOfInterestId == id)
                 .ToListAsync();
@@ -83,6 +87,7 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             return await _dbContext.Comments
                 .Include(c => c.CommentLikes)
                 .Include(c => c.Comments)
+                .AsSplitQuery()
                 .AsNoTracking()
                 .Where(c => c.ParentCommentId == id)
                 .ToListAsync();
@@ -93,6 +98,7 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             return await _dbContext.Comments
                 .Include(c => c.CommentLikes)
                 .Include(c => c.Comments)
+                .AsSplitQuery()
                 .AsNoTracking()
                 .Where(comment => comment.ParentCommentId == commentId && comment.UserId == authorId)
                 .ToListAsync();
