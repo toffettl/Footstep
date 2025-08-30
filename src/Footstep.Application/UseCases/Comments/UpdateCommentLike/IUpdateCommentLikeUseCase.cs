@@ -3,8 +3,8 @@ using Footstep.Communication.Responses.Comments;
 
 namespace Footstep.Application.UseCases.Comments.Update
 {
-    public interface IUpdateStatusCommentsUseCase
+    public interface IUpdateCommentLikeUseCase
     {
-        Task Execute(Guid id, RequestUpdateStatusCommentsJson request);
+        Task Execute(Guid id, Guid userId);
     }
 }

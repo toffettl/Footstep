@@ -29,7 +29,6 @@ namespace Footstep.Application.AutoMapper
                 .ForMember(dest => dest.Password, config => config.Ignore());
             CreateMap<RequestCommentJson, Comment>()
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.AuthorId));
-            CreateMap<RequestUpdateStatusCommentsJson, Comment>();
             CreateMap<RequestUpdateStatusPointOfInterestJson, PointOfInterest>();
             CreateMap<RequestUserRelationJson, UserRelation>();
             CreateMap<RequestPointOfInterestJson, PointOfInterest>();
