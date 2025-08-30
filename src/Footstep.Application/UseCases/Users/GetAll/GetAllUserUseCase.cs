@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using Footstep.Communication.Responses.Traces;
 using Footstep.Communication.Responses.Users;
-using Footstep.Domain.Repositories.Traces;
 using Footstep.Domain.Repositories.Users;
 
 namespace Footstep.Application.UseCases.Users.GetAll
@@ -18,14 +16,11 @@ namespace Footstep.Application.UseCases.Users.GetAll
             _mapper = mapper;
         }
 
-        public async Task<ResponseUsersJson> Execute()
+        public async Task<List<ResponseUserJson>> Execute()
         {
-            var result = await _repository.GetAll();
+            var users = await _repository.GetAll();
 
-            return new ResponseUsersJson
-            {
-                Users = _mapper.Map<List<ResponseGetUserJson>>(result)
-            };
+            return _mapper.Map<List<ResponseUserJson>>(users);
         }
     }
 }

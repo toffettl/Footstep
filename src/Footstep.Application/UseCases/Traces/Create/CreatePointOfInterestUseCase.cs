@@ -32,7 +32,7 @@ namespace Footstep.Application.UseCases.Traces.Create
             _mapper = mapper;
         }
 
-        public async Task<ResponsePointOfIntereseJson> Execute(RequestPointOfInterestJson request)
+        public async Task<ResponsePointOfInterestJson> Execute(RequestPointOfInterestJson request)
         {
             Validade(request);
 
@@ -45,7 +45,7 @@ namespace Footstep.Application.UseCases.Traces.Create
 
             await _unitOfWork.Commit();
 
-            return _mapper.Map<ResponsePointOfIntereseJson>(entity);
+            return _mapper.Map<ResponsePointOfInterestJson>(entity);
         }
 
         private void Validade(RequestPointOfInterestJson request)

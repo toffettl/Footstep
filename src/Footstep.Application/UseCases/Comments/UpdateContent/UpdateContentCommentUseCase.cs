@@ -40,6 +40,8 @@ namespace Footstep.Application.UseCases.Comments.UpdateContent
 
             _mapper.Map(request, comment);
 
+            comment.UpdatedAt = DateTime.UtcNow;
+
             _commentUpdateOnlyRepository.Update(comment);
 
             await _unitOfWork.Commit();

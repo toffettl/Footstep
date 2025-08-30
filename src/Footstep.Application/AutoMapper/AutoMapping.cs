@@ -72,8 +72,6 @@ namespace Footstep.Application.AutoMapper
                     //UnlockedAcessoryStyles = src.UnlockedAcessoryStyles
                 }));
 
-            CreateMap<User, ResponseUsersJson>();
-
             CreateMap<Comment, ResponseCommentJson>()
                 .ForMember(dest => dest.AuthorId, opt => opt.MapFrom(src => src.UserId))
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new StatusResponse
@@ -82,7 +80,7 @@ namespace Footstep.Application.AutoMapper
                     Replies = src.Comments.Count,
                 }));
 
-            CreateMap<PointOfInterest, ResponsePointOfIntereseJson>()
+            CreateMap<PointOfInterest, ResponsePointOfInterestJson>()
                 .ForMember(dest => dest.Coordinates, opt => opt.MapFrom(src => new ResponseCoordinates
                 {
                     Latitude = src.Address!.Latitude,

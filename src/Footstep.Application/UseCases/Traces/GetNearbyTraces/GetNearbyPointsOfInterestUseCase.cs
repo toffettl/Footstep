@@ -15,7 +15,7 @@ public class GetNearbyPointsOfInterestUseCase : IGetNearbyPointsOfInterestUseCas
         _mapper = mapper;
     }
 
-    public async Task<List<ResponsePointOfIntereseJson>> Execute(double latitude, double longitude, double radiusInMeters)
+    public async Task<List<ResponsePointOfInterestJson>> Execute(double latitude, double longitude, double radiusInMeters)
     {
         var allPointsOfInterest = await _pointOfInterestReadOnlyRepository.GetAll();
 
@@ -23,7 +23,7 @@ public class GetNearbyPointsOfInterestUseCase : IGetNearbyPointsOfInterestUseCas
             .Where(t => CalculateDistanceInMeters(latitude, longitude, t.Address!.Latitude, t.Address.Longitude) <= radiusInMeters)
             .ToList();
 
-        return _mapper.Map<List<ResponsePointOfIntereseJson>>(nearbyTraces);
+        return _mapper.Map<List<ResponsePointOfInterestJson>>(nearbyTraces);
     }
 
     private double CalculateDistanceInMeters(double lat1, double lon1, double lat2, double lon2)

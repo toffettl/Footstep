@@ -4,6 +4,6 @@ namespace Footstep.Application.UseCases.Traces.GetAll
 {
     public interface IGetAllPoitntOfInterestUseCase
     {
-        Task<ResponsePointOfInterestJson> Execute();
+        Task<List<ResponsePointOfInterestJson>> Execute();
     }
 }
