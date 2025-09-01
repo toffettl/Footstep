@@ -4,5 +4,5 @@ using Footstep.Communication.Responses.Users;
 namespace Footstep.Application.UseCases.Users.Register;
 public interface IRegisterUserUseCase
 {
-    Task<ResponseUserJson> Execute(RequestRegisterUserJson request);
+    Task<ResponseUserTokenJson> Execute(RequestRegisterUserJson request);
 }

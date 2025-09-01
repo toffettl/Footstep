@@ -15,7 +15,7 @@ public class UserController : ControllerBase
 {
     [HttpGet]
     [Route("get-by-email{email}")]
-    [ProducesResponseType(typeof(ResponseGetUserJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseUserJson), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetByEmail(
         [FromServices] IGetByEmailUserUseCase useCase, 
@@ -28,7 +28,7 @@ public class UserController : ControllerBase
 
     [HttpGet]
     [Route("get-by-id/{id}")]
-    [ProducesResponseType(typeof(ResponseGetUserJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseUserJson), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetByUserId([FromServices] IGetByIdUserUseCase useCase, [FromRoute] Guid id)
     {
@@ -66,7 +66,7 @@ public class UserController : ControllerBase
 
 
     [HttpGet]
-    [ProducesResponseType(typeof(ResponseUserJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseUserTokenJson), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> GetAll(
         [FromServices] IGetAllUserUseCase useCase)

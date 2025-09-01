@@ -22,7 +22,7 @@ namespace Footstep.Application.UseCases.Users.GetByEmail
             _mapper = mapper;
         }
 
-        public async Task<ResponseGetUserJson> Execute(string email)
+        public async Task<ResponseUserJson> Execute(string email)
         {
             var result = await _repository.GetByEmail(email);
 
@@ -31,7 +31,7 @@ namespace Footstep.Application.UseCases.Users.GetByEmail
                 throw new NotFoundException(ResourceErrorMessages.USER_NOT_FOUND);
             }
 
-            return _mapper.Map<ResponseGetUserJson>(result);
+            return _mapper.Map<ResponseUserJson>(result);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Footstep.Application.UseCases.Users.GetById
             _mapper = mapper;
         }
             
-        public async Task<ResponseGetUserJson> Execute(Guid id)
+        public async Task<ResponseUserJson> Execute(Guid id)
         {
             var result = await _repository.GetById(id);
 
@@ -25,7 +25,7 @@ namespace Footstep.Application.UseCases.Users.GetById
                 throw new DirectoryNotFoundException(ResourceErrorMessages.USER_NOT_FOUND);
             }
 
-            return _mapper.Map<ResponseGetUserJson>(result);
+            return _mapper.Map<ResponseUserJson>(result);
         }
     }
 }

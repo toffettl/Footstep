@@ -41,7 +41,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         _tokenGenerator = tokenGenerator;
     }
 
-    public async Task<ResponseUserJson> Execute(RequestRegisterUserJson request)
+    public async Task<ResponseUserTokenJson> Execute(RequestRegisterUserJson request)
     {
         await Validate(request);
 
@@ -68,7 +68,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 
         await _unitOfWork.Commit();
 
-        return new ResponseUserJson
+        return new ResponseUserTokenJson
         {
             Token = _tokenGenerator.Generate(user)
         };

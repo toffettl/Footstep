@@ -16,11 +16,11 @@ namespace Footstep.Application.UseCases.Users.GetAll
             _mapper = mapper;
         }
 
-        public async Task<List<ResponseUserJson>> Execute()
+        public async Task<List<ResponseUserTokenJson>> Execute()
         {
             var users = await _repository.GetAll();
 
-            return _mapper.Map<List<ResponseUserJson>>(users);
+            return _mapper.Map<List<ResponseUserTokenJson>>(users);
         }
     }
 }
