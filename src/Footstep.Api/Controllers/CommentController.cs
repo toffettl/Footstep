@@ -60,9 +60,11 @@ namespace Footstep.Api.Controllers
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetByAuthorId(
             [FromServices] IGetCommentsByAuthorIdUseCase useCase,
-            [FromRoute] Guid id)
+            [FromRoute] Guid id,
+            [FromQuery] int page,
+            [FromQuery] int pageSize)
         {
-            var response = await useCase.Execute(id);
+            var response = await useCase.Execute(id, page, pageSize);
 
             return Ok(response);
         }

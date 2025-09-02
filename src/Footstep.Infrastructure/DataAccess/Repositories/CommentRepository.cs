@@ -34,9 +34,21 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             return true;
         }
 
-        public async Task<List<Comment>> GetByAuthorId(Guid id)
+        public async Task<(List<Comment> Comments, int TotalCount)> GetByAuthorId(Guid id, int page, int pageSize)
         {
-            return await _dbContext.Comments.AsNoTracking().Where(comment => comment.AuthorId == id).ToListAsync();
+            var query = _dbContext.Comments
+                .AsNoTracking()
+                .Where(comment => comment.AuthorId == id);
+
+            var totalCount = await query.CountAsync();
+
+            var comments = await query
+                .OrderByDescending(c => c.Likes)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return (comments, totalCount);
         }
 
         public async Task<Comment> GetById(Guid id)
