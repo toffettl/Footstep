@@ -97,6 +97,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Body cannot be empty.
+        /// </summary>
+        public static string BODY_EMPTY {
+            get {
+                return ResourceManager.GetString("BODY_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Comment cannot be empty.
         /// </summary>
         public static string COMMENT_CANNOT_BE_EMPTY {
@@ -255,6 +264,15 @@ namespace Footstep.Exception {
         public static string IS_FOLLOWING {
             get {
                 return ResourceManager.GetString("IS_FOLLOWING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Item not found.
+        /// </summary>
+        public static string ITEM_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("ITEM_NOT_FOUND", resourceCulture);
             }
         }
         

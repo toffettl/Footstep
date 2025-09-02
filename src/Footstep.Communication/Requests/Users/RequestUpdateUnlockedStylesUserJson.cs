@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Footstep.Communication.Requests.Users
+﻿namespace Footstep.Communication.Requests.Users
 {
     public class RequestUpdateUnlockedStylesUserJson
     {
         public string? UnlockedMapStyles { get; set; }
-        public string? UnlockedPointOfInterestStyles { get; set; }
-        public string? UnlockedHeadStyles { get; set; }
-        public string? UnlockedTorsoStyles { get; set; }
-        public string? UnlockedLegStyles { get; set; }
-        public string? UnlockedBagStyles { get; set; }
-        public string? UnlockedAcessoryStyles { get; set; }
+        public Guid? UnlockedPointOfInterestStyle { get; set; }
+        public Guid? UnlockedHeadStyle { get; set; }
+        public Guid? UnlockedBodyStyle { get; set; }
+        public Guid? UnlockedLegStyle { get; set; }
+        public Guid? UnlockedBagStyle { get; set; }
+        public Guid? UnlockedAcessoryStyle { get; set; }
     }
 }

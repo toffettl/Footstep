@@ -5,6 +5,7 @@
         public Guid Id { get; set; } = Guid.NewGuid();
 
         public string? MapStyle { get; set; }
+        public string? UnlockedMapStyles { get; set; }
         public bool AvatarOverProfile { get; set; } = true;
 
         public Guid UserId { get; set; }

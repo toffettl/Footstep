@@ -39,6 +39,10 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository,
 
     public async Task<List<User>> GetAll()
     {
-        return await _dbContext.Users.AsNoTracking().ToListAsync();
+        return await _dbContext.Users
+            .Include(u => u.Preference)
+            .AsSplitQuery()
+            .AsNoTracking()
+            .ToListAsync();
     }
 }

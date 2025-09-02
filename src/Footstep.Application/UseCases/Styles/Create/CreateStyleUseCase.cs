@@ -45,7 +45,7 @@ namespace Footstep.Application.UseCases.Styles.Create
             {
                 Item item = new Item
                 {
-                    Unblocked = false,
+                    Unlocked = false,
                     Equipped = false,
                     PreferenceId = preference.Id,
                 };

@@ -18,5 +18,8 @@ public class RegisterUserValidator : AbstractValidator<RequestRegisterUserJson>
 
         RuleFor(user => user.MapStyle)
             .NotEmpty().WithMessage(ResourceErrorMessages.MAPSTYLE_REQUIRED);
+
+        RuleFor(user => user.UnlockedMapStyles)
+            .NotEmpty().WithMessage(ResourceErrorMessages.UNLOCKEDMAPSTYLES_REQUIRED);
     }
 }

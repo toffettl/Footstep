@@ -24,9 +24,9 @@ namespace Footstep.Application.UseCases.Users
                 .NotEmpty()
                 .WithMessage(ResourceErrorMessages.HEAD_REQUIRED);
 
-            RuleFor(request => request.AvatarStyle!.Torso)
+            RuleFor(request => request.AvatarStyle!.Body)
                 .NotEmpty()
-                .WithMessage(ResourceErrorMessages.TORSO_REQUIRED);
+                .WithMessage(ResourceErrorMessages.BODY_EMPTY);
 
             RuleFor(request => request.AvatarStyle!.Leg)
                 .NotEmpty()

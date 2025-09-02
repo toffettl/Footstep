@@ -4,7 +4,7 @@
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        public bool Unblocked { get; set; }
+        public bool Unlocked { get; set; }
         public bool Equipped { get; set; } = false;
 
         public Guid PreferenceId { get; set; }

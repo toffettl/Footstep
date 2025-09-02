@@ -24,8 +24,10 @@ namespace Footstep.Application.AutoMapper
         private void RequestToEntity()
         {
             CreateMap<RequestRegisterUserJson, User>()
-                .ForMember(dest => dest.Password, config => config.Ignore());
-            
+                .ForMember(dest => dest.Password, opt => opt.Ignore());
+
+            CreateMap<RequestUpdateUnlockedStylesUserJson, Preference>();
+
             CreateMap<RequestUserRelationJson, UserRelation>();
             
             CreateMap<RequestStyleJson, Style>();
@@ -46,7 +48,16 @@ namespace Footstep.Application.AutoMapper
 
         private void EntityToResponse()
         {
-            CreateMap<User, ResponseUserJson>();
+            CreateMap<User, ResponseUserJson>()
+                .ForMember(dest => dest.Preferences, opt => opt.MapFrom(src => new ResponsePreferencesJson
+                {
+                    MapStyle = src.Preference.MapStyle,
+                    AvatarOverProfile = src.Preference.AvatarOverProfile
+                }))
+                .ForMember(dest => dest.UnlockedStyles, opt => opt.MapFrom(src => new ResponseUnlockedStylesJson
+                {
+                    UnlockedMapStyles = src.Preference.UnlockedMapStyles
+                }));
 
             CreateMap<Comment, ResponseCommentJson>()
                 .ForMember(dest => dest.AuthorId, opt => opt.MapFrom(src => src.UserId))

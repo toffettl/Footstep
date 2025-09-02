@@ -288,4 +288,10 @@
   <data name="CONTENT_EMPTY" xml:space="preserve">
     <value>Content cannot be empty</value>
   </data>
+  <data name="BODY_EMPTY" xml:space="preserve">
+    <value>Body cannot be empty</value>
+  </data>
+  <data name="ITEM_NOT_FOUND" xml:space="preserve">
+    <value>Item not found</value>
+  </data>
 </root>
