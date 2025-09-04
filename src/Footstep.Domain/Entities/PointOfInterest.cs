@@ -5,31 +5,23 @@ namespace Footstep.Domain.Entities
 {
     public class PointOfInterest
     {
-        public Guid Id { get; set; }
-        public Guid AuthorId { get; set; }
-        public PointOfInterestType PointOfInterestType { get; set; }
-
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
-
-        public string? Coutry { get; set; }
-        public string? State { get; set; }
-        public string? City { get; set; }
-        public string? District { get; set; }
-        public string? Street { get; set; }
-        public string? Number { get; set; }
-        public string? Cep { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         public string? Title { get; set; }
         public string? Description { get; set; }
 
-        public int Views { get; set; }
-        public int Likes { get; set; }
+        public PointOfInterestType PointOfInterestType { get; set; }
+        public PointOfInterestVisibility PointOfInterestVisibility { get; set; }
 
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
         public DateTime? ExpireAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? UpdatedAt { get; set; } = DateTime.UtcNow;
 
-        public User? User { get; set; }
+        public Guid AddressId { get; set; }
+
+        public Address? Address { get; set; }
+
+        public ICollection<UserPointOfInterestRelation> UserPointOfInterestRelations { get; set; } = new List<UserPointOfInterestRelation>();
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
     }
 }

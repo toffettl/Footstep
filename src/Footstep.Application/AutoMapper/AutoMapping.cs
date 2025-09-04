@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Footstep.Communication.Requests.Comments;
+using Footstep.Communication.Requests.Styles;
 using Footstep.Communication.Requests.Traces;
 using Footstep.Communication.Requests.UserRelation;
 using Footstep.Communication.Requests.Users;
 using Footstep.Communication.Responses.Comments;
+using Footstep.Communication.Responses.Styles;
 using Footstep.Communication.Responses.Traces;
 using Footstep.Communication.Responses.UserRelation;
 using Footstep.Communication.Responses.Users;
@@ -21,89 +23,71 @@ namespace Footstep.Application.AutoMapper
 
         private void RequestToEntity()
         {
-            CreateMap<RequestPointOfInterestJson, PointOfInterest>();
             CreateMap<RequestRegisterUserJson, User>()
-                .ForMember(dest => dest.Password, config => config.Ignore());
-            CreateMap<RequestUpdatePreferencesUserJson, User>()
-                .ForMember(dest => dest.HeadStyle, config => config.MapFrom(src => src.AvatarStyle!.Head))
-                .ForMember(dest => dest.TorsoStyle, config => config.MapFrom(src => src.AvatarStyle!.Torso))
-                .ForMember(dest => dest.LegStyle, config => config.MapFrom(src => src.AvatarStyle!.Leg))
-                .ForMember(dest => dest.BagStyle, config => config.MapFrom(src => src.AvatarStyle!.Bag))
-                .ForMember(dest => dest.AcessoryStyle, config => config.MapFrom(src => src.AvatarStyle!.Acessory));
-            CreateMap<RequestUpdateUnlockedStylesUserJson, User>();
-            CreateMap<RequestCommentJson, Comment>();
-            CreateMap<RequestUpdateStatusCommentsJson, Comment>();
-            CreateMap<RequestUpdateStatusPointOfInterestJson, PointOfInterest>();
-            CreateMap<RequestUserRelationJson, UserRelation>();
-            CreateMap<RequestPointOfInterestJson, PointOfInterest>()
-                .ForMember(dest => dest.Latitude, opt => opt.MapFrom(src => src.Coordinates != null ? src.Coordinates.Latitude : 0))
-                .ForMember(dest => dest.Longitude, opt => opt.MapFrom(src => src.Coordinates != null ? src.Coordinates.Longitude : 0))
-                .ForMember(dest => dest.Coutry, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Coutry : null))
-                .ForMember(dest => dest.State, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.State : null))
-                .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.City : null))
-                .ForMember(dest => dest.District, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.District : null))
-                .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Street : null))
-                .ForMember(dest => dest.Number, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Number : null))
-                .ForMember(dest => dest.Cep, opt => opt.MapFrom(src => src.Adress != null ? src.Adress.Cep : null));
+                .ForMember(dest => dest.Password, opt => opt.Ignore());
 
+            CreateMap<RequestUpdateUnlockedStylesUserJson, Preference>();
+
+            CreateMap<RequestUserRelationJson, UserRelation>();
+            
+            CreateMap<RequestStyleJson, Style>();
+            
+            CreateMap<RequestPointOfInterestJson, PointOfInterest>();
+            
+            CreateMap<RequestPointOfInterestJson, PointOfInterest>();
+            
+            CreateMap<RequestUpdateStatusPointOfInterestJson, PointOfInterest>();
+
+            CreateMap<RequestUpdatePointOfInterestJson, PointOfInterest>();
+
+            CreateMap<RequestCommentJson, Comment>()
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.AuthorId));
+            
+            CreateMap<RequestUpdateContentComment, Comment>();
         }
 
         private void EntityToResponse()
         {
-            CreateMap<User, ResponseGetUserJson>()
-                .ForMember(dest => dest.Preferences, config => config.MapFrom(src => new ResponsePreferencesJson
+            CreateMap<User, ResponseUserJson>()
+                .ForMember(dest => dest.Preferences, opt => opt.MapFrom(src => new ResponsePreferencesJson
                 {
-                    MapStyle = src.MapStyle,
-                    PointOfInterestStyle = src.PointOfInterestStyle,
-                    AvatarOverProfile = src.AvatarOverProfile,
-                    AvatarStyle = new ResponseAvatarStyleJson
-                    {
-                        Head = src.HeadStyle,
-                        Torso = src.TorsoStyle,
-                        Leg = src.LegStyle,
-                        Bag = src.BagStyle,
-                        Acessory = src.AcessoryStyle,
-                    }
+                    MapStyle = src.Preference.MapStyle,
+                    AvatarOverProfile = src.Preference.AvatarOverProfile
                 }))
-                .ForMember(dest => dest.UnlockedStyles, config => config.MapFrom(src => new ResponseUnlockedStylesJson
+                .ForMember(dest => dest.UnlockedStyles, opt => opt.MapFrom(src => new ResponseUnlockedStylesJson
                 {
-                    UnlockedMapStyles = src.UnlockedMapStyles,
-                    UnlockedPointOfInterestStyles = src.UnlockedPointOfInterestStyles,
-                    UnlockedHeadStyles = src.UnlockedHeadStyles,
-                    UnlockedTorsoStyles = src.UnlockedTorsoStyles,
-                    UnlockedLegStyles = src.UnlockedLegStyles,
-                    UnlockedBagStyles = src.UnlockedBagStyles,
-                    UnlockedAcessoryStyles = src.UnlockedAcessoryStyles
+                    UnlockedMapStyles = src.Preference.UnlockedMapStyles
                 }));
-            CreateMap<PointOfInterest, ResponsePointOfIntereseJson>();
-            CreateMap<User, ResponseUsersJson>();
+
             CreateMap<Comment, ResponseCommentJson>()
+                .ForMember(dest => dest.AuthorId, opt => opt.MapFrom(src => src.UserId))
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new StatusResponse
                     {
-                        Likes = src.Likes,
-                        Replies = src.Replies,
-                    }));
-            CreateMap<PointOfInterest, ResponsePointOfIntereseJson>()
-            .ForMember(dest => dest.Coordinates, opt => opt.MapFrom(src => new ResponseCoordinates
-            {
-                Latitude = src.Latitude,
-                Longitude = src.Longitude
-            }))
-            .ForMember(dest => dest.Adress, opt => opt.MapFrom(src => new ResponseAdress
-            {
-                Coutry = src.Coutry,
-                State = src.State,
-                City = src.City,
-                District = src.District,
-                Street = src.Street,
-                Number = src.Number,
-                Cep = src.Cep
-            }))
-            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new ResponseStatus
-            {
-                Views = src.Views,
-                Likes = src.Likes
-            }));
+                    Likes = src.CommentLikes.Count,
+                    Replies = src.Comments.Count,
+                }));
+
+            CreateMap<PointOfInterest, ResponsePointOfInterestJson>()
+                .ForMember(dest => dest.Coordinates, opt => opt.MapFrom(src => new ResponseCoordinates
+                {
+                    Latitude = src.Address!.Latitude,
+                    Longitude = src.Address!.Longitude
+                }))
+                .ForMember(dest => dest.Adress, opt => opt.MapFrom(src => new ResponseAdress
+                {
+                    Country = src.Address!.Country,
+                    State = src.Address.State,
+                    City = src.Address.City,
+                    District = src.Address.District,
+                    Street = src.Address.Street,
+                    Cep = src.Address.Cep,
+                    Number = src.Address.Number
+                }))
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new ResponseStatus
+                {
+                    //Views = src.Views,
+                    //Likes = src.Likes
+                }));
 
             CreateMap<UserRelation, ResponseFollowersJson>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Follower!.Id))
@@ -116,6 +100,8 @@ namespace Footstep.Application.AutoMapper
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Following!.Email));
 
             CreateMap<UserRelation, ResponseUserRelationJson>();
+
+            CreateMap<Style, ResponseStyleJson>();
         }
     }
 }

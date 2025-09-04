@@ -13,14 +13,15 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task Add(Domain.Entities.PointOfInterest trace)
+        public async Task Add(PointOfInterest pointOfInterest)
         {
-            await _dbContext.PointOfInterests.AddAsync(trace);
+            await _dbContext.PointOfInterests.AddAsync(pointOfInterest);
         }
 
        public async Task<bool?> Delete(Guid id)
         {
             var result = await _dbContext.PointOfInterests.FirstOrDefaultAsync(t => t.Id == id);
+
             if (result == null)
             {
                 return false;
@@ -31,24 +32,25 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             return true;
         }
 
-        async Task<Domain.Entities.PointOfInterest?> IPointsOfInterestUpdateOnlyRepository.GetById(Guid id)
-        {
-            return await _dbContext.PointOfInterests.AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
-        }
-
-        public void Update(Domain.Entities.PointOfInterest trace)
+        public void Update(PointOfInterest trace)
         {
             _dbContext.PointOfInterests.Update(trace);
         }
 
-        public async Task<List<Domain.Entities.PointOfInterest>> GetAll()
+        public async Task<List<PointOfInterest>> GetAll()
         {
-            return await _dbContext.PointOfInterests.AsNoTracking().ToListAsync();
+            return await _dbContext.PointOfInterests
+                .Include(p => p.Address)
+                .AsNoTracking()
+                .ToListAsync();
         }
 
-        async Task<Domain.Entities.PointOfInterest?> IPointsOfInterestReadOnlyRepository.GetById(Guid id)
+        public async Task<PointOfInterest?> GetById(Guid id)
         {
-            return await _dbContext.PointOfInterests.AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
+            return await _dbContext.PointOfInterests
+                .Include(p => p.Address)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(t => t.Id == id);
         }
     }
 }

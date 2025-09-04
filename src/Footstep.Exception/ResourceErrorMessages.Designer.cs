@@ -97,6 +97,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Body cannot be empty.
+        /// </summary>
+        public static string BODY_EMPTY {
+            get {
+                return ResourceManager.GetString("BODY_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Comment cannot be empty.
         /// </summary>
         public static string COMMENT_CANNOT_BE_EMPTY {
@@ -111,6 +120,24 @@ namespace Footstep.Exception {
         public static string COMMENT_NOT_FOUND {
             get {
                 return ResourceManager.GetString("COMMENT_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a This user has already given like to this comment.
+        /// </summary>
+        public static string COMMENTLIKE_ALREADY_EXISTS {
+            get {
+                return ResourceManager.GetString("COMMENTLIKE_ALREADY_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Content cannot be empty.
+        /// </summary>
+        public static string CONTENT_EMPTY {
+            get {
+                return ResourceManager.GetString("CONTENT_EMPTY", resourceCulture);
             }
         }
         
@@ -196,6 +223,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Image is empty.
+        /// </summary>
+        public static string IMAGE_EMPTY {
+            get {
+                return ResourceManager.GetString("IMAGE_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Latitude must be between -90 and 90.
         /// </summary>
         public static string INVALID_LATITUDE {
@@ -232,6 +268,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Item not found.
+        /// </summary>
+        public static string ITEM_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("ITEM_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Latitude is required.
         /// </summary>
         public static string LATITUDE_REQUIRED {
@@ -264,6 +309,15 @@ namespace Footstep.Exception {
         public static string MAPSTYLE_REQUIRED {
             get {
                 return ResourceManager.GetString("MAPSTYLE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a This name is already registered.
+        /// </summary>
+        public static string NAME_ALREADY_REGISTERED {
+            get {
+                return ResourceManager.GetString("NAME_ALREADY_REGISTERED", resourceCulture);
             }
         }
         
@@ -322,6 +376,60 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Price must be greater than 0.
+        /// </summary>
+        public static string PRICE_INVALID {
+            get {
+                return ResourceManager.GetString("PRICE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Price is required.
+        /// </summary>
+        public static string PRICE_REQUIRED {
+            get {
+                return ResourceManager.GetString("PRICE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Store is required.
+        /// </summary>
+        public static string STORE_REQUIRED {
+            get {
+                return ResourceManager.GetString("STORE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Style not found.
+        /// </summary>
+        public static string STYLE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("STYLE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Styletype must be between 0 and 4.
+        /// </summary>
+        public static string STYLETYPE_INVALID {
+            get {
+                return ResourceManager.GetString("STYLETYPE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Styletype is required.
+        /// </summary>
+        public static string STYLETYPE_REQUIRED {
+            get {
+                return ResourceManager.GetString("STYLETYPE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The expiration date cannot be in the past.
         /// </summary>
         public static string THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST {
@@ -363,6 +471,15 @@ namespace Footstep.Exception {
         public static string TRACE_NOT_FOUND {
             get {
                 return ResourceManager.GetString("TRACE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Invalid type.
+        /// </summary>
+        public static string TYPE_INVALID {
+            get {
+                return ResourceManager.GetString("TYPE_INVALID", resourceCulture);
             }
         }
         

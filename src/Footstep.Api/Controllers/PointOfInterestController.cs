@@ -17,7 +17,7 @@ namespace Footstep.Api.Controllers
     public class PointOfInterestController : ControllerBase
     {
         [HttpPost]
-        [ProducesResponseType(typeof(ResponsePointOfIntereseJson), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponsePointOfInterestJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create([FromServices] ICreatePointOfInterestUseCase usecase,
             [FromBody] RequestPointOfInterestJson request)
@@ -42,10 +42,25 @@ namespace Footstep.Api.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update(
+            [FromServices] IUpdatePointOfInterestUseCase useCase,
+            [FromRoute] Guid id,
+            [FromBody] RequestUpdatePointOfInterestJson request)
+        {
+            await useCase.Execute(id, request);
+
+            return NoContent();
+        }
+
+        [HttpPut]
+        [Route("Status/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Updatetatus(
             [FromServices] IUpdateStatusPointOfInterestUseCase useCase,
             [FromRoute] Guid id,
             [FromBody] RequestUpdateStatusPointOfInterestJson request)
@@ -57,7 +72,7 @@ namespace Footstep.Api.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        [ProducesResponseType(typeof(ResponsePointOfIntereseJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponsePointOfInterestJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(
             [FromServices] IGetByIdPointOfInterestUseCase useCase,
@@ -69,22 +84,19 @@ namespace Footstep.Api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(ResponsePointOfIntereseJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponsePointOfInterestJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetAll(
             [FromServices] IGetAllPoitntOfInterestUseCase useCase)
         {
             var response = await useCase.Execute();
 
-            if (response.Traces.Count != 0)
-            {
-                return Ok(response);
-            }
-            return NoContent();
+            return Ok(response);
         }
 
         [HttpGet("nearby")]
-        [ProducesResponseType(typeof(List<ResponsePointOfIntereseJson>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<ResponsePointOfInterestJson>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetNearbyTraces(
             [FromServices] IGetNearbyPointsOfInterestUseCase useCase,
             [FromQuery] double latitude,

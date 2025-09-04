@@ -22,7 +22,7 @@ public class DoLoginUseCase : IDoLoginUseCase
         _accessTokenGenerator = accessTokenGenerator;
     }
 
-    public async Task<ResponseUserJson> Execute(RequestLoginJson request)
+    public async Task<ResponseUserTokenJson> Execute(RequestLoginJson request)
     {
         var user = await _repository.GetByEmail(request.Email!);
 
@@ -38,7 +38,7 @@ public class DoLoginUseCase : IDoLoginUseCase
             throw new InvalidLoginException();
         }
 
-        return new ResponseUserJson
+        return new ResponseUserTokenJson
         {
             Token = _accessTokenGenerator.Generate(user)
         };

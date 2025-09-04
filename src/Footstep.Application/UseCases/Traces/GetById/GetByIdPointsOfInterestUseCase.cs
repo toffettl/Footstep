@@ -18,7 +18,7 @@ namespace Footstep.Application.UseCases.Traces.GetById
             _mapper = mapper;
         }
 
-        public async Task<ResponsePointOfIntereseJson> Execute(Guid id)
+        public async Task<ResponsePointOfInterestJson> Execute(Guid id)
         {
             var result = await _repository.GetById(id);
 
@@ -27,7 +27,7 @@ namespace Footstep.Application.UseCases.Traces.GetById
                 throw new NotFoundException(ResourceErrorMessages.TRACE_NOT_FOUND);
             }
 
-            return _mapper.Map<ResponsePointOfIntereseJson>(result);
+            return _mapper.Map<ResponsePointOfInterestJson>(result);
         }
     }
 }

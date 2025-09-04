@@ -34,55 +34,74 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             return true;
         }
 
-        public async Task<(List<Comment> Comments, int TotalCount)> GetByAuthorId(Guid id, int page, int pageSize)
+        public async Task<List<Comment>> GetByUserId(Guid id)
         {
-            var query = _dbContext.Comments
+            return await _dbContext.Comments
+                .Include(c => c.CommentLikes)
+                .Include(c => c.Comments)
+                .AsSplitQuery()
                 .AsNoTracking()
-                .Where(comment => comment.AuthorId == id);
-
-            var totalCount = await query.CountAsync();
-
-            var comments = await query
-                .OrderByDescending(c => c.Likes)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
-
-            return (comments, totalCount);
-        }
-
-        public async Task<Comment> GetById(Guid id)
-        {
-            return await _dbContext.Comments.AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
-        }
-
-        public async Task<List<Comment>> GetByParentIdAndAuthorId(Guid parentId, Guid authorId)
-        {
-            return await _dbContext.Comments.AsNoTracking()
-                .Where(comment => comment.ParentId == parentId && comment.AuthorId == authorId)
+                .Where(c => c.UserId == id)
                 .ToListAsync();
         }
 
-        public async Task<(List<Comment> Comments, int TotalCount)> GetByParentsId(Guid id, int page, int pageSize)
+        public async Task<Comment?> GetById(Guid id)
         {
-            var query = _dbContext.Comments
+            return await _dbContext.Comments
+                .Include(c => c.CommentLikes)
+                .Include(c => c.Comments)
+                .AsSplitQuery()
                 .AsNoTracking()
-                .Where(comment => comment.ParentId == id);
+                .FirstOrDefaultAsync(c => c.Id == id);
+        }
 
-            var totalCount = await query.CountAsync();
-
-            var comments = await query
-                .OrderByDescending(c => c.Likes)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
+        public async Task<List<Comment>> GetByPointOfInterestIdAndAuthorId(Guid pointOfInterestId, Guid authorId)
+        {
+            return await _dbContext.Comments
+                .Include(c => c.CommentLikes)
+                .Include(c => c.Comments)
+                .AsSplitQuery()
+                .AsNoTracking()
+                .Where(c => c.ParentPointOfInterestId == pointOfInterestId && c.UserId == authorId)
                 .ToListAsync();
+        }
 
-            return (comments, totalCount);
+        public async Task<List<Comment>> GetByPointOfInterestId(Guid id)
+        {
+            return await _dbContext.Comments
+                .Include(c => c.CommentLikes)
+                .Include(c => c.Comments)
+                .AsSplitQuery()
+                .AsNoTracking()
+                .Where(c => c.ParentPointOfInterestId == id)
+                .ToListAsync();
         }
 
         public void Update(Comment comment)
         {
             _dbContext.Comments.Update(comment);
+        }
+
+        public async Task<List<Comment>> GetByCommentId(Guid id)
+        {
+            return await _dbContext.Comments
+                .Include(c => c.CommentLikes)
+                .Include(c => c.Comments)
+                .AsSplitQuery()
+                .AsNoTracking()
+                .Where(c => c.ParentCommentId == id)
+                .ToListAsync();
+        }
+
+        public async Task<List<Comment>> GetByCommentIdAndAuthorId(Guid commentId, Guid authorId)
+        {
+            return await _dbContext.Comments
+                .Include(c => c.CommentLikes)
+                .Include(c => c.Comments)
+                .AsSplitQuery()
+                .AsNoTracking()
+                .Where(comment => comment.ParentCommentId == commentId && comment.UserId == authorId)
+                .ToListAsync();
         }
     }
 }

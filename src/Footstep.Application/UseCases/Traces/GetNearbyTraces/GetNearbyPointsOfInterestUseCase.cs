@@ -4,24 +4,26 @@ using Footstep.Domain.Repositories.Traces;
 namespace Footstep.Application.UseCases.Traces.GetByRay;
 public class GetNearbyPointsOfInterestUseCase : IGetNearbyPointsOfInterestUseCase
 {
-    private readonly IPointsOfInterestReadOnlyRepository _repository;
+    private readonly IPointsOfInterestReadOnlyRepository _pointOfInterestReadOnlyRepository;
     private readonly IMapper _mapper;
 
-    public GetNearbyPointsOfInterestUseCase(IPointsOfInterestReadOnlyRepository repository, IMapper mapper)
+    public GetNearbyPointsOfInterestUseCase(
+        IPointsOfInterestReadOnlyRepository pointOfInterestReadOnlyRepository, 
+        IMapper mapper)
     {
-        _repository = repository;
+        _pointOfInterestReadOnlyRepository = pointOfInterestReadOnlyRepository;
         _mapper = mapper;
     }
 
-    public async Task<List<ResponsePointOfIntereseJson>> Execute(double latitude, double longitude, double radiusInMeters)
+    public async Task<List<ResponsePointOfInterestJson>> Execute(double latitude, double longitude, double radiusInMeters)
     {
-        var allTraces = await _repository.GetAll();
+        var allPointsOfInterest = await _pointOfInterestReadOnlyRepository.GetAll();
 
-        var nearbyTraces = allTraces
-            .Where(t => CalculateDistanceInMeters(latitude, longitude, t.Latitude, t.Longitude) <= radiusInMeters)
+        var nearbyTraces = allPointsOfInterest
+            .Where(t => CalculateDistanceInMeters(latitude, longitude, t.Address!.Latitude, t.Address.Longitude) <= radiusInMeters)
             .ToList();
 
-        return _mapper.Map<List<ResponsePointOfIntereseJson>>(nearbyTraces);
+        return _mapper.Map<List<ResponsePointOfInterestJson>>(nearbyTraces);
     }
 
     private double CalculateDistanceInMeters(double lat1, double lon1, double lat2, double lon2)

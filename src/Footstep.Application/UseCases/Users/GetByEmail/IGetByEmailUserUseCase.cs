@@ -4,6 +4,6 @@ namespace Footstep.Application.UseCases.Users.GetByEmail
 {
     public interface IGetByEmailUserUseCase
     {
-        Task<ResponseGetUserJson> Execute(string email);
+        Task<ResponseUserJson> Execute(string email);
     }
 }
