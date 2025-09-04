@@ -1,31 +1,35 @@
 ﻿using AutoMapper;
-using Footstep.Communication.Enums;
+using FluentValidation.Results;
 using Footstep.Communication.Requests.Traces;
 using Footstep.Communication.Responses.Traces;
 using Footstep.Domain.Entities;
 using Footstep.Domain.Repositories;
 using Footstep.Domain.Repositories.Addresses;
 using Footstep.Domain.Repositories.Traces;
+using Footstep.Domain.Repositories.Users;
+using Footstep.Exception;
 using Footstep.Exception.ExceptionsBase;
-using System.Threading.Tasks;
 
 namespace Footstep.Application.UseCases.Traces.Create
 {
     public class CreatePointOfInterestUseCase : ICreatePointOfInterestUseCase
     {
-        private readonly IPointsOfInterestWriteOnlyRepository _pointOfInterestWriteOnlyRepository;
+        private readonly IPointOfInterestWriteOnlyRepository _pointOfInterestWriteOnlyRepository;
+        private readonly IUserReadOnlyRepository _userReadOnlyRepository;
         private readonly IAddressWriteOnlyRepository _addressWriteOnlyRepository;
         private readonly IAddressReadOnlyRepository _addressReadOnlyRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         public CreatePointOfInterestUseCase(
-            IPointsOfInterestWriteOnlyRepository repository,
+            IPointOfInterestWriteOnlyRepository pointOfInterestWriteRepository,
+            IUserReadOnlyRepository userReadOnlyRepository,
             IAddressWriteOnlyRepository addressWriteOnlyRepository,
             IAddressReadOnlyRepository addressReadOnlyRepository,
             IUnitOfWork unitOfWork,
             IMapper mapper)
         {
-            _pointOfInterestWriteOnlyRepository = repository;
+            _pointOfInterestWriteOnlyRepository = pointOfInterestWriteRepository;
+            _userReadOnlyRepository = userReadOnlyRepository;
             _addressWriteOnlyRepository = addressWriteOnlyRepository;
             _addressReadOnlyRepository = addressReadOnlyRepository;
             _unitOfWork = unitOfWork;
@@ -34,25 +38,30 @@ namespace Footstep.Application.UseCases.Traces.Create
 
         public async Task<ResponsePointOfInterestJson> Execute(RequestPointOfInterestJson request)
         {
-            Validade(request);
+            await Validade(request);
 
-            var entity = _mapper.Map<PointOfInterest>(request);
+            var pointOfInterest = _mapper.Map<PointOfInterest>(request);
 
-            entity.AddressId = await GetAddressId(request);
-            entity.UserPointOfInterestRelations.Add(CreateUserPointOfInterestRelation(request.AuthorId));
+            pointOfInterest.AddressId = await GetAddressId(request);
 
-            await _pointOfInterestWriteOnlyRepository.Add(entity);
+            await _pointOfInterestWriteOnlyRepository.Add(pointOfInterest);
 
             await _unitOfWork.Commit();
 
-            return _mapper.Map<ResponsePointOfInterestJson>(entity);
+            return _mapper.Map<ResponsePointOfInterestJson>(pointOfInterest);
         }
 
-        private void Validade(RequestPointOfInterestJson request)
+        private async Task Validade(RequestPointOfInterestJson request)
         {
             var validator = new RequestPointOfInterestJsonValidator();
 
             var result = validator.Validate(request);
+            var existsId = await _userReadOnlyRepository.ExistActiveUserWithId(request.AuthorId);
+
+            if (!existsId)
+            {
+                result.Errors.Add(new ValidationFailure(string.Empty, ResourceErrorMessages.USER_NOT_FOUND));
+            }
 
             if (result.IsValid == false)
             {
@@ -85,15 +94,6 @@ namespace Footstep.Application.UseCases.Traces.Create
             }
 
             return address.Id;
-        }
-
-        private UserPointOfInterestRelation CreateUserPointOfInterestRelation(Guid userId)
-        {
-            return new UserPointOfInterestRelation
-            {
-                UserId = userId,
-                Type = (Domain.Enums.UserPointOfInterestRelationType)(int)UserPointOfInterestRelationType.Creator
-            };
         }
     }
 }

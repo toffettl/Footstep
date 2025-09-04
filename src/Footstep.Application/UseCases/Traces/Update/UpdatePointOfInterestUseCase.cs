@@ -9,14 +9,14 @@ namespace Footstep.Application.UseCases.Traces.Update
 {
     public class UpdatePointOfInterestUseCase : IUpdatePointOfInterestUseCase
     {
-        private readonly IPointsOfInterestReadOnlyRepository _pointOfInterestReadOnlyRepository;
-        private readonly IPointsOfInterestUpdateOnlyRepository _pointOfInterestUpdateOnlyRepository;
+        private readonly IPointOfInterestReadOnlyRepository _pointOfInterestReadOnlyRepository;
+        private readonly IPointOfInterestUpdateOnlyRepository _pointOfInterestUpdateOnlyRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
         public UpdatePointOfInterestUseCase(
-            IPointsOfInterestReadOnlyRepository pointsOfInterestReadOnlyRepository,
-            IPointsOfInterestUpdateOnlyRepository pointOfInterestUpdateOnlyRepository,
+            IPointOfInterestReadOnlyRepository pointsOfInterestReadOnlyRepository,
+            IPointOfInterestUpdateOnlyRepository pointOfInterestUpdateOnlyRepository,
             IUnitOfWork unitOfWork,
             IMapper mapper)
         {

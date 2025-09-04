@@ -8,10 +8,10 @@ namespace Footstep.Application.UseCases.Traces.GetById
 {
     public class GetByIdPointsOfInterestUseCase : IGetByIdPointOfInterestUseCase
     {
-        private readonly IPointsOfInterestReadOnlyRepository _repository;
+        private readonly IPointOfInterestReadOnlyRepository _repository;
         private readonly IMapper _mapper;
 
-        public GetByIdPointsOfInterestUseCase(IPointsOfInterestReadOnlyRepository repository,
+        public GetByIdPointsOfInterestUseCase(IPointOfInterestReadOnlyRepository repository,
             IMapper mapper)
         {
             _repository = repository;

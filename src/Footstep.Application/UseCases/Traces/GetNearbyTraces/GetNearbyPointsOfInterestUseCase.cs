@@ -4,11 +4,11 @@ using Footstep.Domain.Repositories.Traces;
 namespace Footstep.Application.UseCases.Traces.GetByRay;
 public class GetNearbyPointsOfInterestUseCase : IGetNearbyPointsOfInterestUseCase
 {
-    private readonly IPointsOfInterestReadOnlyRepository _pointOfInterestReadOnlyRepository;
+    private readonly IPointOfInterestReadOnlyRepository _pointOfInterestReadOnlyRepository;
     private readonly IMapper _mapper;
 
     public GetNearbyPointsOfInterestUseCase(
-        IPointsOfInterestReadOnlyRepository pointOfInterestReadOnlyRepository, 
+        IPointOfInterestReadOnlyRepository pointOfInterestReadOnlyRepository, 
         IMapper mapper)
     {
         _pointOfInterestReadOnlyRepository = pointOfInterestReadOnlyRepository;

@@ -6,11 +6,11 @@ namespace Footstep.Application.UseCases.Traces.GetAll
 {
     public class GetAllPointOfInterestUseCase : IGetAllPoitntOfInterestUseCase
     {
-        private readonly IPointsOfInterestReadOnlyRepository _pointOfInterestReadOnlyRepository;
+        private readonly IPointOfInterestReadOnlyRepository _pointOfInterestReadOnlyRepository;
         private readonly IMapper _mapper;
 
         public GetAllPointOfInterestUseCase(
-            IPointsOfInterestReadOnlyRepository pointOfInterestReadOnlyRepository,
+            IPointOfInterestReadOnlyRepository pointOfInterestReadOnlyRepository,
             IMapper mapper)
         {
             _pointOfInterestReadOnlyRepository = pointOfInterestReadOnlyRepository;
