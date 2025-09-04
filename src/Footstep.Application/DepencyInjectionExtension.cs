@@ -49,6 +49,7 @@ namespace Footstep.Application
             services.AddScoped<IGetByEmailUserUseCase, GetByEmailUserUseCase>();
             services.AddScoped<IGetByIdUserUseCase, GetByIdUserUseCase>();
             services.AddScoped<IGetAllUserUseCase, GetAllUserUseCase>();
+            services.AddScoped<IGetAllUserPaginationUseCase, GetAllUserPaginationUseCase>();
 
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
 

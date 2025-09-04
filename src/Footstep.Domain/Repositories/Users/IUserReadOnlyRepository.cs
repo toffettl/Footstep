@@ -9,4 +9,7 @@ public interface IUserReadOnlyRepository
     Task<User?> GetById(Guid id);
 
     Task<List<User>> GetAll();
+
+    Task<(List<User> Users, int TotalCount)> GetAllPagination(int page, int pageSize);
+
 }

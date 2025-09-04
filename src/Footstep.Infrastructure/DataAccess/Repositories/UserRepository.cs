@@ -45,4 +45,22 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository,
             .AsNoTracking()
             .ToListAsync();
     }
+
+    public async Task<(List<User> Users, int TotalCount)> GetAllPagination(int page, int pageSize)
+    {
+        var query = _dbContext.Users
+            .Include(u => u.Preference)
+            .AsSplitQuery()
+            .AsNoTracking();
+
+        var totalCount = await query.CountAsync();
+
+        var users = await query
+            .OrderByDescending(u => u.UserPointOfInterestRelations.Count)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (users, totalCount);
+    }
 }
