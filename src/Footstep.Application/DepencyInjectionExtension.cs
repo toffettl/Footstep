@@ -13,6 +13,7 @@ using Footstep.Application.UseCases.Styles.GetByStore;
 using Footstep.Application.UseCases.Traces.Create;
 using Footstep.Application.UseCases.Traces.Delete;
 using Footstep.Application.UseCases.Traces.GetAll;
+using Footstep.Application.UseCases.Traces.GetAllByPage;
 using Footstep.Application.UseCases.Traces.GetById;
 using Footstep.Application.UseCases.Traces.GetByRay;
 using Footstep.Application.UseCases.Traces.Update;
@@ -69,6 +70,7 @@ namespace Footstep.Application
             services.AddScoped<IUpdatePointOfInterestUseCase, UpdatePointOfInterestUseCase>();
             services.AddScoped<IGetByIdPointOfInterestUseCase, GetByIdPointsOfInterestUseCase>();
             services.AddScoped<IGetAllPoitntOfInterestUseCase, GetAllPointOfInterestUseCase>();
+            services.AddScoped<IGetAllPointsOfInterestByPageUseCase, GetAllPointsOfInterestByPageUseCase>();
             services.AddScoped<IGetNearbyPointsOfInterestUseCase, GetNearbyPointsOfInterestUseCase>();
 
             services.AddScoped<ICreateCommentUseCase, CreateCommentUseCase>();
