@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Footstep.Communication.Enums;
 using Footstep.Communication.Requests.Comments;
+using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Comments;
 using Footstep.Domain.Repositories.Comments;
 using Footstep.Exception;
@@ -19,15 +20,15 @@ namespace Footstep.Application.UseCases.Comments.GetByParentsId
             _mapper = mapper;
         }
 
-        public async Task<List<ResponseCommentJson>> Execute(Guid parentId, ParentType parentType)
+        public async Task<PagedResult<ResponseCommentJson>> Execute(Guid parentId, ParentType parentType, int page, int pageSize)
         {
             Validate(parentType);
 
-            var comments = await _commentReadOnlyRepository.GetByPointOfInterestId(parentId);
+            var (comments, totalCount) = await _commentReadOnlyRepository.GetByPointOfInterestId(parentId, page, pageSize);
 
             if (parentType == ParentType.Comment)
             {
-                comments = await _commentReadOnlyRepository.GetByCommentId(parentId);
+                (comments, totalCount) = await _commentReadOnlyRepository.GetByCommentId(parentId, page, pageSize);
             }
 
             if (comments.Count == 0)
@@ -42,7 +43,14 @@ namespace Footstep.Application.UseCases.Comments.GetByParentsId
                 response.ParentId = parentId;
             }
 
-            return responses;
+            return new PagedResult<ResponseCommentJson>
+            {
+                Items = responses,
+                Page = page,
+                PageSize = pageSize,
+                TotalCount = totalCount,
+                TotalPages = (int)Math.Ceiling((double)totalCount / pageSize)
+            };
         }
 
         private void Validate(ParentType parentType)

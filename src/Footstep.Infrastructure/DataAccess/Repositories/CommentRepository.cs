@@ -1,7 +1,6 @@
 ﻿using Footstep.Domain.Entities;
 using Footstep.Domain.Repositories.Comments;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 
 namespace Footstep.Infrastructure.DataAccess.Repositories
 {
@@ -34,15 +33,24 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             return true;
         }
 
-        public async Task<List<Comment>> GetByUserId(Guid id)
+        public async Task<(List<Comment> Comments, int TotalCount)> GetByUserId(Guid id, int page, int pageSize)
         {
-            return await _dbContext.Comments
+            var query = _dbContext.Comments
                 .Include(c => c.CommentLikes)
                 .Include(c => c.Comments)
                 .AsSplitQuery()
                 .AsNoTracking()
-                .Where(c => c.UserId == id)
+                .Where(c => c.UserId == id);
+
+            var totalCount = await query.CountAsync();
+
+            var comments = await query
+                .OrderByDescending(c => c.CommentLikes.Count)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
+
+            return (comments, totalCount);
         }
 
         public async Task<Comment?> GetById(Guid id)
@@ -55,7 +63,7 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public async Task<List<Comment>> GetByPointOfInterestIdAndAuthorId(Guid pointOfInterestId, Guid authorId)
+        public async Task<List<Comment>> GetByPointOfInterestIdAndUserId(Guid pointOfInterestId, Guid authorId)
         {
             return await _dbContext.Comments
                 .Include(c => c.CommentLikes)
@@ -66,15 +74,24 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
                 .ToListAsync();
         }
 
-        public async Task<List<Comment>> GetByPointOfInterestId(Guid id)
+        public async Task<(List<Comment> Comments, int TotalCount)> GetByPointOfInterestId(Guid id, int page, int pageSize)
         {
-            return await _dbContext.Comments
+            var query = _dbContext.Comments
                 .Include(c => c.CommentLikes)
                 .Include(c => c.Comments)
                 .AsSplitQuery()
                 .AsNoTracking()
-                .Where(c => c.ParentPointOfInterestId == id)
+                .Where(c => c.ParentPointOfInterestId == id);
+
+            var totalCount = await query.CountAsync();
+
+            var comments = await query
+                .OrderByDescending(c => c.CommentLikes.Count)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
+
+            return (comments, totalCount);
         }
 
         public void Update(Comment comment)
@@ -82,18 +99,27 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             _dbContext.Comments.Update(comment);
         }
 
-        public async Task<List<Comment>> GetByCommentId(Guid id)
+        public async Task<(List<Comment> Comments, int TotalCount)> GetByCommentId(Guid id, int page, int pageSize)
         {
-            return await _dbContext.Comments
+            var query = _dbContext.Comments
                 .Include(c => c.CommentLikes)
                 .Include(c => c.Comments)
                 .AsSplitQuery()
                 .AsNoTracking()
-                .Where(c => c.ParentCommentId == id)
+                .Where(c => c.ParentCommentId == id);
+
+            var totalCount = await query.CountAsync();
+
+            var comments = await query
+                .OrderByDescending(c => c.CommentLikes.Count)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
+
+            return (comments, totalCount);
         }
 
-        public async Task<List<Comment>> GetByCommentIdAndAuthorId(Guid commentId, Guid authorId)
+        public async Task<List<Comment>> GetByCommentIdAndUserId(Guid commentId, Guid authorId)
         {
             return await _dbContext.Comments
                 .Include(c => c.CommentLikes)

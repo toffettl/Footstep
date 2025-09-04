@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Footstep.Communication.Enums;
+using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Comments;
 using Footstep.Domain.Repositories.Comments;
 using Footstep.Exception;
@@ -18,9 +19,9 @@ namespace Footstep.Application.UseCases.Comments.GetByAuthorId
             _mapper = mapper;
         }
 
-        public async Task<List<ResponseCommentJson>> Execute(Guid id)
+        public async Task<PagedResult<ResponseCommentJson>> Execute(Guid id, int page, int pageSize)
         {
-            var comments = await _commentReadOnlyRepository.GetByUserId(id);
+            var (comments, totalCount) = await _commentReadOnlyRepository.GetByUserId(id, page, pageSize);
 
             if (comments.Count == 0)
             {
@@ -46,7 +47,14 @@ namespace Footstep.Application.UseCases.Comments.GetByAuthorId
                 responses.Add(response);
             }
 
-            return responses;
+            return new PagedResult<ResponseCommentJson>
+            {
+                Items = responses,
+                Page = page,
+                PageSize = pageSize,
+                TotalCount = totalCount,
+                TotalPages = (int)Math.Ceiling((double)totalCount / pageSize)
+            };
         }
     }
 }

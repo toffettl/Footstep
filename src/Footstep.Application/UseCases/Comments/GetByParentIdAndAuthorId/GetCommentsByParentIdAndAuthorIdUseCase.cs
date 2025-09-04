@@ -22,11 +22,11 @@ namespace Footstep.Application.UseCases.Comments.GetByParentIdAndAuthorId
         {
             Validate(parentType);
 
-            var comment = await _commentReadOnlyRepository.GetByPointOfInterestIdAndAuthorId(parentId, authorId);
+            var comment = await _commentReadOnlyRepository.GetByPointOfInterestIdAndUserId(parentId, authorId);
 
             if (parentType == ParentType.Comment)
             {
-                comment = await _commentReadOnlyRepository.GetByCommentIdAndAuthorId(parentId, authorId);
+                comment = await _commentReadOnlyRepository.GetByCommentIdAndUserId(parentId, authorId);
             }
 
             if (comment.Count == 0)
