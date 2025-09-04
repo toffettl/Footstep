@@ -1,6 +1,7 @@
 ﻿using Footstep.Application.UseCases.Traces.Create;
 using Footstep.Application.UseCases.Traces.Delete;
 using Footstep.Application.UseCases.Traces.GetAll;
+using Footstep.Application.UseCases.Traces.GetAllByPage;
 using Footstep.Application.UseCases.Traces.GetById;
 using Footstep.Application.UseCases.Traces.GetByRay;
 using Footstep.Application.UseCases.Traces.Update;
@@ -90,6 +91,19 @@ namespace Footstep.Api.Controllers
             [FromServices] IGetAllPoitntOfInterestUseCase useCase)
         {
             var response = await useCase.Execute();
+
+            return Ok(response);
+        }
+
+        [HttpGet("All/Page")]
+        [ProducesResponseType(typeof(ResponsePointOfInterestJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> GetAllByPage(
+            [FromServices] IGetAllPointsOfInterestByPageUseCase useCase,
+            [FromQuery] int page,
+            [FromQuery] int pageSize)
+        {
+            var response = await useCase.Execute(page, pageSize);
 
             return Ok(response);
         }
