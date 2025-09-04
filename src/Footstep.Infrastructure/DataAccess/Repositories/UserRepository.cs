@@ -45,4 +45,9 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository,
             .AsNoTracking()
             .ToListAsync();
     }
+
+    public async Task<bool> ExistActiveUserWithId(Guid id)
+    {
+        return await _dbContext.Users.AnyAsync(user => user.Id.Equals(id));
+    }
 }

@@ -58,9 +58,9 @@ namespace Footstep.Infrastructure
             services.AddScoped<IItemReadOnlyRepository, ItemRepository>();
             services.AddScoped<IItemUpdateOnlyRepository, ItemRepository>();
 
-            services.AddScoped<IPointsOfInterestWriteOnlyRepository, PointOfInterestRepository>();
-            services.AddScoped<IPointsOfInterestUpdateOnlyRepository, PointOfInterestRepository>();
-            services.AddScoped<IPointsOfInterestReadOnlyRepository, PointOfInterestRepository>();
+            services.AddScoped<IPointOfInterestWriteOnlyRepository, PointOfInterestRepository>();
+            services.AddScoped<IPointOfInterestUpdateOnlyRepository, PointOfInterestRepository>();
+            services.AddScoped<IPointOfInterestReadOnlyRepository, PointOfInterestRepository>();
 
             services.AddScoped<IAddressWriteOnlyRepository, AddressRepository>();
             services.AddScoped<IAddressReadOnlyRepository, AddressRepository>();

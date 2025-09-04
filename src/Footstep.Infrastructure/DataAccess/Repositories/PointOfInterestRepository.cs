@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Footstep.Infrastructure.DataAccess.Repositories
 {
-    public class PointOfInterestRepository : IPointsOfInterestWriteOnlyRepository,
-        IPointsOfInterestUpdateOnlyRepository,
-        IPointsOfInterestReadOnlyRepository
+    public class PointOfInterestRepository : IPointOfInterestWriteOnlyRepository,
+        IPointOfInterestUpdateOnlyRepository,
+        IPointOfInterestReadOnlyRepository
     {
         private readonly FootstepDbContext _dbContext;
         public PointOfInterestRepository(FootstepDbContext dbContext)
@@ -40,6 +40,7 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
         public async Task<List<PointOfInterest>> GetAll()
         {
             return await _dbContext.PointOfInterests
+                .AsSplitQuery()
                 .Include(p => p.Address)
                 .AsNoTracking()
                 .ToListAsync();
@@ -51,6 +52,24 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
                 .Include(p => p.Address)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(t => t.Id == id);
+        }
+
+        public async Task<(List<PointOfInterest> PointsOfInterest, int TotalCount)> GetAllByPage(int page, int pageSize)
+        {
+            var query = _dbContext.PointOfInterests
+                .Include(p => p.Address)
+                .AsSplitQuery()
+                .AsNoTracking();
+
+            var totalCount = await query.CountAsync();
+
+            var pointsOfInterest = await query
+                .OrderBy(p => p.Comments.Count)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return (pointsOfInterest, totalCount);
         }
     }
 }
