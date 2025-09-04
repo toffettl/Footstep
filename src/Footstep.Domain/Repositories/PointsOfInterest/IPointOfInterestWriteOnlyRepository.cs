@@ -2,7 +2,7 @@
 
 namespace Footstep.Domain.Repositories.Traces
 {
-    public interface IPointsOfInterestWriteOnlyRepository
+    public interface IPointOfInterestWriteOnlyRepository
     {
         Task Add(PointOfInterest pointOfInterest);
         Task<bool?> Delete(Guid id);

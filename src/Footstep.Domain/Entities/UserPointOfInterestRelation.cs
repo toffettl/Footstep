@@ -8,8 +8,6 @@ namespace Footstep.Domain.Entities
 
         public bool Like { get; set; } = false;
 
-        public UserPointOfInterestRelationType Type { get; set; }
-
         public Guid UserId { get; set; }
         public Guid PointOfInterestId { get; set; }
 

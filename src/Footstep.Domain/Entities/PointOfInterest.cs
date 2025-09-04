@@ -18,8 +18,10 @@ namespace Footstep.Domain.Entities
         public DateTime? UpdatedAt { get; set; } = DateTime.UtcNow;
 
         public Guid AddressId { get; set; }
+        public Guid UserId { get; set; }
 
         public Address? Address { get; set; }
+        public User? User { get; set; }
 
         public ICollection<UserPointOfInterestRelation> UserPointOfInterestRelations { get; set; } = new List<UserPointOfInterestRelation>();
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
