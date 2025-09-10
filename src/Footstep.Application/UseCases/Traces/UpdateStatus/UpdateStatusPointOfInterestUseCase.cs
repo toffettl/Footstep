@@ -1,43 +1,43 @@
-﻿//using AutoMapper;
-//using Footstep.Communication.Requests.Comments;
-//using Footstep.Communication.Requests.Traces;
-//using Footstep.Domain.Repositories;
-//using Footstep.Domain.Repositories.Traces;
-//using Footstep.Exception;
-//using Footstep.Exception.ExceptionsBase;
+﻿using AutoMapper;
+using Footstep.Domain.Repositories;
+using Footstep.Domain.Repositories.UserPointOfInterestRelations;
+using Footstep.Exception;
+using Footstep.Exception.ExceptionsBase;
 
-//namespace Footstep.Application.UseCases.Traces.UpdateStatus
-//{
-//    public class UpdateStatusPointOfInterestUseCase : IUpdateStatusPointOfInterestUseCase
-//    {
-//        private readonly IPointsOfInterestUpdateOnlyRepository _repository;
-//        private readonly IUnitOfWork _unitOfWork;
-//        private readonly IMapper _mapper;
+namespace Footstep.Application.UseCases.Traces.UpdateStatus
+{
+    public class UpdateStatusPointOfInterestUseCase : 
+        IUpdateStatusPointOfInterestUseCase
+    {
+        private readonly IUserPointOfInterestRelationReadOnlyRepository _userPointOfInterestRelationReadOnlyRepository;
+        private readonly IUserPointOfInterestRelationUpdateOnlyRepository _userPointOfInterestRelationUpdateOnlyRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-//        public UpdateStatusPointOfInterestUseCase(IPointsOfInterestUpdateOnlyRepository repository,
-//            IUnitOfWork unitOfWork,
-//            IMapper mapper)
-//        {
-//            _repository = repository;
-//            _unitOfWork = unitOfWork;
-//            _mapper = mapper;
-//        }
+        public UpdateStatusPointOfInterestUseCase(
+            IUserPointOfInterestRelationReadOnlyRepository userPointOfInterestRelationReadOnlyRepository,
+            IUserPointOfInterestRelationUpdateOnlyRepository userPointOfInterestRelationUpdateOnlyRepository,
+            IUnitOfWork unitOfWork,
+            IMapper mapper)
+        {
+            _userPointOfInterestRelationReadOnlyRepository = userPointOfInterestRelationReadOnlyRepository;
+            _userPointOfInterestRelationUpdateOnlyRepository = userPointOfInterestRelationUpdateOnlyRepository;
+            _unitOfWork = unitOfWork;
+        }
 
-//        //public async Task Execute(Guid id, RequestUpdateStatusPointOfInterestJson request)
-//        //{
-//        //    //var pointOfInterest = await _repository.GetById(id);
+        public async Task Execute(Guid id, Guid userId, bool like)
+        {
+            var userPointOfInterestRelation = await _userPointOfInterestRelationReadOnlyRepository.GetByUserIdAndPointOfInterestId(id, userId);
 
-//        //    if (pointOfInterest == null)
-//        //    {
-//        //        throw new NotFoundException(ResourceErrorMessages.POINT_OF_INTEREST_NOT_FOUND);
-//        //    }
+            if (userPointOfInterestRelation  == null)
+            {
+                throw new NotFoundException(ResourceErrorMessages.USER_AND_POINT_OF_INTEREST_RELATION_NOT_FOUND);
+            }
 
-//        //    _mapper.Map(request, pointOfInterest);
+            userPointOfInterestRelation.Like = like;
 
-//        //    pointOfInterest.UpdatedAt = DateTime.UtcNow;
-//        //    _repository.Update(pointOfInterest);
+            _userPointOfInterestRelationUpdateOnlyRepository.Update(userPointOfInterestRelation);
 
-//        //    await _unitOfWork.Commit();
-//        //}
-//    }
-//}
+            await _unitOfWork.Commit();
+        }
+    }
+}
