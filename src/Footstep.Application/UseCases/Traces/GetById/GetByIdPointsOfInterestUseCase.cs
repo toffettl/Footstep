@@ -47,7 +47,7 @@ namespace Footstep.Application.UseCases.Traces.GetById
 
             if (pointOfInterest == null)
             {
-                throw new NotFoundException(ResourceErrorMessages.TRACE_NOT_FOUND);
+                throw new NotFoundException(ResourceErrorMessages.POINT_OF_INTEREST_NOT_FOUND);
             }
 
             await UpdateUserPointOfInterestRelation(id, userId);
@@ -63,7 +63,7 @@ namespace Footstep.Application.UseCases.Traces.GetById
 
         private async Task UpdateUserPointOfInterestRelation(Guid pointOfInterestId, Guid userId)
         {
-            var userPointOfInterestRelation = await _userPointOfInterestRelationReadOnlyRepository.GetByUserIdAndPointOfInterestId(userId, pointOfInterestId);
+            var userPointOfInterestRelation = await _userPointOfInterestRelationReadOnlyRepository.GetByUserIdAndPointOfInterestId(pointOfInterestId, userId);
 
             if (userPointOfInterestRelation == null)
             {
