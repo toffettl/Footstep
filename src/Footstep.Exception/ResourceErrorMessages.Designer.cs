@@ -574,6 +574,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a User and point of interest relation not found.
+        /// </summary>
+        public static string USER_AND_POINT_OF_INTEREST_RELATION_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("USER_AND_POINT_OF_INTEREST_RELATION_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a User not found.
         /// </summary>
         public static string USER_NOT_FOUND {

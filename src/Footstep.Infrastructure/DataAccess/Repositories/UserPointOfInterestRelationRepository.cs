@@ -22,7 +22,7 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             await _dbContext.UserPointOfInterestRelations.AddAsync(userPointOfInterestRelation);
         }
 
-        public async Task<UserPointOfInterestRelation?> GetByUserIdAndPointOfInterestId(Guid userId, Guid pointOfInterestId)
+        public async Task<UserPointOfInterestRelation?> GetByUserIdAndPointOfInterestId(Guid pointOfInterestId, Guid userId)
         {
             return await _dbContext.UserPointOfInterestRelations
                 .FirstOrDefaultAsync(upoir => upoir.UserId == userId && upoir.PointOfInterestId == pointOfInterestId);

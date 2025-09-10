@@ -4,6 +4,6 @@ namespace Footstep.Domain.Repositories.UserPointOfInterestRelations
 {
     public interface IUserPointOfInterestRelationReadOnlyRepository
     {
-        Task<UserPointOfInterestRelation?> GetByUserIdAndPointOfInterestId(Guid userId, Guid pointOfInterestId);
+        Task<UserPointOfInterestRelation?> GetByUserIdAndPointOfInterestId(Guid pointOfInterestId, Guid userId);
     }
 }
