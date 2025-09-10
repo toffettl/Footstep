@@ -4,7 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Footstep.Infrastructure.DataAccess.Repositories
 {
-    public class PointOfInterestRepository : IPointOfInterestWriteOnlyRepository,
+    public class PointOfInterestRepository : 
+        IPointOfInterestWriteOnlyRepository,
         IPointOfInterestUpdateOnlyRepository,
         IPointOfInterestReadOnlyRepository
     {
@@ -32,16 +33,16 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             return true;
         }
 
-        public void Update(PointOfInterest trace)
+        public void Update(PointOfInterest pointOfInterest)
         {
-            _dbContext.PointOfInterests.Update(trace);
+            _dbContext.PointOfInterests.Update(pointOfInterest);
         }
 
         public async Task<List<PointOfInterest>> GetAll()
         {
             return await _dbContext.PointOfInterests
                 .AsSplitQuery()
-                .Include(p => p.Address)
+                .Include(poi => poi.Address)
                 .AsNoTracking()
                 .ToListAsync();
         }
@@ -49,16 +50,18 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
         public async Task<PointOfInterest?> GetById(Guid id)
         {
             return await _dbContext.PointOfInterests
-                .Include(p => p.Address)
+                .AsSplitQuery()
+                .Include(poi => poi.User)
+                .Include(poi => poi.Address)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(t => t.Id == id);
+                .FirstOrDefaultAsync(poi => poi.Id == id);
         }
 
         public async Task<(List<PointOfInterest> PointsOfInterest, int TotalCount)> GetAllByPage(int page, int pageSize)
         {
             var query = _dbContext.PointOfInterests
-                .Include(p => p.Address)
                 .AsSplitQuery()
+                .Include(poi => poi.Address)
                 .AsNoTracking();
 
             var totalCount = await query.CountAsync();

@@ -11,6 +11,7 @@ namespace Footstep.Infrastructure.DataAccess
         public DbSet<Address> Addresses { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserRelation> UserRelations { get; set; }
+        public DbSet<UserPointOfInterestRelation> UserPointOfInterestRelations { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<CommentLike> CommentLikes { get; set; }
         public DbSet<Style> Styles { get; set; }

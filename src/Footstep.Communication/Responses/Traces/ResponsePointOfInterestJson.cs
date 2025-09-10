@@ -6,10 +6,13 @@ namespace Footstep.Communication.Responses.Traces
     {
         public Guid Id { get; set; }
         public Guid AuthorId { get; set; }
+
+        public ResponseUser? Author { get; set; }
+
         public PointOfInterestType PointOfInterestType { get; set; }
         
         public ResponseCoordinates? Coordinates { get; set; }
-        public ResponseAdress? Adress { get; set; }
+        public ResponseAddress? Address { get; set; }
         public ResponseStatus? Status { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
@@ -19,12 +22,28 @@ namespace Footstep.Communication.Responses.Traces
         public DateTime? ExpireAt { get; set; }
     }
 
+    public class ResponseUser
+    {
+        public string? Name { get; set; }
+        public ResponseAvatarStyle? AvatarStyle { get; set; }
+    }
+
+    public class ResponseAvatarStyle
+    {
+        public Guid Head {  get; set; }
+        public Guid Body { get; set; }
+        public Guid Leg { get; set; }
+        public Guid Bag { get; set; }
+        public Guid Accessory { get; set; }
+    }
+
     public class ResponseCoordinates
     {
         public double Latitude { get; set; }
         public double Longitude { get; set; }
     }
-    public class ResponseAdress
+
+    public class ResponseAddress
     {
         public string? Country { get; set; }
         public string? State { get; set; }

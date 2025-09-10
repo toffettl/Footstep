@@ -10,6 +10,7 @@ using Footstep.Communication.Responses.Traces;
 using Footstep.Communication.Responses.UserRelation;
 using Footstep.Communication.Responses.Users;
 using Footstep.Domain.Entities;
+using Footstep.Domain.Enums;
 
 namespace Footstep.Application.AutoMapper
 {
@@ -68,12 +69,24 @@ namespace Footstep.Application.AutoMapper
 
             CreateMap<PointOfInterest, ResponsePointOfInterestJson>()
                 .ForMember(dest => dest.AuthorId, opt => opt.MapFrom(src => src.UserId))
+                .ForMember(dest => dest.Author, opt => opt.MapFrom(src => new ResponseUser
+                {
+                    Name = src.User!.Name,
+                    AvatarStyle = new ResponseAvatarStyle
+                    {
+                        Head = src.User!.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Head)!.StyleId,
+                        Body = src.User!.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Body)!.StyleId,
+                        Leg = src.User!.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Leg)!.StyleId,
+                        Bag = src.User!.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Bag)!.StyleId,
+                        Accessory = src.User!.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Accessory)!.StyleId
+                    }
+                }))
                 .ForMember(dest => dest.Coordinates, opt => opt.MapFrom(src => new ResponseCoordinates
                 {
                     Latitude = src.Address!.Latitude,
                     Longitude = src.Address!.Longitude
                 }))
-                .ForMember(dest => dest.Adress, opt => opt.MapFrom(src => new ResponseAdress
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => new ResponseAddress
                 {
                     Country = src.Address!.Country,
                     State = src.Address.State,
@@ -85,8 +98,8 @@ namespace Footstep.Application.AutoMapper
                 }))
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new ResponseStatus
                 {
-                    //Views = src.Views,
-                    //Likes = src.Likes
+                    Views = src.Views,
+                    Likes = src.UserPointOfInterestRelations.Where(upoir => upoir.Like == true).Count()
                 }));
 
             CreateMap<UserRelation, ResponseFollowersJson>()

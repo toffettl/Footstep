@@ -77,9 +77,10 @@ namespace Footstep.Api.Controllers
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(
             [FromServices] IGetByIdPointOfInterestUseCase useCase,
-            [FromRoute] Guid id)
+            [FromRoute] Guid id,
+            [FromQuery] Guid userId)
         {
-            var response = await useCase.Execute(id);
+            var response = await useCase.Execute(id, userId);
 
             return Ok(response);
         }

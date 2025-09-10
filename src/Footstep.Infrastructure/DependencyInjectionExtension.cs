@@ -7,6 +7,7 @@ using Footstep.Domain.Repositories.Preferences;
 using Footstep.Domain.Repositories.RelationUser;
 using Footstep.Domain.Repositories.Styles;
 using Footstep.Domain.Repositories.Traces;
+using Footstep.Domain.Repositories.UserPointOfInterestRelations;
 using Footstep.Domain.Repositories.Users;
 using Footstep.Domain.Security.Cryptography;
 using Footstep.Domain.Security.Tokens;
@@ -45,8 +46,8 @@ namespace Footstep.Infrastructure
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
             services.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
 
-            services.AddScoped<IUserRelationReadOnlyRepository, UserRelationRepository>();
             services.AddScoped<IUserRelationWriteOnlyRepository, UserRelationRepository>();
+            services.AddScoped<IUserRelationReadOnlyRepository, UserRelationRepository>();
 
             services.AddScoped<IPreferenceWriteOnlyRepository, PreferenceRepository>();
             services.AddScoped<IPreferenceReadOnlyRepository, PreferenceRepository>();
@@ -61,6 +62,8 @@ namespace Footstep.Infrastructure
             services.AddScoped<IPointOfInterestWriteOnlyRepository, PointOfInterestRepository>();
             services.AddScoped<IPointOfInterestUpdateOnlyRepository, PointOfInterestRepository>();
             services.AddScoped<IPointOfInterestReadOnlyRepository, PointOfInterestRepository>();
+
+            services.AddScoped<IUserPointOfInterestRelationReadOnlyRepository, UserPointOfInterestRelationRepository>();
 
             services.AddScoped<IAddressWriteOnlyRepository, AddressRepository>();
             services.AddScoped<IAddressReadOnlyRepository, AddressRepository>();

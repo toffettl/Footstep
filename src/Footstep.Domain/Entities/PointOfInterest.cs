@@ -9,6 +9,7 @@ namespace Footstep.Domain.Entities
 
         public string? Title { get; set; }
         public string? Description { get; set; }
+        public int Views { get; set; } = 0;
 
         public PointOfInterestType PointOfInterestType { get; set; }
         public PointOfInterestVisibility PointOfInterestVisibility { get; set; }
