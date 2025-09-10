@@ -9,7 +9,7 @@ namespace Footstep.Communication.Requests.Traces
 
         public RequestCoordinates? Coordinates { get; set; }
 
-        public RequestAdress? Adress { get; set; }
+        public RequestAdress? Address { get; set; }
 
         public string? Title { get; set; }
         public string? Description { get; set; }
@@ -23,7 +23,7 @@ namespace Footstep.Communication.Requests.Traces
     }
     public class RequestAdress
     {
-        public string? Coutry { get; set; }
+        public string? Country { get; set; }
         public string? State { get; set; }
         public string? City { get; set; }
         public string? District { get; set; }

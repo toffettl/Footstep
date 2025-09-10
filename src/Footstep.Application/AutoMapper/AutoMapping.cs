@@ -74,11 +74,11 @@ namespace Footstep.Application.AutoMapper
                     Name = src.User!.Name,
                     AvatarStyle = new ResponseAvatarStyle
                     {
-                        Head = src.User!.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Head)!.StyleId,
-                        Body = src.User!.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Body)!.StyleId,
-                        Leg = src.User!.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Leg)!.StyleId,
-                        Bag = src.User!.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Bag)!.StyleId,
-                        Accessory = src.User!.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Accessory)!.StyleId
+                        Head = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head)!.StyleId,
+                        Body = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Body)!.StyleId,
+                        Leg = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Leg)!.StyleId,
+                        Bag = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Bag)!.StyleId,
+                        Accessory = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Accessory)!.StyleId
                     }
                 }))
                 .ForMember(dest => dest.Coordinates, opt => opt.MapFrom(src => new ResponseCoordinates

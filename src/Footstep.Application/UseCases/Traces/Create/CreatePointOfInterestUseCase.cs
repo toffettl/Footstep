@@ -81,13 +81,13 @@ namespace Footstep.Application.UseCases.Traces.Create
                 {
                     Latitude = request.Coordinates!.Latitude,
                     Longitude = request.Coordinates!.Longitude,
-                    Cep = request.Adress?.Cep,
-                    City = request.Adress?.City,
-                    Country = request.Adress?.Coutry,
-                    District = request.Adress?.District,
-                    Number = request.Adress!.Number,
-                    State = request.Adress?.State,
-                    Street = request.Adress?.Street
+                    Cep = request.Address?.Cep,
+                    City = request.Address?.City,
+                    Country = request.Address?.Country,
+                    District = request.Address?.District,
+                    Number = request.Address!.Number,
+                    State = request.Address?.State,
+                    Street = request.Address?.Street
                 };
 
                 await _addressWriteOnlyRepository.Add(address);

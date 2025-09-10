@@ -5,7 +5,9 @@ using Microsoft.EntityFrameworkCore;
 namespace Footstep.Infrastructure.DataAccess.Repositories
 {
     public class UserPointOfInterestRelationRepository : 
-        IUserPointOfInterestRelationReadOnlyRepository
+        IUserPointOfInterestRelationWriteOnlyRepository,
+        IUserPointOfInterestRelationReadOnlyRepository,
+        IUserPointOfInterestRelationUpdateOnlyRepository
     {
         private readonly FootstepDbContext _dbContext;
 
@@ -15,11 +17,20 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             _dbContext = dbContext;
         }
 
+        public async Task Add(UserPointOfInterestRelation userPointOfInterestRelation)
+        {
+            await _dbContext.UserPointOfInterestRelations.AddAsync(userPointOfInterestRelation);
+        }
+
         public async Task<UserPointOfInterestRelation?> GetByUserIdAndPointOfInterestId(Guid userId, Guid pointOfInterestId)
         {
             return await _dbContext.UserPointOfInterestRelations
-                .AsNoTracking()
                 .FirstOrDefaultAsync(upoir => upoir.UserId == userId && upoir.PointOfInterestId == pointOfInterestId);
+        }
+
+        public void Update(UserPointOfInterestRelation userPointOfInterestRelation)
+        {
+            _dbContext.Update(userPointOfInterestRelation);
         }
     }
 }
