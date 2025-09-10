@@ -64,9 +64,10 @@ namespace Footstep.Api.Controllers
         public async Task<IActionResult> Updatetatus(
             [FromServices] IUpdateStatusPointOfInterestUseCase useCase,
             [FromRoute] Guid id,
-            [FromBody] RequestUpdateStatusPointOfInterestJson request)
+            [FromQuery] Guid userId,
+            [FromQuery] bool like)
         {
-            await useCase.Execute(id, request);
+            await useCase.Execute(id, userId, like);
 
             return NoContent();
         }

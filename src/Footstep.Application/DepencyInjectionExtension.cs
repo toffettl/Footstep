@@ -17,6 +17,7 @@ using Footstep.Application.UseCases.Traces.GetAllByPage;
 using Footstep.Application.UseCases.Traces.GetById;
 using Footstep.Application.UseCases.Traces.GetByRay;
 using Footstep.Application.UseCases.Traces.Update;
+using Footstep.Application.UseCases.Traces.UpdateStatus;
 using Footstep.Application.UseCases.UserRelation.Unfollow;
 using Footstep.Application.UseCases.Users.GetAll;
 using Footstep.Application.UseCases.Users.GetByEmail;
@@ -68,6 +69,7 @@ namespace Footstep.Application
             services.AddScoped<ICreatePointOfInterestUseCase, CreatePointOfInterestUseCase>();
             services.AddScoped<IDeletePointOfInterestUseCase, DeletePointOfInterestUseCase>();
             services.AddScoped<IUpdatePointOfInterestUseCase, UpdatePointOfInterestUseCase>();
+            services.AddScoped<IUpdateStatusPointOfInterestUseCase, UpdateStatusPointOfInterestUseCase>();
             services.AddScoped<IGetByIdPointOfInterestUseCase, GetByIdPointsOfInterestUseCase>();
             services.AddScoped<IGetAllPoitntOfInterestUseCase, GetAllPointOfInterestUseCase>();
             services.AddScoped<IGetAllPointsOfInterestByPageUseCase, GetAllPointsOfInterestByPageUseCase>();
