@@ -34,7 +34,8 @@ namespace Footstep.Application.AutoMapper
             CreateMap<RequestStyleJson, Style>();
             
             CreateMap<RequestPointOfInterestJson, PointOfInterest>()
-                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.AuthorId));
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.AuthorId))
+                .ForMember(dest => dest.Address, opt => opt.Ignore());
             
             CreateMap<RequestUpdateStatusPointOfInterestJson, PointOfInterest>();
 
@@ -69,7 +70,7 @@ namespace Footstep.Application.AutoMapper
 
             CreateMap<PointOfInterest, ResponsePointOfInterestJson>()
                 .ForMember(dest => dest.AuthorId, opt => opt.MapFrom(src => src.UserId))
-                .ForMember(dest => dest.Author, opt => opt.MapFrom(src => new ResponseUser
+                .ForMember(dest => dest.Author, opt => opt.MapFrom(src => new ResponseAuthor
                 {
                     Name = src.User!.Name,
                     AvatarStyle = new ResponseAvatarStyle
@@ -99,7 +100,58 @@ namespace Footstep.Application.AutoMapper
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new ResponseStatus
                 {
                     Views = src.Views,
-                    Likes = src.UserPointOfInterestRelations.Where(upoir => upoir.Like == true).Count()
+                    Likes = src.UserPointOfInterestRelations.Count(),
+                    Commentaries = src.Comments.Count()
+                }));
+
+            CreateMap<User, ResponseAuthor>()
+                .ForMember(dest => dest.AvatarStyle, opt => opt.MapFrom(src => new ResponseAvatarStyle
+                {
+                    Head = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Head)!.StyleId,
+                    Body = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Body)!.StyleId,
+                    Leg = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Leg)!.StyleId,
+                    Bag = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Bag)!.StyleId,
+                    Accessory = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Accessory)!.StyleId,
+                }));
+
+            CreateMap<Address, ResponseCoordinates>();
+
+            CreateMap<Address, ResponseAddress>();
+
+            CreateMap<PointOfInterest, ResponsePaginationPointOfInterestJson>()
+                .ForMember(dest => dest.AuthorId, opt => opt.MapFrom(src => src.UserId))
+                .ForMember(dest => dest.Author, opt => opt.MapFrom(src => new ResponsePaginationAuthor
+                {
+                    Name = src.User!.Name,
+                    AvatarStyle = new ResponsePaginationAvatarStyle
+                    {
+                        Head = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head)!.StyleId,
+                        Body = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Body)!.StyleId,
+                        Leg = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Leg)!.StyleId,
+                        Bag = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Bag)!.StyleId,
+                        Accessory = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Accessory)!.StyleId
+                    }
+                }))
+                .ForMember(dest => dest.Coordinates, opt => opt.MapFrom(src => new ResponsePaginationCoordinates
+                {
+                    Latitude = src.Address!.Latitude,
+                    Longitude = src.Address!.Longitude
+                }))
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => new ResponsePaginationAddress
+                {
+                    Country = src.Address!.Country,
+                    State = src.Address.State,
+                    City = src.Address.City,
+                    District = src.Address.District,
+                    Street = src.Address.Street,
+                    Cep = src.Address.Cep,
+                    Number = src.Address.Number
+                }))
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new ResponsePaginationStatus
+                {
+                    Views = src.Views,
+                    Likes = src.UserPointOfInterestRelations.Count(),
+                    Commentaries = src.Comments.Count()
                 }));
 
             CreateMap<UserRelation, ResponseFollowersJson>()
