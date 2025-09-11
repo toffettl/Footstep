@@ -4,5 +4,5 @@ namespace Footstep.Application.UseCases.Traces.GetByRay;
 
 public interface IGetNearbyPointsOfInterestUseCase
 {
-    Task<List<ResponsePointOfInterestJson>> Execute(double latitude, double longitude, double radiusInMeters);
+    Task<List<ResponsePaginationPointOfInterestJson>> Execute(double latitude, double longitude, double radiusInMeters);
 }

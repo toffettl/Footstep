@@ -8,11 +8,7 @@ namespace Footstep.Application.UseCases.Traces
     {
         public RequestPointOfInterestJsonValidator()
         {   
-            RuleFor(trace => trace.ExpireAt)
-                .GreaterThan(DateTime.UtcNow)
-                .WithMessage(ResourceErrorMessages.THE_EXPIRATION_DATE_CANNOT_BE_IN_THE_PAST);
-            
-            RuleFor(trace => trace.Coordinates.Latitude)
+            RuleFor(trace => trace.Coordinates!.Latitude)
                 .InclusiveBetween(-90, 90)
                 .WithMessage(ResourceErrorMessages.INVALID_LATITUDE);
 
@@ -21,11 +17,11 @@ namespace Footstep.Application.UseCases.Traces
                 .WithMessage(ResourceErrorMessages.INVALID_LONGITUDE);
 
             RuleFor(trace => trace.Coordinates!.Latitude)
-            .NotEmpty()
-            .WithMessage(ResourceErrorMessages.LATITUDE_REQUIRED);
+                .NotNull()
+                .WithMessage(ResourceErrorMessages.LATITUDE_REQUIRED);
 
             RuleFor(trace => trace.Coordinates!.Longitude)
-                .NotEmpty()
+                .NotNull()
                 .WithMessage(ResourceErrorMessages.LONGITUDE_REQUIRED);
         }
     }
