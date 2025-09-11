@@ -1,4 +1,4 @@
-﻿using Footstep.Domain.Enums;
+﻿using Footstep.Communication.Enums;
 
 namespace Footstep.Communication.Requests.Traces
 {

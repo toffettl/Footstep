@@ -1,4 +1,4 @@
-﻿namespace Footstep.Domain.Enums
+﻿namespace Footstep.Communication.Enums
 {
     public enum PointOfInterestType
     {

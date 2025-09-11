@@ -2,48 +2,47 @@
 
 namespace Footstep.Communication.Responses.Traces
 {
-    public class ResponsePointOfInterestJson
+    public class ResponsePaginationPointOfInterestJson
     {
         public Guid Id { get; set; }
         public Guid AuthorId { get; set; }
 
-        public ResponseAuthor? Author { get; set; }
+        public ResponsePaginationAuthor? Author { get; set; }
 
         public PointOfInterestType PointOfInterestType { get; set; }
-        
-        public ResponseCoordinates? Coordinates { get; set; }
-        public ResponseAddress? Address { get; set; }
-        public ResponseStatus? Status { get; set; }
+
+        public ResponsePaginationCoordinates? Coordinates { get; set; }
+        public ResponsePaginationAddress? Address { get; set; }
+        public ResponsePaginationStatus? Status { get; set; }
+
         public string? Title { get; set; }
         public string? Description { get; set; }
 
-        public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
-        public DateTime? ExpireAt { get; set; }
     }
 
-    public class ResponseAuthor
+    public class ResponsePaginationAuthor
     {
         public string? Name { get; set; }
-        public ResponseAvatarStyle? AvatarStyle { get; set; }
+        public ResponsePaginationAvatarStyle? AvatarStyle { get; set; }
     }
 
-    public class ResponseAvatarStyle
+    public class ResponsePaginationAvatarStyle
     {
-        public Guid Head {  get; set; }
+        public Guid Head { get; set; }
         public Guid Body { get; set; }
         public Guid Leg { get; set; }
         public Guid Bag { get; set; }
         public Guid Accessory { get; set; }
     }
 
-    public class ResponseCoordinates
+    public class ResponsePaginationCoordinates
     {
         public double Latitude { get; set; }
         public double Longitude { get; set; }
     }
 
-    public class ResponseAddress
+    public class ResponsePaginationAddress
     {
         public string? Country { get; set; }
         public string? State { get; set; }
@@ -54,7 +53,7 @@ namespace Footstep.Communication.Responses.Traces
         public int Number { get; set; }
     }
 
-    public class ResponseStatus
+    public class ResponsePaginationStatus
     {
         public int Views { get; set; }
         public int Likes { get; set; }
