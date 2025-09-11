@@ -19,13 +19,13 @@ namespace Footstep.Application.UseCases.Traces.GetAllByPage
             _mapper = mapper;
         }
 
-        public async Task<PagedResult<ResponsePointOfInterestJson>> Execute(int page, int pageSize)
+        public async Task<PagedResult<ResponsePaginationPointOfInterestJson>> Execute(int page, int pageSize)
         {
             var (pointsOfInterest, totalCount) = await _pointsOfInterestReadOnlyRepository.GetAllByPage(page, pageSize);
 
-            var responses = _mapper.Map<List<ResponsePointOfInterestJson>>(pointsOfInterest);
+            var responses = _mapper.Map<List<ResponsePaginationPointOfInterestJson>>(pointsOfInterest);
 
-            return new PagedResult<ResponsePointOfInterestJson>
+            return new PagedResult<ResponsePaginationPointOfInterestJson>
             {
                 Items = responses,
                 Page = page,
