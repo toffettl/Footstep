@@ -16,7 +16,8 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
         }
         public async Task Add(PointOfInterest pointOfInterest)
         {
-            await _dbContext.PointOfInterests.AddAsync(pointOfInterest);
+            await _dbContext.PointOfInterests
+                .AddAsync(pointOfInterest);
         }
 
        public async Task<bool?> Delete(Guid id)
@@ -28,22 +29,30 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
                 return false;
             }
 
-            _dbContext.PointOfInterests.Remove(result);
+            _dbContext.PointOfInterests
+                .Remove(result);
 
             return true;
         }
 
         public void Update(PointOfInterest pointOfInterest)
         {
-            _dbContext.PointOfInterests.Update(pointOfInterest);
+            _dbContext.PointOfInterests
+                .Update(pointOfInterest);
         }
 
         public async Task<List<PointOfInterest>> GetAll()
         {
             return await _dbContext.PointOfInterests
-                .AsSplitQuery()
-                .Include(poi => poi.Address)
                 .AsNoTracking()
+                .AsSplitQuery()
+                .Include(poi => poi.User)
+                    .ThenInclude(u => u!.Preference)
+                    .ThenInclude(p => p.Items.Where(i => i.Equipped))
+                    .ThenInclude(i => i.Style)
+                .Include(poi => poi.UserPointOfInterestRelations.Where(upoir => upoir.Like))
+                .Include(poi => poi.Address)
+                .Include(poi => poi.Comments)
                 .ToListAsync();
         }
 
@@ -55,21 +64,29 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
                     .ThenInclude(u => u!.Preference)
                     .ThenInclude(p => p.Items.Where(i => i.Equipped))
                     .ThenInclude(i => i.Style)
+                .Include(poi => poi.UserPointOfInterestRelations.Where(upoir => upoir.Like))
                 .Include(poi => poi.Address)
+                .Include(poi => poi.Comments)
                 .FirstOrDefaultAsync(poi => poi.Id == id);
         }
 
         public async Task<(List<PointOfInterest> PointsOfInterest, int TotalCount)> GetAllByPage(int page, int pageSize)
         {
             var query = _dbContext.PointOfInterests
+                .AsNoTracking()
                 .AsSplitQuery()
+                .Include(poi => poi.User)
+                    .ThenInclude(u => u!.Preference)
+                    .ThenInclude(p => p.Items.Where(i => i.Equipped))
+                    .ThenInclude(i => i.Style)
+                .Include(poi => poi.UserPointOfInterestRelations.Where(upoir => upoir.Like))
                 .Include(poi => poi.Address)
-                .AsNoTracking();
+                .Include(poi => poi.Comments);
 
             var totalCount = await query.CountAsync();
 
             var pointsOfInterest = await query
-                .OrderBy(p => p.Comments.Count)
+                .OrderByDescending(p => p.Views)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
