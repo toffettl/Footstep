@@ -5,6 +5,6 @@ namespace Footstep.Application.UseCases.Traces.GetAllByPage
 {
     public interface IGetAllPointsOfInterestByPageUseCase
     {
-        Task<PagedResult<ResponsePointOfInterestJson>> Execute(int page, int pageSize);
+        Task<PagedResult<ResponsePaginationPointOfInterestJson>> Execute(int page, int pageSize);
     }
 }

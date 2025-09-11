@@ -32,7 +32,7 @@ namespace Footstep.Application.UseCases.Comments.Create
 
             switch ((ParentType)(int)comment.ParentType)
             {
-                case ParentType.PointOfInterest:
+                case ParentType.Mark:
                     comment.ParentPointOfInterestId = request.ParentId;
                     comment.ParentCommentId = null;
                     break;

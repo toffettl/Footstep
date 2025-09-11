@@ -36,7 +36,7 @@ namespace Footstep.Application.UseCases.Comments.GetByAuthorId
 
                 switch ((ParentType)(int)comment.ParentType)
                 {
-                    case ParentType.PointOfInterest:
+                    case ParentType.Mark:
                         response.ParentId = comment.ParentPointOfInterestId;
                         break;
                     case ParentType.Comment:

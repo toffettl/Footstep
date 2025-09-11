@@ -66,7 +66,7 @@ namespace Footstep.Application.UseCases.Styles.Create
 
             var result = validator.Validate(request);
 
-            var  nameExists = await _styleReadOnlyRepository.GetByName(request.Name);
+            var nameExists = await _styleReadOnlyRepository.GetByName(request.Name!);
 
             if (nameExists != null)
             {
