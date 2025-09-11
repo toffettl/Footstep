@@ -1,0 +1,8 @@
+﻿[build]
+builder = "DOCKERFILE"
+
+[deploy]
+# Nome do arquivo Dockerfile na raiz
+dockerfilePath = "Dockerfile"
+
+[start]
