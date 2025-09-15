@@ -24,12 +24,24 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository,
 
     public async Task<User?> GetById(Guid id)
     {
-        return await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(user => user.Id == id);
+        return await _dbContext.Users
+            .AsNoTracking()
+            .AsSplitQuery()
+            .Include(u => u.Preference)
+                .ThenInclude(p => p.Items.Where(i => i.Unlocked))
+                    .ThenInclude(i => i.Style)
+            .FirstOrDefaultAsync(user => user.Id == id);
     }
 
     public async Task<User?> GetByEmail(string email)
     {
-        return await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(user => user.Email!.Equals(email));
+        return await _dbContext.Users
+            .AsNoTracking()
+            .AsSplitQuery()
+            .Include(u => u.Preference)
+                .ThenInclude(p => p.Items.Where(i => i.Unlocked))
+                    .ThenInclude(i => i.Style)
+            .FirstOrDefaultAsync(user => user.Email == email);
     }
 
     public void Update(User user)
@@ -40,9 +52,11 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository,
     public async Task<List<User>> GetAll()
     {
         return await _dbContext.Users
-            .Include(u => u.Preference)
-            .AsSplitQuery()
             .AsNoTracking()
+            .AsSplitQuery()
+            .Include(u => u.Preference)
+                .ThenInclude(p => p.Items.Where(i => i.Unlocked))
+                    .ThenInclude(i => i.Style)
             .ToListAsync();
     }
 

@@ -20,7 +20,7 @@ namespace Footstep.Application.UseCases.Users
                 .NotEmpty()
                 .WithMessage(ResourceErrorMessages.UNLOCKEDHEADSTYLES_REQUIRED);
             
-            RuleFor(request => request.UnlockedBagStyle)
+            RuleFor(request => request.UnlockedTorsoStyle)
                 .NotEmpty()
                 .WithMessage(ResourceErrorMessages.UNLOCKEDTORSOSTYLES_REQUIRED);
             

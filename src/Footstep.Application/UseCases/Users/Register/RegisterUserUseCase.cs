@@ -101,7 +101,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         List<Style> basicStyles = new List<Style>();
 
         basicStyles.Add(await CreateBasicStyle(styles, "Basic Head", "", StyleType.Head));
-        basicStyles.Add(await CreateBasicStyle(styles, "Basic Body", "", StyleType.Body));
+        basicStyles.Add(await CreateBasicStyle(styles, "Basic Body", "", StyleType.Torso));
         basicStyles.Add(await CreateBasicStyle(styles, "Basic Leg", "", StyleType.Leg));
         basicStyles.Add(await CreateBasicStyle(styles, "Basic Bag", "", StyleType.Bag));
         basicStyles.Add(await CreateBasicStyle(styles, "Basic Accessory", "", StyleType.Accessory));
