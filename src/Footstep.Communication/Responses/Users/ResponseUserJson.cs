@@ -17,10 +17,10 @@
         public string? MapStyle { get; set; }
         public string? PointOfInterestStyle { get; set; }
         public bool? AvatarOverProfile { get; set; }
-        public ResponseAvatarStyleJson? AvatarStyle { get; set; } = new ResponseAvatarStyleJson();
+        public ResponseAvatarStyle? AvatarStyle { get; set; }
     }
 
-    public class ResponseAvatarStyleJson
+    public class ResponseAvatarStyle
     {
         public string? Head { get; set; }
         public string? Body { get; set; }

@@ -55,7 +55,7 @@ namespace Footstep.Application.AutoMapper
                     MapStyle = src.Preference.MapStyle,
                     PointOfInterestStyle = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.PointOfInterest)!.Style!.Image,
                     AvatarOverProfile = src.Preference.AvatarOverProfile,
-                    AvatarStyle = new ResponseAvatarStyleJson()
+                    AvatarStyle = new ResponseAvatarStyle()
                     {
                         Head = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head && i.Equipped)!.Style!.Image,
                         Body = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Torso && i.Equipped)!.Style!.Image,
@@ -64,7 +64,7 @@ namespace Footstep.Application.AutoMapper
                         Accessory = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head && i.Equipped)!.Style!.Image
                     }
                 }))
-                .ForMember(dest => dest.Preferences, opt => opt.MapFrom(src => new ResponseUnlockedStyles
+                .ForMember(dest => dest.UnlockedStyles, opt => opt.MapFrom(src => new ResponseUnlockedStyles
                 {
                     UnlockedMapStyles = src.Preference.MapStyle,
                     UnlockedPointOfInterestStyles = src.Preference.Items.Where(i => i.Style!.StyleType == StyleType.PointOfInterest).Select(i => i.Style!.Image).ToList()!,
@@ -74,6 +74,20 @@ namespace Footstep.Application.AutoMapper
                     UnlockedBagStyles = src.Preference.Items.Where(i => i.Style!.StyleType == StyleType.Bag).Select(i => i.Style!.Image).ToList()!,
                     UnlockedAcessoryStyles = src.Preference.Items.Where(i => i.Style!.StyleType == StyleType.Accessory).Select(i => i.Style!.Image).ToList()!
                 }));
+
+            CreateMap<User, ResponsePaginationUserJson>()
+                 .ForMember(dest => dest.Preferences, opt => opt.MapFrom(src => new ResponsePaginationPreferences
+                 {
+                     AvatarOverProfile = src.Preference.AvatarOverProfile,
+                     AvatarStyle = new ResponsePaginationAvatarStyle()
+                     {
+                         Head = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head && i.Equipped)!.Style!.Image,
+                         Body = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Torso && i.Equipped)!.Style!.Image,
+                         Leg = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Leg && i.Equipped)!.Style!.Image,
+                         Bag = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Bag && i.Equipped)!.Style!.Image,
+                         Accessory = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head && i.Equipped)!.Style!.Image
+                     }
+                 }));
 
             CreateMap<Comment, ResponseCommentJson>()
                 .ForMember(dest => dest.AuthorId, opt => opt.MapFrom(src => src.UserId))

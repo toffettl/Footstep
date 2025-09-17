@@ -100,12 +100,12 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         var styles = await _styleReadOnlyRepository.GetAll();
         List<Style> basicStyles = new List<Style>();
 
-        basicStyles.Add(await CreateBasicStyle(styles, "Basic Head", "", StyleType.Head));
-        basicStyles.Add(await CreateBasicStyle(styles, "Basic Body", "", StyleType.Torso));
-        basicStyles.Add(await CreateBasicStyle(styles, "Basic Leg", "", StyleType.Leg));
-        basicStyles.Add(await CreateBasicStyle(styles, "Basic Bag", "", StyleType.Bag));
-        basicStyles.Add(await CreateBasicStyle(styles, "Basic Accessory", "", StyleType.Accessory));
-        basicStyles.Add(await CreateBasicStyle(styles, "Basic PoitnOfInterest", "", StyleType.PointOfInterest));
+        basicStyles.Add(await CreateBasicStyle(styles, "Basic Head", "Basic", StyleType.Head));
+        basicStyles.Add(await CreateBasicStyle(styles, "Basic Body", "Basic", StyleType.Torso));
+        basicStyles.Add(await CreateBasicStyle(styles, "Basic Leg", "Basic", StyleType.Leg));
+        basicStyles.Add(await CreateBasicStyle(styles, "Basic Bag", "Basic", StyleType.Bag));
+        basicStyles.Add(await CreateBasicStyle(styles, "Basic Accessory", "Basic", StyleType.Accessory));
+        basicStyles.Add(await CreateBasicStyle(styles, "Basic PoitnOfInterest", "Basic", StyleType.PointOfInterest));
 
         styles.RemoveAll(s => basicStyles.Contains(s));
 

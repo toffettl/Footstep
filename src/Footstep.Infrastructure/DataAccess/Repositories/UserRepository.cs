@@ -63,9 +63,11 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository,
     public async Task<(List<User> Users, int TotalCount)> GetAllPagination(int page, int pageSize)
     {
         var query = _dbContext.Users
-            .Include(u => u.Preference)
+            .AsTracking()
             .AsSplitQuery()
-            .AsNoTracking();
+            .Include(u => u.Preference)
+                .ThenInclude(p => p.Items.Where(i => i.Unlocked && i.Equipped))
+                    .ThenInclude(i => i.Style);
 
         var totalCount = await query.CountAsync();
 
