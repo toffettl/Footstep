@@ -4,12 +4,14 @@ using Footstep.Application.UseCases.Styles.GetByStore;
 using Footstep.Communication.Requests.Styles;
 using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Styles;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Footstep.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class StyleController : ControllerBase
     {
         [HttpPost]
