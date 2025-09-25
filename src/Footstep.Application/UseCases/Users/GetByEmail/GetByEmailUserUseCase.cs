@@ -39,20 +39,24 @@ namespace Footstep.Application.UseCases.Users.GetByEmail
 
             response.Preferences!.PointOfInterestStyle = items.FirstOrDefault(i => i.Style?.StyleType == StyleType.PointOfInterest && i.Equipped)?.Style?.Id;
 
-            response.Preferences!.AvatarStyle!.Head = items.FirstOrDefault(i => i.Style?.StyleType == StyleType.Head && i.Equipped)?.Style?.Id;
-            response.Preferences!.AvatarStyle!.Body = items.FirstOrDefault(i => i.Style?.StyleType == StyleType.Body && i.Equipped)?.Style?.Id;
-            response.Preferences!.AvatarStyle!.Leg = items.FirstOrDefault(i => i.Style?.StyleType == StyleType.Leg && i.Equipped)?.Style?.Id;
-            response.Preferences!.AvatarStyle!.Bag = items.FirstOrDefault(i => i.Style?.StyleType == StyleType.Bag && i.Equipped)?.Style?.Id;
-            response.Preferences!.AvatarStyle!.Acessory = items.FirstOrDefault(i => i.Style?.StyleType == StyleType.Accessory && i.Equipped)?.Style?.Id;
+            response.Preferences!.AvatarStyle!.Accessories = items.FirstOrDefault(i => i.Style?.StyleType == StyleType.Accessories && i.Equipped)?.Style?.Id;
+            response.Preferences!.AvatarStyle!.Top = items.FirstOrDefault(i => i.Style?.StyleType == StyleType.Top && i.Equipped)?.Style?.Id;
+            response.Preferences!.AvatarStyle!.FacialHair = items.FirstOrDefault(i => i.Style?.StyleType == StyleType.FacialHair && i.Equipped)?.Style?.Id;
+            response.Preferences!.AvatarStyle!.Clothes = items.FirstOrDefault(i => i.Style?.StyleType == StyleType.Clothes && i.Equipped)?.Style?.Id;
+            response.Preferences!.AvatarStyle!.Eyes = items.FirstOrDefault(i => i.Style?.StyleType == StyleType.Eyes && i.Equipped)?.Style?.Id;
+            response.Preferences!.AvatarStyle!.Eyebrown = items.FirstOrDefault(i => i.Style?.StyleType == StyleType.Eyebrown && i.Equipped)?.Style?.Id;
+            response.Preferences!.AvatarStyle!.Mouth = items.FirstOrDefault(i => i.Style?.StyleType== StyleType.Mouth && i.Equipped)?.Style?.Id;
+            response.Preferences!.AvatarStyle!.Skin = items.FirstOrDefault(i => i.Style?.StyleType == StyleType.Skin && i.Equipped)?.Style?.Id;
+            response.Preferences!.AvatarStyle!.BackPack = items.FirstOrDefault(i => i.Style?.StyleType != StyleType.BackPack && i.Equipped)?.Style?.Id;
 
             response.UnlockedStyles!.UnlockedMapStyles = user.Preference.MapStyle;
             response.UnlockedStyles!.UnlockedPointOfInterestStyles = items.Where(i => i.Style?.StyleType == StyleType.PointOfInterest).Select(i => i.StyleId).ToList();
-            response.UnlockedStyles!.UnlockedHeadStyles = items.Where(i => i.Style?.StyleType == StyleType.Head).Select(i => i.Style!.Id).ToList();
-            response.UnlockedStyles!.UnlockedBodyStyles = items.Where(i => i.Style?.StyleType == StyleType.Body).Select(i => i.Style!.Id).ToList();
-            response.UnlockedStyles!.UnlockedLegStyles = items.Where(i => i.Style?.StyleType == StyleType.Leg).Select(i => i.Style!.Id).ToList();
-            response.UnlockedStyles!.UnlockedBagStyles = items.Where(i => i.Style?.StyleType == StyleType.Bag).Select(i => i.Style!.Id).ToList();
-            response.UnlockedStyles!.UnlockedAcessoryStyles = items.Where(i => i.Style?.StyleType == StyleType.Accessory).Select(i => i.Style!.Id).ToList();
-
+            response.UnlockedStyles!.UnlockedAccessoriesStyles = items.Where(i => i.Style?.StyleType == StyleType.Head).Select(i => i.Style!.Id).ToList();
+            response.UnlockedStyles!.UnlockedTopStyles = items.Where(i => i.Style?.StyleType == StyleType.Body).Select(i => i.Style!.Id).ToList();
+            response.UnlockedStyles!.UnlockedFacialHairStyles = items.Where(i => i.Style?.StyleType == StyleType.Leg).Select(i => i.Style!.Id).ToList();
+            response.UnlockedStyles!.UnlockedClothesStyles = items.Where(i => i.Style?.StyleType == StyleType.Bag).Select(i => i.Style!.Id).ToList();
+            response.UnlockedStyles!.UnlockedEyesStyles = items.Where(i => i.Style?.StyleType == StyleType.Eyes).Select(i => i.Style!.Id).ToList();
+            response.UnlockedStyles!.UnlockedEyebrownStyles = items.Where(i => i.Style?.StyleType == StyleType.Eyebrown).Select(i => i.Style!.Id).ToList();
             return response;
         }
     }

@@ -30,11 +30,17 @@ namespace Footstep.Communication.Responses.Traces
 
     public class ResponseAvatarStyle
     {
-        public Guid Head {  get; set; }
-        public Guid Body { get; set; }
-        public Guid Leg { get; set; }
-        public Guid Bag { get; set; }
-        public Guid Accessory { get; set; }
+        public Guid Accessories {  get; set; }
+        public Guid Top { get; set; }
+        public Guid FacialHair { get; set; }
+        public Guid Clothes { get; set; }
+        public Guid Eyes { get; set; }
+        public Guid Eyebrown { get; set; }
+        public Guid Mouth { get; set; }
+        public Guid Skin { get; set; }
+        public Guid BackPack { get; set; }
+        public Guid PointOfInterest { get; set; }
+
     }
 
     public class ResponseCoordinates

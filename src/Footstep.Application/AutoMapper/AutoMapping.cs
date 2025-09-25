@@ -75,11 +75,15 @@ namespace Footstep.Application.AutoMapper
                     Name = src.User!.Name,
                     AvatarStyle = new ResponseAvatarStyle
                     {
-                        Head = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head)!.StyleId,
-                        Body = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Body)!.StyleId,
-                        Leg = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Leg)!.StyleId,
-                        Bag = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Bag)!.StyleId,
-                        Accessory = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Accessory)!.StyleId
+                        Accessories = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Accessories)!.StyleId,
+                        Top = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Top)!.StyleId,
+                        FacialHair = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.FacialHair)!.StyleId,
+                        Clothes = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Clothes)!.StyleId,
+                        Eyes = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Eyes)!.StyleId,
+                        Eyebrown = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Eyebrown)!.StyleId,
+                        Mouth = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Mouth)!.StyleId,
+                        Skin = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Skin)!.StyleId,
+                        BackPack = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.BackPack)!.StyleId
                     }
                 }))
                 .ForMember(dest => dest.Coordinates, opt => opt.MapFrom(src => new ResponseCoordinates
@@ -107,11 +111,15 @@ namespace Footstep.Application.AutoMapper
             CreateMap<User, ResponseAuthor>()
                 .ForMember(dest => dest.AvatarStyle, opt => opt.MapFrom(src => new ResponseAvatarStyle
                 {
-                    Head = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Head)!.StyleId,
-                    Body = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Body)!.StyleId,
-                    Leg = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Leg)!.StyleId,
-                    Bag = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Bag)!.StyleId,
-                    Accessory = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Accessory)!.StyleId,
+                    Accessories = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Accessories)!.StyleId,
+                    Top = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Top)!.StyleId,
+                    FacialHair = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.FacialHair)!.StyleId,
+                    Clothes = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Clothes)!.StyleId,
+                    Eyes = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Eyes)!.StyleId,
+                    Eyebrown = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Eyebrown)!.StyleId,
+                    Mouth = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Mouth)!.StyleId,
+                    Skin = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Skin)!.StyleId,
+                    BackPack = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.BackPack)!.StyleId
                 }));
 
             CreateMap<Address, ResponseCoordinates>();
@@ -125,11 +133,15 @@ namespace Footstep.Application.AutoMapper
                     Name = src.User!.Name,
                     AvatarStyle = new ResponsePaginationAvatarStyle
                     {
-                        Head = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head)!.StyleId,
-                        Body = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Body)!.StyleId,
-                        Leg = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Leg)!.StyleId,
-                        Bag = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Bag)!.StyleId,
-                        Accessory = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Accessory)!.StyleId
+                        Accessories = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Accessories)!.StyleId,
+                        Top = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Top)!.StyleId,
+                        FacialHair = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.FacialHair)!.StyleId,
+                        Clothes = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Clothes)!.StyleId,
+                        Eyes = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Eyes)!.StyleId,
+                        Eyebrown = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Eyebrown)!.StyleId,
+                        Mouth = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Mouth)!.StyleId,
+                        Skin = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Skin)!.StyleId,
+                        BackPack = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.BackPack)!.StyleId
                     }
                 }))
                 .ForMember(dest => dest.Coordinates, opt => opt.MapFrom(src => new ResponsePaginationCoordinates

@@ -22,21 +22,30 @@
 
     public class ResponseAvatarStyleJson
     {
-        public Guid? Head { get; set; }
-        public Guid? Body { get; set; }
-        public Guid? Leg { get; set; }
-        public Guid? Bag { get; set; }
-        public Guid? Acessory { get; set; }
+        public Guid? Accessories { get; set; }
+        public Guid? Top { get; set; }
+        public Guid? FacialHair { get; set; }
+        public Guid? Clothes { get; set; }
+        public Guid? Eyes { get; set; }
+        public Guid? Eyebrown { get; set; }
+        public Guid? Mouth { get; set; }
+        public Guid? Skin { get; set; }
+        public Guid? BackPack { get; set; }
     }
 
     public class ResponseUnlockedStylesJson
     {
         public string? UnlockedMapStyles { get; set; }
         public List<Guid>? UnlockedPointOfInterestStyles { get; set; }
-        public List<Guid>? UnlockedHeadStyles { get; set; }
-        public List<Guid>? UnlockedBodyStyles { get; set; }
-        public List<Guid>? UnlockedLegStyles { get; set; }
-        public List<Guid>? UnlockedBagStyles { get; set; }
-        public List<Guid>? UnlockedAcessoryStyles { get; set; }
+        public List<Guid>? UnlockedAccessoriesStyles { get; set; }
+        public List<Guid>? UnlockedTopStyles { get; set; }
+        public List<Guid>? UnlockedFacialHairStyles { get; set; }
+        public List<Guid>? UnlockedClothesStyles { get; set; }
+        public List<Guid>? UnlockedEyesStyles { get; set; }
+        public List<Guid>? UnlockedEyebrownStyles { get; set; }
+        public List<Guid>?  UnlockedMouthStyles { get; set; }
+        public List<Guid>? UnlockedSkinStyles { get; set; }
+        public List<Guid>? UnlockedBackPackStyles { get; set; }
+
     }
 }
