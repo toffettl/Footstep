@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Footstep.Infrastructure.Migrations
 {
     [DbContext(typeof(FootstepDbContext))]
-    [Migration("20250902211043_firstMigration")]
-    partial class firstMigration
+    [Migration("20250925133825_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -148,6 +148,27 @@ namespace Footstep.Infrastructure.Migrations
                     b.ToTable("CommentLikes");
                 });
 
+            modelBuilder.Entity("Footstep.Domain.Entities.Followership", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("FollowerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("FollowingId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FollowerId");
+
+                    b.HasIndex("FollowingId");
+
+                    b.ToTable("UserRelations");
+                });
+
             modelBuilder.Entity("Footstep.Domain.Entities.Item", b =>
                 {
                     b.Property<Guid>("Id")
@@ -205,9 +226,17 @@ namespace Footstep.Infrastructure.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Views")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("PointOfInterests");
                 });
@@ -311,8 +340,8 @@ namespace Footstep.Infrastructure.Migrations
                     b.Property<Guid>("PointOfInterestId")
                         .HasColumnType("uuid");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("integer");
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -323,28 +352,7 @@ namespace Footstep.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserPointOfInterestRelation");
-                });
-
-            modelBuilder.Entity("Footstep.Domain.Entities.UserRelation", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("FollowerId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("FollowingId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FollowerId");
-
-                    b.HasIndex("FollowingId");
-
-                    b.ToTable("UserRelations");
+                    b.ToTable("UserPointOfInterestRelations");
                 });
 
             modelBuilder.Entity("Footstep.Domain.Entities.Coin", b =>
@@ -400,6 +408,25 @@ namespace Footstep.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Footstep.Domain.Entities.Followership", b =>
+                {
+                    b.HasOne("Footstep.Domain.Entities.User", "Follower")
+                        .WithMany("Following")
+                        .HasForeignKey("FollowerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Footstep.Domain.Entities.User", "Following")
+                        .WithMany("Followers")
+                        .HasForeignKey("FollowingId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Follower");
+
+                    b.Navigation("Following");
+                });
+
             modelBuilder.Entity("Footstep.Domain.Entities.Item", b =>
                 {
                     b.HasOne("Footstep.Domain.Entities.Preference", "Preference")
@@ -427,7 +454,15 @@ namespace Footstep.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Footstep.Domain.Entities.User", "User")
+                        .WithMany("PointsOfInterest")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Address");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Footstep.Domain.Entities.Preference", b =>
@@ -458,25 +493,6 @@ namespace Footstep.Infrastructure.Migrations
                     b.Navigation("PointOfInterest");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Footstep.Domain.Entities.UserRelation", b =>
-                {
-                    b.HasOne("Footstep.Domain.Entities.User", "Follower")
-                        .WithMany("Following")
-                        .HasForeignKey("FollowerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Footstep.Domain.Entities.User", "Following")
-                        .WithMany("Followers")
-                        .HasForeignKey("FollowingId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Follower");
-
-                    b.Navigation("Following");
                 });
 
             modelBuilder.Entity("Footstep.Domain.Entities.Address", b =>
@@ -518,6 +534,8 @@ namespace Footstep.Infrastructure.Migrations
                     b.Navigation("Following");
 
                     b.Navigation("LikeComments");
+
+                    b.Navigation("PointsOfInterest");
 
                     b.Navigation("Preference")
                         .IsRequired();

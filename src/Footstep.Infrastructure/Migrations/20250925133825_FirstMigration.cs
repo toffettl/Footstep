@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Footstep.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class firstMigration : Migration
+    public partial class FirstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -67,31 +67,6 @@ namespace Footstep.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PointOfInterests",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Title = table.Column<string>(type: "text", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    PointOfInterestType = table.Column<int>(type: "integer", nullable: false),
-                    PointOfInterestVisibility = table.Column<int>(type: "integer", nullable: false),
-                    ExpireAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    AddressId = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PointOfInterests", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PointOfInterests_Addresses_AddressId",
-                        column: x => x.AddressId,
-                        principalTable: "Addresses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Coin",
                 columns: table => new
                 {
@@ -106,6 +81,39 @@ namespace Footstep.Infrastructure.Migrations
                     table.PrimaryKey("PK_Coin", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Coin_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PointOfInterests",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Views = table.Column<int>(type: "integer", nullable: false),
+                    PointOfInterestType = table.Column<int>(type: "integer", nullable: false),
+                    PointOfInterestVisibility = table.Column<int>(type: "integer", nullable: false),
+                    ExpireAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    AddressId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PointOfInterests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PointOfInterests_Addresses_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Addresses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PointOfInterests_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -193,26 +201,26 @@ namespace Footstep.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserPointOfInterestRelation",
+                name: "UserPointOfInterestRelations",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Like = table.Column<bool>(type: "boolean", nullable: false),
-                    Type = table.Column<int>(type: "integer", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     PointOfInterestId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserPointOfInterestRelation", x => x.Id);
+                    table.PrimaryKey("PK_UserPointOfInterestRelations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserPointOfInterestRelation_PointOfInterests_PointOfInteres~",
+                        name: "FK_UserPointOfInterestRelations_PointOfInterests_PointOfIntere~",
                         column: x => x.PointOfInterestId,
                         principalTable: "PointOfInterests",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserPointOfInterestRelation_Users_UserId",
+                        name: "FK_UserPointOfInterestRelations_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -318,19 +326,24 @@ namespace Footstep.Infrastructure.Migrations
                 column: "AddressId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PointOfInterests_UserId",
+                table: "PointOfInterests",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Preferences_UserId",
                 table: "Preferences",
                 column: "UserId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserPointOfInterestRelation_PointOfInterestId",
-                table: "UserPointOfInterestRelation",
+                name: "IX_UserPointOfInterestRelations_PointOfInterestId",
+                table: "UserPointOfInterestRelations",
                 column: "PointOfInterestId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserPointOfInterestRelation_UserId",
-                table: "UserPointOfInterestRelation",
+                name: "IX_UserPointOfInterestRelations_UserId",
+                table: "UserPointOfInterestRelations",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -357,7 +370,7 @@ namespace Footstep.Infrastructure.Migrations
                 name: "Items");
 
             migrationBuilder.DropTable(
-                name: "UserPointOfInterestRelation");
+                name: "UserPointOfInterestRelations");
 
             migrationBuilder.DropTable(
                 name: "UserRelations");
@@ -375,10 +388,10 @@ namespace Footstep.Infrastructure.Migrations
                 name: "PointOfInterests");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Addresses");
 
             migrationBuilder.DropTable(
-                name: "Addresses");
+                name: "Users");
         }
     }
 }
