@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Footstep.Communication.Enums;
 using Footstep.Communication.Requests.Comments;
 using Footstep.Communication.Responses.Comments;
 using Footstep.Domain.Entities;
@@ -10,7 +11,7 @@ namespace Footstep.Application.UseCases.Comments.Create
 {
     public class CreateCommentUseCase : ICreateCommentUseCase
     {
-        private readonly ICommentsWriteOnlyRepository _repository;
+        private readonly ICommentsWriteOnlyRepository _CommentWriteOnlyRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
@@ -19,26 +20,47 @@ namespace Footstep.Application.UseCases.Comments.Create
             IUnitOfWork unitOfWork,
             IMapper mapper)
         {
-            _repository = repository;
+            _CommentWriteOnlyRepository = repository;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
         public async Task<ResponseCommentJson> Execute(RequestCommentJson request)
         {
-            Validade(request);
+            Validate(request);
 
-            var entity = _mapper.Map<Comment>(request);
+            var comment = _mapper.Map<Comment>(request);
 
-            entity.CreatedAt = DateTime.UtcNow;
+            switch ((ParentType)(int)comment.ParentType)
+            {
+                case ParentType.Mark:
+                    comment.ParentPointOfInterestId = request.ParentId;
+                    comment.ParentCommentId = null;
+                    break;
+                case ParentType.Comment:
+                    comment.ParentCommentId = request.ParentId;
+                    comment.ParentPointOfInterestId = null;
+                    break;
+            }
 
-            await _repository.Add(entity);
+            CommentLike commentLike = new CommentLike
+            {
+                CommentId = comment.Id,
+                UserId = comment.UserId
+            };
+
+            comment.CommentLikes.Add(commentLike);
+
+            await _CommentWriteOnlyRepository.Add(comment);
 
             await _unitOfWork.Commit();
 
-            return _mapper.Map<ResponseCommentJson>(entity);
+            ResponseCommentJson response = _mapper.Map<ResponseCommentJson>(comment);
+
+            response.ParentId = request.ParentId;
+            return response;
         }
 
-        private void Validade(RequestCommentJson request)
+        private void Validate(RequestCommentJson request)
         {
             var validator = new CommentValidator();
 

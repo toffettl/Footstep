@@ -5,4 +5,6 @@ public class RequestRegisterUserJson
     public string? Email { get; set; }
     public string? Password { get; set; }
     public string? Biography { get; set; }
+    public string? MapStyle { get; set; }
+    public string? UnlockedMapStyles { get; set; }
 }

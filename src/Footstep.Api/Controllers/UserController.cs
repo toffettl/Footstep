@@ -1,12 +1,10 @@
-﻿using Footstep.Application.UseCases.Traces.GetAll;
-using Footstep.Application.UseCases.Users.GetAll;
+﻿using Footstep.Application.UseCases.Users.GetAll;
 using Footstep.Application.UseCases.Users.GetByEmail;
 using Footstep.Application.UseCases.Users.GetById;
 using Footstep.Application.UseCases.Users.UpdatePreferences;
 using Footstep.Application.UseCases.Users.UpdateUnlockedStyles;
 using Footstep.Communication.Requests.Users;
 using Footstep.Communication.Responses;
-using Footstep.Communication.Responses.Traces;
 using Footstep.Communication.Responses.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,8 +16,8 @@ namespace Footstep.Api.Controllers;
 public class UserController : ControllerBase
 {
     [HttpGet]
-    [Route("get-by-email/{email}")]
-    [ProducesResponseType(typeof(ResponseGetUserJson), StatusCodes.Status200OK)]
+    [Route("get-by-email{email}")]
+    [ProducesResponseType(typeof(ResponseUserJson), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetByEmail(
         [FromServices] IGetByEmailUserUseCase useCase, 
@@ -32,7 +30,7 @@ public class UserController : ControllerBase
 
     [HttpGet]
     [Route("get-by-id/{id}")]
-    [ProducesResponseType(typeof(ResponseGetUserJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseUserJson), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetByUserId([FromServices] IGetByIdUserUseCase useCase, [FromRoute] Guid id)
     {
@@ -70,17 +68,29 @@ public class UserController : ControllerBase
 
 
     [HttpGet]
-    [ProducesResponseType(typeof(ResponseUsersJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseUserTokenJson), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> GetAll(
         [FromServices] IGetAllUserUseCase useCase)
     {
         var response = await useCase.Execute();
 
-        if (response.Users.Count != 0)
-        {
-            return Ok(response);
-        }
-        return NoContent();
+        return Ok(response);
     }
+
+
+    [HttpGet("pagination")]
+    [ProducesResponseType(typeof(PagedResult<ResponseUserJson>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> GetAllPagination(
+        [FromServices] IGetAllUserPaginationUseCase useCase,
+        [FromQuery] int page,
+        [FromQuery] int pageSize)
+    {
+        var response = await useCase.Execute(page, pageSize);
+
+        return Ok(response);
+    }
+
+
 }

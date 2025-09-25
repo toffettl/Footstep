@@ -1,7 +1,13 @@
 ﻿using Footstep.Domain.Repositories;
+using Footstep.Domain.Repositories.Addresses;
+using Footstep.Domain.Repositories.CommentLikes;
 using Footstep.Domain.Repositories.Comments;
+using Footstep.Domain.Repositories.Items;
+using Footstep.Domain.Repositories.Preferences;
 using Footstep.Domain.Repositories.RelationUser;
+using Footstep.Domain.Repositories.Styles;
 using Footstep.Domain.Repositories.Traces;
+using Footstep.Domain.Repositories.UserPointOfInterestRelations;
 using Footstep.Domain.Repositories.Users;
 using Footstep.Domain.Security.Cryptography;
 using Footstep.Domain.Security.Tokens;
@@ -35,17 +41,41 @@ namespace Footstep.Infrastructure
         private static void AddRepositories(IServiceCollection services)
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IPointsOfInterestWriteOnlyRepository, PointOfInterestRepository>();
-            services.AddScoped<IPointsOfInterestUpdateOnlyRepository, PointOfInterestRepository>();
-            services.AddScoped<IPointsOfInterestReadOnlyRepository, PointOfInterestRepository>();
+
             services.AddScoped<IUserReadOnlyRepository, UserRepository>();
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
             services.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
-            services.AddScoped<IUserRelationReadOnlyRepository, UserRelationRepository>();
+
             services.AddScoped<IUserRelationWriteOnlyRepository, UserRelationRepository>();
+            services.AddScoped<IUserRelationReadOnlyRepository, UserRelationRepository>();
+
+            services.AddScoped<IPreferenceWriteOnlyRepository, PreferenceRepository>();
+            services.AddScoped<IPreferenceReadOnlyRepository, PreferenceRepository>();
+
+            services.AddScoped<IStyleWriteOnlyRepository, StyleRepository>();
+            services.AddScoped<IStyleReadOnlyRepository, StyleRepository>();
+
+            services.AddScoped<IItemWriteOnlyRepository, ItemRepository>();
+            services.AddScoped<IItemReadOnlyRepository, ItemRepository>();
+            services.AddScoped<IItemUpdateOnlyRepository, ItemRepository>();
+
+            services.AddScoped<IPointOfInterestWriteOnlyRepository, PointOfInterestRepository>();
+            services.AddScoped<IPointOfInterestUpdateOnlyRepository, PointOfInterestRepository>();
+            services.AddScoped<IPointOfInterestReadOnlyRepository, PointOfInterestRepository>();
+
+            services.AddScoped<IUserPointOfInterestRelationWriteOnlyRepository, UserPointOfInterestRelationRepository>();
+            services.AddScoped<IUserPointOfInterestRelationReadOnlyRepository, UserPointOfInterestRelationRepository>();
+            services.AddScoped<IUserPointOfInterestRelationUpdateOnlyRepository, UserPointOfInterestRelationRepository>();
+
+            services.AddScoped<IAddressWriteOnlyRepository, AddressRepository>();
+            services.AddScoped<IAddressReadOnlyRepository, AddressRepository>();
+
             services.AddScoped<ICommentsWriteOnlyRepository, CommentRepository>();
             services.AddScoped<ICommentsReadOnlyRepository, CommentRepository>();
             services.AddScoped<ICommentsUpdateOnlyRepository, CommentRepository>();
+
+            services.AddScoped<ICommentLikeWriteOnlyRepository, CommentLikeRepository>();
+            services.AddScoped<ICommentLikeReadOnlyRepository, CommentLikeRepository>();
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

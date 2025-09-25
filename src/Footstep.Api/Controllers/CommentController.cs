@@ -4,7 +4,9 @@ using Footstep.Application.UseCases.Comments.GetByAuthorId;
 using Footstep.Application.UseCases.Comments.GetByParentIdAndAuthorId;
 using Footstep.Application.UseCases.Comments.GetByParentsId;
 using Footstep.Application.UseCases.Comments.Update;
+using Footstep.Application.UseCases.Comments.UpdateContent;
 using Footstep.Application.UseCases.Traces.Update;
+using Footstep.Communication.Enums;
 using Footstep.Communication.Requests.Comments;
 using Footstep.Communication.Requests.Traces;
 using Footstep.Communication.Responses;
@@ -44,14 +46,17 @@ namespace Footstep.Api.Controllers
             return NoContent();
         }
 
-        [HttpGet("by-parent/{id}")]
+        [HttpGet("by-parent/{parentId}")]
         [ProducesResponseType(typeof(List<ResponseCommentJson>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetByParentId(
-            [FromServices] IGetCommentsByParentsIdUseCase useCase,
-            [FromRoute] Guid id)
+            [FromServices] IGetCommentsByParentIdUseCase useCase,
+            [FromRoute] Guid parentId,
+            [FromQuery] ParentType parentType,
+            [FromQuery] int page,
+            [FromQuery] int pageSize)
         {
-            var response = await useCase.Execute(id);
+            var response = await useCase.Execute(parentId, parentType, page, pageSize);
 
             return Ok(response);
         }
@@ -60,10 +65,12 @@ namespace Footstep.Api.Controllers
         [ProducesResponseType(typeof(List<ResponseCommentJson>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetByAuthorId(
-            [FromServices] IGetCommentsByAuthorIdUseCase useCase,
-            [FromRoute] Guid id)
+            [FromServices] IGetCommentsByUserIdUseCase useCase,
+            [FromRoute] Guid id,
+            [FromQuery] int page,
+            [FromQuery] int pageSize)
         {
-            var response = await useCase.Execute(id);
+            var response = await useCase.Execute(id, page, pageSize);
 
             return Ok(response);
         }
@@ -71,30 +78,43 @@ namespace Footstep.Api.Controllers
         [HttpGet("by-parent-and-author")]
         [ProducesResponseType(typeof(List<ResponseCommentJson>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetByAuthorId(
-            [FromServices] IGetCommentsByParentsIdAndAuthorIdUseCase useCase,
+        public async Task<IActionResult> GetByParentsIdAndAuthorId(
+            [FromServices] IGetCommentsByParentIdAndAuthorIdUseCase useCase,
             [FromQuery] Guid parentId,
-            [FromQuery] Guid authorId)
+            [FromQuery] Guid authorId,
+            [FromQuery] ParentType parentType)
         {
-            var response = await useCase.Execute(parentId, authorId);
+            var response = await useCase.Execute(parentId, authorId, parentType);
 
             return Ok(response);
         }
 
-        [HttpPut]
-        [Route("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpPut("Likes/{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Update(
-            [FromServices] IUpdateStatusCommentsUseCase useCase,
+        public async Task<IActionResult> UpdateCommentLike(
+            [FromServices] IUpdateCommentLikeCommentUseCase useCase,
             [FromRoute] Guid id,
-            [FromBody] RequestUpdateStatusCommentsJson request)
+            [FromQuery] Guid userId)
+        {
+            await useCase.Execute(id, userId);
+
+            return NoContent();
+        }
+
+        [HttpPut("Content/{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> UpdateContent(
+            [FromServices] IUpdateContentCommentUseCase useCase,
+            [FromRoute] Guid id,
+            [FromBody] RequestUpdateContentComment request)
         {
             await useCase.Execute(id, request);
 
             return NoContent();
         }
-
     }
 }

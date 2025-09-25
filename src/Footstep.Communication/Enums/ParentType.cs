@@ -3,6 +3,6 @@
     public enum ParentType
     {
         Mark = 0,
-        comment = 1
+        Comment = 1
     }
 }

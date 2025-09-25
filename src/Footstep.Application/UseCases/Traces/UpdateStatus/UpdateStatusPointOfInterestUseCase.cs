@@ -1,41 +1,41 @@
 ﻿using AutoMapper;
-using Footstep.Communication.Requests.Comments;
-using Footstep.Communication.Requests.Traces;
 using Footstep.Domain.Repositories;
-using Footstep.Domain.Repositories.Traces;
+using Footstep.Domain.Repositories.UserPointOfInterestRelations;
 using Footstep.Exception;
 using Footstep.Exception.ExceptionsBase;
 
 namespace Footstep.Application.UseCases.Traces.UpdateStatus
 {
-    public class UpdateStatusPointOfInterestUseCase : IUpdateStatusPointOfInterestUseCase
+    public class UpdateStatusPointOfInterestUseCase : 
+        IUpdateStatusPointOfInterestUseCase
     {
-        private readonly IPointsOfInterestUpdateOnlyRepository _repository;
+        private readonly IUserPointOfInterestRelationReadOnlyRepository _userPointOfInterestRelationReadOnlyRepository;
+        private readonly IUserPointOfInterestRelationUpdateOnlyRepository _userPointOfInterestRelationUpdateOnlyRepository;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
 
-        public UpdateStatusPointOfInterestUseCase(IPointsOfInterestUpdateOnlyRepository repository,
+        public UpdateStatusPointOfInterestUseCase(
+            IUserPointOfInterestRelationReadOnlyRepository userPointOfInterestRelationReadOnlyRepository,
+            IUserPointOfInterestRelationUpdateOnlyRepository userPointOfInterestRelationUpdateOnlyRepository,
             IUnitOfWork unitOfWork,
             IMapper mapper)
         {
-            _repository = repository;
+            _userPointOfInterestRelationReadOnlyRepository = userPointOfInterestRelationReadOnlyRepository;
+            _userPointOfInterestRelationUpdateOnlyRepository = userPointOfInterestRelationUpdateOnlyRepository;
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
         }
 
-        public async Task Execute(Guid id, RequestUpdateStatusPointOfInterestJson request)
+        public async Task Execute(Guid id, Guid userId, bool like)
         {
-            var pointOfInterest = await _repository.GetById(id);
+            var userPointOfInterestRelation = await _userPointOfInterestRelationReadOnlyRepository.GetByUserIdAndPointOfInterestId(id, userId);
 
-            if (pointOfInterest == null)
+            if (userPointOfInterestRelation  == null)
             {
-                throw new NotFoundException(ResourceErrorMessages.POINT_OF_INTEREST_NOT_FOUND);
+                throw new NotFoundException(ResourceErrorMessages.USER_AND_POINT_OF_INTEREST_RELATION_NOT_FOUND);
             }
 
-            _mapper.Map(request, pointOfInterest);
+            userPointOfInterestRelation.Like = like;
 
-            pointOfInterest.UpdatedAt = DateTime.UtcNow;
-            _repository.Update(pointOfInterest);
+            _userPointOfInterestRelationUpdateOnlyRepository.Update(userPointOfInterestRelation);
 
             await _unitOfWork.Commit();
         }

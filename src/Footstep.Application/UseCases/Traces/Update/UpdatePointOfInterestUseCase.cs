@@ -9,39 +9,43 @@ namespace Footstep.Application.UseCases.Traces.Update
 {
     public class UpdatePointOfInterestUseCase : IUpdatePointOfInterestUseCase
     {
-        private readonly IPointsOfInterestUpdateOnlyRepository _repostiory;
+        private readonly IPointOfInterestReadOnlyRepository _pointOfInterestReadOnlyRepository;
+        private readonly IPointOfInterestUpdateOnlyRepository _pointOfInterestUpdateOnlyRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UpdatePointOfInterestUseCase(IPointsOfInterestUpdateOnlyRepository repository,
-        IUnitOfWork unitOfWork,
-        IMapper mapper)
+        public UpdatePointOfInterestUseCase(
+            IPointOfInterestReadOnlyRepository pointsOfInterestReadOnlyRepository,
+            IPointOfInterestUpdateOnlyRepository pointOfInterestUpdateOnlyRepository,
+            IUnitOfWork unitOfWork,
+            IMapper mapper)
         {
-            _repostiory = repository;
+            _pointOfInterestReadOnlyRepository = pointsOfInterestReadOnlyRepository;
+            _pointOfInterestUpdateOnlyRepository = pointOfInterestUpdateOnlyRepository;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task Execute(Guid id, RequestPointOfInterestJson request)
+        public async Task Execute(Guid id, RequestUpdatePointOfInterestJson request)
         {
             Validate(request);
 
-            var trace = await _repostiory.GetById(id);
+            var pointOfInterest = await _pointOfInterestReadOnlyRepository.GetById(id);
 
-            if(trace == null)
+            if(pointOfInterest == null)
             {
                 throw new NotFoundException(ResourceErrorMessages.TRACE_NOT_FOUND);
             }
 
-            _mapper.Map(request, trace);
+            _mapper.Map(request, pointOfInterest);
 
-            _repostiory.Update(trace);
+            _pointOfInterestUpdateOnlyRepository.Update(pointOfInterest);
 
             await _unitOfWork.Commit();
         }
 
-        private void Validate(RequestPointOfInterestJson request)
+        private void Validate(RequestUpdatePointOfInterestJson request)
         {
-            var validator = new TraceValidator();
+            var validator = new RequestUpdatePointOfInterestJsonValidator();
 
             var result = validator.Validate(request);
 
