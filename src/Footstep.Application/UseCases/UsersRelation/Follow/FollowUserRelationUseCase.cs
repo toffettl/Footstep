@@ -31,7 +31,7 @@ public class FollowUserRelationUseCase : IFollowUserRelationUseCase
     {
         await Validate(request);
 
-        var relation = _mapper.Map<Domain.Entities.UserRelation>(request);
+        var relation = _mapper.Map<Domain.Entities.Followership>(request);
 
         await _writeOnlyRepository.AddRelation(relation);
 

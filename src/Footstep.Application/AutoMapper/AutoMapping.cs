@@ -29,7 +29,7 @@ namespace Footstep.Application.AutoMapper
 
             CreateMap<RequestUpdateUnlockedStylesUserJson, Preference>();
 
-            CreateMap<RequestUserRelationJson, UserRelation>();
+            CreateMap<RequestUserRelationJson, Followership>();
             
             CreateMap<RequestStyleJson, Style>();
             
@@ -154,17 +154,17 @@ namespace Footstep.Application.AutoMapper
                     Commentaries = src.Comments.Count()
                 }));
 
-            CreateMap<UserRelation, ResponseFollowersJson>()
+            CreateMap<Followership, ResponseFollowersJson>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Follower!.Id))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Follower!.Name))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Follower!.Email));
 
-            CreateMap<UserRelation, ResponseFollowingJson>()
+            CreateMap<Followership, ResponseFollowingJson>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Following!.Id))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Following!.Name))
                 .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Following!.Email));
 
-            CreateMap<UserRelation, ResponseUserRelationJson>();
+            CreateMap<Followership, ResponseUserRelationJson>();
 
             CreateMap<Style, ResponseStyleJson>();
         }

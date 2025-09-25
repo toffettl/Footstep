@@ -10,7 +10,7 @@ namespace Footstep.Infrastructure.DataAccess
         public DbSet<PointOfInterest> PointOfInterests { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<UserRelation> UserRelations { get; set; }
+        public DbSet<Followership> UserRelations { get; set; }
         public DbSet<UserPointOfInterestRelation> UserPointOfInterestRelations { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<CommentLike> CommentLikes { get; set; }
@@ -31,13 +31,13 @@ namespace Footstep.Infrastructure.DataAccess
                 .WithOne(p => p.User)
                 .HasForeignKey<Preference>(p => p.UserId);
 
-            modelBuilder.Entity<UserRelation>()
+            modelBuilder.Entity<Followership>()
                 .HasOne(ur => ur.Follower)
                 .WithMany(u => u.Following)
                 .HasForeignKey(ur => ur.FollowerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<UserRelation>()
+            modelBuilder.Entity<Followership>()
                 .HasOne(ur => ur.Following)
                 .WithMany(u => u.Followers)
                 .HasForeignKey(ur => ur.FollowingId)

@@ -11,7 +11,7 @@ public class UserRelationRepository : IUserRelationWriteOnlyRepository,
     {
         _dbContext = dbContext;
     }
-    public async Task AddRelation(UserRelation userRelation)
+    public async Task AddRelation(Followership userRelation)
     {
         await _dbContext.UserRelations.AddAsync(userRelation);
     }
@@ -30,7 +30,7 @@ public class UserRelationRepository : IUserRelationWriteOnlyRepository,
         return true;
     }
 
-    public async Task<List<UserRelation>> GetFollowers(Guid followingId)
+    public async Task<List<Followership>> GetFollowers(Guid followingId)
     {
         return await _dbContext.UserRelations
             .Where(user => user.FollowingId == followingId)
@@ -38,7 +38,7 @@ public class UserRelationRepository : IUserRelationWriteOnlyRepository,
             .ToListAsync();
     }
 
-    public async Task<List<UserRelation>> GetFollowing(Guid followerId)
+    public async Task<List<Followership>> GetFollowing(Guid followerId)
     {
         return await _dbContext.UserRelations
             .Where(user => user.FollowerId == followerId)

@@ -17,8 +17,8 @@ public class User
     public Coin Coin { get; set; } = new Coin();
     public Preference Preference { get; set; } = new Preference();
 
-    public ICollection<UserRelation> Followers { get; set; } = new List<UserRelation>();
-    public ICollection<UserRelation> Following { get; set; } = new List<UserRelation>();
+    public ICollection<Followership> Followers { get; set; } = new List<Followership>();
+    public ICollection<Followership> Following { get; set; } = new List<Followership>();
     public ICollection<CommentLike> LikeComments { get; set; } = new List<CommentLike>();
     public ICollection<PointOfInterest> PointsOfInterest {  get; set; } = new List<PointOfInterest>();
     public ICollection<UserPointOfInterestRelation> UserPointOfInterestRelations { get; set; } = new List<UserPointOfInterestRelation>();

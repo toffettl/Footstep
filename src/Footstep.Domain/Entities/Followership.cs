@@ -1,5 +1,5 @@
 ﻿namespace Footstep.Domain.Entities;
-public class UserRelation
+public class Followership
 {
     public Guid Id { get; set; } = Guid.NewGuid();
 
