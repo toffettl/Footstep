@@ -198,9 +198,6 @@
   <data name="UNLOCKEDLEGSTYLES_REQUIRED" xml:space="preserve">
     <value>The unlockedlegstyles is required</value>
   </data>
-  <data name="UNLOCKEDTORSOSTYLES_REQUIRED" xml:space="preserve">
-    <value>The unlockedtorsostyles is required</value>
-  </data>
   <data name="UNLOCKEDHEADSTYLES_REQUIRED" xml:space="preserve">
     <value>The unlockedheadstyles is required</value>
   </data>
@@ -254,5 +251,50 @@
   </data>
   <data name="POINT_OF_INTEREST_NOT_FOUND" xml:space="preserve">
     <value>Point of interest not found</value>
+  </data>
+  <data name="TYPE_INVALID" xml:space="preserve">
+    <value>Invalid type</value>
+  </data>
+  <data name="UNLOCKEDTORSOSTYLES_REQUIRED" xml:space="preserve">
+    <value>The unlockedtorsostyles is required</value>
+  </data>
+  <data name="IMAGE_EMPTY" xml:space="preserve">
+    <value>Image is empty</value>
+  </data>
+  <data name="PRICE_INVALID" xml:space="preserve">
+    <value>Price must be greater than 0</value>
+  </data>
+  <data name="STYLETYPE_INVALID" xml:space="preserve">
+    <value>Styletype must be between 0 and 4</value>
+  </data>
+  <data name="NAME_ALREADY_REGISTERED" xml:space="preserve">
+    <value>This name is already registered</value>
+  </data>
+  <data name="STORE_REQUIRED" xml:space="preserve">
+    <value>Store is required</value>
+  </data>
+  <data name="PRICE_REQUIRED" xml:space="preserve">
+    <value>Price is required</value>
+  </data>
+  <data name="STYLETYPE_REQUIRED" xml:space="preserve">
+    <value>Styletype is required</value>
+  </data>
+  <data name="STYLE_NOT_FOUND" xml:space="preserve">
+    <value>Style not found</value>
+  </data>
+  <data name="COMMENTLIKE_ALREADY_EXISTS" xml:space="preserve">
+    <value>This user has already given like to this comment</value>
+  </data>
+  <data name="CONTENT_EMPTY" xml:space="preserve">
+    <value>Content cannot be empty</value>
+  </data>
+  <data name="BODY_EMPTY" xml:space="preserve">
+    <value>Body cannot be empty</value>
+  </data>
+  <data name="ITEM_NOT_FOUND" xml:space="preserve">
+    <value>Item not found</value>
+  </data>
+  <data name="USER_AND_POINT_OF_INTEREST_RELATION_NOT_FOUND" xml:space="preserve">
+    <value>User and point of interest relation not found</value>
   </data>
 </root>

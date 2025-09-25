@@ -1,29 +1,25 @@
 ﻿namespace Footstep.Domain.Entities;
 public class User
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
+
     public string? Name { get; set; }
     public string? Email { get; set; }
     public string? Biography { get; set; }
     public string? Password { get; set; }
-    public string? MapStyle { get; set; }
-    public string? PointOfInterestStyle { get; set; }
-    public bool? AvatarOverProfile { get; set; }
-    public string? HeadStyle { get; set; }
-    public string? TorsoStyle { get; set; }
-    public string? LegStyle { get; set; }
-    public string? BagStyle { get; set; }
-    public string? AcessoryStyle {  get; set; }
-    public string? UnlockedMapStyles { get; set; }
-    public string? UnlockedPointOfInterestStyles { get; set; }
-    public string? UnlockedHeadStyles { get; set; }
-    public string? UnlockedTorsoStyles { get; set; }
-    public string? UnlockedLegStyles { get; set; }
-    public string? UnlockedBagStyles { get; set; }
-    public string? UnlockedAcessoryStyles { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
+
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
+    public Guid CoinId { get; set; }
+    public Guid PreferenceId { get; set; }
+
+    public Coin Coin { get; set; } = new Coin();
+    public Preference Preference { get; set; } = new Preference();
 
     public ICollection<UserRelation> Followers { get; set; } = new List<UserRelation>();
     public ICollection<UserRelation> Following { get; set; } = new List<UserRelation>();
+    public ICollection<CommentLike> LikeComments { get; set; } = new List<CommentLike>();
+    public ICollection<PointOfInterest> PointsOfInterest {  get; set; } = new List<PointOfInterest>();
+    public ICollection<UserPointOfInterestRelation> UserPointOfInterestRelations { get; set; } = new List<UserPointOfInterestRelation>();
 }

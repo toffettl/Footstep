@@ -8,9 +8,17 @@ namespace Footstep.Application.UseCases.Comments
     {
         public CommentValidator()
         {
-            RuleFor(x => x.Content).NotEmpty().WithMessage(ResourceErrorMessages.COMMENT_CANNOT_BE_EMPTY);
-            RuleFor(x => x.AuthorId).NotEmpty().WithMessage(ResourceErrorMessages.AUTHOR_ID_CANNOT_BE_EMPTY);
-            RuleFor(x => x.ParentId).NotEmpty().WithMessage(ResourceErrorMessages.PARENT_ID_CANNOT_BE_EMPTY);
+            RuleFor(x => x.Content)
+                .NotEmpty().WithMessage(ResourceErrorMessages.COMMENT_CANNOT_BE_EMPTY);
+
+            RuleFor(x => x.AuthorId)
+                .NotEmpty().WithMessage(ResourceErrorMessages.AUTHOR_ID_CANNOT_BE_EMPTY);
+
+            RuleFor(x => x.ParentId)
+                .NotEmpty().WithMessage(ResourceErrorMessages.PARENT_ID_CANNOT_BE_EMPTY);
+
+            RuleFor(x => x.Content)
+                .NotEmpty().WithMessage(ResourceErrorMessages.CONTENT_EMPTY);
         }
     }
 }

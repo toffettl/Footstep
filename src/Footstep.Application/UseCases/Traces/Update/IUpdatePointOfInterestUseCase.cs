@@ -4,6 +4,6 @@ namespace Footstep.Application.UseCases.Traces.Update
 {
     public interface IUpdatePointOfInterestUseCase
     {
-        Task Execute(Guid id, RequestPointOfInterestJson request);
+        Task Execute(Guid id, RequestUpdatePointOfInterestJson request);
     }
 }

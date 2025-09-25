@@ -1,6 +1,7 @@
 ﻿using Footstep.Application.UseCases.Traces.Create;
 using Footstep.Application.UseCases.Traces.Delete;
 using Footstep.Application.UseCases.Traces.GetAll;
+using Footstep.Application.UseCases.Traces.GetAllByPage;
 using Footstep.Application.UseCases.Traces.GetById;
 using Footstep.Application.UseCases.Traces.GetByRay;
 using Footstep.Application.UseCases.Traces.Update;
@@ -19,7 +20,7 @@ namespace Footstep.Api.Controllers
     public class PointOfInterestController : ControllerBase
     {
         [HttpPost]
-        [ProducesResponseType(typeof(ResponsePointOfIntereseJson), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponsePointOfInterestJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create([FromServices] ICreatePointOfInterestUseCase usecase,
             [FromBody] RequestPointOfInterestJson request)
@@ -44,49 +45,76 @@ namespace Footstep.Api.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update(
-            [FromServices] IUpdateStatusPointOfInterestUseCase useCase,
+            [FromServices] IUpdatePointOfInterestUseCase useCase,
             [FromRoute] Guid id,
-            [FromBody] RequestUpdateStatusPointOfInterestJson request)
+            [FromBody] RequestUpdatePointOfInterestJson request)
         {
             await useCase.Execute(id, request);
 
             return NoContent();
         }
 
+        [HttpPut]
+        [Route("Status/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Updatetatus(
+            [FromServices] IUpdateStatusPointOfInterestUseCase useCase,
+            [FromRoute] Guid id,
+            [FromQuery] Guid userId,
+            [FromQuery] bool like)
+        {
+            await useCase.Execute(id, userId, like);
+
+            return NoContent();
+        }
+
         [HttpGet]
         [Route("{id}")]
-        [ProducesResponseType(typeof(ResponsePointOfIntereseJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponsePointOfInterestJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(
             [FromServices] IGetByIdPointOfInterestUseCase useCase,
-            [FromRoute] Guid id)
+            [FromRoute] Guid id,
+            [FromQuery] Guid userId)
         {
-            var response = await useCase.Execute(id);
+            var response = await useCase.Execute(id, userId);
 
             return Ok(response);
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(ResponsePointOfIntereseJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponsePointOfInterestJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetAll(
             [FromServices] IGetAllPoitntOfInterestUseCase useCase)
         {
             var response = await useCase.Execute();
 
-            if (response.Traces.Count != 0)
-            {
-                return Ok(response);
-            }
-            return NoContent();
+            return Ok(response);
+        }
+
+        [HttpGet("All/Page")]
+        [ProducesResponseType(typeof(ResponsePointOfInterestJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> GetAllByPage(
+            [FromServices] IGetAllPointsOfInterestByPageUseCase useCase,
+            [FromQuery] int page,
+            [FromQuery] int pageSize)
+        {
+            var response = await useCase.Execute(page, pageSize);
+
+            return Ok(response);
         }
 
         [HttpGet("nearby")]
-        [ProducesResponseType(typeof(List<ResponsePointOfIntereseJson>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<ResponsePointOfInterestJson>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetNearbyTraces(
             [FromServices] IGetNearbyPointsOfInterestUseCase useCase,
             [FromQuery] double latitude,

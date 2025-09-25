@@ -22,48 +22,10 @@ namespace Footstep.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Footstep.Domain.Entities.Comment", b =>
+            modelBuilder.Entity("Footstep.Domain.Entities.Address", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("AuthorId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Content")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("Likes")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("ParentId")
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("ParentType")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Replies")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("Footstep.Domain.Entities.PointOfInterest", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("AuthorId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Cep")
@@ -72,34 +34,19 @@ namespace Footstep.Infrastructure.Migrations
                     b.Property<string>("City")
                         .HasColumnType("text");
 
-                    b.Property<string>("Coutry")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
+                    b.Property<string>("Country")
                         .HasColumnType("text");
 
                     b.Property<string>("District")
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("ExpireAt")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<double>("Latitude")
                         .HasColumnType("double precision");
-
-                    b.Property<int>("Likes")
-                        .HasColumnType("integer");
 
                     b.Property<double>("Longitude")
                         .HasColumnType("double precision");
 
-                    b.Property<string>("Number")
-                        .HasColumnType("text");
-
-                    b.Property<int>("PointOfInterestType")
+                    b.Property<int>("Number")
                         .HasColumnType("integer");
 
                     b.Property<string>("State")
@@ -108,23 +55,210 @@ namespace Footstep.Infrastructure.Migrations
                     b.Property<string>("Street")
                         .HasColumnType("text");
 
+                    b.HasKey("Id");
+
+                    b.ToTable("Addresses");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.Coin", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Earned")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Spent")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Total")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Coin");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.Comment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("ParentCommentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ParentPointOfInterestId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("ParentType")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentCommentId");
+
+                    b.HasIndex("ParentPointOfInterestId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.CommentLike", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CommentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommentId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CommentLikes");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.Item", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("Equipped")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("PreferenceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("StyleId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("Unlocked")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PreferenceId");
+
+                    b.HasIndex("StyleId");
+
+                    b.ToTable("Items");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.PointOfInterest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("AddressId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("ExpireAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("PointOfInterestType")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PointOfInterestVisibility")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid?>("UserId")
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
+
+                    b.ToTable("PointOfInterests");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.Preference", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int>("Views")
+                    b.Property<bool>("AvatarOverProfile")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("MapStyle")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UnlockedMapStyles")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Preferences");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.Style", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("Store")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("StyleType")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("PointOfInterests");
+                    b.ToTable("Styles");
                 });
 
             modelBuilder.Entity("Footstep.Domain.Entities.User", b =>
@@ -133,31 +267,16 @@ namespace Footstep.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AcessoryStyle")
-                        .HasColumnType("text");
-
-                    b.Property<bool?>("AvatarOverProfile")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("BagStyle")
-                        .HasColumnType("text");
-
                     b.Property<string>("Biography")
                         .HasColumnType("text");
+
+                    b.Property<Guid>("CoinId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
-                        .HasColumnType("text");
-
-                    b.Property<string>("HeadStyle")
-                        .HasColumnType("text");
-
-                    b.Property<string>("LegStyle")
-                        .HasColumnType("text");
-
-                    b.Property<string>("MapStyle")
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
@@ -166,32 +285,8 @@ namespace Footstep.Infrastructure.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("text");
 
-                    b.Property<string>("PointOfInterestStyle")
-                        .HasColumnType("text");
-
-                    b.Property<string>("TorsoStyle")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UnlockedAcessoryStyles")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UnlockedBagStyles")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UnlockedHeadStyles")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UnlockedLegStyles")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UnlockedMapStyles")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UnlockedPointOfInterestStyles")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UnlockedTorsoStyles")
-                        .HasColumnType("text");
+                    b.Property<Guid>("PreferenceId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -199,6 +294,33 @@ namespace Footstep.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.UserPointOfInterestRelation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("Like")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("PointOfInterestId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PointOfInterestId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserPointOfInterestRelation");
                 });
 
             modelBuilder.Entity("Footstep.Domain.Entities.UserRelation", b =>
@@ -222,11 +344,115 @@ namespace Footstep.Infrastructure.Migrations
                     b.ToTable("UserRelations");
                 });
 
-            modelBuilder.Entity("Footstep.Domain.Entities.PointOfInterest", b =>
+            modelBuilder.Entity("Footstep.Domain.Entities.Coin", b =>
                 {
                     b.HasOne("Footstep.Domain.Entities.User", "User")
+                        .WithOne("Coin")
+                        .HasForeignKey("Footstep.Domain.Entities.Coin", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.Comment", b =>
+                {
+                    b.HasOne("Footstep.Domain.Entities.Comment", "ParentComment")
+                        .WithMany("Comments")
+                        .HasForeignKey("ParentCommentId");
+
+                    b.HasOne("Footstep.Domain.Entities.PointOfInterest", "ParentPointOfInterest")
+                        .WithMany("Comments")
+                        .HasForeignKey("ParentPointOfInterestId");
+
+                    b.HasOne("Footstep.Domain.Entities.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ParentComment");
+
+                    b.Navigation("ParentPointOfInterest");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.CommentLike", b =>
+                {
+                    b.HasOne("Footstep.Domain.Entities.Comment", "Comment")
+                        .WithMany("CommentLikes")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Footstep.Domain.Entities.User", "User")
+                        .WithMany("LikeComments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comment");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.Item", b =>
+                {
+                    b.HasOne("Footstep.Domain.Entities.Preference", "Preference")
+                        .WithMany("Items")
+                        .HasForeignKey("PreferenceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Footstep.Domain.Entities.Style", "Style")
+                        .WithMany("Items")
+                        .HasForeignKey("StyleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Preference");
+
+                    b.Navigation("Style");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.PointOfInterest", b =>
+                {
+                    b.HasOne("Footstep.Domain.Entities.Address", "Address")
+                        .WithMany("PointOfInterests")
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Address");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.Preference", b =>
+                {
+                    b.HasOne("Footstep.Domain.Entities.User", "User")
+                        .WithOne("Preference")
+                        .HasForeignKey("Footstep.Domain.Entities.Preference", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.UserPointOfInterestRelation", b =>
+                {
+                    b.HasOne("Footstep.Domain.Entities.PointOfInterest", "PointOfInterest")
+                        .WithMany("UserPointOfInterestRelations")
+                        .HasForeignKey("PointOfInterestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Footstep.Domain.Entities.User", "User")
+                        .WithMany("UserPointOfInterestRelations")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PointOfInterest");
 
                     b.Navigation("User");
                 });
@@ -250,11 +476,50 @@ namespace Footstep.Infrastructure.Migrations
                     b.Navigation("Following");
                 });
 
+            modelBuilder.Entity("Footstep.Domain.Entities.Address", b =>
+                {
+                    b.Navigation("PointOfInterests");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.Comment", b =>
+                {
+                    b.Navigation("CommentLikes");
+
+                    b.Navigation("Comments");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.PointOfInterest", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("UserPointOfInterestRelations");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.Preference", b =>
+                {
+                    b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.Style", b =>
+                {
+                    b.Navigation("Items");
+                });
+
             modelBuilder.Entity("Footstep.Domain.Entities.User", b =>
                 {
+                    b.Navigation("Coin")
+                        .IsRequired();
+
                     b.Navigation("Followers");
 
                     b.Navigation("Following");
+
+                    b.Navigation("LikeComments");
+
+                    b.Navigation("Preference")
+                        .IsRequired();
+
+                    b.Navigation("UserPointOfInterestRelations");
                 });
 #pragma warning restore 612, 618
         }

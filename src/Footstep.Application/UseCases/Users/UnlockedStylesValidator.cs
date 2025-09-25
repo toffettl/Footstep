@@ -12,27 +12,27 @@ namespace Footstep.Application.UseCases.Users
                 .NotEmpty()
                 .WithMessage(ResourceErrorMessages.UNLOCKEDMAPSTYLES_REQUIRED);
 
-            RuleFor(request => request.UnlockedPointOfInterestStyles)
+            RuleFor(request => request.UnlockedPointOfInterestStyle)
                 .NotEmpty()
                 .WithMessage(ResourceErrorMessages.UNLOCKEDPOINTOFINTERESTSTYLES_REQUIRED);
             
-            RuleFor(request => request.UnlockedHeadStyles)
+            RuleFor(request => request.UnlockedHeadStyle)
                 .NotEmpty()
                 .WithMessage(ResourceErrorMessages.UNLOCKEDHEADSTYLES_REQUIRED);
             
-            RuleFor(request => request.UnlockedTorsoStyles)
+            RuleFor(request => request.UnlockedBagStyle)
                 .NotEmpty()
                 .WithMessage(ResourceErrorMessages.UNLOCKEDTORSOSTYLES_REQUIRED);
             
-            RuleFor(request => request.UnlockedLegStyles)
+            RuleFor(request => request.UnlockedLegStyle)
                 .NotEmpty()
                 .WithMessage(ResourceErrorMessages.UNLOCKEDLEGSTYLES_REQUIRED);
             
-            RuleFor(request => request.UnlockedBagStyles)
+            RuleFor(request => request.UnlockedBagStyle)
                 .NotEmpty()
                 .WithMessage(ResourceErrorMessages.UNLOCKEDBAGSTYLES_REQUIRED);
             
-            RuleFor(request => request.UnlockedAcessoryStyles)
+            RuleFor(request => request.UnlockedAcessoryStyle)
                 .NotEmpty()
                 .WithMessage(ResourceErrorMessages.UNLOCKEDACESSORYSTYLES_REQUIRED);
         }

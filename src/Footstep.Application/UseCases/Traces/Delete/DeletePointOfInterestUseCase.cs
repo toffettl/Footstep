@@ -7,9 +7,9 @@ namespace Footstep.Application.UseCases.Traces.Delete
 {
     public class DeletePointOfInterestUseCase : IDeletePointOfInterestUseCase
     {
-        private readonly IPointsOfInterestWriteOnlyRepository _repository;
+        private readonly IPointOfInterestWriteOnlyRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
-        public DeletePointOfInterestUseCase(IPointsOfInterestWriteOnlyRepository repository,
+        public DeletePointOfInterestUseCase(IPointOfInterestWriteOnlyRepository repository,
             IUnitOfWork unitOfWork)
         {
             _repository = repository;

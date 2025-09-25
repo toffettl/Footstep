@@ -5,6 +5,6 @@ namespace Footstep.Application.UseCases.Traces.Create
 {
     public interface ICreatePointOfInterestUseCase
     {
-        Task<ResponsePointOfIntereseJson> Execute(RequestPointOfInterestJson request);
+        Task<ResponsePointOfInterestJson> Execute(RequestPointOfInterestJson request);
     }
 }

@@ -12,7 +12,7 @@ namespace Footstep.Api.Controllers
     public class AuthController : ControllerBase
     {
         [HttpPost("register")]
-        [ProducesResponseType(typeof(ResponseUserJson), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseUserTokenJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register(
             [FromServices] IRegisterUserUseCase useCase,
@@ -24,7 +24,7 @@ namespace Footstep.Api.Controllers
         }
 
         [HttpPost("login")]
-        [ProducesResponseType(typeof(ResponseUserJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseUserTokenJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Login(
             [FromServices] IDoLoginUseCase useCase,
