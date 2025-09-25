@@ -63,4 +63,9 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository,
 
         return (users, totalCount);
     }
+
+    public async Task<bool> ExistActiveUserWithId(Guid id)
+    {
+        return await _dbContext.Users.AnyAsync(user => user.Id!.Equals(id));
+    }
 }
