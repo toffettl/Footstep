@@ -223,52 +223,20 @@ namespace Footstep.Application.AutoMapper
                 }));
 
             CreateMap<PointOfInterest, ResponsePointOfInterestJson>()
-                .ForMember(dest => dest.Author, opt => opt.MapFrom(src => new ResponsePointOfInterestAuthorJson
-                 {
-                     Id = src.User!.Id,
-                     Name = src.User!.Name,
-                     AvatarOverProfile = src.User!.Preference.AvatarOverProfile,
-                     Avatar = new ResponsePointOfInterestCharacterStyleJson
-                     {
-                         Skin = "",
-                         Top = new ResponsePointOfInterestItemJson
-                         {
-                             Style = "",
-                             Color = ""
-                         },
-                         Backpack = new ResponsePointOfInterestItemJson
-                         {
-                             Style = "",
-                             Color = ""
-                         },
-                         Clothe = new ResponsePointOfInterestItemJson
-                         {
-                             Style = "",
-                             Color = ""
-                         },
-                         Eye = "",
-                         Eyebrow = "",
-                         Mouth = "",
-                         FacialHair = new ResponsePointOfInterestItemJson
-                         {
-                             Style = "",
-                             Color = ""
-                         },
-                         Accessory = new ResponsePointOfInterestItemJson
-                         {
-                             Style = "",
-                             Color = ""
-                         }
-                     },
-                     ProfilePicture = new ResponsePointOfInterestProfilePictureJson
-                     {
-                         Uri = "",
-                         Style = ""
-                     }
-                 }))
-                .ForMember(dest => dest.POIType, opt => opt.MapFrom(src => src.PointOfInterestType))
-                .ForMember(dest => dest.Style, opt => opt.MapFrom(src => ""))
-                .ForMember(dest => dest.Coordinates, opt => opt.MapFrom(src => new ResponsePointOfInterestCoordinatesJson
+                .ForMember(dest => dest.AuthorId, opt => opt.MapFrom(src => src.UserId))
+                .ForMember(dest => dest.Author, opt => opt.MapFrom(src => new ResponseAuthor
+                {
+                    Name = src.User!.Name,
+                    AvatarStyle = new ResponseAvatarStyle
+                    {
+                        Head = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head)!.StyleId,
+                        Body = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Body)!.StyleId,
+                        Leg = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Leg)!.StyleId,
+                        Bag = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Bag)!.StyleId,
+                        Accessory = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Accessory)!.StyleId
+                    }
+                }))
+                .ForMember(dest => dest.Coordinates, opt => opt.MapFrom(src => new ResponseCoordinates
                 {
                     Latitude = src.Address!.Latitude,
                     Longitude = src.Address!.Longitude
@@ -287,13 +255,11 @@ namespace Footstep.Application.AutoMapper
                 }))
                 .ForMember(dest => dest.Address, opt => opt.MapFrom(src => new ResponsePointOfInterestAddressJson
                 {
-                    Country = src.Address!.Country,
-                    State = src.Address!.State,
-                    City = src.Address!.City,
-                    District = src.Address!.District,
-                    Street = src.Address!.Street,
-                    Cep = src.Address!.Cep,
-                    Number = src.Address!.Number
+                    Head = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Head)!.StyleId,
+                    Body = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Body)!.StyleId,
+                    Leg = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Leg)!.StyleId,
+                    Bag = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Bag)!.StyleId,
+                    Accessory = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Accessory)!.StyleId,
                 }));
 
             CreateMap<PointOfInterest, ResponsePaginationPointOfInterestJson>()
@@ -336,8 +302,11 @@ namespace Footstep.Application.AutoMapper
                     },
                     ProfilePicture = new ResponsePaginationPointOfInterestProfilePictureJson
                     {
-                        Uri = "",
-                        Style = ""
+                        Head = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head)!.StyleId,
+                        Body = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Body)!.StyleId,
+                        Leg = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Leg)!.StyleId,
+                        Bag = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Bag)!.StyleId,
+                        Accessory = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Accessory)!.StyleId
                     }
                 }))
                 .ForMember(dest => dest.POIType, opt => opt.MapFrom(src => src.PointOfInterestType))
