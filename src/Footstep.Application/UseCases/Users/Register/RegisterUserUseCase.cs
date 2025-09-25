@@ -61,8 +61,6 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         user.Password = _passwordEncripter.Encrypt(request.Password!);
         user.PreferenceId = user.Preference.Id;
         user.CoinId = user.Coin.Id;
-        user.Preference.MapStyle = request.MapStyle;
-        user.Preference.UnlockedMapStyles = request.UnlockedMapStyles;
 
         await _userWriteOnlyRepository.Add(user);
         await _preferenceWriteOnlyRepository.Add(user.Preference);
