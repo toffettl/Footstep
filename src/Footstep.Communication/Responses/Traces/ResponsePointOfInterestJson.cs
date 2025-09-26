@@ -5,7 +5,6 @@ namespace Footstep.Communication.Responses.Traces
     public class ResponsePointOfInterestJson
     {
         public Guid Id { get; set; }
-        public Guid AuthorId { get; set; }
 
         public ResponseAuthor? Author { get; set; }
 
@@ -24,6 +23,7 @@ namespace Footstep.Communication.Responses.Traces
 
     public class ResponseAuthor
     {
+        public Guid AuthorId { get; set; }
         public string? Name { get; set; }
         public ResponseAvatarStyle? AvatarStyle { get; set; }
     }
@@ -58,6 +58,6 @@ namespace Footstep.Communication.Responses.Traces
     {
         public int Views { get; set; }
         public int Likes { get; set; }
-        public int Commentaries { get; set; }
+        public int Comments { get; set; }
     }
 }

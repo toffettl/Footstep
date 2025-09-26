@@ -5,7 +5,6 @@ namespace Footstep.Communication.Responses.Traces
     public class ResponsePaginationPointOfInterestJson
     {
         public Guid Id { get; set; }
-        public Guid AuthorId { get; set; }
 
         public ResponsePaginationAuthor? Author { get; set; }
 
@@ -23,6 +22,7 @@ namespace Footstep.Communication.Responses.Traces
 
     public class ResponsePaginationAuthor
     {
+        public Guid AuthorId { get; set; }
         public string? Name { get; set; }
         public ResponsePaginationAvatarStyle? AvatarStyle { get; set; }
     }

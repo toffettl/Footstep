@@ -69,9 +69,9 @@ namespace Footstep.Application.AutoMapper
                 }));
 
             CreateMap<PointOfInterest, ResponsePointOfInterestJson>()
-                .ForMember(dest => dest.AuthorId, opt => opt.MapFrom(src => src.UserId))
                 .ForMember(dest => dest.Author, opt => opt.MapFrom(src => new ResponseAuthor
                 {
+                    AuthorId = src.UserId,
                     Name = src.User!.Name,
                     AvatarStyle = new ResponseAvatarStyle
                     {
@@ -101,10 +101,11 @@ namespace Footstep.Application.AutoMapper
                 {
                     Views = src.Views,
                     Likes = src.UserPointOfInterestRelations.Count(),
-                    Commentaries = src.Comments.Count()
+                    Comments = src.Comments.Count()
                 }));
 
             CreateMap<User, ResponseAuthor>()
+                .ForMember(dest => dest.AuthorId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.AvatarStyle, opt => opt.MapFrom(src => new ResponseAvatarStyle
                 {
                     Head = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Head)!.StyleId,
@@ -119,9 +120,9 @@ namespace Footstep.Application.AutoMapper
             CreateMap<Address, ResponseAddress>();
 
             CreateMap<PointOfInterest, ResponsePaginationPointOfInterestJson>()
-                .ForMember(dest => dest.AuthorId, opt => opt.MapFrom(src => src.UserId))
                 .ForMember(dest => dest.Author, opt => opt.MapFrom(src => new ResponsePaginationAuthor
                 {
+                    AuthorId = src.UserId,
                     Name = src.User!.Name,
                     AvatarStyle = new ResponsePaginationAvatarStyle
                     {

@@ -10,7 +10,7 @@ using Footstep.Domain.Repositories.Traces;
 using Footstep.Domain.Repositories.Users;
 using Footstep.Exception;
 using Footstep.Exception.ExceptionsBase;
-using System.Threading.Tasks;
+using System.Net;
 
 namespace Footstep.Application.UseCases.Traces.Create
 {
@@ -44,7 +44,9 @@ namespace Footstep.Application.UseCases.Traces.Create
 
             var pointOfInterest = _mapper.Map<PointOfInterest>(request);
 
-            pointOfInterest.AddressId = await GetAddressId(request);
+            Address address = await GetAddressId(request);
+
+            pointOfInterest.AddressId = address.Id;
 
             if (request.PointOfInterestType == PointOfInterestType.Mark)
             {
@@ -52,6 +54,9 @@ namespace Footstep.Application.UseCases.Traces.Create
             }
 
             ResponsePointOfInterestJson response = await CreateResponse(pointOfInterest);
+
+            response.Coordinates = _mapper.Map<ResponseCoordinates>(address);
+            response.Address = _mapper.Map<ResponseAddress>(address);
 
             await _pointOfInterestWriteOnlyRepository.Add(pointOfInterest);
 
@@ -79,7 +84,7 @@ namespace Footstep.Application.UseCases.Traces.Create
             }
         }
 
-        private async Task<Guid> GetAddressId(RequestPointOfInterestJson request)
+        private async Task<Address> GetAddressId(RequestPointOfInterestJson request)
         {
             var address = await _addressReadOnlyRepository.GetByLatitudeAndLongitude(request.Coordinates!.Latitude, request.Coordinates!.Longitude);
 
@@ -101,7 +106,7 @@ namespace Footstep.Application.UseCases.Traces.Create
                 await _addressWriteOnlyRepository.Add(address);
             }
 
-            return address.Id;
+            return address;
         }
 
         private async Task<ResponsePointOfInterestJson> CreateResponse(PointOfInterest pointOfInterest)
@@ -116,15 +121,10 @@ namespace Footstep.Application.UseCases.Traces.Create
 
             response.Author = _mapper.Map<ResponseAuthor>(user);
 
-            var address = await _addressReadOnlyRepository.GetById(pointOfInterest.AddressId);
-
-            response.Coordinates = _mapper.Map<ResponseCoordinates>(address);
-            response.Address = _mapper.Map<ResponseAddress>(address);
-
             response.Status = new ResponseStatus
             {
                 Likes = 0,
-                Commentaries = 0,
+                Comments = 0,
             };
 
             return response;

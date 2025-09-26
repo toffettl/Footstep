@@ -28,7 +28,7 @@ namespace Footstep.Application.UseCases.Traces.UpdateStatus
         {
             var userPointOfInterestRelation = await _userPointOfInterestRelationReadOnlyRepository.GetByUserIdAndPointOfInterestId(id, userId);
 
-            if (userPointOfInterestRelation  == null)
+            if (userPointOfInterestRelation == null)
             {
                 throw new NotFoundException(ResourceErrorMessages.USER_AND_POINT_OF_INTEREST_RELATION_NOT_FOUND);
             }
