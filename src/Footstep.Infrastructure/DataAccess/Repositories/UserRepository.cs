@@ -91,4 +91,24 @@ public class UserRepository :
         return await _dbContext.Users
             .AnyAsync(user => user.Id!.Equals(id));
     }
+
+    public async Task<(List<User> Users, int TotalCount)> GetByRanking(int page, int pageSize, DateTime dateTime)
+    {
+        var query = _dbContext.Users
+            .AsTracking()
+            .AsSplitQuery()
+            .Include(u => u.Preference)
+                .ThenInclude(p => p.Items.Where(i => i.Unlocked && i.Equipped))
+                    .ThenInclude(i => i.Style);
+
+        var totalCount = await query.CountAsync();
+
+        var users = await query
+            .OrderByDescending(u => u.PointsOfInterest.Where(poi => poi.CreatedAt > dateTime).Count())
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (users, totalCount);
+    }
 }

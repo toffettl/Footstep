@@ -9,5 +9,5 @@ public interface IUserReadOnlyRepository
     Task<User?> GetById(Guid id);
     Task<List<User>> GetAll();
     Task<(List<User> Users, int TotalCount)> GetAllPagination(int page, int pageSize);
-    Task<(List<User> Users, int TotalCount)> GetUsersByRanking(int page, int pageSize, DateTime dateTime);
+    Task<(List<User> Users, int TotalCount)> GetByRanking(int page, int pageSize, DateTime dateTime);
 }
