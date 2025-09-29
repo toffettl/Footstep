@@ -102,10 +102,10 @@ namespace Footstep.Application.AutoMapper
                 .ForMember(dest => dest.Author, opt => opt.MapFrom(src => new ResponseAuthor
                 {
                     Name = src.User!.Name,
-                    AvatarStyle = new ResponseAvatarStyle
+                    AvatarStyle = new ResponsePointOfInterestAvatarStyle
                     {
                         Head = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head)!.StyleId,
-                        Body = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Body)!.StyleId,
+                        Torso = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Torso)!.StyleId,
                         Leg = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Leg)!.StyleId,
                         Bag = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Bag)!.StyleId,
                         Accessory = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Accessory)!.StyleId
@@ -134,10 +134,10 @@ namespace Footstep.Application.AutoMapper
                 }));
 
             CreateMap<User, ResponseAuthor>()
-                .ForMember(dest => dest.AvatarStyle, opt => opt.MapFrom(src => new ResponseAvatarStyle
+                .ForMember(dest => dest.AvatarStyle, opt => opt.MapFrom(src => new ResponsePointOfInterestAvatarStyle
                 {
                     Head = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Head)!.StyleId,
-                    Body = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Body)!.StyleId,
+                    Torso = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Torso)!.StyleId,
                     Leg = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Leg)!.StyleId,
                     Bag = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Bag)!.StyleId,
                     Accessory = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Accessory)!.StyleId,
@@ -152,10 +152,10 @@ namespace Footstep.Application.AutoMapper
                 .ForMember(dest => dest.Author, opt => opt.MapFrom(src => new ResponsePaginationAuthor
                 {
                     Name = src.User!.Name,
-                    AvatarStyle = new ResponsePaginationAvatarStyle
+                    AvatarStyle = new ResponsePaginationPointOfInterestAvatarStyle
                     {
                         Head = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head)!.StyleId,
-                        Body = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Body)!.StyleId,
+                        Torso = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Torso)!.StyleId,
                         Leg = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Leg)!.StyleId,
                         Bag = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Bag)!.StyleId,
                         Accessory = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Accessory)!.StyleId

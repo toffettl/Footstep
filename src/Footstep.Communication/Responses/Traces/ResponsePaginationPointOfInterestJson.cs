@@ -24,13 +24,13 @@ namespace Footstep.Communication.Responses.Traces
     public class ResponsePaginationAuthor
     {
         public string? Name { get; set; }
-        public ResponsePaginationAvatarStyle? AvatarStyle { get; set; }
+        public ResponsePaginationPointOfInterestAvatarStyle? AvatarStyle { get; set; }
     }
 
-    public class ResponsePaginationAvatarStyle
+    public class ResponsePaginationPointOfInterestAvatarStyle
     {
         public Guid Head { get; set; }
-        public Guid Body { get; set; }
+        public Guid Torso { get; set; }
         public Guid Leg { get; set; }
         public Guid Bag { get; set; }
         public Guid Accessory { get; set; }

@@ -3,7 +3,10 @@ using Footstep.Domain.Repositories.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace Footstep.Infrastructure.DataAccess.Repositories;
-public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository, IUserUpdateOnlyRepository
+public class UserRepository : 
+    IUserReadOnlyRepository, 
+    IUserWriteOnlyRepository, 
+    IUserUpdateOnlyRepository
 {
     private readonly FootstepDbContext _dbContext;
 
@@ -14,12 +17,14 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository,
 
     public async Task Add(User user)
     {
-        await _dbContext.Users.AddAsync(user);
+        await _dbContext.Users
+            .AddAsync(user);
     }
 
     public async Task<bool> ExistActiveUserWithEmail(string email)
     {
-        return await _dbContext.Users.AnyAsync(user => user.Email!.Equals(email));
+        return await _dbContext.Users
+            .AnyAsync(user => user.Email!.Equals(email));
     }
 
     public async Task<User?> GetById(Guid id)
@@ -46,7 +51,8 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository,
 
     public void Update(User user)
     {
-        _dbContext.Users.Update(user);
+        _dbContext.Users
+            .Update(user);
     }
 
     public async Task<List<User>> GetAll()
@@ -78,5 +84,11 @@ public class UserRepository : IUserReadOnlyRepository, IUserWriteOnlyRepository,
             .ToListAsync();
 
         return (users, totalCount);
+    }
+
+    public async Task<bool> ExistActiveUserWithId(Guid id)
+    {
+        return await _dbContext.Users
+            .AnyAsync(user => user.Id!.Equals(id));
     }
 }
