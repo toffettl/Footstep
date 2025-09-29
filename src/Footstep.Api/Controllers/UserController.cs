@@ -78,7 +78,7 @@ public class UserController : ControllerBase
 
 
     [HttpGet("pagination")]
-    [ProducesResponseType(typeof(PagedResult<ResponseUserJson>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(PagedResult<ResponsePaginationUserJson>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> GetAllPagination(
         [FromServices] IGetAllUserPaginationUseCase useCase,

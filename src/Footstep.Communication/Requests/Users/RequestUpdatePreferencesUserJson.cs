@@ -11,7 +11,7 @@
     public class RequestAvatarStyleJson
     {
         public Guid? Head { get; set; }
-        public Guid? Body { get; set; }
+        public Guid? Torso { get; set; }
         public Guid? Leg { get; set; }
         public Guid? Bag { get; set; }
         public Guid? Acessory { get; set; }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Users;
 using Footstep.Domain.Repositories.Users;
@@ -21,13 +16,13 @@ namespace Footstep.Application.UseCases.Users.GetAll
             _mapper = mapper;
         }
 
-        public async Task<PagedResult<ResponseUserJson>> Execute(int page, int pageSize)
+        public async Task<PagedResult<ResponsePaginationUserJson>> Execute(int page, int pageSize)
         {
             var (users, totalCount) = await _userReadOnlyRepository.GetAllPagination(page, pageSize);
 
-            List<ResponseUserJson> responses = _mapper.Map<List<ResponseUserJson>>(users);
+            List<ResponsePaginationUserJson> responses = _mapper.Map<List<ResponsePaginationUserJson>>(users);
 
-            return new PagedResult<ResponseUserJson>
+            return new PagedResult<ResponsePaginationUserJson>
             {
                 Items = responses,
                 Page = page,

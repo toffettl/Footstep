@@ -50,15 +50,44 @@ namespace Footstep.Application.AutoMapper
         private void EntityToResponse()
         {
             CreateMap<User, ResponseUserJson>()
-                .ForMember(dest => dest.Preferences, opt => opt.MapFrom(src => new ResponsePreferencesJson
+                .ForMember(dest => dest.Preferences, opt => opt.MapFrom(src => new ResponsePreferences
                 {
                     MapStyle = src.Preference.MapStyle,
-                    AvatarOverProfile = src.Preference.AvatarOverProfile
+                    PointOfInterestStyle = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.PointOfInterest)!.Style!.Image,
+                    AvatarOverProfile = src.Preference.AvatarOverProfile,
+                    AvatarStyle = new ResponseAvatarStyle()
+                    {
+                        Head = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head && i.Equipped)!.Style!.Image,
+                        Body = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Torso && i.Equipped)!.Style!.Image,
+                        Leg = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Leg && i.Equipped)!.Style!.Image,
+                        Bag = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Bag && i.Equipped)!.Style!.Image,
+                        Accessory = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head && i.Equipped)!.Style!.Image
+                    }
                 }))
-                .ForMember(dest => dest.UnlockedStyles, opt => opt.MapFrom(src => new ResponseUnlockedStylesJson
+                .ForMember(dest => dest.UnlockedStyles, opt => opt.MapFrom(src => new ResponseUnlockedStyles
                 {
-                    UnlockedMapStyles = src.Preference.UnlockedMapStyles
+                    UnlockedMapStyles = src.Preference.MapStyle,
+                    UnlockedPointOfInterestStyles = src.Preference.Items.Where(i => i.Style!.StyleType == StyleType.PointOfInterest).Select(i => i.Style!.Image).ToList()!,
+                    UnlockedHeadStyles = src.Preference.Items.Where(i => i.Style!.StyleType == StyleType.Head).Select(i => i.Style!.Image).ToList()!,
+                    UnlockedTorsoStyles = src.Preference.Items.Where(i => i.Style!.StyleType == StyleType.Torso).Select(i => i.Style!.Image).ToList()!,
+                    UnlockedLegStyles = src.Preference.Items.Where(i => i.Style!.StyleType == StyleType.Leg).Select(i => i.Style!.Image).ToList()!,
+                    UnlockedBagStyles = src.Preference.Items.Where(i => i.Style!.StyleType == StyleType.Bag).Select(i => i.Style!.Image).ToList()!,
+                    UnlockedAcessoryStyles = src.Preference.Items.Where(i => i.Style!.StyleType == StyleType.Accessory).Select(i => i.Style!.Image).ToList()!
                 }));
+
+            CreateMap<User, ResponsePaginationUserJson>()
+                 .ForMember(dest => dest.Preferences, opt => opt.MapFrom(src => new ResponsePaginationPreferences
+                 {
+                     AvatarOverProfile = src.Preference.AvatarOverProfile,
+                     AvatarStyle = new ResponsePaginationAvatarStyle()
+                     {
+                         Head = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head && i.Equipped)!.Style!.Image,
+                         Body = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Torso && i.Equipped)!.Style!.Image,
+                         Leg = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Leg && i.Equipped)!.Style!.Image,
+                         Bag = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Bag && i.Equipped)!.Style!.Image,
+                         Accessory = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head && i.Equipped)!.Style!.Image
+                     }
+                 }));
 
             CreateMap<Comment, ResponseCommentJson>()
                 .ForMember(dest => dest.AuthorId, opt => opt.MapFrom(src => src.UserId))
