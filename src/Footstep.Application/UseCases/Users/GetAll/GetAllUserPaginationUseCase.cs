@@ -29,8 +29,7 @@ namespace Footstep.Application.UseCases.Users.GetAll
                 PageSize = pageSize,
                 TotalCount = totalCount,
                 TotalPages = (int)Math.Ceiling((double)totalCount / pageSize)
-            };
-                  
+            };   
         }
     }
 }
