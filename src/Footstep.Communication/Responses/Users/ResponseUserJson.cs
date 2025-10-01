@@ -1,4 +1,6 @@
-﻿namespace Footstep.Communication.Responses.Users
+﻿using System.Diagnostics;
+
+namespace Footstep.Communication.Responses.Users
 {
     public class ResponseUserJson
     {
@@ -6,37 +8,97 @@
         public string? Name { get; set; }
         public string? Email { get; set; }
         public string? Biography { get; set; }
-        public ResponsePreferences? Preferences { get; set; } 
-        public ResponseUnlockedStyles? UnlockedStyles { get; set; } = new ResponseUnlockedStyles();
+        public ResponseUserProfilePictureJson? ProfilePicture { get; set; }
+        public ResponseUserSocialJson? Social { get; set; }
+        public ResponseUserActivityJson? Activity { get; set; }
+        public ResponseUserPreferencesJson? Preferences { get; set; }
+        public ResponseUserUnlockedStyles? UnlockedStyles { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }
 
-    public class ResponsePreferences
+    public class ResponseUserProfilePictureJson
     {
-        public string? MapStyle { get; set; }
-        public string? PointOfInterestStyle { get; set; }
+        public string? Uri { get; set; }
+        public string? Style { get; set; }
+    }
+
+    public class ResponseUserSocialJson
+    {
+        public List<Guid>? Followers { get; set; }
+        public List<Guid>? Following { get; set; }
+        public List<Guid>? Comments { get; set; }
+    }
+
+    //Start of Activity
+    public class ResponseUserActivityJson
+    {
+        public ResponseUserPOIsJson? POIs { get; set; }
+        public ResponseUserCoinsJson? Coins { get; set; }
+    } 
+
+    public class ResponseUserPOIsJson
+    {
+        public List<Guid>? Steps { get; set; }
+        public List<Guid>? Marks { get; set; }
+    }
+
+    public class ResponseUserCoinsJson
+    {
+        public int Total { get; set; }
+        public int Spent { get; set; }
+        public int Earned { get; set; }
+    }
+    //End of Activity
+
+    //Start of Preferences
+    public class ResponseUserPreferencesJson
+    {
+        public string? Map { get; set; }
+        public string? POI { get; set; }
         public bool? AvatarOverProfile { get; set; }
-        public ResponseAvatarStyle? AvatarStyle { get; set; }
+        public ResponseUserCharacterStyleJson? Avatar { get; set; }
     }
 
-    public class ResponseAvatarStyle
+    public class ResponseUserCharacterStyleJson
     {
-        public string? Head { get; set; }
-        public string? Body { get; set; }
-        public string? Leg { get; set; }
-        public string? Bag { get; set; }
-        public string? Accessory { get; set; }
+        public string? Skin { get; set; }
+        public ResponseItemJson? Top { get; set; }
+        public ResponseItemJson? Backpack { get; set; }
+        public ResponseItemJson? Clothe { get; set; }
+        public string? Eye { get; set; }
+        public string? Eyebrow { get; set; }
+        public string? Mouth { get; set; }
+        public ResponseItemJson? FacialHair { get; set; }
+        public ResponseItemJson? Accessory { get; set; }
+    }
+    //End of Preferences
+
+    //Start of UnlockedStyles
+    public class ResponseUserUnlockedStyles
+    {
+        public List<string>? Map { get; set; }
+        public List<string>? POI { get; set; }
+        public ResponseUserCharacterStylesJson? Avatar { get; set; }
     }
 
-    public class ResponseUnlockedStyles
+    public class ResponseUserCharacterStylesJson
     {
-        public string? UnlockedMapStyles { get; set; }
-        public List<string>? UnlockedPointOfInterestStyles { get; set; }
-        public List<string>? UnlockedHeadStyles { get; set; }
-        public List<string>? UnlockedTorsoStyles { get; set; }
-        public List<string>? UnlockedLegStyles { get; set; }
-        public List<string>? UnlockedBagStyles { get; set; }
-        public List<string>? UnlockedAcessoryStyles { get; set; }
+        public List<string>? Skin { get; set; }
+        public List<ResponseItemJson>? Top { get; set; }
+        public List<ResponseItemJson>? Backpack { get; set; }
+        public List<ResponseItemJson>? Clothe { get; set; }
+        public List<string>? Eye { get; set; }
+        public List<string>? Eyebrow { get; set; }
+        public List<string>? Mouth { get; set; }
+        public List<ResponseItemJson>? FacialHair { get; set; }
+        public List<ResponseItemJson>? Accessory { get; set; }
+    }
+    //End of UnlockedStyles
+
+    public class ResponseItemJson
+    {
+        public string? Style { get; set; }
+        public string? Color { get; set; }
     }
 }

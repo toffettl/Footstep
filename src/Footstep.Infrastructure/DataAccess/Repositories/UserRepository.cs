@@ -32,10 +32,14 @@ public class UserRepository :
         return await _dbContext.Users
             .AsNoTracking()
             .AsSplitQuery()
+            .Include(u => u.Followers)
+            .Include(u => u.Following)
+            .Include(u => u.PointsOfInterest)
+            .Include(u => u.Coin)
             .Include(u => u.Preference)
                 .ThenInclude(p => p.Items.Where(i => i.Unlocked))
                     .ThenInclude(i => i.Style)
-            .FirstOrDefaultAsync(user => user.Id == id);
+            .FirstOrDefaultAsync(u => u.Id == id);
     }
 
     public async Task<User?> GetByEmail(string email)
@@ -43,10 +47,14 @@ public class UserRepository :
         return await _dbContext.Users
             .AsNoTracking()
             .AsSplitQuery()
+            .Include(u => u.Followers)
+            .Include(u => u.Following)
+            .Include(u => u.PointsOfInterest)
+            .Include(u => u.Coin)
             .Include(u => u.Preference)
                 .ThenInclude(p => p.Items.Where(i => i.Unlocked))
                     .ThenInclude(i => i.Style)
-            .FirstOrDefaultAsync(user => user.Email == email);
+            .FirstOrDefaultAsync(u => u.Email == email);
     }
 
     public void Update(User user)
@@ -60,6 +68,10 @@ public class UserRepository :
         return await _dbContext.Users
             .AsNoTracking()
             .AsSplitQuery()
+            .Include(u => u.Followers)
+            .Include(u => u.Following)
+            .Include(u => u.PointsOfInterest)
+            .Include(u => u.Coin)
             .Include(u => u.Preference)
                 .ThenInclude(p => p.Items.Where(i => i.Unlocked))
                     .ThenInclude(i => i.Style)

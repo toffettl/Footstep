@@ -50,29 +50,120 @@ namespace Footstep.Application.AutoMapper
         private void EntityToResponse()
         {
             CreateMap<User, ResponseUserJson>()
-                .ForMember(dest => dest.Preferences, opt => opt.MapFrom(src => new ResponsePreferences
+                .ForMember(dest => dest.ProfilePicture, opt => opt.MapFrom(src => new ResponseUserProfilePictureJson
                 {
-                    MapStyle = src.Preference.MapStyle,
-                    PointOfInterestStyle = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.PointOfInterest)!.Style!.Image,
-                    AvatarOverProfile = src.Preference.AvatarOverProfile,
-                    AvatarStyle = new ResponseAvatarStyle()
+                    Uri = "",
+                    Style = ""
+                }))
+                .ForMember(dest => dest.Social, opt => opt.MapFrom(src => new ResponseUserSocialJson
+                {
+                    Followers = src.Followers.Select(f => f.FollowerId).ToList(),
+                    Following = src.Following.Select(f => f.FollowingId).ToList(),
+                    Comments = src.Comments.Select(c => c.Id).ToList()
+                }))
+                .ForMember(dest => dest.Activity, opt => opt.MapFrom(src => new ResponseUserActivityJson
+                {
+                    POIs = new ResponseUserPOIsJson
                     {
-                        Head = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head && i.Equipped)!.Style!.Image,
-                        Body = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Torso && i.Equipped)!.Style!.Image,
-                        Leg = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Leg && i.Equipped)!.Style!.Image,
-                        Bag = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Bag && i.Equipped)!.Style!.Image,
-                        Accessory = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head && i.Equipped)!.Style!.Image
+                        Steps = src.PointsOfInterest.Where(p => p.PointOfInterestType == PointOfInterestType.Step).Select(p => p.Id).ToList(),
+                        Marks = src.PointsOfInterest.Where(p => p.PointOfInterestType == PointOfInterestType.Mark).Select(p => p.Id).ToList()
+                    },
+                    Coins = new ResponseUserCoinsJson
+                    {
+                        Total = src.Coin.Total,
+                        Spent = src.Coin.Spent,
+                        Earned = src.Coin.Earned
                     }
                 }))
-                .ForMember(dest => dest.UnlockedStyles, opt => opt.MapFrom(src => new ResponseUnlockedStyles
+                .ForMember(dest => dest.Preferences, opt => opt.MapFrom(src => new ResponseUserPreferencesJson
                 {
-                    UnlockedMapStyles = src.Preference.MapStyle,
-                    UnlockedPointOfInterestStyles = src.Preference.Items.Where(i => i.Style!.StyleType == StyleType.PointOfInterest).Select(i => i.Style!.Image).ToList()!,
-                    UnlockedHeadStyles = src.Preference.Items.Where(i => i.Style!.StyleType == StyleType.Head).Select(i => i.Style!.Image).ToList()!,
-                    UnlockedTorsoStyles = src.Preference.Items.Where(i => i.Style!.StyleType == StyleType.Torso).Select(i => i.Style!.Image).ToList()!,
-                    UnlockedLegStyles = src.Preference.Items.Where(i => i.Style!.StyleType == StyleType.Leg).Select(i => i.Style!.Image).ToList()!,
-                    UnlockedBagStyles = src.Preference.Items.Where(i => i.Style!.StyleType == StyleType.Bag).Select(i => i.Style!.Image).ToList()!,
-                    UnlockedAcessoryStyles = src.Preference.Items.Where(i => i.Style!.StyleType == StyleType.Accessory).Select(i => i.Style!.Image).ToList()!
+                    Map = src.Preference.MapStyle,
+                    POI = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.PointOfInterest)!.Style!.Image,
+                    AvatarOverProfile = src.Preference.AvatarOverProfile,
+                    Avatar = new ResponseUserCharacterStyleJson
+                    {
+                        Skin = "",
+                        Top = new ResponseItemJson
+                        {
+                            Style = "",
+                            Color = ""
+                        },
+                        Backpack = new ResponseItemJson
+                        {
+                            Style = "",
+                            Color = ""
+                        },
+                        Clothe = new ResponseItemJson
+                        {
+                            Style = "",
+                            Color = ""
+                        },
+                        Eye = "",
+                        Eyebrow = "",
+                        Mouth = "",
+                        FacialHair = new ResponseItemJson
+                        {
+                            Style = "",
+                            Color = ""
+                        },
+                        Accessory = new ResponseItemJson
+                        {
+                            Style = "",
+                            Color = ""
+                        }
+                    }
+                }))
+                .ForMember(dest => dest.UnlockedStyles, opt => opt.MapFrom(src => new ResponseUserUnlockedStyles
+                {
+                    Map = new List<string> { src.Preference.MapStyle! },
+                    POI = new List<string> { src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.PointOfInterest)!.Style!.Image! },
+                    Avatar = new ResponseUserCharacterStylesJson
+                    {
+                        Skin = new List<string> { "" },
+                        Top = new List<ResponseItemJson>
+                        {
+                            new ResponseItemJson
+                            {
+                                Style = "",
+                                Color = ""
+                            }
+                        },
+                        Backpack = new List<ResponseItemJson>
+                        {
+                            new ResponseItemJson
+                            {
+                                Style = "",
+                                Color = ""
+                            }
+                        },
+                        Clothe = new List<ResponseItemJson>
+                        {
+                            new ResponseItemJson
+                            {
+                                Style = "",
+                                Color = ""
+                            }
+                        },
+                        Eye = new List<string> { "" },
+                        Eyebrow = new List<string> { "" },
+                        Mouth = new List<string> { "" },
+                        FacialHair = new List<ResponseItemJson>
+                        {
+                            new ResponseItemJson
+                            {
+                                Style = "",
+                                Color = ""
+                            }
+                        },
+                        Accessory = new List<ResponseItemJson>
+                        {
+                            new ResponseItemJson
+                            {
+                                Style = "",
+                                Color = ""
+                            }
+                        }
+                    }
                 }));
 
             CreateMap<User, ResponsePaginationUserJson>()
