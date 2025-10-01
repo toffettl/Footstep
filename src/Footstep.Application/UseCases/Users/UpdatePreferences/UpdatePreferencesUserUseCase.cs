@@ -47,7 +47,7 @@ namespace Footstep.Application.UseCases.Users.UpdatePreferences
 
             UpdateEquippedItem(user.PreferenceId, request.PointOfInterestStyle!.Value, StyleType.PointOfInterest, items);
             UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Head!.Value, StyleType.Head, items);
-            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Body!.Value, StyleType.Body, items);
+            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Torso!.Value, StyleType.Torso, items);
             UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Leg!.Value, StyleType.Leg, items);
             UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Bag!.Value, StyleType.Bag, items);
             UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Acessory!.Value, StyleType.Accessory, items);

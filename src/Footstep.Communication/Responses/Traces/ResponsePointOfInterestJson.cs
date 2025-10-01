@@ -25,13 +25,13 @@ namespace Footstep.Communication.Responses.Traces
     {
         public Guid AuthorId { get; set; }
         public string? Name { get; set; }
-        public ResponseAvatarStyle? AvatarStyle { get; set; }
+        public ResponsePointOfInterestAvatarStyle? AvatarStyle { get; set; }
     }
 
-    public class ResponseAvatarStyle
+    public class ResponsePointOfInterestAvatarStyle
     {
         public Guid Head {  get; set; }
-        public Guid Body { get; set; }
+        public Guid Torso { get; set; }
         public Guid Leg { get; set; }
         public Guid Bag { get; set; }
         public Guid Accessory { get; set; }

@@ -19,6 +19,7 @@ public class User
 
     public ICollection<Followership> Followers { get; set; } = new List<Followership>();
     public ICollection<Followership> Following { get; set; } = new List<Followership>();
+    public ICollection<Comment> Comments { get; set; } = new List<Comment>();
     public ICollection<CommentLike> LikeComments { get; set; } = new List<CommentLike>();
     public ICollection<PointOfInterest> PointsOfInterest {  get; set; } = new List<PointOfInterest>();
     public ICollection<UserPointOfInterestRelation> UserPointOfInterestRelations { get; set; } = new List<UserPointOfInterestRelation>();

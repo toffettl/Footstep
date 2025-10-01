@@ -50,15 +50,135 @@ namespace Footstep.Application.AutoMapper
         private void EntityToResponse()
         {
             CreateMap<User, ResponseUserJson>()
-                .ForMember(dest => dest.Preferences, opt => opt.MapFrom(src => new ResponsePreferencesJson
+                .ForMember(dest => dest.ProfilePicture, opt => opt.MapFrom(src => new ResponseUserProfilePictureJson
                 {
-                    MapStyle = src.Preference.MapStyle,
-                    AvatarOverProfile = src.Preference.AvatarOverProfile
+                    Uri = "",
+                    Style = ""
                 }))
-                .ForMember(dest => dest.UnlockedStyles, opt => opt.MapFrom(src => new ResponseUnlockedStylesJson
+                .ForMember(dest => dest.Social, opt => opt.MapFrom(src => new ResponseUserSocialJson
                 {
-                    UnlockedMapStyles = src.Preference.UnlockedMapStyles
+                    Followers = src.Followers.Select(f => f.FollowerId).ToList(),
+                    Following = src.Following.Select(f => f.FollowingId).ToList(),
+                    Comments = src.Comments.Select(c => c.Id).ToList()
+                }))
+                .ForMember(dest => dest.Activity, opt => opt.MapFrom(src => new ResponseUserActivityJson
+                {
+                    POIs = new ResponseUserPOIsJson
+                    {
+                        Steps = src.PointsOfInterest.Where(p => p.PointOfInterestType == PointOfInterestType.Step).Select(p => p.Id).ToList(),
+                        Marks = src.PointsOfInterest.Where(p => p.PointOfInterestType == PointOfInterestType.Mark).Select(p => p.Id).ToList()
+                    },
+                    Coins = new ResponseUserCoinsJson
+                    {
+                        Total = src.Coin.Total,
+                        Spent = src.Coin.Spent,
+                        Earned = src.Coin.Earned
+                    }
+                }))
+                .ForMember(dest => dest.Preferences, opt => opt.MapFrom(src => new ResponseUserPreferencesJson
+                {
+                    Map = src.Preference.MapStyle,
+                    POI = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.PointOfInterest)!.Style!.Image,
+                    AvatarOverProfile = src.Preference.AvatarOverProfile,
+                    Avatar = new ResponseUserCharacterStyleJson
+                    {
+                        Skin = "",
+                        Top = new ResponseItemJson
+                        {
+                            Style = "",
+                            Color = ""
+                        },
+                        Backpack = new ResponseItemJson
+                        {
+                            Style = "",
+                            Color = ""
+                        },
+                        Clothe = new ResponseItemJson
+                        {
+                            Style = "",
+                            Color = ""
+                        },
+                        Eye = "",
+                        Eyebrow = "",
+                        Mouth = "",
+                        FacialHair = new ResponseItemJson
+                        {
+                            Style = "",
+                            Color = ""
+                        },
+                        Accessory = new ResponseItemJson
+                        {
+                            Style = "",
+                            Color = ""
+                        }
+                    }
+                }))
+                .ForMember(dest => dest.UnlockedStyles, opt => opt.MapFrom(src => new ResponseUserUnlockedStyles
+                {
+                    Map = new List<string> { src.Preference.MapStyle! },
+                    POI = new List<string> { src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.PointOfInterest)!.Style!.Image! },
+                    Avatar = new ResponseUserCharacterStylesJson
+                    {
+                        Skin = new List<string> { "" },
+                        Top = new List<ResponseItemJson>
+                        {
+                            new ResponseItemJson
+                            {
+                                Style = "",
+                                Color = ""
+                            }
+                        },
+                        Backpack = new List<ResponseItemJson>
+                        {
+                            new ResponseItemJson
+                            {
+                                Style = "",
+                                Color = ""
+                            }
+                        },
+                        Clothe = new List<ResponseItemJson>
+                        {
+                            new ResponseItemJson
+                            {
+                                Style = "",
+                                Color = ""
+                            }
+                        },
+                        Eye = new List<string> { "" },
+                        Eyebrow = new List<string> { "" },
+                        Mouth = new List<string> { "" },
+                        FacialHair = new List<ResponseItemJson>
+                        {
+                            new ResponseItemJson
+                            {
+                                Style = "",
+                                Color = ""
+                            }
+                        },
+                        Accessory = new List<ResponseItemJson>
+                        {
+                            new ResponseItemJson
+                            {
+                                Style = "",
+                                Color = ""
+                            }
+                        }
+                    }
                 }));
+
+            CreateMap<User, ResponsePaginationUserJson>()
+                 .ForMember(dest => dest.Preferences, opt => opt.MapFrom(src => new ResponsePaginationPreferences
+                 {
+                     AvatarOverProfile = src.Preference.AvatarOverProfile,
+                     AvatarStyle = new ResponsePaginationAvatarStyle()
+                     {
+                         Head = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head && i.Equipped)!.Style!.Image,
+                         Body = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Torso && i.Equipped)!.Style!.Image,
+                         Leg = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Leg && i.Equipped)!.Style!.Image,
+                         Bag = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Bag && i.Equipped)!.Style!.Image,
+                         Accessory = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head && i.Equipped)!.Style!.Image
+                     }
+                 }));
 
             CreateMap<Comment, ResponseCommentJson>()
                 .ForMember(dest => dest.AuthorId, opt => opt.MapFrom(src => src.UserId))
@@ -73,10 +193,10 @@ namespace Footstep.Application.AutoMapper
                 {
                     AuthorId = src.UserId,
                     Name = src.User!.Name,
-                    AvatarStyle = new ResponseAvatarStyle
+                    AvatarStyle = new ResponsePointOfInterestAvatarStyle
                     {
                         Head = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head)!.StyleId,
-                        Body = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Body)!.StyleId,
+                        Torso = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Torso)!.StyleId,
                         Leg = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Leg)!.StyleId,
                         Bag = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Bag)!.StyleId,
                         Accessory = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Accessory)!.StyleId
@@ -104,17 +224,6 @@ namespace Footstep.Application.AutoMapper
                     Comments = src.Comments.Count()
                 }));
 
-            CreateMap<User, ResponseAuthor>()
-                .ForMember(dest => dest.AuthorId, opt => opt.MapFrom(src => src.Id))
-                .ForMember(dest => dest.AvatarStyle, opt => opt.MapFrom(src => new ResponseAvatarStyle
-                {
-                    Head = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Head)!.StyleId,
-                    Body = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Body)!.StyleId,
-                    Leg = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Leg)!.StyleId,
-                    Bag = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Bag)!.StyleId,
-                    Accessory = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Accessory)!.StyleId,
-                }));
-
             CreateMap<Address, ResponseCoordinates>();
 
             CreateMap<Address, ResponseAddress>();
@@ -124,10 +233,10 @@ namespace Footstep.Application.AutoMapper
                 {
                     AuthorId = src.UserId,
                     Name = src.User!.Name,
-                    AvatarStyle = new ResponsePaginationAvatarStyle
+                    AvatarStyle = new ResponsePaginationPointOfInterestAvatarStyle
                     {
                         Head = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head)!.StyleId,
-                        Body = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Body)!.StyleId,
+                        Torso = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Torso)!.StyleId,
                         Leg = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Leg)!.StyleId,
                         Bag = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Bag)!.StyleId,
                         Accessory = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Accessory)!.StyleId
