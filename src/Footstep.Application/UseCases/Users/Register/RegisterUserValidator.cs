@@ -15,11 +15,5 @@ public class RegisterUserValidator : AbstractValidator<RequestRegisterUserJson>
             .EmailAddress().WithMessage(ResourceErrorMessages.EMAIL_INVALID);
 
         RuleFor(user => user.Password).SetValidator(new PasswordValidator<RequestRegisterUserJson>()!);
-
-        RuleFor(user => user.MapStyle)
-            .NotEmpty().WithMessage(ResourceErrorMessages.MAPSTYLE_REQUIRED);
-
-        RuleFor(user => user.UnlockedMapStyles)
-            .NotEmpty().WithMessage(ResourceErrorMessages.UNLOCKEDMAPSTYLES_REQUIRED);
     }
 }
