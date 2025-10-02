@@ -83,17 +83,17 @@ namespace Footstep.Application.AutoMapper
                     Avatar = new ResponseUserCharacterStyleJson
                     {
                         Skin = "",
-                        Top = new ResponseItemJson
+                        Top = new ResponseUserItemJson
                         {
                             Style = "",
                             Color = ""
                         },
-                        Backpack = new ResponseItemJson
+                        Backpack = new ResponseUserItemJson
                         {
                             Style = "",
                             Color = ""
                         },
-                        Clothe = new ResponseItemJson
+                        Clothe = new ResponseUserItemJson
                         {
                             Style = "",
                             Color = ""
@@ -101,12 +101,12 @@ namespace Footstep.Application.AutoMapper
                         Eye = "",
                         Eyebrow = "",
                         Mouth = "",
-                        FacialHair = new ResponseItemJson
+                        FacialHair = new ResponseUserItemJson
                         {
                             Style = "",
                             Color = ""
                         },
-                        Accessory = new ResponseItemJson
+                        Accessory = new ResponseUserItemJson
                         {
                             Style = "",
                             Color = ""
@@ -120,25 +120,25 @@ namespace Footstep.Application.AutoMapper
                     Avatar = new ResponseUserCharacterStylesJson
                     {
                         Skin = new List<string> { "" },
-                        Top = new List<ResponseItemJson>
+                        Top = new List<ResponseUserItemJson>
                         {
-                            new ResponseItemJson
+                            new ResponseUserItemJson
                             {
                                 Style = "",
                                 Color = ""
                             }
                         },
-                        Backpack = new List<ResponseItemJson>
+                        Backpack = new List<ResponseUserItemJson>
                         {
-                            new ResponseItemJson
+                            new ResponseUserItemJson
                             {
                                 Style = "",
                                 Color = ""
                             }
                         },
-                        Clothe = new List<ResponseItemJson>
+                        Clothe = new List<ResponseUserItemJson>
                         {
-                            new ResponseItemJson
+                            new ResponseUserItemJson
                             {
                                 Style = "",
                                 Color = ""
@@ -147,17 +147,17 @@ namespace Footstep.Application.AutoMapper
                         Eye = new List<string> { "" },
                         Eyebrow = new List<string> { "" },
                         Mouth = new List<string> { "" },
-                        FacialHair = new List<ResponseItemJson>
+                        FacialHair = new List<ResponseUserItemJson>
                         {
-                            new ResponseItemJson
+                            new ResponseUserItemJson
                             {
                                 Style = "",
                                 Color = ""
                             }
                         },
-                        Accessory = new List<ResponseItemJson>
+                        Accessory = new List<ResponseUserItemJson>
                         {
-                            new ResponseItemJson
+                            new ResponseUserItemJson
                             {
                                 Style = "",
                                 Color = ""
@@ -167,18 +167,52 @@ namespace Footstep.Application.AutoMapper
                 }));
 
             CreateMap<User, ResponsePaginationUserJson>()
-                 .ForMember(dest => dest.Preferences, opt => opt.MapFrom(src => new ResponsePaginationPreferences
+                 .ForMember(dest => dest.ProfilePicture, opt => opt.MapFrom(src => new ResponsePaginationUserProfilePictureJson
                  {
-                     AvatarOverProfile = src.Preference.AvatarOverProfile,
-                     AvatarStyle = new ResponsePaginationAvatarStyle()
-                     {
-                         Head = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head && i.Equipped)!.Style!.Image,
-                         Body = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Torso && i.Equipped)!.Style!.Image,
-                         Leg = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Leg && i.Equipped)!.Style!.Image,
-                         Bag = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Bag && i.Equipped)!.Style!.Image,
-                         Accessory = src.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head && i.Equipped)!.Style!.Image
-                     }
-                 }));
+                     Uri = "",
+                     Style = ""
+                 }))
+                .ForMember(dest => dest.Social, opt => opt.MapFrom(src => new ResponsePaginationUserSocialJson
+                {
+                    Followers = src.Followers.Select(f => f.FollowerId).ToList(),
+                    Following = src.Following.Select(f => f.FollowingId).ToList(),
+                }))
+                .ForMember(dest => dest.Preferences, opt => opt.MapFrom(src => new ResponsePaginationUserPreferencesJson
+                {
+                    AvatarOverProfile = src.Preference.AvatarOverProfile,
+                    Avatar = new ResponsePaginationUserCharacterStyleJson
+                    {
+                        Skin = "",
+                        Top = new ResponsePaginationUserItemJson
+                        {
+                            Style = "",
+                            Color = ""
+                        },
+                        Backpack = new ResponsePaginationUserItemJson
+                        {
+                            Style = "",
+                            Color = ""
+                        },
+                        Clothe = new ResponsePaginationUserItemJson
+                        {
+                            Style = "",
+                            Color = ""
+                        },
+                        Eye = "",
+                        Eyebrow = "",
+                        Mouth = "",
+                        FacialHair = new ResponsePaginationUserItemJson
+                        {
+                            Style = "",
+                            Color = ""
+                        },
+                        Accessory = new ResponsePaginationUserItemJson
+                        {
+                            Style = "",
+                            Color = ""
+                        }
+                    }
+                }));
 
             CreateMap<Comment, ResponseCommentJson>()
                 .ForMember(dest => dest.AuthorId, opt => opt.MapFrom(src => src.UserId))

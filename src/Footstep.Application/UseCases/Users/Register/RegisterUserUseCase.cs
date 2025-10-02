@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FluentValidation.Results;
-using Footstep.Communication.Enums;
 using Footstep.Communication.Requests.Users;
 using Footstep.Communication.Responses.Users;
 using Footstep.Domain.Entities;
@@ -61,13 +60,10 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         user.Password = _passwordEncripter.Encrypt(request.Password!);
         user.PreferenceId = user.Preference.Id;
         user.CoinId = user.Coin.Id;
-        user.Preference.MapStyle = request.MapStyle;
-        user.Preference.UnlockedMapStyles = request.UnlockedMapStyles;
+        user.Preference.MapStyle = "";
+        user.Preference.UnlockedMapStyles = "";
 
         await _userWriteOnlyRepository.Add(user);
-        await _preferenceWriteOnlyRepository.Add(user.Preference);
-
-        await CreateItems(user.Preference.Id);
 
         await _unitOfWork.Commit();
 
@@ -93,67 +89,5 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 
             throw new ErrorOnValidationException(errorMessages);
         }
-    }
-
-    private async Task CreateItems(Guid preferenceId)
-    {
-        var styles = await _styleReadOnlyRepository.GetAll();
-        List<Style> basicStyles = new List<Style>();
-
-        basicStyles.Add(await CreateBasicStyle(styles, "Basic Head", "Basic", StyleType.Head));
-        basicStyles.Add(await CreateBasicStyle(styles, "Basic Body", "Basic", StyleType.Torso));
-        basicStyles.Add(await CreateBasicStyle(styles, "Basic Leg", "Basic", StyleType.Leg));
-        basicStyles.Add(await CreateBasicStyle(styles, "Basic Bag", "Basic", StyleType.Bag));
-        basicStyles.Add(await CreateBasicStyle(styles, "Basic Accessory", "Basic", StyleType.Accessory));
-        basicStyles.Add(await CreateBasicStyle(styles, "Basic PoitnOfInterest", "Basic", StyleType.PointOfInterest));
-
-        styles.RemoveAll(s => basicStyles.Contains(s));
-
-        foreach (var style in styles)
-        {
-            Item item = new Item
-            {
-                Unlocked = false,
-                Equipped = false,
-                StyleId = style.Id,
-                PreferenceId = preferenceId
-            };
-
-            await _itemWriteOnlyRepository.Add(item);
-        }
-
-        foreach (var basicStyle in basicStyles)
-        {
-            Item item = new Item
-            {
-                Unlocked = true,
-                Equipped = true,
-                StyleId = basicStyle.Id,
-                PreferenceId = preferenceId
-            };
-
-            await _itemWriteOnlyRepository.Add(item);
-        }
-    }
-
-    private async Task<Style> CreateBasicStyle(List<Style> styles, string name, string image, StyleType styleType)
-    {
-        var style = styles.FirstOrDefault(s => s.Name == name);
-
-        if (style == null)
-        {
-            style = new Style
-            {
-                Name = name,
-                Image = image,
-                Price = 0,
-                Store = false,
-                StyleType = (Domain.Enums.StyleType)(int)styleType
-            };
-
-            await _styleWriteOnlyRepository.Add(style);
-        }
-
-        return style;
     }
 }
