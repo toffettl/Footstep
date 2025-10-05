@@ -77,8 +77,8 @@ namespace Footstep.Application.AutoMapper
                 }))
                 .ForMember(dest => dest.Preferences, opt => opt.MapFrom(src => new ResponseUserPreferencesJson
                 {
-                    Map = src.Preference.MapStyle,
-                    POI = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.PointOfInterest)!.Style!.Image,
+                    Map = "",
+                    POI = "",
                     AvatarOverProfile = src.Preference.AvatarOverProfile,
                     Avatar = new ResponseUserCharacterStyleJson
                     {
@@ -115,8 +115,8 @@ namespace Footstep.Application.AutoMapper
                 }))
                 .ForMember(dest => dest.UnlockedStyles, opt => opt.MapFrom(src => new ResponseUserUnlockedStyles
                 {
-                    Map = new List<string> { src.Preference.MapStyle! },
-                    POI = new List<string> { src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.PointOfInterest)!.Style!.Image! },
+                    Map = new List<string> { "" },
+                    POI = new List<string> { "" },
                     Avatar = new ResponseUserCharacterStylesJson
                     {
                         Skin = new List<string> { "" },
@@ -223,89 +223,149 @@ namespace Footstep.Application.AutoMapper
                 }));
 
             CreateMap<PointOfInterest, ResponsePointOfInterestJson>()
-                .ForMember(dest => dest.AuthorId, opt => opt.MapFrom(src => src.UserId))
-                .ForMember(dest => dest.Author, opt => opt.MapFrom(src => new ResponseAuthor
-                {
-                    Name = src.User!.Name,
-                    AvatarStyle = new ResponsePointOfInterestAvatarStyle
-                    {
-                        Head = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head)!.StyleId,
-                        Torso = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Torso)!.StyleId,
-                        Leg = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Leg)!.StyleId,
-                        Bag = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Bag)!.StyleId,
-                        Accessory = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Accessory)!.StyleId
-                    }
-                }))
-                .ForMember(dest => dest.Coordinates, opt => opt.MapFrom(src => new ResponseCoordinates
+                .ForMember(dest => dest.Author, opt => opt.MapFrom(src => new ResponsePointOfInterestAuthorJson
+                 {
+                     Id = src.User!.Id,
+                     Name = src.User!.Name,
+                     AvatarOverProfile = src.User!.Preference.AvatarOverProfile,
+                     Avatar = new ResponsePointOfInterestCharacterStyleJson
+                     {
+                         Skin = "",
+                         Top = new ResponsePointOfInterestItemJson
+                         {
+                             Style = "",
+                             Color = ""
+                         },
+                         Backpack = new ResponsePointOfInterestItemJson
+                         {
+                             Style = "",
+                             Color = ""
+                         },
+                         Clothe = new ResponsePointOfInterestItemJson
+                         {
+                             Style = "",
+                             Color = ""
+                         },
+                         Eye = "",
+                         Eyebrow = "",
+                         Mouth = "",
+                         FacialHair = new ResponsePointOfInterestItemJson
+                         {
+                             Style = "",
+                             Color = ""
+                         },
+                         Accessory = new ResponsePointOfInterestItemJson
+                         {
+                             Style = "",
+                             Color = ""
+                         }
+                     },
+                     ProfilePicture = new ResponsePointOfInterestProfilePictureJson
+                     {
+                         Uri = "",
+                         Style = ""
+                     }
+                 }))
+                .ForMember(dest => dest.POIType, opt => opt.MapFrom(src => src.PointOfInterestType))
+                .ForMember(dest => dest.Style, opt => opt.MapFrom(src => ""))
+                .ForMember(dest => dest.Coordinates, opt => opt.MapFrom(src => new ResponsePointOfInterestCoordinatesJson
                 {
                     Latitude = src.Address!.Latitude,
                     Longitude = src.Address!.Longitude
                 }))
-                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => new ResponseAddress
+                .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => new List<string> { "" }))
+                .ForMember(dest => dest.Media, opt => opt.MapFrom(src => new ResponsePointOfInterestMediaJson
                 {
-                    Country = src.Address!.Country,
-                    State = src.Address.State,
-                    City = src.Address.City,
-                    District = src.Address.District,
-                    Street = src.Address.Street,
-                    Cep = src.Address.Cep,
-                    Number = src.Address.Number
+                    Images = new List<string> { "" },
+                    Videos = new List<string> { "" }
                 }))
-                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new ResponseStatus
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new ResponsePointOfInterestStatusJson
                 {
                     Views = src.Views,
-                    Likes = src.UserPointOfInterestRelations.Count(),
-                    Commentaries = src.Comments.Count()
-                }));
-
-            CreateMap<User, ResponseAuthor>()
-                .ForMember(dest => dest.AvatarStyle, opt => opt.MapFrom(src => new ResponsePointOfInterestAvatarStyle
+                    Likes = src.UserPointOfInterestRelations.Where(upoir => upoir.Like).Count(),
+                    Comments = src.Comments.Count()
+                }))
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => new ResponsePointOfInterestAddressJson
                 {
-                    Head = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Head)!.StyleId,
-                    Torso = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Torso)!.StyleId,
-                    Leg = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Leg)!.StyleId,
-                    Bag = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Bag)!.StyleId,
-                    Accessory = src.Preference.Items.FirstOrDefault(i => i.Equipped && i.Style!.StyleType == StyleType.Accessory)!.StyleId,
+                    Country = src.Address!.Country,
+                    State = src.Address!.State,
+                    City = src.Address!.City,
+                    District = src.Address!.District,
+                    Street = src.Address!.Street,
+                    Cep = src.Address!.Cep,
+                    Number = src.Address!.Number
                 }));
-
-            CreateMap<Address, ResponseCoordinates>();
-
-            CreateMap<Address, ResponseAddress>();
 
             CreateMap<PointOfInterest, ResponsePaginationPointOfInterestJson>()
-                .ForMember(dest => dest.AuthorId, opt => opt.MapFrom(src => src.UserId))
-                .ForMember(dest => dest.Author, opt => opt.MapFrom(src => new ResponsePaginationAuthor
+                .ForMember(dest => dest.Author, opt => opt.MapFrom(src => new ResponsePaginationPointOfInterestAuthorJson
                 {
+                    Id = src.User!.Id,
                     Name = src.User!.Name,
-                    AvatarStyle = new ResponsePaginationPointOfInterestAvatarStyle
+                    AvatarOverProfile = src.User!.Preference.AvatarOverProfile,
+                    Avatar = new ResponsePaginationPointOfInterestCharacterStyleJson
                     {
-                        Head = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Head)!.StyleId,
-                        Torso = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Torso)!.StyleId,
-                        Leg = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Leg)!.StyleId,
-                        Bag = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Bag)!.StyleId,
-                        Accessory = src.User!.Preference.Items.FirstOrDefault(i => i.Style!.StyleType == StyleType.Accessory)!.StyleId
+                        Skin = "",
+                        Top = new ResponsePaginationPointOfInterestItemJson
+                        {
+                            Style = "",
+                            Color = ""
+                        },
+                        Backpack = new ResponsePaginationPointOfInterestItemJson
+                        {
+                            Style = "",
+                            Color = ""
+                        },
+                        Clothe = new ResponsePaginationPointOfInterestItemJson
+                        {
+                            Style = "",
+                            Color = ""
+                        },
+                        Eye = "",
+                        Eyebrow = "",
+                        Mouth = "",
+                        FacialHair = new ResponsePaginationPointOfInterestItemJson
+                        {
+                            Style = "",
+                            Color = ""
+                        },
+                        Accessory = new ResponsePaginationPointOfInterestItemJson
+                        {
+                            Style = "",
+                            Color = ""
+                        }
+                    },
+                    ProfilePicture = new ResponsePaginationPointOfInterestProfilePictureJson
+                    {
+                        Uri = "",
+                        Style = ""
                     }
                 }))
-                .ForMember(dest => dest.Coordinates, opt => opt.MapFrom(src => new ResponsePaginationCoordinates
+                .ForMember(dest => dest.POIType, opt => opt.MapFrom(src => src.PointOfInterestType))
+                .ForMember(dest => dest.Style, opt => opt.MapFrom(src => ""))
+                .ForMember(dest => dest.Coordinates, opt => opt.MapFrom(src => new ResponsePaginationPointOfInterestCoordinatesJson
                 {
                     Latitude = src.Address!.Latitude,
                     Longitude = src.Address!.Longitude
                 }))
-                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => new ResponsePaginationAddress
+                .ForMember(dest => dest.Media, opt => opt.MapFrom(src => new ResponsePaginationPointOfInterestMediaJson
                 {
-                    Country = src.Address!.Country,
-                    State = src.Address.State,
-                    City = src.Address.City,
-                    District = src.Address.District,
-                    Street = src.Address.Street,
-                    Cep = src.Address.Cep,
-                    Number = src.Address.Number
+                    Image = ""
                 }))
-                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new ResponsePaginationStatus
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new ResponsePaginationPointOfInterestStatusJson
                 {
                     Views = src.Views,
-                    Likes = src.UserPointOfInterestRelations.Count(),
-                    Commentaries = src.Comments.Count()
+                    Likes = src.UserPointOfInterestRelations.Where(upoir => upoir.Like).Count(),
+                    Comments = src.Comments.Count()
+                }))
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => new ResponsePaginationPointOfInterestAddressJson
+                {
+                    Country = src.Address!.Country,
+                    State = src.Address!.State,
+                    City = src.Address!.City,
+                    District = src.Address!.District,
+                    Street = src.Address!.Street,
+                    Cep = src.Address!.Cep,
+                    Number = src.Address!.Number
                 }));
 
             CreateMap<UserRelation, ResponseFollowersJson>()

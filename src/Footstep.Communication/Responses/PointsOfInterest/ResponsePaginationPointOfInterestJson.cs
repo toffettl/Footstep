@@ -5,44 +5,73 @@ namespace Footstep.Communication.Responses.Traces
     public class ResponsePaginationPointOfInterestJson
     {
         public Guid Id { get; set; }
-        public Guid AuthorId { get; set; }
-
-        public ResponsePaginationAuthor? Author { get; set; }
-
-        public PointOfInterestType PointOfInterestType { get; set; }
-
-        public ResponsePaginationCoordinates? Coordinates { get; set; }
-        public ResponsePaginationAddress? Address { get; set; }
-        public ResponsePaginationStatus? Status { get; set; }
-
+        public ResponsePaginationPointOfInterestAuthorJson? Author { get; set; }
+        public PointOfInterestType POIType { get; set; }
+        public string? Style { get; set; }
+        public ResponsePaginationPointOfInterestCoordinatesJson? Coordinates { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
-
-        public DateTime? UpdatedAt { get; set; }
+        public ResponsePaginationPointOfInterestMediaJson? Media { get; set; }
+        public ResponsePaginationPointOfInterestStatusJson? Status { get; set; }
+        public ResponsePaginationPointOfInterestAddressJson? Address { get; set; }
+        public DateTime? ExpireAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 
-    public class ResponsePaginationAuthor
+    public class ResponsePaginationPointOfInterestAuthorJson
     {
+        public Guid Id { get; set; }
         public string? Name { get; set; }
-        public ResponsePaginationPointOfInterestAvatarStyle? AvatarStyle { get; set; }
+        public bool AvatarOverProfile { get; set; }
+        public ResponsePaginationPointOfInterestCharacterStyleJson? Avatar { get; set; }
+        public ResponsePaginationPointOfInterestProfilePictureJson? ProfilePicture { get; set; }
     }
 
-    public class ResponsePaginationPointOfInterestAvatarStyle
+    public class ResponsePaginationPointOfInterestCharacterStyleJson
     {
-        public Guid Head { get; set; }
-        public Guid Torso { get; set; }
-        public Guid Leg { get; set; }
-        public Guid Bag { get; set; }
-        public Guid Accessory { get; set; }
+        public string? Skin { get; set; }
+        public ResponsePaginationPointOfInterestItemJson? Top { get; set; }
+        public ResponsePaginationPointOfInterestItemJson? Backpack { get; set; }
+        public ResponsePaginationPointOfInterestItemJson? Clothe { get; set; }
+        public string? Eye { get; set; }
+        public string? Eyebrow { get; set; }
+        public string? Mouth { get; set; }
+        public ResponsePaginationPointOfInterestItemJson? FacialHair { get; set; }
+        public ResponsePaginationPointOfInterestItemJson? Accessory { get; set; }
     }
 
-    public class ResponsePaginationCoordinates
+    public class ResponsePaginationPointOfInterestItemJson
+    {
+        public string? Style { get; set; }
+        public string? Color { get; set; }
+    }
+
+    public class ResponsePaginationPointOfInterestProfilePictureJson
+    {
+        public string? Uri { get; set; }
+        public string? Style { get; set; }
+    }
+    //End of Author
+
+    public class ResponsePaginationPointOfInterestCoordinatesJson
     {
         public double Latitude { get; set; }
         public double Longitude { get; set; }
     }
 
-    public class ResponsePaginationAddress
+    public class ResponsePaginationPointOfInterestMediaJson
+    {
+        public string? Image { get; set; }
+    }
+
+    public class ResponsePaginationPointOfInterestStatusJson
+    {
+        public int Views { get; set; }
+        public int Likes { get; set; }
+        public int Comments { get; set; }
+    }
+
+    public class ResponsePaginationPointOfInterestAddressJson
     {
         public string? Country { get; set; }
         public string? State { get; set; }
@@ -51,12 +80,5 @@ namespace Footstep.Communication.Responses.Traces
         public string? Street { get; set; }
         public string? Cep { get; set; }
         public string? Number { get; set; }
-    }
-
-    public class ResponsePaginationStatus
-    {
-        public int Views { get; set; }
-        public int Likes { get; set; }
-        public int Commentaries { get; set; }
     }
 }
