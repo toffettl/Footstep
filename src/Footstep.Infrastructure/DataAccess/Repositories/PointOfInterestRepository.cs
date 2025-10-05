@@ -10,10 +10,12 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
         IPointOfInterestReadOnlyRepository
     {
         private readonly FootstepDbContext _dbContext;
+
         public PointOfInterestRepository(FootstepDbContext dbContext)
         {
             _dbContext = dbContext;
         }
+
         public async Task Add(PointOfInterest pointOfInterest)
         {
             await _dbContext.PointOfInterests
@@ -47,12 +49,7 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
                 .AsNoTracking()
                 .AsSplitQuery()
                 .Include(poi => poi.User)
-                    .ThenInclude(u => u!.Preference)
-                    .ThenInclude(p => p.Items.Where(i => i.Equipped))
-                    .ThenInclude(i => i.Style)
-                .Include(poi => poi.UserPointOfInterestRelations.Where(upoir => upoir.Like))
                 .Include(poi => poi.Address)
-                .Include(poi => poi.Comments)
                 .ToListAsync();
         }
 
