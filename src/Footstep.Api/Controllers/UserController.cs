@@ -2,6 +2,7 @@
 using Footstep.Application.UseCases.Users.GetByEmail;
 using Footstep.Application.UseCases.Users.GetById;
 using Footstep.Application.UseCases.Users.GetByRanking;
+using Footstep.Application.UseCases.Users.GetEmailExistence;
 using Footstep.Application.UseCases.Users.UpdatePreferences;
 using Footstep.Application.UseCases.Users.UpdateUnlockedStyles;
 using Footstep.Communication.Requests.Users;
@@ -102,6 +103,16 @@ public class UserController : ControllerBase
     {
         var response = await useCase.Execute(page, pageSize, dateTime);
 
+        return Ok(response);
+    }
+
+    [HttpGet("email/existence/{email}")]
+    [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetEmailExistence(
+        [FromServices] IGetUserEmailExistenceUseCase useCase,
+        [FromRoute] string email)
+    {
+        var response = await useCase.Execute(email);
         return Ok(response);
     }
 }
