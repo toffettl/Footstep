@@ -10,13 +10,13 @@ using Footstep.Domain.Repositories.Traces;
 using Footstep.Domain.Repositories.Users;
 using Footstep.Exception;
 using Footstep.Exception.ExceptionsBase;
-using System.Net;
 
 namespace Footstep.Application.UseCases.Traces.Create
 {
     public class CreatePointOfInterestUseCase : ICreatePointOfInterestUseCase
     {
         private readonly IPointOfInterestWriteOnlyRepository _pointOfInterestWriteOnlyRepository;
+        private readonly IPointOfInterestReadOnlyRepository _pointOfInterestReadOnlyRepository;
         private readonly IUserReadOnlyRepository _userReadOnlyRepository;
         private readonly IAddressWriteOnlyRepository _addressWriteOnlyRepository;
         private readonly IAddressReadOnlyRepository _addressReadOnlyRepository;
@@ -24,6 +24,7 @@ namespace Footstep.Application.UseCases.Traces.Create
         private readonly IMapper _mapper;
         public CreatePointOfInterestUseCase(
             IPointOfInterestWriteOnlyRepository pointOfInterestWriteRepository,
+            IPointOfInterestReadOnlyRepository pointOfInterestReadOnlyRepository,
             IUserReadOnlyRepository userReadOnlyRepository,
             IAddressWriteOnlyRepository addressWriteOnlyRepository,
             IAddressReadOnlyRepository addressReadOnlyRepository,
@@ -31,6 +32,7 @@ namespace Footstep.Application.UseCases.Traces.Create
             IMapper mapper)
         {
             _pointOfInterestWriteOnlyRepository = pointOfInterestWriteRepository;
+            _pointOfInterestReadOnlyRepository = pointOfInterestReadOnlyRepository;
             _userReadOnlyRepository = userReadOnlyRepository;
             _addressWriteOnlyRepository = addressWriteOnlyRepository;
             _addressReadOnlyRepository = addressReadOnlyRepository;
@@ -40,7 +42,7 @@ namespace Footstep.Application.UseCases.Traces.Create
 
         public async Task<ResponsePointOfInterestJson> Execute(RequestPointOfInterestJson request)
         {
-            Validade(request);
+            await Validade(request);
 
             var pointOfInterest = _mapper.Map<PointOfInterest>(request);
 
@@ -53,23 +55,27 @@ namespace Footstep.Application.UseCases.Traces.Create
                 pointOfInterest.ExpireAt = null;
             }
 
-            ResponsePointOfInterestJson response = await CreateResponse(pointOfInterest);
-
-            response.Coordinates = _mapper.Map<ResponseCoordinates>(address);
-            response.Address = _mapper.Map<ResponseAddress>(address);
-
             await _pointOfInterestWriteOnlyRepository.Add(pointOfInterest);
 
             await _unitOfWork.Commit();
 
-            return response;
+            pointOfInterest = await _pointOfInterestReadOnlyRepository.GetById(pointOfInterest.Id);   
+
+            return _mapper.Map<ResponsePointOfInterestJson>(pointOfInterest);
         }
 
-        private void Validade(RequestPointOfInterestJson request)
+        private async Task Validade(RequestPointOfInterestJson request)
         {
             var validator = new RequestPointOfInterestJsonValidator();
 
             var result = validator.Validate(request);
+
+            var existsId = await _userReadOnlyRepository.ExistActiveUserWithId(request.AuthorId);
+
+            if (!existsId)
+            {
+                result.Errors.Add(new ValidationFailure(string.Empty, ResourceErrorMessages.USER_NOT_FOUND));
+            }
 
             if (request.PointOfInterestType == PointOfInterestType.Step && request.ExpireAt < DateTime.UtcNow)
             {
@@ -98,7 +104,7 @@ namespace Footstep.Application.UseCases.Traces.Create
                     City = request.Address!.City,
                     Country = request.Address!.Country,
                     District = request.Address!.District,
-                    Number = request.Address!.Number,
+                    Number = request.Address!.Number.ToString(),
                     State = request.Address!.State,
                     Street = request.Address!.Street
                 };
@@ -107,27 +113,6 @@ namespace Footstep.Application.UseCases.Traces.Create
             }
 
             return address;
-        }
-
-        private async Task<ResponsePointOfInterestJson> CreateResponse(PointOfInterest pointOfInterest)
-        {
-            var response = _mapper.Map<ResponsePointOfInterestJson>(pointOfInterest);
-            var user = await _userReadOnlyRepository.GetById(pointOfInterest.UserId);
-
-            if (user == null)
-            {
-                throw new NotFoundException(ResourceErrorMessages.USER_NOT_FOUND);
-            }
-
-            response.Author = _mapper.Map<ResponseAuthor>(user);
-
-            response.Status = new ResponseStatus
-            {
-                Likes = 0,
-                Comments = 0,
-            };
-
-            return response;
         }
     }
 }

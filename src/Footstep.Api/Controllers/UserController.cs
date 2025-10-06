@@ -2,6 +2,7 @@
 using Footstep.Application.UseCases.Users.GetByEmail;
 using Footstep.Application.UseCases.Users.GetById;
 using Footstep.Application.UseCases.Users.GetByRanking;
+using Footstep.Application.UseCases.Users.GetEmailExistence;
 using Footstep.Application.UseCases.Users.UpdatePreferences;
 using Footstep.Application.UseCases.Users.UpdateUnlockedStyles;
 using Footstep.Communication.Requests.Users;

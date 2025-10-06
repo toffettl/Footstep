@@ -63,14 +63,14 @@ namespace Footstep.Communication.Responses.Users
     public class ResponseUserCharacterStyleJson
     {
         public string? Skin { get; set; }
-        public ResponseItemJson? Top { get; set; }
-        public ResponseItemJson? Backpack { get; set; }
-        public ResponseItemJson? Clothe { get; set; }
+        public ResponseUserItemJson? Top { get; set; }
+        public ResponseUserItemJson? Backpack { get; set; }
+        public ResponseUserItemJson? Clothe { get; set; }
         public string? Eye { get; set; }
         public string? Eyebrow { get; set; }
         public string? Mouth { get; set; }
-        public ResponseItemJson? FacialHair { get; set; }
-        public ResponseItemJson? Accessory { get; set; }
+        public ResponseUserItemJson? FacialHair { get; set; }
+        public ResponseUserItemJson? Accessory { get; set; }
     }
     //End of Preferences
 
@@ -85,18 +85,18 @@ namespace Footstep.Communication.Responses.Users
     public class ResponseUserCharacterStylesJson
     {
         public List<string>? Skin { get; set; }
-        public List<ResponseItemJson>? Top { get; set; }
-        public List<ResponseItemJson>? Backpack { get; set; }
-        public List<ResponseItemJson>? Clothe { get; set; }
+        public List<ResponseUserItemJson>? Top { get; set; }
+        public List<ResponseUserItemJson>? Backpack { get; set; }
+        public List<ResponseUserItemJson>? Clothe { get; set; }
         public List<string>? Eye { get; set; }
         public List<string>? Eyebrow { get; set; }
         public List<string>? Mouth { get; set; }
-        public List<ResponseItemJson>? FacialHair { get; set; }
-        public List<ResponseItemJson>? Accessory { get; set; }
+        public List<ResponseUserItemJson>? FacialHair { get; set; }
+        public List<ResponseUserItemJson>? Accessory { get; set; }
     }
     //End of UnlockedStyles
 
-    public class ResponseItemJson
+    public class ResponseUserItemJson
     {
         public string? Style { get; set; }
         public string? Color { get; set; }

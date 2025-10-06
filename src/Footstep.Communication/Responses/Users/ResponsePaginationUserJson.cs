@@ -4,23 +4,48 @@
     {
         public Guid Id { get; set; }
         public string? Name { get; set; }
-        public string? Email { get; set; }
-        public ResponsePaginationPreferences? Preferences { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public ResponsePaginationUserProfilePictureJson? ProfilePicture { get; set; }
+        public ResponsePaginationUserSocialJson? Social { get; set; }
+        public ResponsePaginationUserPreferencesJson? Preferences { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 
-    public class ResponsePaginationPreferences
+    public class ResponsePaginationUserProfilePictureJson
+    {
+        public string? Uri { get; set; }
+        public string? Style { get; set; }
+    }
+
+    public class ResponsePaginationUserSocialJson
+    {
+        public List<Guid>? Followers { get; set; }
+        public List<Guid>? Following { get; set; }
+    }
+
+    //Start of Preferences
+    public class ResponsePaginationUserPreferencesJson
     {
         public bool? AvatarOverProfile { get; set; }
-        public ResponsePaginationAvatarStyle? AvatarStyle { get; set; }
+        public ResponsePaginationUserCharacterStyleJson? Avatar { get; set; }
     }
 
-    public class ResponsePaginationAvatarStyle
+    public class ResponsePaginationUserCharacterStyleJson
     {
-        public string? Head { get; set; }
-        public string? Body { get; set; }
-        public string? Leg { get; set; }
-        public string? Bag { get; set; }
-        public string? Accessory { get; set; }
+        public string? Skin { get; set; }
+        public ResponsePaginationUserItemJson? Top { get; set; }
+        public ResponsePaginationUserItemJson? Backpack { get; set; }
+        public ResponsePaginationUserItemJson? Clothe { get; set; }
+        public string? Eye { get; set; }
+        public string? Eyebrow { get; set; }
+        public string? Mouth { get; set; }
+        public ResponsePaginationUserItemJson? FacialHair { get; set; }
+        public ResponsePaginationUserItemJson? Accessory { get; set; }
     }
+
+    public class ResponsePaginationUserItemJson
+    {
+        public string? Style { get; set; }
+        public string? Color { get; set; }
+    }
+    //End of Preferences
 }

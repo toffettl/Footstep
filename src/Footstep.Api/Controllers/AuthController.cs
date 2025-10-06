@@ -1,4 +1,5 @@
-﻿using Footstep.Application.UseCases.Users.Login;
+﻿using Footstep.Application.UseCases.Users.GetEmailExistence;
+using Footstep.Application.UseCases.Users.Login;
 using Footstep.Application.UseCases.Users.Register;
 using Footstep.Communication.Requests.Users;
 using Footstep.Communication.Responses;
@@ -32,6 +33,16 @@ namespace Footstep.Api.Controllers
         {
             var response = await useCase.Execute(request);
 
+            return Ok(response);
+        }
+
+        [HttpGet("email/existence/{email}")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetEmailExistence(
+        [FromServices] IGetUserEmailExistenceUseCase useCase,
+        [FromRoute] string email)
+        {
+            var response = await useCase.Execute(email);
             return Ok(response);
         }
     }
