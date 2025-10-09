@@ -100,11 +100,15 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         var styles = await _styleReadOnlyRepository.GetAll();
         List<Style> basicStyles = new List<Style>();
 
-        basicStyles.Add(await CreateBasicStyle(styles, "Basic Head", "", StyleType.Head));
-        basicStyles.Add(await CreateBasicStyle(styles, "Basic Body", "", StyleType.Body));
-        basicStyles.Add(await CreateBasicStyle(styles, "Basic Leg", "", StyleType.Leg));
-        basicStyles.Add(await CreateBasicStyle(styles, "Basic Bag", "", StyleType.Bag));
-        basicStyles.Add(await CreateBasicStyle(styles, "Basic Accessory", "", StyleType.Accessory));
+        basicStyles.Add(await CreateBasicStyle(styles, "Basic Accessories", "", StyleType.Accessories));
+        basicStyles.Add(await CreateBasicStyle(styles, "Basic Top", "", StyleType.Top));
+        basicStyles.Add(await CreateBasicStyle(styles, "Basic FacialHair", "", StyleType.FacialHair));
+        basicStyles.Add(await CreateBasicStyle(styles, "Basic Clothes", "", StyleType.Clothes));
+        basicStyles.Add(await CreateBasicStyle(styles, "Basic Eyes", "", StyleType.Eyes));
+        basicStyles.Add(await CreateBasicStyle(styles, "Basic Eyebrown", "", StyleType.Eyebrown));
+        basicStyles.Add(await CreateBasicStyle(styles, "Basic Mouth", "", StyleType.Mouth));
+        basicStyles.Add(await CreateBasicStyle(styles, "Basic Skin", "", StyleType.Skin));
+        basicStyles.Add(await CreateBasicStyle(styles, "Basic BackPack", "", StyleType.BackPack));
         basicStyles.Add(await CreateBasicStyle(styles, "Basic PoitnOfInterest", "", StyleType.PointOfInterest));
 
         styles.RemoveAll(s => basicStyles.Contains(s));

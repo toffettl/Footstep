@@ -51,12 +51,15 @@ namespace Footstep.Application.UseCases.Users.GetByEmail
 
             response.UnlockedStyles!.UnlockedMapStyles = user.Preference.MapStyle;
             response.UnlockedStyles!.UnlockedPointOfInterestStyles = items.Where(i => i.Style?.StyleType == StyleType.PointOfInterest).Select(i => i.StyleId).ToList();
-            response.UnlockedStyles!.UnlockedAccessoriesStyles = items.Where(i => i.Style?.StyleType == StyleType.Head).Select(i => i.Style!.Id).ToList();
-            response.UnlockedStyles!.UnlockedTopStyles = items.Where(i => i.Style?.StyleType == StyleType.Body).Select(i => i.Style!.Id).ToList();
-            response.UnlockedStyles!.UnlockedFacialHairStyles = items.Where(i => i.Style?.StyleType == StyleType.Leg).Select(i => i.Style!.Id).ToList();
-            response.UnlockedStyles!.UnlockedClothesStyles = items.Where(i => i.Style?.StyleType == StyleType.Bag).Select(i => i.Style!.Id).ToList();
+            response.UnlockedStyles!.UnlockedAccessoriesStyles = items.Where(i => i.Style?.StyleType == StyleType.Accessories).Select(i => i.Style!.Id).ToList();
+            response.UnlockedStyles!.UnlockedTopStyles = items.Where(i => i.Style?.StyleType == StyleType.Top).Select(i => i.Style!.Id).ToList();
+            response.UnlockedStyles!.UnlockedFacialHairStyles = items.Where(i => i.Style?.StyleType == StyleType.FacialHair).Select(i => i.Style!.Id).ToList();
+            response.UnlockedStyles!.UnlockedClothesStyles = items.Where(i => i.Style?.StyleType == StyleType.Clothes).Select(i => i.Style!.Id).ToList();
             response.UnlockedStyles!.UnlockedEyesStyles = items.Where(i => i.Style?.StyleType == StyleType.Eyes).Select(i => i.Style!.Id).ToList();
             response.UnlockedStyles!.UnlockedEyebrownStyles = items.Where(i => i.Style?.StyleType == StyleType.Eyebrown).Select(i => i.Style!.Id).ToList();
+            response.UnlockedStyles!.UnlockedMouthStyles = items.Where(i => i.Style?.StyleType == StyleType.Mouth).Select(i => i.Style!.Id).ToList();
+            response.UnlockedStyles!.UnlockedSkinStyles = items.Where(i => i.Style?.StyleType == StyleType.Skin).Select(i => i.Style!.Id).ToList();
+            response.UnlockedStyles!.UnlockedBackPackStyles = items.Where(i => i.Style?.StyleType == StyleType.BackPack).Select(i => i.Style!.Id).ToList();
             return response;
         }
     }
