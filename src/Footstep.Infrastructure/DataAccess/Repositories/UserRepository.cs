@@ -104,11 +104,7 @@ public class UserRepository :
         return (users, totalCount);
     }
 
-    public async Task<bool> ExistActiveUserWithId(Guid id)
-    {
-        return await _dbContext.Users
-            .AnyAsync(user => user.Id!.Equals(id));
-    }
+    
 
     public async Task<(List<User> Users, int TotalCount)> GetByRanking(int page, int pageSize, DateTime dateTime)
     {
