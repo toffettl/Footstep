@@ -47,7 +47,7 @@ namespace Footstep.Application.UseCases.Users.UpdateUnlockedStyles
 
             await UpdateUnlockedItem(request.UnlockedPointOfInterestStyle!.Value, items);
             await UpdateUnlockedItem(request.UnlockedHeadStyle!.Value, items);
-            await UpdateUnlockedItem(request.UnlockedBodyStyle!.Value, items);
+            await UpdateUnlockedItem(request.UnlockedTorsoStyle!.Value, items);
             await UpdateUnlockedItem(request.UnlockedLegStyle!.Value, items);
             await UpdateUnlockedItem(request.UnlockedBagStyle!.Value, items);
             await UpdateUnlockedItem(request.UnlockedAcessoryStyle!.Value, items);

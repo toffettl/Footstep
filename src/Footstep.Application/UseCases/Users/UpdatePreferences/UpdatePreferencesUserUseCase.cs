@@ -46,11 +46,11 @@ namespace Footstep.Application.UseCases.Users.UpdatePreferences
             var items = await _itemReadOnlyRepository.GetByPreferenceIdAndUnlocked(user!.PreferenceId);
 
             UpdateEquippedItem(user.PreferenceId, request.PointOfInterestStyle!.Value, StyleType.PointOfInterest, items);
-            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Head!.Value, StyleType.Accessories, items);
-            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Body!.Value, StyleType.Top, items);
-            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Leg!.Value, StyleType.FacialHair, items);
-            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Bag!.Value, StyleType.Eyes, items);
-            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Acessory!.Value, StyleType.Eyebrown, items);
+            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Head!.Value, StyleType.Head, items);
+            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Torso!.Value, StyleType.Torso, items);
+            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Leg!.Value, StyleType.Leg, items);
+            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Bag!.Value, StyleType.Bag, items);
+            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Acessory!.Value, StyleType.Accessory, items);
 
             _mapper.Map(request, user.Preference);
 
