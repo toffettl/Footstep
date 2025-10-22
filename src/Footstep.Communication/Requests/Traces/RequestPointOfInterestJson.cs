@@ -4,7 +4,7 @@ namespace Footstep.Communication.Requests.Traces
 {
     public class RequestPointOfInterestJson
     {
-        public Guid AuthorId { get; set; }
+        public RequestAuthorPointOfInterestJson? Author { get; set; }
         public PointOfInterestType PointOfInterestType { get; set; }
 
         public RequestCoordinates? Coordinates { get; set; }
@@ -14,6 +14,11 @@ namespace Footstep.Communication.Requests.Traces
         public string? Title { get; set; }
         public string? Description { get; set; }
         public DateTime? ExpireAt { get; set; }
+    }
+
+    public class RequestAuthorPointOfInterestJson
+    {
+        public Guid Id { get; set; }
     }
 
     public class RequestCoordinates

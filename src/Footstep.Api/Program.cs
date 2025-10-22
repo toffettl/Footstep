@@ -64,7 +64,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
+//builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
@@ -81,7 +81,7 @@ app.UseMiddleware<CultureMiddleware>();
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
 app.MapControllers();
 

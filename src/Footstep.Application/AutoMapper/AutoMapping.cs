@@ -34,7 +34,7 @@ namespace Footstep.Application.AutoMapper
             CreateMap<RequestStyleJson, Style>();
             
             CreateMap<RequestPointOfInterestJson, PointOfInterest>()
-                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.AuthorId))
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.Author!.Id))
                 .ForMember(dest => dest.Address, opt => opt.Ignore());
             
             CreateMap<RequestUpdateStatusPointOfInterestJson, PointOfInterest>();

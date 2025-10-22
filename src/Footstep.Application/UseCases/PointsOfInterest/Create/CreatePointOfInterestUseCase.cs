@@ -70,7 +70,7 @@ namespace Footstep.Application.UseCases.Traces.Create
 
             var result = validator.Validate(request);
 
-            var existsId = await _userReadOnlyRepository.ExistActiveUserWithId(request.AuthorId);
+            var existsId = await _userReadOnlyRepository.ExistActiveUserWithId(request.Author!.Id);
 
             if (!existsId)
             {
