@@ -1,5 +1,4 @@
 ﻿using Footstep.Communication.Enums;
-using System.ComponentModel.DataAnnotations;
 
 namespace Footstep.Communication.Responses.Comments
 {
@@ -22,6 +21,6 @@ namespace Footstep.Communication.Responses.Comments
     public class StatusResponse
     {
         public int Likes { get; set; }
-        public int Replies { get; set; }
+        public List<Guid>? Replies { get; set; }
     }
 }

@@ -31,11 +31,6 @@ namespace Footstep.Application.UseCases.Comments.GetByParentsId
                 (comments, totalCount) = await _commentReadOnlyRepository.GetByCommentId(parentId, page, pageSize);
             }
 
-            if (comments.Count == 0)
-            {
-                throw new NotFoundException(ResourceErrorMessages.COMMENT_NOT_FOUND);
-            }
-
             List<ResponseCommentJson> responses = _mapper.Map<List<ResponseCommentJson>>(comments);
 
             foreach (var response in responses)

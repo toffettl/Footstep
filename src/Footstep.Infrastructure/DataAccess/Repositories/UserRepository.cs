@@ -39,6 +39,10 @@ public class UserRepository :
             .Include(u => u.Preference)
                 .ThenInclude(p => p.Items.Where(i => i.Unlocked))
                     .ThenInclude(i => i.Style)
+            .Include(u => u.UserPointOfInterestRelations.Where(upoir => upoir.Like))
+                .ThenInclude(upoir => upoir.PointOfInterest)
+            .Include(u => u.LikeComments)
+                .ThenInclude(lc => lc.Comment)
             .FirstOrDefaultAsync(u => u.Id == id);
     }
 
@@ -54,6 +58,10 @@ public class UserRepository :
             .Include(u => u.Preference)
                 .ThenInclude(p => p.Items.Where(i => i.Unlocked))
                     .ThenInclude(i => i.Style)
+            .Include(u => u.UserPointOfInterestRelations.Where(upoir => upoir.Like))
+                .ThenInclude(upoir => upoir.PointOfInterest)
+            .Include(u => u.LikeComments)
+                .ThenInclude(lc => lc.Comment)
             .FirstOrDefaultAsync(u => u.Email == email);
     }
 
@@ -75,6 +83,10 @@ public class UserRepository :
             .Include(u => u.Preference)
                 .ThenInclude(p => p.Items.Where(i => i.Unlocked))
                     .ThenInclude(i => i.Style)
+            .Include(u => u.UserPointOfInterestRelations.Where(upoir => upoir.Like))
+                .ThenInclude(upoir => upoir.PointOfInterest)
+            .Include(u => u.LikeComments)
+                .ThenInclude(lc => lc.Comment)
             .ToListAsync();
     }
 

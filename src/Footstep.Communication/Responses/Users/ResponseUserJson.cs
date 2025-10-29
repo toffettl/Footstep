@@ -28,6 +28,7 @@ namespace Footstep.Communication.Responses.Users
         public List<Guid>? Followers { get; set; }
         public List<Guid>? Following { get; set; }
         public List<Guid>? Comments { get; set; }
+        public List<Guid>? Likes { get; set; }
     }
 
     //Start of Activity

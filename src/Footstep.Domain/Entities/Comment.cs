@@ -1,5 +1,4 @@
 ﻿using Footstep.Domain.Enums;
-using System.ComponentModel.DataAnnotations;
 
 namespace Footstep.Domain.Entities
 {

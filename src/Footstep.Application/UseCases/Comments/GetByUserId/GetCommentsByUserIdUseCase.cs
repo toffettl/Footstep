@@ -3,8 +3,6 @@ using Footstep.Communication.Enums;
 using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Comments;
 using Footstep.Domain.Repositories.Comments;
-using Footstep.Exception;
-using Footstep.Exception.ExceptionsBase;
 
 namespace Footstep.Application.UseCases.Comments.GetByAuthorId
 {
@@ -22,11 +20,6 @@ namespace Footstep.Application.UseCases.Comments.GetByAuthorId
         public async Task<PagedResult<ResponseCommentJson>> Execute(Guid id, int page, int pageSize)
         {
             var (comments, totalCount) = await _commentReadOnlyRepository.GetByUserId(id, page, pageSize);
-
-            if (comments.Count == 0)
-            {
-                throw new NotFoundException(ResourceErrorMessages.COMMENT_NOT_FOUND);
-            }
 
             List<ResponseCommentJson> responses = new List<ResponseCommentJson>();
 

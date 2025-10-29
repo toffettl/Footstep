@@ -71,7 +71,7 @@ namespace Footstep.Communication.Responses.Traces
     {
         public int Views { get; set; }
         public int Likes { get; set; }
-        public int Comments { get; set; }
+        public List<Guid>? Comments { get; set; }
     }
 
     public class ResponsePointOfInterestAddressJson

@@ -59,7 +59,8 @@ namespace Footstep.Application.AutoMapper
                 {
                     Followers = src.Followers.Select(f => f.FollowerId).ToList(),
                     Following = src.Following.Select(f => f.FollowingId).ToList(),
-                    Comments = src.Comments.Select(c => c.Id).ToList()
+                    Comments = src.Comments.Select(c => c.Id).ToList(),
+                    Likes = src.UserPointOfInterestRelations.Select(upoir => upoir.PointOfInterestId).Concat(src.LikeComments.Select(lc => lc.CommentId)).ToList()
                 }))
                 .ForMember(dest => dest.Activity, opt => opt.MapFrom(src => new ResponseUserActivityJson
                 {
@@ -219,7 +220,7 @@ namespace Footstep.Application.AutoMapper
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new StatusResponse
                     {
                     Likes = src.CommentLikes.Count,
-                    Replies = src.Comments.Count,
+                    Replies = src.Comments.Select(c => c.Id).ToList(),
                 }));
 
             CreateMap<PointOfInterest, ResponsePointOfInterestJson>()
@@ -283,7 +284,7 @@ namespace Footstep.Application.AutoMapper
                 {
                     Views = src.Views,
                     Likes = src.UserPointOfInterestRelations.Where(upoir => upoir.Like).Count(),
-                    Comments = src.Comments.Count()
+                    Comments = src.Comments.Select(c => c.Id).ToList()
                 }))
                 .ForMember(dest => dest.Address, opt => opt.MapFrom(src => new ResponsePointOfInterestAddressJson
                 {

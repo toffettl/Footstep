@@ -59,7 +59,7 @@ namespace Footstep.Api.Controllers
         }
 
         [HttpPut]
-        [Route("Status/{id}")]
+        [Route("Likes/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]

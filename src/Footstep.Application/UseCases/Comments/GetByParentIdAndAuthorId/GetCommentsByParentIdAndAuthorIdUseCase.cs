@@ -2,7 +2,6 @@
 using Footstep.Communication.Enums;
 using Footstep.Communication.Responses.Comments;
 using Footstep.Domain.Repositories.Comments;
-using Footstep.Exception;
 using Footstep.Exception.ExceptionsBase;
 
 namespace Footstep.Application.UseCases.Comments.GetByParentIdAndAuthorId
@@ -27,11 +26,6 @@ namespace Footstep.Application.UseCases.Comments.GetByParentIdAndAuthorId
             if (parentType == ParentType.Comment)
             {
                 comment = await _commentReadOnlyRepository.GetByCommentIdAndUserId(parentId, authorId);
-            }
-
-            if (comment.Count == 0)
-            {
-                throw new NotFoundException(ResourceErrorMessages.COMMENT_NOT_FOUND);
             }
 
             List<ResponseCommentJson> responses = _mapper.Map<List<ResponseCommentJson>>(comment);
