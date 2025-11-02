@@ -17,6 +17,9 @@ namespace Footstep.Infrastructure.DataAccess
         public DbSet<Style> Styles { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Preference> Preferences { get; set; }
+        public DbSet<Coin> Coins { get; set; }
+
+        public DbSet<UserItem> UserItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -48,6 +51,8 @@ namespace Footstep.Infrastructure.DataAccess
                 .WithMany(c => c.CommentLikes)
                 .HasForeignKey(cl => cl.CommentId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+           
         }
     }
 }
