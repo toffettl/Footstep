@@ -90,6 +90,8 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
                 .Where(ui => ui.UserId == userId)
                 .Include(ui => ui.Item)
                     .ThenInclude(i => i.Style)
+                .Include(ui => ui.Item)
+                    .ThenInclude(i => i.Preference)
                 .Select(ui => ui.Item!)
                 .ToListAsync();
         }
