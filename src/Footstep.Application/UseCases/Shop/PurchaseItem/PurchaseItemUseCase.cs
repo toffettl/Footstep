@@ -59,7 +59,7 @@ namespace Footstep.Application.UseCases.Shop.PurchaseItem
             var coin = await _coinRepository.GetByUserId(request.UserId);
             if (coin == null)
             {
-                throw new NotFoundException(ResourceErrorMessages.USER_COINS_NOT_FOUND);
+                throw new NotFoundException(ResourceErrorMessages.COIN_NOT_FOUND);
 
             }
 

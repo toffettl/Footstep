@@ -106,6 +106,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Coin not found.
+        /// </summary>
+        public static string COIN_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("COIN_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Comment cannot be empty.
         /// </summary>
         public static string COMMENT_CANNOT_BE_EMPTY {
@@ -232,6 +241,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Insufficient coins to purchase this item.
+        /// </summary>
+        public static string INSUFFICIENT_COINS {
+            get {
+                return ResourceManager.GetString("INSUFFICIENT_COINS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Latitude must be between -90 and 90.
         /// </summary>
         public static string INVALID_LATITUDE {
@@ -264,6 +282,33 @@ namespace Footstep.Exception {
         public static string IS_FOLLOWING {
             get {
                 return ResourceManager.GetString("IS_FOLLOWING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Item already purchased.
+        /// </summary>
+        public static string ITEM_ALREADY_PURCHASED {
+            get {
+                return ResourceManager.GetString("ITEM_ALREADY_PURCHASED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Item ID is required.
+        /// </summary>
+        public static string ITEM_ID_REQUIRED {
+            get {
+                return ResourceManager.GetString("ITEM_ID_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Item is not available.
+        /// </summary>
+        public static string ITEM_NOT_AVAILABLE {
+            get {
+                return ResourceManager.GetString("ITEM_NOT_AVAILABLE", resourceCulture);
             }
         }
         
@@ -579,6 +624,15 @@ namespace Footstep.Exception {
         public static string USER_AND_POINT_OF_INTEREST_RELATION_NOT_FOUND {
             get {
                 return ResourceManager.GetString("USER_AND_POINT_OF_INTEREST_RELATION_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a User ID is required.
+        /// </summary>
+        public static string USER_ID_REQUIRED {
+            get {
+                return ResourceManager.GetString("USER_ID_REQUIRED", resourceCulture);
             }
         }
         

@@ -26,11 +26,11 @@ namespace Footstep.Application.UseCases.Shop.GetUserCoins
 
         public async Task<ResponseUserCoinsJson> Execute(Guid userId)
         {
-            var coin = await _coinRepository.GetByUserIdAsync(userId);
+            var coin = await _coinRepository.GetByUserId(userId);
 
             if (coin == null)
             {
-                throw new NotFoundException(ResourceErrorMessages.USER_COINS_NOT_FOUND)
+                throw new NotFoundException(ResourceErrorMessages.COIN_NOT_FOUND);
             }
 
             var response = _mapper.Map<ResponseUserCoinsJson>(coin);

@@ -297,4 +297,22 @@
   <data name="USER_AND_POINT_OF_INTEREST_RELATION_NOT_FOUND" xml:space="preserve">
     <value>User and point of interest relation not found</value>
   </data>
+  <data name="USER_ID_REQUIRED" xml:space="preserve">
+    <value>User ID is required</value>
+  </data>
+  <data name="ITEM_ID_REQUIRED" xml:space="preserve">
+    <value>Item ID is required</value>
+  </data>
+  <data name="COIN_NOT_FOUND" xml:space="preserve">
+    <value>Coin not found</value>
+  </data>
+  <data name="ITEM_NOT_AVAILABLE" xml:space="preserve">
+    <value>Item is not available</value>
+  </data>
+  <data name="ITEM_ALREADY_PURCHASED" xml:space="preserve">
+    <value>Item already purchased</value>
+  </data>
+  <data name="INSUFFICIENT_COINS" xml:space="preserve">
+    <value>Insufficient coins to purchase this item</value>
+  </data>
 </root>
