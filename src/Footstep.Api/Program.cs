@@ -1,11 +1,15 @@
+using Amazon.S3;
 using DotNetEnv;
 using Footstep.Api.Filters;
 using Footstep.Api.Middleware;
 using Footstep.Application;
 using Footstep.Infrastructure;
+using Footstep.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Runtime;
 using System.Text;
 
 //V3.0.2
@@ -14,6 +18,10 @@ Env.Load();
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration["ConnectionStrings:DefaultConnection"] = Environment.GetEnvironmentVariable("DEFAULT_CONNECTION");
+builder.Configuration["S3Settings:Region"] = Environment.GetEnvironmentVariable("AWS_REGION");
+builder.Configuration["S3Settings:BucketName"] = Environment.GetEnvironmentVariable("AWS_BUCKET_NAME");
+builder.Configuration["S3Settings:AccessKey"] = Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID");
+builder.Configuration["S3Settings:SecretKey"] = Environment.GetEnvironmentVariable("AWS_SECRET_KEY");
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -66,8 +74,23 @@ builder.Services.AddAuthentication(options =>
 
 //builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
+builder.Services.Configure<S3Settings>(builder.Configuration.GetSection("S3Settings"));
+
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
+
+builder.Services.AddSingleton<IAmazonS3>(sp =>
+{
+    var s3Settings = sp.GetRequiredService<IOptions<S3Settings>>().Value;
+
+    var config = new AmazonS3Config
+    {
+        RegionEndpoint = Amazon.RegionEndpoint.GetBySystemName(s3Settings.Region)
+    };
+
+    return new AmazonS3Client(s3Settings.AccessKey, s3Settings.SecretKey, config);
+});
+
 
 var app = builder.Build();
 
