@@ -241,6 +241,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Image not found.
+        /// </summary>
+        public static string IMAGE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("IMAGE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a The point of interest can only have one image.
         /// </summary>
         public static string IMAGE_QUANTITY_INVALID {

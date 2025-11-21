@@ -12,7 +12,7 @@ namespace Footstep.Communication.Responses.Traces
         public string? Title { get; set; }
         public string? Description { get; set; }
         public List<string>? Tags { get; set; }
-        public ResponsePointOfInterestMediaJson? Media { get; set; }
+        public ResponsePointOfInterestMediaJson Media { get; set; } = new ResponsePointOfInterestMediaJson();
         public ResponsePointOfInterestStatusJson? Status { get; set; }
         public ResponsePointOfInterestAddressJson? Address { get; set; }
         public DateTime? ExpireAt { get; set; }
@@ -63,8 +63,14 @@ namespace Footstep.Communication.Responses.Traces
     }
 
     public class ResponsePointOfInterestMediaJson     {
-        public List<string>? Images { get; set; }
-        public List<string>? Videos { get; set; }
+        public List<ResponsePointOfInterestImageJson> Images { get; set; } = new List<ResponsePointOfInterestImageJson>();
+        public List<string> Videos { get; set; } = new List<string>();
+    }
+
+    public class ResponsePointOfInterestImageJson
+    {
+        public Guid Id { get; set; }
+        public string? Url { get; set; }
     }
 
     public class ResponsePointOfInterestStatusJson
