@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Footstep.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+//[Authorize]
 public class UserController : ControllerBase
 {
     [HttpGet]

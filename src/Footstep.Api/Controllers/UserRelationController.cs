@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Footstep.Api.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+//[Authorize]
 public class UserRelationController : ControllerBase
 {
     [HttpPost]

@@ -1,4 +1,5 @@
-﻿using Footstep.Application.UseCases.PointsOfInterest.UpdateImages;
+﻿using Footstep.Application.UseCases.PointsOfInterest.UpdateDeleteImage;
+using Footstep.Application.UseCases.PointsOfInterest.UpdateImages;
 using Footstep.Application.UseCases.Traces.Create;
 using Footstep.Application.UseCases.Traces.Delete;
 using Footstep.Application.UseCases.Traces.GetAll;
@@ -18,7 +19,7 @@ namespace Footstep.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class PointOfInterestController : ControllerBase
     {
         [HttpPost]
@@ -62,14 +63,14 @@ namespace Footstep.Api.Controllers
         }
 
         [HttpPut]
-        [Route("Image/Add/{pointOfInterestId}")]
+        [Route("Image/Add/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> UpdateAddImage(
             [FromServices] IUpdateAddImagePointOfInterestUseCase useCase,
-            [FromRoute] Guid pointOfInterestId,
+            [FromRoute] Guid id,
             IFormFile file)
         {
             if (file.Length == 0)
@@ -77,7 +78,21 @@ namespace Footstep.Api.Controllers
                 return BadRequest(ResourceErrorMessages.FILE_INVALID);
             }
 
-            await useCase.Execute(pointOfInterestId, file.OpenReadStream(), file.FileName, file.ContentType);
+            await useCase.Execute(id, file.OpenReadStream(), file.FileName, file.ContentType);
+
+            return NoContent();
+        }
+
+        [HttpPut]
+        [Route("Image/Remove/{imageId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UpdateRemoveImage(
+            [FromServices] IUpdateDeleteImagePointOfInterestUseCase useCase,
+            [FromRoute] Guid imageId)
+        {
+            await useCase.Execute(imageId);
 
             return NoContent();
         }
