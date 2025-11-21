@@ -42,7 +42,7 @@ namespace Footstep.Application.UseCases.Users.UpdateAddProfilePicture
                 throw new NotFoundException(ResourceErrorMessages.USER_NOT_FOUND);
             }
 
-            if (user.Preference.ImageId != null)
+            if (user.Preference.Image != null)
             {
                 throw new System.Exception(ResourceErrorMessages.IMAGE_QUANTITY_INVALID);
             }

@@ -47,5 +47,53 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
         {
             _dbContext.Items.Update(item);
         }
+
+        public async Task<Item?> GetById(Guid id)
+        {
+            return await _dbContext.Items
+                 .AsNoTracking()
+                 .Include(i => i.Style)
+                 .Include(i => i.Preference)
+                 .FirstOrDefaultAsync(i => i.Id == id);
+        }
+
+        public async Task<List<Item>> GetAllShopItems()
+        {
+            return await _dbContext.Items
+                 .AsNoTracking()
+                 .Include(i => i.Style)
+                 .Include(i => i.Preference)
+                 .Where(i => i.IsAvaliableInShop)
+                 .ToListAsync();
+        }
+
+        public async Task<List<Item>> GetAvailableForUser(Guid userId)
+        {
+            var purchasedItemIds = await _dbContext.UserItems
+                .AsNoTracking()
+                .Where(ui => ui.UserId == userId)
+                .Select(ui => ui.ItemId)
+                .ToListAsync();
+
+            return await _dbContext.Items
+                .AsNoTracking()
+                .Include(i => i.Style)
+                .Where(i => i.IsAvaliableInShop && !purchasedItemIds.Contains(i.Id))
+                .OrderBy(i => i.Price)
+                .ToListAsync();
+        }
+
+        public async Task<List<Item>> GetUserPurchasedItems(Guid userId)
+        {
+            return await _dbContext.UserItems
+                .AsNoTracking()
+                .Where(ui => ui.UserId == userId)
+                .Include(ui => ui.Item)
+                    .ThenInclude(i => i.Style)
+                .Include(ui => ui.Item)
+                    .ThenInclude(i => i.Preference)
+                .Select(ui => ui.Item!)
+                .ToListAsync();
+        }
     }
 }
