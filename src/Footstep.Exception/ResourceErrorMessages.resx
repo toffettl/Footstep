@@ -297,4 +297,13 @@
   <data name="USER_AND_POINT_OF_INTEREST_RELATION_NOT_FOUND" xml:space="preserve">
     <value>User and point of interest relation not found</value>
   </data>
+  <data name="IMAGE_QUANTITY_INVALID" xml:space="preserve">
+    <value>The point of interest can only have one image</value>
+  </data>
+  <data name="S3_CONNECTION_INVALID" xml:space="preserve">
+    <value>Invalid connection to s3</value>
+  </data>
+  <data name="FILE_INVALID" xml:space="preserve">
+    <value>File invalid</value>
+  </data>
 </root>

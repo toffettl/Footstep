@@ -12,6 +12,7 @@
 
         public User? User { get; set; }
 
+        public ICollection<Image> Images { get; set; } = new List<Image>();
         public ICollection<Item> Items { get; set; } = new List<Item>();
     }
 }

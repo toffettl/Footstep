@@ -196,6 +196,15 @@ namespace Footstep.Exception {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a File invalid.
+        /// </summary>
+        public static string FILE_INVALID {
+            get {
+                return ResourceManager.GetString("FILE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Followed user Id cannot be null.
         /// </summary>
         public static string FOLLOWED_USER_ID_CANNOT_BE_NULL {
@@ -228,6 +237,15 @@ namespace Footstep.Exception {
         public static string IMAGE_EMPTY {
             get {
                 return ResourceManager.GetString("IMAGE_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a The point of interest can only have one image.
+        /// </summary>
+        public static string IMAGE_QUANTITY_INVALID {
+            get {
+                return ResourceManager.GetString("IMAGE_QUANTITY_INVALID", resourceCulture);
             }
         }
         
@@ -390,6 +408,15 @@ namespace Footstep.Exception {
         public static string PRICE_REQUIRED {
             get {
                 return ResourceManager.GetString("PRICE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Invalid connection to s3.
+        /// </summary>
+        public static string S3_CONNECTION_INVALID {
+            get {
+                return ResourceManager.GetString("S3_CONNECTION_INVALID", resourceCulture);
             }
         }
         
