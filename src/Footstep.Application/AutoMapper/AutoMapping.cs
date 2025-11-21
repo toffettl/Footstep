@@ -67,7 +67,7 @@ namespace Footstep.Application.AutoMapper
                         Steps = src.PointsOfInterest.Where(p => p.PointOfInterestType == PointOfInterestType.Step).Select(p => p.Id).ToList(),
                         Marks = src.PointsOfInterest.Where(p => p.PointOfInterestType == PointOfInterestType.Mark).Select(p => p.Id).ToList()
                     },
-                    Coins = new ResponseUserCoinsJson
+                    Coins = new ResponseUserCoinJson
                     {
                         Total = src.Coin.Total,
                         Spent = src.Coin.Spent,

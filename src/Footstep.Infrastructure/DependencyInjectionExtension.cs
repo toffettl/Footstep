@@ -1,5 +1,6 @@
 ﻿using Footstep.Domain.Repositories;
 using Footstep.Domain.Repositories.Addresses;
+using Footstep.Domain.Repositories.Coins;
 using Footstep.Domain.Repositories.CommentLikes;
 using Footstep.Domain.Repositories.Comments;
 using Footstep.Domain.Repositories.Images;
@@ -79,6 +80,9 @@ namespace Footstep.Infrastructure
             services.AddScoped<ICommentLikeReadOnlyRepository, CommentLikeRepository>();
 
             services.AddScoped<IImageWriteOnlyRepository, ImageRepository>();
+
+            services.AddScoped<ICoinReadOnlyRepository, CoinRepository>();
+            services.AddScoped<ICoinUpdateOnlyRepository, CoinRepository>();
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

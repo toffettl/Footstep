@@ -34,7 +34,7 @@ namespace Footstep.Communication.Responses.Users
     public class ResponseUserActivityJson
     {
         public ResponseUserPOIsJson? POIs { get; set; }
-        public ResponseUserCoinsJson? Coins { get; set; }
+        public ResponseUserCoinJson? Coins { get; set; }
     } 
 
     public class ResponseUserPOIsJson
@@ -43,7 +43,7 @@ namespace Footstep.Communication.Responses.Users
         public List<Guid>? Marks { get; set; }
     }
 
-    public class ResponseUserCoinsJson
+    public class ResponseUserCoinJson
     {
         public int Total { get; set; }
         public int Spent { get; set; }
