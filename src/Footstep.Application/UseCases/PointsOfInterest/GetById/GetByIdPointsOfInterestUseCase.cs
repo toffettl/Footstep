@@ -72,24 +72,24 @@ namespace Footstep.Application.UseCases.Traces.GetById
 
             foreach (var image in pointOfInterest.Images)
             {
-                response.Media.Images.Add(GetResponseImage(image));
+                response.Media.Images.Add(GetResponseImage(image.Id));
             }
 
             return response;
         }
 
-        private ResponsePointOfInterestImageJson GetResponseImage(Image image)
+        private ResponsePointOfInterestImageJson GetResponseImage(Guid imageId)
         {
             var s3Request = new GetPreSignedUrlRequest
             {
                 BucketName = _s3Settings.Value.BucketName,
-                Key = image.Id.ToString(),
+                Key = imageId.ToString(),
                 Expires = DateTime.UtcNow.AddDays(1)
             };
 
             return new ResponsePointOfInterestImageJson()
             {
-                Id = image.Id,
+                Id = imageId,
                 Url = _amazonS3.GetPreSignedURL(s3Request)
             };
         }

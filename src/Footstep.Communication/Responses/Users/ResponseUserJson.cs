@@ -8,7 +8,7 @@ namespace Footstep.Communication.Responses.Users
         public string? Name { get; set; }
         public string? Email { get; set; }
         public string? Biography { get; set; }
-        public ResponseUserProfilePictureJson? ProfilePicture { get; set; }
+        public ResponseUserProfilePictureJson ProfilePicture { get; set; } = new ResponseUserProfilePictureJson();
         public ResponseUserSocialJson? Social { get; set; }
         public ResponseUserActivityJson? Activity { get; set; }
         public ResponseUserPreferencesJson? Preferences { get; set; }

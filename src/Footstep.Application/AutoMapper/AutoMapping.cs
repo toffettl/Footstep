@@ -52,7 +52,6 @@ namespace Footstep.Application.AutoMapper
             CreateMap<User, ResponseUserJson>()
                 .ForMember(dest => dest.ProfilePicture, opt => opt.MapFrom(src => new ResponseUserProfilePictureJson
                 {
-                    Uri = "",
                     Style = ""
                 }))
                 .ForMember(dest => dest.Social, opt => opt.MapFrom(src => new ResponseUserSocialJson
@@ -169,7 +168,6 @@ namespace Footstep.Application.AutoMapper
             CreateMap<User, ResponsePaginationUserJson>()
                  .ForMember(dest => dest.ProfilePicture, opt => opt.MapFrom(src => new ResponsePaginationUserProfilePictureJson
                  {
-                     Uri = "",
                      Style = ""
                  }))
                 .ForMember(dest => dest.Social, opt => opt.MapFrom(src => new ResponsePaginationUserSocialJson

@@ -44,7 +44,7 @@ public class GetNearbyPointsOfInterestUseCase : IGetNearbyPointsOfInterestUseCas
 
             var image = pointOfInterest.Images.ElementAt(_random.Next(pointOfInterest.Images.Count));
 
-            response.Media.Image = GetResponseImage(image);
+            response.Media.Image = GetResponseImage(image.Id);
 
             responses.Add(response);
         }
@@ -52,18 +52,18 @@ public class GetNearbyPointsOfInterestUseCase : IGetNearbyPointsOfInterestUseCas
         return responses;
     }
 
-    private ResponsePaginationPointOfInterestImageJson GetResponseImage(Image image)
+    private ResponsePaginationPointOfInterestImageJson GetResponseImage(Guid imageId)
     {
         var s3Request = new GetPreSignedUrlRequest
         {
             BucketName = _s3Settings.Value.BucketName,
-            Key = image.Id.ToString(),
+            Key = imageId.ToString(),
             Expires = DateTime.UtcNow.AddDays(1)
         };
 
         return new ResponsePaginationPointOfInterestImageJson()
         {
-            Id = image.Id,
+            Id = imageId,
             Url = _amazonS3.GetPreSignedURL(s3Request)
         };
     }
