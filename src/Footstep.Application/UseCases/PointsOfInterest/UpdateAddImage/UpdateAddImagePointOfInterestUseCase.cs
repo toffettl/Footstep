@@ -1,6 +1,5 @@
 ﻿using Amazon.S3;
 using Amazon.S3.Model;
-using AutoMapper;
 using Footstep.Application.UseCases.PointsOfInterest.UpdateImages;
 using Footstep.Domain.Entities;
 using Footstep.Domain.Repositories;
@@ -20,27 +19,24 @@ namespace Footstep.Application.UseCases.PointsOfInterest.UpdateImage
         private readonly IAmazonS3 _amazonS3;
         private readonly IOptions<S3Settings> _s3Settings;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
 
         public UpdateAddImagePointOfInterestUseCase(
             IPointOfInterestReadOnlyRepository pointOfInterestReadOnlyRepository,
             IImageWriteOnlyRepository imageWriteOnlyRepository,
             IAmazonS3 amazonS3,
             IOptions<S3Settings> s3Settings,
-            IUnitOfWork unitOfWork,
-            IMapper mapper)
+            IUnitOfWork unitOfWork)
         {
             _pointOfInterestReadOnlyRepository = pointOfInterestReadOnlyRepository;
             _imageWriteOnlyRepository = imageWriteOnlyRepository;
             _amazonS3 = amazonS3;
             _s3Settings = s3Settings;
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
         }
 
-        public async Task Execute(Guid pointOfInterestId, Stream stream, string fileName, string contentType)
+        public async Task Execute(Guid Id, Stream stream, string fileName, string contentType)
         {
-            var pointOfInterest = await _pointOfInterestReadOnlyRepository.GetById(pointOfInterestId);
+            var pointOfInterest = await _pointOfInterestReadOnlyRepository.GetById(Id);
 
             if (pointOfInterest == null)
             {

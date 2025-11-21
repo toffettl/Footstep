@@ -276,7 +276,6 @@ namespace Footstep.Application.AutoMapper
                 .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => new List<string> { "" }))
                 .ForMember(dest => dest.Media, opt => opt.MapFrom(src => new ResponsePointOfInterestMediaJson
                 {
-                    Images = new List<string> { "" },
                     Videos = new List<string> { "" }
                 }))
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new ResponsePointOfInterestStatusJson
@@ -346,10 +345,6 @@ namespace Footstep.Application.AutoMapper
                 {
                     Latitude = src.Address!.Latitude,
                     Longitude = src.Address!.Longitude
-                }))
-                .ForMember(dest => dest.Media, opt => opt.MapFrom(src => new ResponsePaginationPointOfInterestMediaJson
-                {
-                    Image = ""
                 }))
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => new ResponsePaginationPointOfInterestStatusJson
                 {

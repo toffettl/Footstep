@@ -2,6 +2,6 @@
 {
     public interface IUpdateAddImagePointOfInterestUseCase
     {
-        Task Execute(Guid pointOfInterestId, Stream stream, string fileName, string contentType);
+        Task Execute(Guid Id, Stream stream, string fileName, string contentType);
     }
 }

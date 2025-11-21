@@ -1,17 +1,30 @@
-﻿using AutoMapper;
+﻿using Amazon.S3;
+using Amazon.S3.Model;
+using AutoMapper;
 using Footstep.Communication.Responses.Traces;
+using Footstep.Domain.Entities;
 using Footstep.Domain.Repositories.Traces;
+using Footstep.Infrastructure.Settings;
+using Microsoft.Extensions.Options;
+using System;
 namespace Footstep.Application.UseCases.Traces.GetByRay;
 public class GetNearbyPointsOfInterestUseCase : IGetNearbyPointsOfInterestUseCase
 {
     private readonly IPointOfInterestReadOnlyRepository _pointOfInterestReadOnlyRepository;
+    private readonly IAmazonS3 _amazonS3;
+    private readonly IOptions<S3Settings> _s3Settings;
     private readonly IMapper _mapper;
+    private readonly Random _random = new Random();
 
     public GetNearbyPointsOfInterestUseCase(
-        IPointOfInterestReadOnlyRepository pointOfInterestReadOnlyRepository, 
+        IPointOfInterestReadOnlyRepository pointOfInterestReadOnlyRepository,
+        IAmazonS3 amazonS3,
+        IOptions<S3Settings> s3Settings,
         IMapper mapper)
     {
         _pointOfInterestReadOnlyRepository = pointOfInterestReadOnlyRepository;
+        _amazonS3 = amazonS3;
+        _s3Settings = s3Settings;
         _mapper = mapper;
     }
 
@@ -23,7 +36,36 @@ public class GetNearbyPointsOfInterestUseCase : IGetNearbyPointsOfInterestUseCas
             .Where(t => CalculateDistanceInMeters(latitude, longitude, t.Address!.Latitude, t.Address.Longitude) <= radiusInMeters)
             .ToList();
 
-        return _mapper.Map<List<ResponsePaginationPointOfInterestJson>>(nearbyTraces);
+        var responses = new List<ResponsePaginationPointOfInterestJson>();
+
+        foreach (var pointOfInterest in nearbyTraces)
+        {
+            var response = _mapper.Map<ResponsePaginationPointOfInterestJson>(pointOfInterest);
+
+            var image = pointOfInterest.Images.ElementAt(_random.Next(pointOfInterest.Images.Count));
+
+            response.Media.Image = GetResponseImage(image);
+
+            responses.Add(response);
+        }
+
+        return responses;
+    }
+
+    private ResponsePaginationPointOfInterestImageJson GetResponseImage(Image image)
+    {
+        var s3Request = new GetPreSignedUrlRequest
+        {
+            BucketName = _s3Settings.Value.BucketName,
+            Key = image.Id.ToString(),
+            Expires = DateTime.UtcNow.AddDays(1)
+        };
+
+        return new ResponsePaginationPointOfInterestImageJson()
+        {
+            Id = image.Id,
+            Url = _amazonS3.GetPreSignedURL(s3Request)
+        };
     }
 
     private double CalculateDistanceInMeters(double lat1, double lon1, double lat2, double lon2)
