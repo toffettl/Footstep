@@ -37,6 +37,8 @@ public class UserRepository :
             .Include(u => u.PointsOfInterest)
             .Include(u => u.Coin)
             .Include(u => u.Preference)
+                .ThenInclude(p => p.Image)
+            .Include(u => u.Preference)
                 .ThenInclude(p => p.Items.Where(i => i.Unlocked))
                     .ThenInclude(i => i.Style)
             .FirstOrDefaultAsync(u => u.Id == id);
@@ -51,6 +53,8 @@ public class UserRepository :
             .Include(u => u.Following)
             .Include(u => u.PointsOfInterest)
             .Include(u => u.Coin)
+            .Include(u => u.Preference)
+                .ThenInclude(p => p.Image)
             .Include(u => u.Preference)
                 .ThenInclude(p => p.Items.Where(i => i.Unlocked))
                     .ThenInclude(i => i.Style)
@@ -73,6 +77,8 @@ public class UserRepository :
             .Include(u => u.PointsOfInterest)
             .Include(u => u.Coin)
             .Include(u => u.Preference)
+                .ThenInclude(p => p.Image)
+            .Include(u => u.Preference)
                 .ThenInclude(p => p.Items.Where(i => i.Unlocked))
                     .ThenInclude(i => i.Style)
             .ToListAsync();
@@ -83,6 +89,8 @@ public class UserRepository :
         var query = _dbContext.Users
             .AsTracking()
             .AsSplitQuery()
+            .Include(u => u.Preference)
+                .ThenInclude(p => p.Image)
             .Include(u => u.Preference)
                 .ThenInclude(p => p.Items.Where(i => i.Unlocked && i.Equipped))
                     .ThenInclude(i => i.Style);

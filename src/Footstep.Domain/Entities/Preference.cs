@@ -9,10 +9,11 @@
         public bool AvatarOverProfile { get; set; } = true;
 
         public Guid UserId { get; set; }
+        public Guid ImageId { get; set; }
 
         public User? User { get; set; }
+        public Image? Image { get; set; }
 
-        public ICollection<Image> Images { get; set; } = new List<Image>();
         public ICollection<Item> Items { get; set; } = new List<Item>();
     }
 }

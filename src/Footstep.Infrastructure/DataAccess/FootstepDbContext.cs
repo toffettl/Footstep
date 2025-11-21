@@ -32,6 +32,11 @@ namespace Footstep.Infrastructure.DataAccess
                 .WithOne(p => p.User)
                 .HasForeignKey<Preference>(p => p.UserId);
 
+            modelBuilder.Entity<Preference>()
+                .HasOne(u => u.Image)
+                .WithOne(p => p.Preference)
+                .HasForeignKey<Image>(i => i.PreferenceId);
+
             modelBuilder.Entity<Followership>()
                 .HasOne(ur => ur.Follower)
                 .WithMany(u => u.Following)
