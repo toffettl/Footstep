@@ -48,6 +48,7 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             return await _dbContext.PointOfInterests
                 .AsNoTracking()
                 .AsSplitQuery()
+                .Include(poi => poi.Images)
                 .Include(poi => poi.User)
                 .Include(poi => poi.Address)
                 .ToListAsync();
@@ -73,6 +74,7 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
             var query = _dbContext.PointOfInterests
                 .AsNoTracking()
                 .AsSplitQuery()
+                .Include(poi => poi.Images)
                 .Include(poi => poi.User)
                     .ThenInclude(u => u!.Preference)
                     .ThenInclude(p => p.Items.Where(i => i.Equipped))

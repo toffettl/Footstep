@@ -1,5 +1,6 @@
 ﻿using Footstep.Domain.Entities;
 using Footstep.Domain.Repositories.Images;
+using Microsoft.EntityFrameworkCore;
 
 namespace Footstep.Infrastructure.DataAccess.Repositories
 {
@@ -13,6 +14,20 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
         public async Task Add(Image image)
         {
             await _dbContext.Images.AddAsync(image);
+        }
+
+        public async Task<bool?> Delete(Guid id)
+        {
+            var result = await _dbContext.Images.FirstOrDefaultAsync(i => i.Id == id);
+
+            if (result == null)
+            {
+                return false;
+            }
+
+            _dbContext.Images.Remove(result);
+
+            return true;
         }
     }
 }
