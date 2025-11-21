@@ -1,4 +1,5 @@
-﻿using Footstep.Application.UseCases.Traces.Create;
+﻿using Footstep.Application.UseCases.PointsOfInterest.UpdateImages;
+using Footstep.Application.UseCases.Traces.Create;
 using Footstep.Application.UseCases.Traces.Delete;
 using Footstep.Application.UseCases.Traces.GetAll;
 using Footstep.Application.UseCases.Traces.GetAllByPage;
@@ -9,6 +10,7 @@ using Footstep.Application.UseCases.Traces.UpdateStatus;
 using Footstep.Communication.Requests.Traces;
 using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Traces;
+using Footstep.Exception;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,7 +24,8 @@ namespace Footstep.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ResponsePointOfInterestJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Create([FromServices] ICreatePointOfInterestUseCase usecase,
+        public async Task<IActionResult> Create(
+            [FromServices] ICreatePointOfInterestUseCase usecase,
             [FromBody] RequestPointOfInterestJson request)
         {
             var response = await usecase.Execute(request);
@@ -54,6 +57,27 @@ namespace Footstep.Api.Controllers
             [FromBody] RequestUpdatePointOfInterestJson request)
         {
             await useCase.Execute(id, request);
+
+            return NoContent();
+        }
+
+        [HttpPut]
+        [Route("Image/Add/{pointOfInterestId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UpdateAddImage(
+            [FromServices] IUpdateAddImagePointOfInterestUseCase useCase,
+            [FromRoute] Guid pointOfInterestId,
+            IFormFile file)
+        {
+            if (file.Length == 0)
+            {
+                return BadRequest(ResourceErrorMessages.FILE_INVALID);
+            }
+
+            await useCase.Execute(pointOfInterestId, file.OpenReadStream(), file.FileName, file.ContentType);
 
             return NoContent();
         }
