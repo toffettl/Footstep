@@ -88,7 +88,7 @@ namespace Footstep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> UpdateRemoveImage(
+        public async Task<IActionResult> UpdateDeleteImage(
             [FromServices] IUpdateDeleteImagePointOfInterestUseCase useCase,
             [FromRoute] Guid imageId)
         {

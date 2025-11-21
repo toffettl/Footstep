@@ -3,11 +3,14 @@ using Footstep.Application.UseCases.Users.GetByEmail;
 using Footstep.Application.UseCases.Users.GetById;
 using Footstep.Application.UseCases.Users.GetByRanking;
 using Footstep.Application.UseCases.Users.GetEmailExistence;
+using Footstep.Application.UseCases.Users.UpdateAddProfilePicture;
+using Footstep.Application.UseCases.Users.UpdateDeleteProfilePicture;
 using Footstep.Application.UseCases.Users.UpdatePreferences;
 using Footstep.Application.UseCases.Users.UpdateUnlockedStyles;
 using Footstep.Communication.Requests.Users;
 using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Users;
+using Footstep.Exception;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -51,6 +54,41 @@ public class UserController : ControllerBase
         [FromBody] RequestUpdatePreferencesUserJson request)
     {
         await useCase.Execute(id, request);
+
+        return NoContent();
+    }
+
+    [HttpPut]
+    [Route("profile-picture/add/{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> UpdateAddProfilePicture(
+        [FromServices] IUpdateAddProfilePictureUserUseCase useCase,
+        [FromRoute] Guid id,
+        IFormFile file)
+    {
+        if (file.Length == 0)
+        {
+            return BadRequest(ResourceErrorMessages.FILE_INVALID);
+        }
+
+        await useCase.Execute(id, file.OpenReadStream(), file.FileName, file.ContentType);
+
+        return NoContent();
+    }
+
+    [HttpPut]
+    [Route("profile-picture/remove/{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> UpdateDeleteProfilePicture(
+        [FromServices] IUpdateDeleteProfilePictureUserUseCase useCase,
+        [FromRoute] Guid id)
+    {
+        await useCase.Execute(id);
 
         return NoContent();
     }
