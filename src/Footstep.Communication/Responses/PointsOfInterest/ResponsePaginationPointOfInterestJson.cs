@@ -11,7 +11,7 @@ namespace Footstep.Communication.Responses.Traces
         public ResponsePaginationPointOfInterestCoordinatesJson? Coordinates { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
-        public ResponsePaginationPointOfInterestMediaJson? Media { get; set; }
+        public ResponsePaginationPointOfInterestMediaJson Media { get; set; } = new ResponsePaginationPointOfInterestMediaJson();
         public ResponsePaginationPointOfInterestStatusJson? Status { get; set; }
         public ResponsePaginationPointOfInterestAddressJson? Address { get; set; }
         public DateTime? ExpireAt { get; set; }
@@ -61,7 +61,13 @@ namespace Footstep.Communication.Responses.Traces
 
     public class ResponsePaginationPointOfInterestMediaJson
     {
-        public string? Image { get; set; }
+        public ResponsePaginationPointOfInterestImageJson? Image { get; set; } 
+    }
+
+    public class ResponsePaginationPointOfInterestImageJson
+    {
+        public Guid Id { get; set; }
+        public string? Url { get; set; }
     }
 
     public class ResponsePaginationPointOfInterestStatusJson

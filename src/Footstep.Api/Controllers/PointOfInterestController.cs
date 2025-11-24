@@ -1,4 +1,6 @@
-﻿using Footstep.Application.UseCases.Traces.Create;
+﻿using Footstep.Application.UseCases.PointsOfInterest.UpdateDeleteImage;
+using Footstep.Application.UseCases.PointsOfInterest.UpdateImages;
+using Footstep.Application.UseCases.Traces.Create;
 using Footstep.Application.UseCases.Traces.Delete;
 using Footstep.Application.UseCases.Traces.GetAll;
 using Footstep.Application.UseCases.Traces.GetAllByPage;
@@ -9,6 +11,7 @@ using Footstep.Application.UseCases.Traces.UpdateStatus;
 using Footstep.Communication.Requests.Traces;
 using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Traces;
+using Footstep.Exception;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,13 +19,14 @@ namespace Footstep.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class PointOfInterestController : ControllerBase
     {
         [HttpPost]
         [ProducesResponseType(typeof(ResponsePointOfInterestJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Create([FromServices] ICreatePointOfInterestUseCase usecase,
+        public async Task<IActionResult> Create(
+            [FromServices] ICreatePointOfInterestUseCase usecase,
             [FromBody] RequestPointOfInterestJson request)
         {
             var response = await usecase.Execute(request);
@@ -59,7 +63,42 @@ namespace Footstep.Api.Controllers
         }
 
         [HttpPut]
-        [Route("Likes/{id}")]
+        [Route("Image/Add/{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UpdateAddImage(
+            [FromServices] IUpdateAddImagePointOfInterestUseCase useCase,
+            [FromRoute] Guid id,
+            IFormFile file)
+        {
+            if (file.Length == 0)
+            {
+                return BadRequest(ResourceErrorMessages.FILE_INVALID);
+            }
+
+            await useCase.Execute(id, file.OpenReadStream(), file.FileName, file.ContentType);
+
+            return NoContent();
+        }
+
+        [HttpPut]
+        [Route("Image/Remove/{imageId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UpdateDeleteImage(
+            [FromServices] IUpdateDeleteImagePointOfInterestUseCase useCase,
+            [FromRoute] Guid imageId)
+        {
+            await useCase.Execute(imageId);
+
+            return NoContent();
+        }
+
+        [HttpPut]
+        [Route("Status/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]

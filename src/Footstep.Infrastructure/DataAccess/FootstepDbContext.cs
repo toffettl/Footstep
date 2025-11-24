@@ -17,6 +17,10 @@ namespace Footstep.Infrastructure.DataAccess
         public DbSet<Style> Styles { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Preference> Preferences { get; set; }
+        public DbSet<Coin> Coins { get; set; }
+
+        public DbSet<UserItem> UserItems { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,6 +34,11 @@ namespace Footstep.Infrastructure.DataAccess
                 .HasOne(u => u.Preference)
                 .WithOne(p => p.User)
                 .HasForeignKey<Preference>(p => p.UserId);
+
+            modelBuilder.Entity<Preference>()
+                .HasOne(u => u.Image)
+                .WithOne(p => p.Preference)
+                .HasForeignKey<Image>(i => i.PreferenceId);
 
             modelBuilder.Entity<Followership>()
                 .HasOne(ur => ur.Follower)
@@ -48,6 +57,8 @@ namespace Footstep.Infrastructure.DataAccess
                 .WithMany(c => c.CommentLikes)
                 .HasForeignKey(cl => cl.CommentId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+           
         }
     }
 }
