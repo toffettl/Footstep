@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Footstep.Infrastructure.Migrations
 {
     [DbContext(typeof(FootstepDbContext))]
-    [Migration("20250925133825_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20251125211308_A")]
+    partial class A
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,8 +49,8 @@ namespace Footstep.Infrastructure.Migrations
                     b.Property<double>("Longitude")
                         .HasColumnType("double precision");
 
-                    b.Property<int>("Number")
-                        .HasColumnType("integer");
+                    b.Property<string>("Number")
+                        .HasColumnType("text");
 
                     b.Property<string>("State")
                         .HasColumnType("text");
@@ -86,7 +86,7 @@ namespace Footstep.Infrastructure.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Coin");
+                    b.ToTable("Coins");
                 });
 
             modelBuilder.Entity("Footstep.Domain.Entities.Comment", b =>
@@ -169,17 +169,57 @@ namespace Footstep.Infrastructure.Migrations
                     b.ToTable("UserRelations");
                 });
 
+            modelBuilder.Entity("Footstep.Domain.Entities.Image", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("PointOfInterestId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("PreferenceId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PointOfInterestId");
+
+                    b.HasIndex("PreferenceId")
+                        .IsUnique();
+
+                    b.ToTable("Images");
+                });
+
             modelBuilder.Entity("Footstep.Domain.Entities.Item", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<bool>("Equipped")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsAvaliableInShop")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<Guid>("PreferenceId")
                         .HasColumnType("uuid");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("StyleId")
                         .HasColumnType("uuid");
@@ -249,6 +289,9 @@ namespace Footstep.Infrastructure.Migrations
 
                     b.Property<bool>("AvatarOverProfile")
                         .HasColumnType("boolean");
+
+                    b.Property<Guid>("ImageId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("MapStyle")
                         .HasColumnType("text");
@@ -328,6 +371,30 @@ namespace Footstep.Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Footstep.Domain.Entities.UserItem", b =>
+                {
+                    b.Property<Guid>("UserItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ItemId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("PurchasedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("UserItemId");
+
+                    b.HasIndex("ItemId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserItems");
+                });
+
             modelBuilder.Entity("Footstep.Domain.Entities.UserPointOfInterestRelation", b =>
                 {
                     b.Property<Guid>("Id")
@@ -377,7 +444,7 @@ namespace Footstep.Infrastructure.Migrations
                         .HasForeignKey("ParentPointOfInterestId");
 
                     b.HasOne("Footstep.Domain.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -425,6 +492,21 @@ namespace Footstep.Infrastructure.Migrations
                     b.Navigation("Follower");
 
                     b.Navigation("Following");
+                });
+
+            modelBuilder.Entity("Footstep.Domain.Entities.Image", b =>
+                {
+                    b.HasOne("Footstep.Domain.Entities.PointOfInterest", "PointOfInterest")
+                        .WithMany("Images")
+                        .HasForeignKey("PointOfInterestId");
+
+                    b.HasOne("Footstep.Domain.Entities.Preference", "Preference")
+                        .WithOne("Image")
+                        .HasForeignKey("Footstep.Domain.Entities.Image", "PreferenceId");
+
+                    b.Navigation("PointOfInterest");
+
+                    b.Navigation("Preference");
                 });
 
             modelBuilder.Entity("Footstep.Domain.Entities.Item", b =>
@@ -476,6 +558,25 @@ namespace Footstep.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Footstep.Domain.Entities.UserItem", b =>
+                {
+                    b.HasOne("Footstep.Domain.Entities.Item", "Item")
+                        .WithMany("UserItems")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Footstep.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Item");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Footstep.Domain.Entities.UserPointOfInterestRelation", b =>
                 {
                     b.HasOne("Footstep.Domain.Entities.PointOfInterest", "PointOfInterest")
@@ -507,15 +608,24 @@ namespace Footstep.Infrastructure.Migrations
                     b.Navigation("Comments");
                 });
 
+            modelBuilder.Entity("Footstep.Domain.Entities.Item", b =>
+                {
+                    b.Navigation("UserItems");
+                });
+
             modelBuilder.Entity("Footstep.Domain.Entities.PointOfInterest", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("Images");
 
                     b.Navigation("UserPointOfInterestRelations");
                 });
 
             modelBuilder.Entity("Footstep.Domain.Entities.Preference", b =>
                 {
+                    b.Navigation("Image");
+
                     b.Navigation("Items");
                 });
 
@@ -528,6 +638,8 @@ namespace Footstep.Infrastructure.Migrations
                 {
                     b.Navigation("Coin")
                         .IsRequired();
+
+                    b.Navigation("Comments");
 
                     b.Navigation("Followers");
 

@@ -19,7 +19,7 @@ namespace Footstep.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class PointOfInterestController : ControllerBase
     {
         [HttpPost]

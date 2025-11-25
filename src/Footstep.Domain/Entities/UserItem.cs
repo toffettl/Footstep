@@ -8,6 +8,7 @@ namespace Footstep.Domain.Entities
 {
     public class UserItem
     {
+        public Guid UserItemId { get; set; } = Guid.NewGuid();
         public Guid UserId { get; set; }
         public Guid ItemId { get; set; }
         public DateTime PurchasedAt { get; set; } = DateTime.UtcNow;

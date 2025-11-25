@@ -11,7 +11,7 @@ namespace Footstep.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class StyleController : ControllerBase
     {
         [HttpPost]

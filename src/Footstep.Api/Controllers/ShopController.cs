@@ -5,6 +5,7 @@ using Footstep.Application.UseCases.Shop.PurchaseItem;
 using Footstep.Communication.Requests.Shop;
 using Footstep.Communication.Responses;
 using Footstep.Communication.Responses.Shop;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,7 @@ namespace Footstep.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ShopController : ControllerBase
     {
         [HttpGet("items/available/{userId}")]

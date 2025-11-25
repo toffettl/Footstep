@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Footstep.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class A : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -24,7 +24,7 @@ namespace Footstep.Infrastructure.Migrations
                     District = table.Column<string>(type: "text", nullable: true),
                     Street = table.Column<string>(type: "text", nullable: true),
                     Cep = table.Column<string>(type: "text", nullable: true),
-                    Number = table.Column<int>(type: "integer", nullable: false)
+                    Number = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -67,7 +67,7 @@ namespace Footstep.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Coin",
+                name: "Coins",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -78,9 +78,9 @@ namespace Footstep.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Coin", x => x.Id);
+                    table.PrimaryKey("PK_Coins", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Coin_Users_UserId",
+                        name: "FK_Coins_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -128,7 +128,8 @@ namespace Footstep.Infrastructure.Migrations
                     MapStyle = table.Column<string>(type: "text", nullable: true),
                     UnlockedMapStyles = table.Column<string>(type: "text", nullable: true),
                     AvatarOverProfile = table.Column<bool>(type: "boolean", nullable: false),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false)
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ImageId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -228,12 +229,40 @@ namespace Footstep.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    PreferenceId = table.Column<Guid>(type: "uuid", nullable: true),
+                    PointOfInterestId = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Images_PointOfInterests_PointOfInterestId",
+                        column: x => x.PointOfInterestId,
+                        principalTable: "PointOfInterests",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Images_Preferences_PreferenceId",
+                        column: x => x.PreferenceId,
+                        principalTable: "Preferences",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Items",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Unlocked = table.Column<bool>(type: "boolean", nullable: false),
                     Equipped = table.Column<bool>(type: "boolean", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    Price = table.Column<int>(type: "integer", nullable: false),
+                    ImageUrl = table.Column<string>(type: "text", nullable: false),
+                    IsAvaliableInShop = table.Column<bool>(type: "boolean", nullable: false),
                     PreferenceId = table.Column<Guid>(type: "uuid", nullable: false),
                     StyleId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
@@ -279,9 +308,35 @@ namespace Footstep.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UserItems",
+                columns: table => new
+                {
+                    UserItemId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ItemId = table.Column<Guid>(type: "uuid", nullable: false),
+                    PurchasedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserItems", x => x.UserItemId);
+                    table.ForeignKey(
+                        name: "FK_UserItems_Items_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "Items",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserItems_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Coin_UserId",
-                table: "Coin",
+                name: "IX_Coins_UserId",
+                table: "Coins",
                 column: "UserId",
                 unique: true);
 
@@ -311,6 +366,17 @@ namespace Footstep.Infrastructure.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Images_PointOfInterestId",
+                table: "Images",
+                column: "PointOfInterestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Images_PreferenceId",
+                table: "Images",
+                column: "PreferenceId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Items_PreferenceId",
                 table: "Items",
                 column: "PreferenceId");
@@ -337,6 +403,16 @@ namespace Footstep.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserItems_ItemId",
+                table: "UserItems",
+                column: "ItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserItems_UserId",
+                table: "UserItems",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserPointOfInterestRelations_PointOfInterestId",
                 table: "UserPointOfInterestRelations",
                 column: "PointOfInterestId");
@@ -361,13 +437,16 @@ namespace Footstep.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Coin");
+                name: "Coins");
 
             migrationBuilder.DropTable(
                 name: "CommentLikes");
 
             migrationBuilder.DropTable(
-                name: "Items");
+                name: "Images");
+
+            migrationBuilder.DropTable(
+                name: "UserItems");
 
             migrationBuilder.DropTable(
                 name: "UserPointOfInterestRelations");
@@ -379,13 +458,16 @@ namespace Footstep.Infrastructure.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
+                name: "Items");
+
+            migrationBuilder.DropTable(
+                name: "PointOfInterests");
+
+            migrationBuilder.DropTable(
                 name: "Preferences");
 
             migrationBuilder.DropTable(
                 name: "Styles");
-
-            migrationBuilder.DropTable(
-                name: "PointOfInterests");
 
             migrationBuilder.DropTable(
                 name: "Addresses");
