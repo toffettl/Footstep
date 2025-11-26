@@ -47,7 +47,6 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
         {
             return await _dbContext.PointOfInterests
                 .AsNoTracking()
-                .AsSplitQuery()
                 .Include(poi => poi.Images)
                 .Include(poi => poi.User)
                 .Include(poi => poi.Address)
@@ -57,7 +56,6 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
         public async Task<PointOfInterest?> GetById(Guid id)
         {
             return await _dbContext.PointOfInterests
-                .AsSplitQuery()
                 .Include(poi => poi.Images)
                 .Include(poi => poi.User)
                     .ThenInclude(u => u!.Preference)
@@ -73,7 +71,6 @@ namespace Footstep.Infrastructure.DataAccess.Repositories
         {
             var query = _dbContext.PointOfInterests
                 .AsNoTracking()
-                .AsSplitQuery()
                 .Include(poi => poi.Images)
                 .Include(poi => poi.User)
                     .ThenInclude(u => u!.Preference)
