@@ -16,7 +16,6 @@ namespace Footstep.Application.UseCases.Traces.GetAllByPage
         private readonly IAmazonS3 _amazonS3;
         private readonly IOptions<S3Settings> _s3Settings;
         private readonly IMapper _mapper;
-        private readonly Random _random = new Random();
 
         public GetAllPointsOfInterestByPageUseCase(
             IPointOfInterestReadOnlyRepository pointsOfInterestReadOnlyRepository,
@@ -39,10 +38,14 @@ namespace Footstep.Application.UseCases.Traces.GetAllByPage
             foreach (var pointOfInterest in pointsOfInterest)
             {
                 var response = _mapper.Map<ResponsePaginationPointOfInterestJson>(pointOfInterest);
-                
-                var image = pointOfInterest.Images.ElementAt(_random.Next(pointOfInterest.Images.Count));
 
-                response.Media.Image = GetResponseImage(image.Id);
+                response.Media.Image = null;
+
+                if (pointOfInterest.Images.Count > 0)
+                {
+                    var image = pointOfInterest.Images.ElementAt(new Random().Next(pointOfInterest.Images.Count));
+                    response.Media.Image = GetResponseImage(image.Id);
+                }
 
                 responses.Add(response);
             }

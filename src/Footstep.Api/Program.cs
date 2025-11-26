@@ -72,7 +72,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
+//builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
 builder.Services.Configure<S3Settings>(builder.Configuration.GetSection("S3Settings"));
 

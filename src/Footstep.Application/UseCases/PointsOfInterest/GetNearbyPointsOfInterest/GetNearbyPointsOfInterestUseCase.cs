@@ -14,7 +14,6 @@ public class GetNearbyPointsOfInterestUseCase : IGetNearbyPointsOfInterestUseCas
     private readonly IAmazonS3 _amazonS3;
     private readonly IOptions<S3Settings> _s3Settings;
     private readonly IMapper _mapper;
-    private readonly Random _random = new Random();
 
     public GetNearbyPointsOfInterestUseCase(
         IPointOfInterestReadOnlyRepository pointOfInterestReadOnlyRepository,
@@ -33,18 +32,24 @@ public class GetNearbyPointsOfInterestUseCase : IGetNearbyPointsOfInterestUseCas
         var allPointsOfInterest = await _pointOfInterestReadOnlyRepository.GetAll();
 
         var nearbyTraces = allPointsOfInterest
-            .Where(t => CalculateDistanceInMeters(latitude, longitude, t.Address!.Latitude, t.Address.Longitude) <= radiusInMeters)
+            .Where(t => CalculateDistanceInMeters(latitude, longitude, t.Address.Latitude, t.Address.Longitude) <= radiusInMeters)
             .ToList();
 
-        var responses = new List<ResponsePaginationPointOfInterestJson>();
+        Console.WriteLine(CalculateDistanceInMeters(latitude, longitude, 0, 0));
+
+        var responses = _mapper.Map<List<ResponsePaginationPointOfInterestJson>>(nearbyTraces);
 
         foreach (var pointOfInterest in nearbyTraces)
         {
             var response = _mapper.Map<ResponsePaginationPointOfInterestJson>(pointOfInterest);
 
-            var image = pointOfInterest.Images.ElementAt(_random.Next(pointOfInterest.Images.Count));
+            response.Media.Image = null;
 
-            response.Media.Image = GetResponseImage(image.Id);
+            if (pointOfInterest.Images.Count > 0)
+            {
+                var image = pointOfInterest.Images.ElementAt(new Random().Next(pointOfInterest.Images.Count));
+                response.Media.Image = GetResponseImage(image.Id);
+            }
 
             responses.Add(response);
         }
