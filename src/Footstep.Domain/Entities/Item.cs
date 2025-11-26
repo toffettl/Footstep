@@ -12,6 +12,8 @@
         public string ImageUrl { get; set; }
         public bool IsAvaliableInShop { get; set; } = true;
 
+        public string Color { get; set; }
+
         public Guid PreferenceId { get; set; }
         public Guid StyleId { get; set; }
 

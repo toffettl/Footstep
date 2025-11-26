@@ -82,34 +82,38 @@ namespace Footstep.Application.AutoMapper
                     AvatarOverProfile = src.Preference.AvatarOverProfile,
                     Avatar = new ResponseUserCharacterStyleJson
                     {
-                        Skin = "",
+                        Skin = src.Preference.Items.FirstOrDefault(i => i.Unlocked && i.Equipped && i.Style.StyleType == StyleType.Skin).Style.Name,
                         Top = new ResponseUserItemJson
                         {
-                            Style = "",
-                            Color = ""
+                            Style = src.Preference.Items.FirstOrDefault(i => i.Unlocked && i.Equipped && i.Style.StyleType == StyleType.Top).Style.Name,
+                            Color = src.Preference.Items.FirstOrDefault(i => i.Unlocked && i.Equipped && i.Style.StyleType == StyleType.Top).Color
                         },
                         Backpack = new ResponseUserItemJson
                         {
-                            Style = "",
-                            Color = ""
+                            Style = src.Preference.Items.FirstOrDefault(i => i.Unlocked && i.Equipped && i.Style.StyleType == StyleType.BackPack).Style.Name,
+                            Color = src.Preference.Items.FirstOrDefault(i => i.Unlocked && i.Equipped && i.Style.StyleType == StyleType.BackPack).Color
+
                         },
                         Clothe = new ResponseUserItemJson
                         {
-                            Style = "",
-                            Color = ""
+                            Style = src.Preference.Items.FirstOrDefault(i => i.Unlocked && i.Equipped && i.Style.StyleType == StyleType.Clothe).Style.Name,
+                            Color = src.Preference.Items.FirstOrDefault(i => i.Unlocked && i.Equipped && i.Style.StyleType == StyleType.Clothe).Color
+
                         },
-                        Eye = "",
-                        Eyebrow = "",
-                        Mouth = "",
+                        Eye = src.Preference.Items.FirstOrDefault(i => i.Unlocked && i.Equipped && i.Style.StyleType == StyleType.Eye).Style.Name,
+                        Eyebrow = src.Preference.Items.FirstOrDefault(i => i.Unlocked && i.Equipped && i.Style.StyleType == StyleType.Eyebrown).Style.Name,
+                        Mouth = src.Preference.Items.FirstOrDefault(i => i.Unlocked && i.Equipped && i.Style.StyleType == StyleType.Mouth).Style.Name,
                         FacialHair = new ResponseUserItemJson
                         {
-                            Style = "",
-                            Color = ""
+                            Style = src.Preference.Items.FirstOrDefault(i => i.Unlocked && i.Equipped && i.Style.StyleType == StyleType.FacialHair).Style.Name,
+                            Color = src.Preference.Items.FirstOrDefault(i => i.Unlocked && i.Equipped && i.Style.StyleType == StyleType.FacialHair).Color
+
                         },
                         Accessory = new ResponseUserItemJson
                         {
-                            Style = "",
-                            Color = ""
+                            Style = src.Preference.Items.FirstOrDefault(i => i.Unlocked && i.Equipped && i.Style.StyleType == StyleType.Accessory).Style.Name,
+                            Color = src.Preference.Items.FirstOrDefault(i => i.Unlocked && i.Equipped && i.Style.StyleType == StyleType.Accessory).Color
+
                         }
                     }
                 }))

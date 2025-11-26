@@ -2,11 +2,14 @@
 {
     public enum StyleType
     {
-        Head = 0,
-        Torso = 1,
-        Leg = 2,
-        Bag = 3,
-        Accessory = 4,
-        PointOfInterest = 5
+        Skin = 0,
+        BackPack = 1,
+        Clothe = 2,
+        Eye = 3,
+        Eyebrown = 4,
+        Mouth = 5,
+        FacialHair = 6,
+        Accessory = 7,
+        Top = 8,
     }
 }
