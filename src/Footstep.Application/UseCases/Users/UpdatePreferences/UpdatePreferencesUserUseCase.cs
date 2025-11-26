@@ -46,10 +46,14 @@ namespace Footstep.Application.UseCases.Users.UpdatePreferences
             var items = await _itemReadOnlyRepository.GetByPreferenceIdAndUnlocked(user!.PreferenceId);
 
             UpdateEquippedItem(user.PreferenceId, request.PointOfInterestStyle!.Value, StyleType.PointOfInterest, items);
-            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Head!.Value, StyleType.Head, items);
-            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Torso!.Value, StyleType.Torso, items);
-            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Leg!.Value, StyleType.Leg, items);
-            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Bag!.Value, StyleType.Bag, items);
+            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Skin!.Value, StyleType.Skin, items);
+            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Top!.Value, StyleType.Top, items);
+            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Backpack!.Value, StyleType.BackPack, items);
+            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Clothe!.Value, StyleType.Clothe, items);
+            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Clothe!.Value, StyleType.Eye, items);
+            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Clothe!.Value, StyleType.Eyebrown, items);
+            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Clothe!.Value, StyleType.Mouth, items);
+            UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Clothe!.Value, StyleType.FacialHair, items);
             UpdateEquippedItem(user.PreferenceId, request.AvatarStyle!.Acessory!.Value, StyleType.Accessory, items);
 
             _mapper.Map(request, user.Preference);

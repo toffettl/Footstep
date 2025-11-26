@@ -10,10 +10,15 @@
 
     public class RequestAvatarStyleJson
     {
-        public Guid? Head { get; set; }
-        public Guid? Torso { get; set; }
-        public Guid? Leg { get; set; }
-        public Guid? Bag { get; set; }
+        public Guid? Skin { get; set; }
+        public Guid? Top { get; set; }
+        public Guid? Backpack { get; set; }
+        public Guid? Clothe { get; set; }
+        public Guid? Eye { get; set; }
+        public Guid? Eyebrown { get; set; }
+        public Guid? Mouth { get; set; }
+        public Guid? FacialHair { get; set; }
+
         public Guid? Acessory { get; set; }
     }
 }

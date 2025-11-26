@@ -20,19 +20,19 @@ namespace Footstep.Application.UseCases.Users
                 .NotNull()
                 .WithMessage(ResourceErrorMessages.AVATAROVERPROFILE_REQUIRED);
 
-            RuleFor(request => request.AvatarStyle!.Head)
+            RuleFor(request => request.AvatarStyle!.Skin)
                 .NotEmpty()
                 .WithMessage(ResourceErrorMessages.HEAD_REQUIRED);
 
-            RuleFor(request => request.AvatarStyle!.Torso)
+            RuleFor(request => request.AvatarStyle!.Top)
                 .NotEmpty()
                 .WithMessage(ResourceErrorMessages.TORSO_REQUIRED);
 
-            RuleFor(request => request.AvatarStyle!.Leg)
+            RuleFor(request => request.AvatarStyle!.Backpack)
                 .NotEmpty()
                 .WithMessage(ResourceErrorMessages.LEG_REQUIRED);
 
-            RuleFor(request => request.AvatarStyle!.Bag)
+            RuleFor(request => request.AvatarStyle!.Clothe)
                 .NotEmpty()
                 .WithMessage(ResourceErrorMessages.BAG_REQUIRED);
 
