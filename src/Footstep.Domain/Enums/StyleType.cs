@@ -11,5 +11,6 @@
         FacialHair = 6,
         Accessory = 7,
         Top = 8,
+        PointOfInterest = 9
     }
 }
