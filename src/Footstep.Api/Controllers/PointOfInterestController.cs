@@ -71,7 +71,7 @@ namespace Footstep.Api.Controllers
         public async Task<IActionResult> UpdateAddImage(
             [FromServices] IUpdateAddImagePointOfInterestUseCase useCase,
             [FromRoute] Guid id,
-            IFormFile file)
+            [FromForm] IFormFile file)
         {
             if (file.Length == 0)
             {
